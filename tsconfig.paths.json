@@ -10,7 +10,8 @@
       "@redux/*": ["./redux/*"],
       "@utils/*": ["./utils/*"],
       "@apis/*": ["./apis/*"],
-      "@constants/*": ["./constants/*"]
+      "@constants/*": ["./constants/*"],
+      "@customTypes/*": ["./types/*"]
     }
   }
 }
