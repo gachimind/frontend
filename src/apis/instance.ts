@@ -13,8 +13,12 @@ authInstance.interceptors.request.use((config) => {
   return config;
 });
 
+noAuthInstance.interceptors.response.use((res) => {
+  return res.data.data;
+});
+
 authInstance.interceptors.response.use((res) => {
-  return res.data;
+  return res.data.data;
 });
 
 export { noAuthInstance, authInstance };
