@@ -1,8 +1,9 @@
 import { BrowserRouter } from 'react-router-dom';
-import { Route, Routes } from 'react-router';
+
 import Main from '@pages/Main';
-import Room from '@pages/Room';
 import Mypage from '@pages/Mypage';
+import Room from '@pages/Room';
+import { Route, Routes } from 'react-router';
 
 const App = (): JSX.Element => {
   return (
