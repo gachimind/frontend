@@ -1,7 +1,9 @@
-import { createPortal } from 'react-dom';
-import styled from 'styled-components';
-import useClickAway from '@hooks/useClickAway';
 import { useRef } from 'react';
+import { createPortal } from 'react-dom';
+
+import styled from 'styled-components';
+
+import useClickAway from '@hooks/useClickAway';
 
 interface ModalProps {
   visible: boolean;
