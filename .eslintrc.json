@@ -31,17 +31,31 @@
     "import/order": [
       "error",
       {
-        "groups": ["builtin", "external", "internal"],
+        "groups": ["builtin", "external", "internal", "object"],
         "pathGroups": [
-          { "pattern": "react", "group": "builtin", "position": "after" },
-          { "pattern": "react-dom", "group": "builtin", "position": "after" },
+          { "pattern": "react", "group": "builtin" },
+          { "pattern": "react-dom", "group": "builtin" },
           {
-            "pattern": "react-router-dom",
-            "group": "builtin",
+            "pattern": "react-router**",
+            "group": "builtin"
+          },
+          {
+            "pattern": "@components/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@customTypes/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@**/**",
+            "group": "external",
             "position": "after"
           }
         ],
-        "pathGroupsExcludedImportTypes": ["react", "react-dom", "react-router-dom"],
+        "pathGroupsExcludedImportTypes": ["react", "react-dom", "react-router"],
         "newlines-between": "always",
         "alphabetize": {
           "order": "asc",
