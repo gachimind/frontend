@@ -8,11 +8,23 @@ import { useAppSelector } from '@redux/hooks';
 
 const initValue: Socket = io(process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8080');
 
+const on = (event: string, callback: (...args: any[]) => void) => {
+  initValue.on(event, callback);
+};
+
+const off = (event: string) => {
+  initValue.off(event);
+};
+
+// TODO: 예외 핸들링이 추가되어야 한다.
+const emit = (event: string, ...args: any[]) => {
+  initValue.emit(event, ...args);
+};
 interface UseSocketServiceType {
   socketInstance: Socket;
-  on?: (event: string, callback: (...args: any[]) => void) => void;
-  off?: (event: string) => void;
-  emit?: (event: string, ...args: any[]) => void;
+  on: (event: string, callback: (...args: any[]) => void) => void;
+  off: (event: string) => void;
+  emit: (event: string, ...args: any[]) => void;
 }
 
 const useSocketServiceImpl = (): UseSocketServiceType => {
@@ -24,29 +36,11 @@ const useSocketServiceImpl = (): UseSocketServiceType => {
     }
     if (user.isLogined) {
       // FIXME: 인증상태 구현 후 2번째 인수 data에 accessToken을 보내도록 수정되어야 한다.
-      emit(PUBLISH.login, { data: user });
+      socketInstance.emit(PUBLISH.login, { data: user });
     }
   }, [socketInstance]);
-
-  const on = useCallback(
-    (event: string, callback: (...args: any[]) => void) => {
-      socketInstance.on(event, callback);
-    },
-    [socketInstance],
-  );
-  const off = (event: string) => {
-    socketInstance.off(event);
-  };
-
-  // TODO: 예외 핸들링이 추가되어야 한다.
-  const emit = useCallback(
-    (event: string, ...args: any[]) => {
-      socketInstance.emit(event, ...args);
-    },
-    [socketInstance],
-  );
 
   return { socketInstance, on, off, emit };
 };
 
-export const useSocketService = singletonHook({ socketInstance: initValue }, useSocketServiceImpl);
+export const useSocketService = singletonHook({ socketInstance: initValue, on, off, emit }, useSocketServiceImpl);
