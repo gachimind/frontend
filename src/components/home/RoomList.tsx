@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 import styled from 'styled-components';
@@ -6,13 +6,10 @@ import styled from 'styled-components';
 import useGameSocket from '@hooks/socket/useGameSocket';
 import { useAppSelector } from '@redux/hooks';
 
-import { GameRoomDetail } from '@customTypes/gameRoomType';
-
 const RoomList = () => {
   const navigate = useNavigate();
   const rooms = useAppSelector((state) => state.gameRoom);
   const { onBroadcastWholeRooms } = useGameSocket();
-  const [name, setName] = useState<string>('');
 
   useEffect(() => {
     onBroadcastWholeRooms();
@@ -24,13 +21,6 @@ const RoomList = () => {
 
   return (
     <>
-      <input
-        style={{ marginBottom: '20px' }}
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="닉네임입력"
-      />
       <br />
       <RoomListLayout>
         {rooms.broadcastedRooms.map((room) => (

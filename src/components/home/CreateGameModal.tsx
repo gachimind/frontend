@@ -6,7 +6,7 @@ import { useSocketService } from '@hooks/socket/useSocketService';
 
 import Modal from '@components/common/Modal';
 
-import { GameRoomCreateRequest, GameRoomDetail } from '@customTypes/gameRoomType';
+import { GameRoomCreateRequest } from '@customTypes/gameRoomType';
 
 // TODO: 모든 input을 추가하고 유효성 검사를 수행하여 방을 생성할 수 있어야 한다.
 const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {

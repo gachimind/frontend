@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { singletonHook } from 'react-singleton-hook';
 import { io, Socket } from 'socket.io-client';
