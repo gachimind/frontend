@@ -13,7 +13,7 @@ export interface GameRoomCreateRequest extends GameRoomBaseType {
 }
 
 export interface GameRoomDetail extends GameRoomBaseType {
-  roomId: number;
+  roomId: string;
   participants: Participant[];
 }
 
