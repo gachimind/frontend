@@ -1,6 +1,4 @@
-import { singletonHook } from 'react-singleton-hook';
-
-import { SUBSCRIBE } from '@constants/socket';
+import { PUBLISH, SUBSCRIBE } from '@constants/socket';
 import { useAppDispatch } from '@redux/hooks';
 import { updateAllRooms } from '@redux/modules/gameRoomSlice';
 
@@ -10,20 +8,24 @@ import { useSocketService } from './useSocketService';
 
 interface UseGameSocketType {
   onBroadcastWholeRooms: () => void;
+  emitUserLeaveRoom: () => void;
 }
 
 const useGameSocket = (): UseGameSocketType => {
-  const { on } = useSocketService();
+  const { on, emit } = useSocketService();
   const dispatch = useAppDispatch();
 
   const onBroadcastWholeRooms = () => {
-    on?.(SUBSCRIBE.broadcastRenewedRoomForHomeUsers, ({ data }: { data: GameRoomDetail[] }) => {
-      console.log(data);
+    on(SUBSCRIBE.broadcastRenewedRoomForHomeUsers, ({ data }: { data: GameRoomDetail[] }) => {
       dispatch(updateAllRooms(data));
     });
   };
 
-  return { onBroadcastWholeRooms };
+  const emitUserLeaveRoom = () => {
+    emit(PUBLISH.leaveGame);
+  };
+
+  return { onBroadcastWholeRooms, emitUserLeaveRoom };
 };
 
 export default useGameSocket;
