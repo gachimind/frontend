@@ -1,5 +1,11 @@
+import UserInfo from '@components/home/UserInfo';
+
 const Main = () => {
-  return <div>메인페이지</div>;
+  return (
+    <div>
+      <UserInfo />
+    </div>
+  );
 };
 
 export default Main;
