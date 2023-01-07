@@ -25,22 +25,33 @@ interface UseSocketServiceType {
   on: (event: string, callback: (...args: any[]) => void) => void;
   off: (event: string) => void;
   emit: (event: string, ...args: any[]) => void;
+  authorized: boolean;
 }
 
 const useSocketServiceImpl = (): UseSocketServiceType => {
   const [socketInstance, setSocketInstance] = useState<Socket>(initValue);
-  const user = useAppSelector((state) => state.user);
+  const [authorized, setAuthorized] = useState<boolean>(false);
+  const { user, isLogined } = useAppSelector((state) => state.user);
   useEffect(() => {
     if (!socketInstance) {
       setSocketInstance(initValue);
-    }
-    if (user.isLogined) {
-      // FIXME: 인증상태 구현 후 2번째 인수 data에 accessToken을 보내도록 수정되어야 한다.
-      socketInstance.emit(PUBLISH.login, { data: user });
+      return;
     }
   }, [socketInstance]);
 
-  return { socketInstance, on, off, emit };
+  useEffect(() => {
+    if (isLogined) {
+      // FIXME: 백엔드 소켓 로직 구현과 프론트엔드 인증상태 관리 구현 후 2번째 인수 data에 accessToken을 보내도록 수정되어야 한다.
+      emit(PUBLISH.login, { data: user }, () => {
+        setAuthorized(true);
+      });
+    }
+  }, [isLogined]);
+
+  return { socketInstance, on, off, emit, authorized };
 };
 
-export const useSocketService = singletonHook({ socketInstance: initValue, on, off, emit }, useSocketServiceImpl);
+export const useSocketService = singletonHook(
+  { socketInstance: initValue, on, off, emit, authorized: false },
+  useSocketServiceImpl,
+);
