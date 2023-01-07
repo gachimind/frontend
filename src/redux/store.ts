@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
+import gameRoomSlice from './modules/gameRoomSlice';
 import userSlice from './modules/userSlice';
 
 const rootReducer = combineReducers({
   user: userSlice.reducer,
+  gameRoom: gameRoomSlice.reducer,
 });
 
 export const store = configureStore({
