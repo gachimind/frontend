@@ -9,6 +9,7 @@ import { useSocketService } from './useSocketService';
 interface UseGameSocketType {
   onBroadcastWholeRooms: () => void;
   emitUserLeaveRoom: () => void;
+  emitJoinRoom: (roomId: string) => void;
 }
 
 const useGameSocket = (): UseGameSocketType => {
@@ -25,7 +26,11 @@ const useGameSocket = (): UseGameSocketType => {
     emit(PUBLISH.leaveGame);
   };
 
-  return { onBroadcastWholeRooms, emitUserLeaveRoom };
+  const emitJoinRoom = (roomId: string) => {
+    emit(PUBLISH.joinGame, { roomId });
+  };
+
+  return { onBroadcastWholeRooms, emitUserLeaveRoom, emitJoinRoom };
 };
 
 export default useGameSocket;

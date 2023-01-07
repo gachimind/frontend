@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import useGameSocket from '@hooks/socket/useGameSocket';
 import { useAppSelector } from '@redux/hooks';
 
+import { GameRoomDetail } from '@customTypes/gameRoomType';
+
 const RoomList = () => {
   const navigate = useNavigate();
   const rooms = useAppSelector((state) => state.gameRoom);
@@ -15,6 +17,10 @@ const RoomList = () => {
   useEffect(() => {
     onBroadcastWholeRooms();
   }, []);
+
+  const handleJoinRoomClick = (roomId: string) => {
+    navigate('/room/' + roomId);
+  };
 
   return (
     <>
@@ -29,7 +35,7 @@ const RoomList = () => {
       <RoomListLayout>
         {rooms.broadcastedRooms.map((room) => (
           <RoomCard key={room.roomId}>
-            {/* <button onClick={() => handleLinkClick(room)}>들가기</button> */}
+            <button onClick={() => handleJoinRoomClick(room.roomId)}>들가기</button>
             <p>방장: {room.participants.find((participant) => participant.isHost)?.nickname}</p>
             <p>
               현재 인원: {room.participants.length} / {room.maxCount}
