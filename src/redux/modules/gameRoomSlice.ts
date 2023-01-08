@@ -23,10 +23,13 @@ const gameRoomSlice = createSlice({
     updateAllRooms: (state, action) => {
       state.broadcastedRooms = action.payload;
     },
+    updateRoom: (state, action) => {
+      state.room = action.payload;
+    },
   },
   extraReducers: {},
 });
 
-export const { joinGameRoom, updateAllRooms } = gameRoomSlice.actions;
+export const { joinGameRoom, updateAllRooms, updateRoom } = gameRoomSlice.actions;
 
 export default gameRoomSlice;

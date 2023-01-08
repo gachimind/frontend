@@ -1,6 +1,6 @@
 import { PUBLISH, SUBSCRIBE } from '@constants/socket';
 import { useAppDispatch } from '@redux/hooks';
-import { updateAllRooms } from '@redux/modules/gameRoomSlice';
+import { updateAllRooms, updateRoom } from '@redux/modules/gameRoomSlice';
 
 import { GameRoomDetail } from '@customTypes/gameRoomType';
 
@@ -8,6 +8,7 @@ import { useSocketService } from './useSocketService';
 
 interface UseGameSocketType {
   onBroadcastWholeRooms: () => void;
+  onAnnounceRoomUpdate: () => void;
   emitUserLeaveRoom: () => void;
   emitJoinRoom: (roomId: string) => void;
 }
@@ -22,6 +23,12 @@ const useGameSocket = (): UseGameSocketType => {
     });
   };
 
+  const onAnnounceRoomUpdate = () => {
+    on(SUBSCRIBE.announceRenewedRoomForRoomMembers, ({ room }: { room: GameRoomDetail }) => {
+      dispatch(updateRoom(room));
+    });
+  };
+
   const emitUserLeaveRoom = () => {
     emit(PUBLISH.leaveGame);
   };
@@ -30,7 +37,7 @@ const useGameSocket = (): UseGameSocketType => {
     emit(PUBLISH.joinGame, { roomId });
   };
 
-  return { onBroadcastWholeRooms, emitUserLeaveRoom, emitJoinRoom };
+  return { onBroadcastWholeRooms, onAnnounceRoomUpdate, emitUserLeaveRoom, emitJoinRoom };
 };
 
 export default useGameSocket;
