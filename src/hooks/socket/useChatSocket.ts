@@ -5,11 +5,11 @@ import { SUBSCRIBE } from '@constants/socket';
 import { Chat } from '@customTypes/chatType';
 import { Participant } from '@customTypes/gameRoomType';
 
-import { useSocketService } from './useSocketService';
+import socketInstance from './socketInstance';
 
 const useChatSocket = () => {
   const [chatList, setChatList] = useState<Chat[]>([]);
-  const { on } = useSocketService();
+  const { on } = socketInstance;
 
   function sendMessage(chat: Chat) {
     setChatList((prev) => prev.concat(chat));

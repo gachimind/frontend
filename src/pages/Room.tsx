@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { useAuthSocket } from '@hooks/socket/useAuthSocket';
 import useGameSocket from '@hooks/socket/useGameSocket';
-import { useSocketService } from '@hooks/socket/useSocketService';
 
 import CamList from '@components/game/CamList';
 import ChatLog from '@components/game/ChatLog';
 
 const Room = () => {
   const { id } = useParams();
-  const { authorized } = useSocketService();
+  const { authorized } = useAuthSocket();
 
   const { emitUserLeaveRoom, emitJoinRoom, onAnnounceRoomUpdate } = useGameSocket();
   useEffect(() => {
