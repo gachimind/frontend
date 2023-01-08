@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import { PUBLISH, SUBSCRIBE } from '@constants/socket';
-import { useSocketService } from '@hooks/socket/useSocketService';
+import useGameSocket from '@hooks/socket/useGameSocket';
 
 import Modal from '@components/common/Modal';
 
@@ -12,7 +11,7 @@ import { GameRoomCreateRequest } from '@customTypes/gameRoomType';
 const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
   const [roomTitle, setRoomTitle] = useState<string>('');
   const [maxCount, setMaxCount] = useState<number>(2);
-  const { emit, on } = useSocketService();
+  const { onShowCreatedRoomId, emitCreateRoom } = useGameSocket();
   const navigate = useNavigate();
   const handleCreateGameButtonClick = () => {
     if (!roomTitle || maxCount < 2 || maxCount > 6) {
@@ -28,10 +27,8 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
       speechTime: 30,
       round: 1,
     };
-    emit?.(PUBLISH.createGame, createRoom);
-    on?.(SUBSCRIBE.showCreatedRoomIdForOwner, ({ roomId }: { roomId: string }) => {
-      navigate('/room/' + roomId);
-    });
+    emitCreateRoom(createRoom);
+    onShowCreatedRoomId(navigate, '/room/');
   };
   return (
     <Modal visible={visible} onClose={onClose}>
