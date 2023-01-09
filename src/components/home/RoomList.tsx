@@ -15,7 +15,7 @@ const RoomList = () => {
     onBroadcastWholeRooms();
   }, []);
 
-  const handleJoinRoomClick = (roomId: string) => {
+  const handleJoinRoomClick = (roomId: number) => {
     navigate('/room/' + roomId);
   };
 
@@ -26,9 +26,8 @@ const RoomList = () => {
         {rooms.broadcastedRooms.map((room) => (
           <RoomCard key={room.roomId}>
             <button onClick={() => handleJoinRoomClick(room.roomId)}>들가기</button>
-            <p>방장: {room.participants.find((participant) => participant.isHost)?.nickname}</p>
             <p>
-              현재 인원: {room.participants.length} / {room.maxCount}
+              현재 인원: {room.participants.toString()} / {room.maxCount}
             </p>
           </RoomCard>
         ))}

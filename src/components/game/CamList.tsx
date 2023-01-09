@@ -7,9 +7,9 @@ const CamList = () => {
 
   return (
     <div>
-      {room?.participants.map((participant) => (
+      {room?.participants.map((participant, index) => (
         <p key={participant.userId}>
-          {participant.isHost && '(방장)'} {participant.nickname} {participant.userId === user?.userId && '(나)'}
+          {index === 0 && '(방장)'} {participant.nickname} {participant.userId === user?.userId && '(나)'}
         </p>
       ))}
     </div>

@@ -2,9 +2,10 @@ import { NavigateFunction } from 'react-router-dom';
 
 import { PUBLISH, SUBSCRIBE } from '@constants/socket';
 import { useAppDispatch } from '@redux/hooks';
-import { updateAllRooms, updateRoom } from '@redux/modules/gameRoomSlice';
+import { updateRoom } from '@redux/modules/gameRoomSlice';
 
-import { GameRoomCreateRequest, GameRoomDetail } from '@customTypes/gameRoomType';
+import { GameRoomDetail } from '@customTypes/gameRoomType';
+import { CreateRoomRequest } from '@customTypes/socketType';
 
 import socketInstance from './socketInstance';
 
@@ -14,7 +15,7 @@ interface UseGameSocketType {
   onShowCreatedRoomId: (navigate: NavigateFunction, path: string) => void;
   emitUserLeaveRoom: () => void;
   emitJoinRoom: (roomId: string) => void;
-  emitCreateRoom: (createRoom: GameRoomCreateRequest) => void;
+  emitCreateRoom: (createRoom: CreateRoomRequest) => void;
 }
 
 const useGameSocket = (): UseGameSocketType => {
@@ -22,9 +23,7 @@ const useGameSocket = (): UseGameSocketType => {
   const dispatch = useAppDispatch();
 
   const onBroadcastWholeRooms = () => {
-    on(SUBSCRIBE.broadcastRenewedRoomForHomeUsers, ({ data }: { data: GameRoomDetail[] }) => {
-      dispatch(updateAllRooms(data));
-    });
+    //
   };
 
   const onAnnounceRoomUpdate = () => {
@@ -47,7 +46,7 @@ const useGameSocket = (): UseGameSocketType => {
     emit(PUBLISH.joinGame, { roomId });
   };
 
-  const emitCreateRoom = (createRoom: GameRoomCreateRequest) => {
+  const emitCreateRoom = (createRoom: CreateRoomRequest) => {
     emit(PUBLISH.createGame, createRoom);
   };
 
