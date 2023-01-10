@@ -5,7 +5,7 @@ import { useAppDispatch } from '@redux/hooks';
 import { updateRoom } from '@redux/modules/gameRoomSlice';
 
 import { GameRoomDetail } from '@customTypes/gameRoomType';
-import { CreateRoomRequest } from '@customTypes/socketType';
+import { CreateRoomRequest, EnterRoomRequest } from '@customTypes/socketType';
 
 import socketInstance from './socketInstance';
 
@@ -13,8 +13,9 @@ interface UseGameSocketType {
   onBroadcastWholeRooms: () => void;
   onAnnounceRoomUpdate: () => void;
   onShowCreatedRoomId: (navigate: NavigateFunction, path: string) => void;
+  onJoinRoom: () => void;
   emitUserLeaveRoom: () => void;
-  emitJoinRoom: (roomId: string) => void;
+  emitJoinRoom: ({ roomId, roomPassword }: EnterRoomRequest) => void;
   emitCreateRoom: (createRoom: CreateRoomRequest) => void;
 }
 
@@ -33,8 +34,16 @@ const useGameSocket = (): UseGameSocketType => {
   };
 
   const onShowCreatedRoomId = (navigate: NavigateFunction, path: string) => {
-    on(SUBSCRIBE.showCreatedRoomIdForOwner, ({ roomId }: { roomId: string }) => {
-      navigate(path + roomId);
+    on(SUBSCRIBE.showCreatedRoomIdForOwner, ({ data }: { data: { roomId: string } }) => {
+      console.log('[on] create-room');
+      navigate(path + data.roomId);
+    });
+  };
+
+  const onJoinRoom = () => {
+    on(PUBLISH.joinGame, (data) => {
+      console.log('[on] join-room');
+      console.log(data);
     });
   };
 
@@ -42,18 +51,20 @@ const useGameSocket = (): UseGameSocketType => {
     emit(PUBLISH.leaveGame);
   };
 
-  const emitJoinRoom = (roomId: string) => {
-    emit(PUBLISH.joinGame, { roomId });
+  const emitJoinRoom = ({ roomId, roomPassword }: EnterRoomRequest) => {
+    console.log('[emit] enter-room');
+    emit(PUBLISH.joinGame, { data: { roomId, roomPassword } });
   };
 
   const emitCreateRoom = (createRoom: CreateRoomRequest) => {
-    emit(PUBLISH.createGame, createRoom);
+    emit(PUBLISH.createGame, { data: createRoom });
   };
 
   return {
     onBroadcastWholeRooms,
     onAnnounceRoomUpdate,
     onShowCreatedRoomId,
+    onJoinRoom,
     emitUserLeaveRoom,
     emitJoinRoom,
     emitCreateRoom,

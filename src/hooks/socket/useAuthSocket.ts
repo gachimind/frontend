@@ -58,7 +58,7 @@ const useAuthSocketImpl = () => {
   useEffect(() => {
     if (isLogined) {
       if (!authorized) {
-        emit(PUBLISH.login, { data: { authentication: localStorage.getItem('accessToken') } });
+        emit(PUBLISH.login, { data: { authorization: localStorage.getItem('accessToken') } });
         setAuthorized(true);
       }
     }

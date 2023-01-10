@@ -17,4 +17,6 @@ export const SUBSCRIBE = Object.freeze({
   receiveChat: 'receive-chat', // 유저의 방에서 발생된 채팅을 응답한다.
   showDisconnectedRoomMember: 'room-user-disconnected', // 방에서 연결이 끊긴 유저의 정보를 알려준다.
   showConnectedRoomMember: 'room-user-connected', // 방에 새롭게 연결된 유저의 정보를 알려준다.
+  login: 'log-in', // 로그인 성공 응답 메시지
+  joinGame: 'enter-room', // 방 입장 시도에 대한 서버의 응답을 받는다.
 });
