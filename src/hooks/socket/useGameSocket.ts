@@ -28,8 +28,10 @@ const useGameSocket = (): UseGameSocketType => {
   };
 
   const onAnnounceRoomUpdate = () => {
-    on(SUBSCRIBE.announceRenewedRoomForRoomMembers, ({ room }: { room: GameRoomDetail }) => {
-      dispatch(updateRoom(room));
+    on(SUBSCRIBE.announceRenewedRoomForRoomMembers, ({ data }: { data: GameRoomDetail }) => {
+      console.log('[on] update-room');
+      console.log(data);
+      dispatch(updateRoom(data));
     });
   };
 
