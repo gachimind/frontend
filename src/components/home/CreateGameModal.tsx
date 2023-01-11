@@ -5,7 +5,7 @@ import useGameSocket from '@hooks/socket/useGameSocket';
 
 import Modal from '@components/common/Modal';
 
-import { GameRoomCreateRequest } from '@customTypes/gameRoomType';
+import { CreateRoomRequest } from '@customTypes/socketType';
 
 // TODO: 모든 input을 추가하고 유효성 검사를 수행하여 방을 생성할 수 있어야 한다.
 const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
@@ -18,7 +18,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
       return;
     }
 
-    const createRoom: GameRoomCreateRequest = {
+    const createRoom: CreateRoomRequest = {
       roomTitle,
       maxCount,
       isSecretRoom: false,

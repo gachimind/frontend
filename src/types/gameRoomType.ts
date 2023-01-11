@@ -1,25 +1,25 @@
-export interface GameRoomBaseType {
+export interface GameRoomBaseInfo {
   roomTitle: string;
   maxCount: number;
   isSecretRoom: boolean;
 }
 
-export interface GameRoomCreateRequest extends GameRoomBaseType {
-  round: number;
+export interface GameRoomPlayDetailInfo {
   readyTime: number;
   speechTime: number;
   discussionTime: number;
-  roomPassword?: string;
+  round: number;
 }
 
-export interface GameRoomDetail extends GameRoomBaseType {
-  roomId: string;
+export interface GameRoomDetail extends GameRoomBaseInfo, GameRoomPlayDetailInfo {
+  roomId: number;
+  isGameOn: boolean;
   participants: Participant[];
 }
 
 export interface Participant {
   userId: number;
   nickname: string;
-  isHost: boolean;
-  socketId: string;
+  profileImg: string;
+  isReady: boolean;
 }

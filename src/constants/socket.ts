@@ -10,11 +10,11 @@ export const PUBLISH = Object.freeze({
 
 export const SUBSCRIBE = Object.freeze({
   //   welcomeUserEnteredRoom: 'welcome', // room-update 가 있다면 필요없다.
-  showCreatedRoomIdForOwner: 'room-id', // 유저의 게임 생성 요청으로 생성된 아이디 정보를 알려준다.
+  showCreatedRoomIdForOwner: 'create-room', // 유저의 게임 생성 요청으로 생성된 아이디 정보를 알려준다.
   showRoomListForFirstUser: 'room-list', // 처음 홈페이지에 들어와 소켓에 연결된 유저들에게 방 목록 정보가 알려진다.
-  broadcastRenewedRoomForHomeUsers: 'rooms-refresh', // 방 생성/삭제, 방의 유저 변동에 대한 정보 업데이트가 홈페이지의 모든 유저들에게 알려진다.
-  announceRenewedRoomForRoomMembers: 'room-update', // 방에 새로 들어온 유저, 나간 유저 등을 반영해 업데이트 된 룸 데이터를 얻어와 해당 방의 유저들에게 알려준다.
+  broadcastRenewedRoomForHomeUsers: 'update-room-list', // 방 생성/삭제, 방의 유저 변동에 대한 정보 업데이트가 홈페이지의 모든 유저들에게 알려진다.
+  announceRenewedRoomForRoomMembers: 'update-room', // 방에 새로 들어온 유저, 나간 유저 등을 반영해 업데이트 된 룸 데이터를 얻어와 해당 방의 유저들에게 알려준다.
   receiveChat: 'receive-chat', // 유저의 방에서 발생된 채팅을 응답한다.
-  showDisconnectedRoomMember: 'room-user-disconnected', // 방에서 연결이 끊긴 유저의 정보를 알려준다.
-  showConnectedRoomMember: 'room-user-connected', // 방에 새롭게 연결된 유저의 정보를 알려준다.
+  login: 'log-in', // 로그인 성공 응답 메시지
+  joinGame: 'enter-room', // 방 입장 시도에 대한 서버의 응답을 받는다.
 });

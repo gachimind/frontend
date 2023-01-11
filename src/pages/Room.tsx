@@ -11,7 +11,7 @@ const Room = () => {
   const { id } = useParams();
   const { authorized } = useAuthSocket();
 
-  const { emitUserLeaveRoom, emitJoinRoom, onAnnounceRoomUpdate } = useGameSocket();
+  const { emitUserLeaveRoom, emitJoinRoom, onAnnounceRoomUpdate, onJoinRoom } = useGameSocket();
   useEffect(() => {
     return () => emitUserLeaveRoom();
   }, []);
@@ -19,7 +19,8 @@ const Room = () => {
   useEffect(() => {
     onAnnounceRoomUpdate();
     if (authorized) {
-      id && emitJoinRoom(id);
+      id && emitJoinRoom({ roomId: parseInt(id, 10) });
+      onJoinRoom();
     }
   }, [id, authorized]);
 
