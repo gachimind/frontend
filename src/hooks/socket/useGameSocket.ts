@@ -1,6 +1,7 @@
 import { NavigateFunction } from 'react-router-dom';
 
 import { PUBLISH, SUBSCRIBE } from '@constants/socket';
+import useLocalStream from '@hooks/useLocalStream';
 import { useAppDispatch } from '@redux/hooks';
 import { updateRoom } from '@redux/modules/gameRoomSlice';
 
@@ -22,6 +23,7 @@ interface UseGameSocketType {
 const useGameSocket = (): UseGameSocketType => {
   const { on, emit } = socketInstance;
   const dispatch = useAppDispatch();
+  const { initLocalStream } = useLocalStream();
 
   const onBroadcastWholeRooms = () => {
     //
@@ -30,14 +32,14 @@ const useGameSocket = (): UseGameSocketType => {
   const onAnnounceRoomUpdate = () => {
     on(SUBSCRIBE.announceRenewedRoomForRoomMembers, ({ data }: { data: GameRoomDetail }) => {
       console.log('[on] update-room');
-      console.log(data);
       dispatch(updateRoom(data));
     });
   };
 
   const onShowCreatedRoomId = (navigate: NavigateFunction, path: string) => {
-    on(SUBSCRIBE.showCreatedRoomIdForOwner, ({ data }: { data: { roomId: string } }) => {
+    on(SUBSCRIBE.showCreatedRoomIdForOwner, async ({ data }: { data: { roomId: string } }) => {
       console.log('[on] create-room');
+      await initLocalStream();
       navigate(path + data.roomId);
     });
   };
