@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { useAuthSocket } from '@hooks/socket/useAuthSocket';
 import useGameSocket from '@hooks/socket/useGameSocket';
+import useGameUpdateSocket from '@hooks/socket/useGameUpdateSocket';
 import useLocalStream from '@hooks/useLocalStream';
 import { useAppSelector } from '@redux/hooks';
 
@@ -17,8 +18,8 @@ const Room = () => {
   const { authorized } = useAuthSocket();
   const { userStreamRef } = useAppSelector((state) => state.userMedia);
   const { destroyLocalStream } = useLocalStream();
-
-  const { emitUserLeaveRoom, emitJoinRoom, onAnnounceRoomUpdate, onJoinRoom } = useGameSocket();
+  const { onAnnounceRoomUpdate } = useGameUpdateSocket();
+  const { emitUserLeaveRoom, emitJoinRoom, onJoinRoom } = useGameSocket();
   useEffect(() => {
     return () => emitUserLeaveRoom();
   }, []);
