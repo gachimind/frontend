@@ -2,15 +2,19 @@ import { useEffect, useRef } from 'react';
 
 import styled from 'styled-components';
 
+import CamButton from './CamButton';
+import MicButton from './MicButton';
+
 interface CamProps {
   userStream: MediaStream;
   nickname: string;
   audio?: boolean;
   video?: boolean;
   isMe?: boolean;
+  isHost?: boolean;
 }
 
-const Cam = ({ userStream, nickname, audio, video, isMe }: CamProps) => {
+const Cam = ({ userStream, nickname, audio, video, isMe, isHost }: CamProps) => {
   const videoRef: React.RefObject<HTMLVideoElement> | null = useRef(null);
 
   useEffect(() => {
@@ -22,7 +26,31 @@ const Cam = ({ userStream, nickname, audio, video, isMe }: CamProps) => {
 
   return (
     <CamLayout>
-      {userStream ? <Video ref={videoRef} autoPlay playsInline muted={isMe} /> : <EmptyVideo>{nickname}</EmptyVideo>}
+      {userStream ? (
+        <VideoBox>
+          <NameBox>
+            {isHost && '<방장>'}
+            {nickname}
+            {isMe && '[ME]'}
+          </NameBox>
+          <MediaFlexBox>
+            {isMe ? (
+              <>
+                <CamButton />
+                <MicButton />
+              </>
+            ) : (
+              <>
+                <button>오디오 {audio ? '켜짐' : '꺼짐'}</button>
+                <button>비디오 {video ? '켜짐' : '꺼짐'}</button>
+              </>
+            )}
+          </MediaFlexBox>
+          <Video ref={videoRef} autoPlay playsInline muted={isMe} />
+        </VideoBox>
+      ) : (
+        <EmptyVideo>{nickname}</EmptyVideo>
+      )}
     </CamLayout>
   );
 };
@@ -30,6 +58,22 @@ const Cam = ({ userStream, nickname, audio, video, isMe }: CamProps) => {
 const CamLayout = styled.div`
   border: 1px solid white;
   color: white;
+`;
+
+const NameBox = styled.div`
+  position: absolute;
+  top: 0;
+  background-color: black;
+`;
+
+const MediaFlexBox = styled.div`
+  position: absolute;
+  bottom: 0;
+  background-color: black;
+`;
+
+const VideoBox = styled.div`
+  position: relative;
 `;
 
 const Video = styled.video`
