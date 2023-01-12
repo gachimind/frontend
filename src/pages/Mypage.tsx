@@ -1,21 +1,28 @@
-import Layout from '@components/common/Layout';
+import styled from 'styled-components';
 
+import Container from '@components/common/Container';
+import UserInfo from '@components/home/UserInfo';
+
+// TODO: 마이페이지 디자인 완성 시 다시 작업하기
 const Mypage = () => {
   return (
-    <Layout main={true} height={670} width={1400}>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '40px',
-        }}
-      >
-        <Layout height={500} width={300}></Layout>
-        <Layout height={500} width={400}></Layout>
-        <Layout height={500} width={500}></Layout>
-      </div>
-    </Layout>
+    <Container page="mypage" containerType="template" width={84.63541666666667} height={86.8945868945869}>
+      <ComponentsBox>
+        <Container title="PROFILE" height={67.22689075630252} width={17.578125}>
+          <UserInfo />
+        </Container>
+        <Container title="GROWTH TOWER" height={67.22689075630252} width={17.578125} />
+        <Container title="KEYWORD LIST" height={67.22689075630252} width={22.786458333333332} />
+      </ComponentsBox>
+    </Container>
   );
 };
+
+const ComponentsBox = styled.div`
+  margin-top: 10px;
+  gap: 40px;
+  display: flex;
+  justify-content: center;
+`;
 
 export default Mypage;
