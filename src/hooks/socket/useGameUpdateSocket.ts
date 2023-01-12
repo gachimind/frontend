@@ -19,6 +19,7 @@ const useGameUpdateSocket = () => {
     on(
       SUBSCRIBE.announceRenewedRoomForRoomMembers,
       ({ data }: { data: { room: GameRoomDetail; eventUserInfo: { socketId: string; isEnterEvent: boolean } } }) => {
+        console.log('[on] update-room');
         dispatch(updateRoom(data.room));
         dispatch(setPlayerList(data.room.participants));
         const mySocketId = socketInstance.socketInstance.id;
@@ -36,7 +37,6 @@ const useGameUpdateSocket = () => {
 
   useEffect(() => {
     return () => {
-      console.log('[on] update-room');
       off(SUBSCRIBE.announceRenewedRoomForRoomMembers);
     };
   }, []);
