@@ -10,6 +10,7 @@ export const PUBLISH = Object.freeze({
   webRTCOffer: 'webrtc-offer',
   webRTCAnswer: 'webrtc-answer',
   webRTCLeave: 'webrtc-leave',
+  updateUserStream: 'update-userstream',
 });
 
 export const SUBSCRIBE = Object.freeze({
@@ -26,4 +27,5 @@ export const SUBSCRIBE = Object.freeze({
   webRTCOffer: 'webrtc-offer',
   webRTCAnswer: 'webrtc-answer',
   webRTCLeave: 'webrtc-leave',
+  updateUserStream: 'update-userstream',
 });
