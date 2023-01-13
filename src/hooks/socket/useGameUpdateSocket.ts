@@ -18,7 +18,15 @@ const useGameUpdateSocket = () => {
   const onAnnounceRoomUpdate = () => {
     on(
       SUBSCRIBE.announceRenewedRoomForRoomMembers,
-      ({ data }: { data: { room: GameRoomDetail; eventUserInfo: { socketId: string; isEnterEvent: boolean } } }) => {
+      ({
+        data,
+      }: {
+        data: {
+          room: GameRoomDetail;
+          eventUserInfo: { socketId: string };
+          event: 'enter' | 'leave' | 'leave-force' | 'ready' | 'start';
+        };
+      }) => {
         console.log('[on] update-room');
         dispatch(updateRoom(data.room));
         dispatch(setPlayerList(data.room.participants));
