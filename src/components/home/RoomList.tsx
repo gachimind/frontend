@@ -4,18 +4,21 @@ import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 
 import useGameSocket from '@hooks/socket/useGameSocket';
+import useLocalStream from '@hooks/useLocalStream';
 import { useAppSelector } from '@redux/hooks';
 
 const RoomList = () => {
   const navigate = useNavigate();
   const rooms = useAppSelector((state) => state.gameRoom);
   const { onBroadcastWholeRooms } = useGameSocket();
+  const { initLocalStream } = useLocalStream();
 
   useEffect(() => {
     onBroadcastWholeRooms();
   }, []);
 
-  const handleJoinRoomClick = (roomId: number) => {
+  const handleJoinRoomClick = async (roomId: number) => {
+    await initLocalStream();
     navigate('/room/' + roomId);
   };
 
@@ -41,6 +44,7 @@ const RoomListLayout = styled.div`
   flex-wrap: wrap;
   grid-column-gap: 16px;
   grid-row-gap: 16px;
+  color: white;
 `;
 
 const RoomCard = styled.div`

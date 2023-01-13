@@ -1,17 +1,14 @@
 import { NavigateFunction } from 'react-router-dom';
 
 import { PUBLISH, SUBSCRIBE } from '@constants/socket';
-import { useAppDispatch } from '@redux/hooks';
-import { updateRoom } from '@redux/modules/gameRoomSlice';
+import useLocalStream from '@hooks/useLocalStream';
 
-import { GameRoomDetail } from '@customTypes/gameRoomType';
 import { CreateRoomRequest, EnterRoomRequest } from '@customTypes/socketType';
 
 import socketInstance from './socketInstance';
 
 interface UseGameSocketType {
   onBroadcastWholeRooms: () => void;
-  onAnnounceRoomUpdate: () => void;
   onShowCreatedRoomId: (navigate: NavigateFunction, path: string) => void;
   onJoinRoom: () => void;
   emitUserLeaveRoom: () => void;
@@ -21,23 +18,16 @@ interface UseGameSocketType {
 
 const useGameSocket = (): UseGameSocketType => {
   const { on, emit } = socketInstance;
-  const dispatch = useAppDispatch();
+  const { initLocalStream } = useLocalStream();
 
   const onBroadcastWholeRooms = () => {
     //
   };
 
-  const onAnnounceRoomUpdate = () => {
-    on(SUBSCRIBE.announceRenewedRoomForRoomMembers, ({ data }: { data: GameRoomDetail }) => {
-      console.log('[on] update-room');
-      console.log(data);
-      dispatch(updateRoom(data));
-    });
-  };
-
   const onShowCreatedRoomId = (navigate: NavigateFunction, path: string) => {
-    on(SUBSCRIBE.showCreatedRoomIdForOwner, ({ data }: { data: { roomId: string } }) => {
+    on(SUBSCRIBE.showCreatedRoomIdForOwner, async ({ data }: { data: { roomId: string } }) => {
       console.log('[on] create-room');
+      await initLocalStream();
       navigate(path + data.roomId);
     });
   };
@@ -64,7 +54,6 @@ const useGameSocket = (): UseGameSocketType => {
 
   return {
     onBroadcastWholeRooms,
-    onAnnounceRoomUpdate,
     onShowCreatedRoomId,
     onJoinRoom,
     emitUserLeaveRoom,

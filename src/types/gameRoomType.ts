@@ -22,4 +22,7 @@ export interface Participant {
   nickname: string;
   profileImg: string;
   isReady: boolean;
+  socketId: string;
+  audio?: boolean;
+  video?: boolean;
 }

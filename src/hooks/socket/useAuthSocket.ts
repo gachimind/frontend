@@ -69,10 +69,6 @@ const useAuthSocketImpl = () => {
       console.log('[on] room-list');
       dispatch(updateAllRooms(data));
     });
-    on(SUBSCRIBE.broadcastRenewedRoomForHomeUsers, ({ data }: { data: GameRoomBroadcastResponse[] }) => {
-      console.log('[on] rooms-refresh');
-      dispatch(updateAllRooms(data));
-    });
   }, []);
 
   return { authorized };
