@@ -29,7 +29,7 @@ const MicButton = () => {
 
 // TODO: MIC 커짐/켜짐 아이콘 바꾸기
 
-const MICButton = styled.button`
+const MicButtonLayout = styled.button`
   background-color: transparent;
   display: flex;
   justify-content: center;
