@@ -21,9 +21,9 @@ const MicButton = () => {
     emitUpdateUserStream({ audio: changedCamState });
   };
   return (
-    <MICButton onClick={handleClick} aria-label={`마이크 ${userMic ? '켜짐' : '꺼짐'}`}>
+    <MicButtonLayout onClick={handleClick} aria-label={`마이크 ${userMic ? '켜짐' : '꺼짐'}`}>
       {userMic ? 'MIC켜짐' : <img src={micIcon} />}
-    </MICButton>
+    </MicButtonLayout>
   );
 };
 
