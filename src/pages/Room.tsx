@@ -9,9 +9,12 @@ import useGameUpdateSocket from '@hooks/socket/useGameUpdateSocket';
 import useLocalStream from '@hooks/useLocalStream';
 import { useAppSelector } from '@redux/hooks';
 
-import Layout from '@components/common/Layout';
 import CamList from '@components/game/CamList';
 import ChatLog from '@components/game/ChatLog';
+import Presenter from '@components/game/Presenter';
+import ScoreBoard from '@components/game/ScoreBoard';
+import ContentBox from '@components/layout/ContentBox';
+import RoomLayout from '@components/layout/room/RoomLayout';
 
 const Room = () => {
   const { id } = useParams();
@@ -42,31 +45,52 @@ const Room = () => {
   }, [id, authorized]);
 
   return (
-    <Layout main={true} height={670} width={1400}>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '40px',
-        }}
-      >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-          <Layout height={150} width={400}></Layout>
-          <Layout height={350} width={400}></Layout>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-          <Layout height={350} width={400}></Layout>
-          <Layout height={150} width={400}>
-            <ChatLog />
-          </Layout>
-        </div>
-        <Layout width={400} height={500}>
-          <CamList />
-        </Layout>
-      </div>
-    </Layout>
+    <RoomLayout>
+      <ContentBox title="SCORE">
+        <ScoreBoard />
+      </ContentBox>
+      <MiddleSectionBox>
+        <ContentBox title="PRESENTER">
+          <Presenter />
+        </ContentBox>
+        <CamListBox>{/* <CamList /> */}</CamListBox>
+      </MiddleSectionBox>
+      <RightSectionBox>
+        <ContentBox title="TIMER">
+          <TimerBox>00:00</TimerBox>
+        </ContentBox>
+        <ContentBox title="CHATTING">
+          <ChatLog />
+        </ContentBox>
+      </RightSectionBox>
+    </RoomLayout>
   );
 };
+
+const MiddleSectionBox = styled.div`
+  height: inherit;
+  gap: 32px;
+  display: grid;
+  grid-template-rows: 5fr 2fr;
+`;
+
+const CamListBox = styled.div`
+  border: ${(props) => props.theme.borders.camList};
+`;
+
+const RightSectionBox = styled.div`
+  height: inherit;
+  gap: 23px;
+  display: grid;
+  grid-template-rows: 1fr 3fr;
+`;
+
+const TimerBox = styled.div`
+  font-size: 40px;
+  color: ${(props) => props.theme.colors.outline};
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+`;
 
 export default Room;

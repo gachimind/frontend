@@ -1,6 +1,10 @@
+import styled from 'styled-components';
+
 import useStreamUpdateSocket from '@hooks/socket/useStreamUpdateSocket';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { setUserMic } from '@redux/modules/userMediaSlice';
+
+import micIcon from '../../assets/micIcon.svg';
 
 const MicButton = () => {
   const { userMic, localDevice, userStreamRef } = useAppSelector((state) => state.userMedia);
@@ -17,10 +21,19 @@ const MicButton = () => {
     emitUpdateUserStream({ audio: changedCamState });
   };
   return (
-    <button onClick={handleClick} aria-label={`마이크 ${userMic ? '켜짐' : '꺼짐'}`}>
-      {userMic ? 'MIC켜짐' : 'MIC꺼짐'}
-    </button>
+    <MICButton onClick={handleClick} aria-label={`마이크 ${userMic ? '켜짐' : '꺼짐'}`}>
+      {userMic ? 'MIC켜짐' : <img src={micIcon} />}
+    </MICButton>
   );
 };
+
+// TODO: MIC 커짐/켜짐 아이콘 바꾸기
+
+const MicButtonLayout = styled.button`
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default MicButton;
