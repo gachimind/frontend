@@ -16,6 +16,10 @@ import CamListSliderArrow from './CamListSliderArrow';
 const CamList = () => {
   const { userStream, userCam, userMic, userStreamRef } = useAppSelector((state) => state.userMedia);
   const { playerList, playerStreamMap } = useAppSelector((state) => state.playerMedia);
+  const [hasSlider, setHasSlider] = useState<{ hasPrev: boolean; hasNext: boolean }>({
+    hasPrev: false,
+    hasNext: true,
+  });
   const [emptyUserCount, setEmptyUserCount] = useState<number>(0);
   const { user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
@@ -46,8 +50,20 @@ const CamList = () => {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
-    nextArrow: <CamListSliderArrow direction="right" />,
-    prevArrow: <CamListSliderArrow direction="left" />,
+    nextArrow: (
+      <CamListSliderArrow
+        direction="right"
+        hasSlider={hasSlider.hasNext}
+        setHasSlider={() => setHasSlider({ hasNext: false, hasPrev: true })}
+      />
+    ),
+    prevArrow: (
+      <CamListSliderArrow
+        direction="left"
+        hasSlider={hasSlider.hasPrev}
+        setHasSlider={() => setHasSlider({ hasNext: true, hasPrev: false })}
+      />
+    ),
   };
 
   return (

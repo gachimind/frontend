@@ -5,14 +5,25 @@ import SlideRightIcon from '@assets/slideRightIcon.svg';
 interface SliderNextArrowProps {
   direction: 'left' | 'right';
   onClick?: React.MouseEventHandler<HTMLDivElement>;
+  hasSlider: boolean;
+  setHasSlider: () => void;
 }
 
-const CamListSliderArrow = ({ onClick, direction }: SliderNextArrowProps) => {
+const CamListSliderArrow = ({ onClick, direction, hasSlider, setHasSlider }: SliderNextArrowProps) => {
   return (
-    <SliderNextArrowLayout className="slick-disabled" direction={direction} onClick={onClick}>
-      <SliderIconBox>
-        <img src={direction === 'left' ? SlideLeftIcon : SlideRightIcon} />
-      </SliderIconBox>
+    <SliderNextArrowLayout
+      className="slick-disabled"
+      direction={direction}
+      onClick={(e) => {
+        onClick && onClick(e);
+        setHasSlider();
+      }}
+    >
+      {hasSlider && (
+        <SliderIconBox>
+          <img src={direction === 'left' ? SlideLeftIcon : SlideRightIcon} />
+        </SliderIconBox>
+      )}
     </SliderNextArrowLayout>
   );
 };
