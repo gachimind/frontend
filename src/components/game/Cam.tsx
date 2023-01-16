@@ -2,11 +2,10 @@ import { useEffect, useRef } from 'react';
 
 import styled from 'styled-components';
 
-import CamButton from './CamButton';
-import MicButton from './MicButton';
+import CamUserStatus from './CamUserStatus';
 
 interface CamProps {
-  userStream: MediaStream;
+  userStream?: MediaStream;
   nickname: string;
   audio?: boolean;
   video?: boolean;
@@ -28,25 +27,8 @@ const Cam = ({ userStream, nickname, audio, video, isMe, isHost }: CamProps) => 
     <CamLayout>
       {userStream ? (
         <VideoBox>
-          <NameBox>
-            {isHost && '<방장>'}
-            {nickname}
-            {isMe && '[ME]'}
-          </NameBox>
-          <MediaFlexBox>
-            {isMe ? (
-              <>
-                <CamButton />
-                <MicButton />
-              </>
-            ) : (
-              <>
-                <button>오디오 {audio ? '켜짐' : '꺼짐'}</button>
-                <button>비디오 {video ? '켜짐' : '꺼짐'}</button>
-              </>
-            )}
-          </MediaFlexBox>
           <Video ref={videoRef} autoPlay playsInline muted={isMe} />
+          <CamUserStatus isCamOn={video} isMicOn={audio} nickname={nickname} />
         </VideoBox>
       ) : (
         <EmptyVideo>{nickname}</EmptyVideo>
@@ -56,20 +38,7 @@ const Cam = ({ userStream, nickname, audio, video, isMe, isHost }: CamProps) => 
 };
 
 const CamLayout = styled.div`
-  border: 1px solid white;
-  color: white;
-`;
-
-const NameBox = styled.div`
-  position: absolute;
-  top: 0;
-  background-color: black;
-`;
-
-const MediaFlexBox = styled.div`
-  position: absolute;
-  bottom: 0;
-  background-color: black;
+  margin: 0 16px;
 `;
 
 const VideoBox = styled.div`
@@ -77,9 +46,19 @@ const VideoBox = styled.div`
 `;
 
 const Video = styled.video`
-  max-width: 100%;
-  max-height: 100%;
+  width: 150px;
+  height: 130px;
 `;
-const EmptyVideo = styled.div``;
+const EmptyVideo = styled.div`
+  margin-top: 8px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 116px;
+  background-color: black;
+  color: white;
+`;
 
 export default Cam;
