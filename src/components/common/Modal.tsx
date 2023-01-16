@@ -5,14 +5,17 @@ import styled from 'styled-components';
 
 import useClickAway from '@hooks/useClickAway';
 
+import closeButton from '../../assets/closeButton.svg';
+
 interface ModalProps {
   visible: boolean;
-  width?: number;
+  height: number;
+  title: string;
   children: React.ReactNode;
   onClose: () => void;
 }
 
-const Modal = ({ visible, width = 400, children, onClose }: ModalProps) => {
+const Modal = ({ visible, height, title, children, onClose }: ModalProps) => {
   const ref = useRef(null);
   useClickAway(ref, () => onClose && onClose());
   const portalDiv = document.querySelector('#modal-root');
@@ -25,9 +28,15 @@ const Modal = ({ visible, width = 400, children, onClose }: ModalProps) => {
       {visible &&
         createPortal(
           <ModalBackgroundLayout visible={visible}>
-            <ModalContentsBox ref={ref} style={{ width: width + 'px' }}>
+            <ModalBox ref={ref} height={height}>
+              <ModalHeader>
+                {title}
+                <ModalCloseButton onClick={() => onClose && onClose()}>
+                  <img src={closeButton} />
+                </ModalCloseButton>
+              </ModalHeader>
               {children}
-            </ModalContentsBox>
+            </ModalBox>
           </ModalBackgroundLayout>,
           portalDiv,
         )}
@@ -50,20 +59,38 @@ const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
   min-height: 100vh;
   padding-right: 15vw;
   padding-left: 15vw;
-  background: rgba(0, 0, 0, 0.5);
 `;
 
-const ModalContentsBox = styled.div`
+const ModalBox = styled.div<{ height: number }>`
+  width: 560px;
+  height: ${(props) => props.height}px;
   background-color: white;
   position: relative;
   z-index: 20;
-  min-height: 140px;
-  min-width: 340px;
-  max-width: 748px;
-  max-height: 100vh;
-  padding: 30px 58px 30px 58px;
   margin: auto;
-  border-radius: 30px;
+`;
+
+const ModalHeader = styled.div`
+  position: relative;
+  font-size: 24px;
+  color: ${(props) => props.theme.colors.outline};
+  height: 48px;
+  background-color: ${(props) => props.theme.colors.footer};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ModalCloseButton = styled.button`
+  cursor: pointer;
+  background-color: transparent;
+  position: absolute;
+  font-size: inherit;
+  color: inherit;
+  right: 27px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default Modal;
