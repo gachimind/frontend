@@ -53,7 +53,9 @@ const Room = () => {
         <ContentBox title="PRESENTER">
           <Presenter />
         </ContentBox>
-        <CamListBox>{/* <CamList /> */}</CamListBox>
+        <CamListBox>
+          <CamList />
+        </CamListBox>
       </MiddleSectionBox>
       <RightSectionBox>
         <ContentBox title="TIMER">
@@ -71,11 +73,12 @@ const MiddleSectionBox = styled.div`
   height: inherit;
   gap: 32px;
   display: grid;
-  grid-template-rows: 5fr 2fr;
+  grid-template-rows: 47fr 16fr;
 `;
 
 const CamListBox = styled.div`
   border: ${(props) => props.theme.borders.camList};
+  padding: 16px 39px;
 `;
 
 const RightSectionBox = styled.div`
