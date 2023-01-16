@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
 import useChatSocket from '@hooks/socket/useChatSocket';
-import { useAppSelector } from '@redux/hooks';
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { clearChatList } from '@redux/modules/gameRoomSlice';
 
 // TODO: 색상 변경할 것
 interface ChatColorType {
@@ -21,7 +22,14 @@ const ChatColor: ChatColorType = {
 const ChatLog = () => {
   const { chatList } = useAppSelector((state) => state.gameRoom);
   const [chat, setChat] = useState<string>('');
+  const dispatch = useAppDispatch();
   const { emitSendChat } = useChatSocket();
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearChatList());
+    };
+  }, []);
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (!chat) {

@@ -32,10 +32,13 @@ const gameRoomSlice = createSlice({
     addChat: (state, action: PayloadAction<Chat>) => {
       state.chatList = [action.payload, ...state.chatList];
     },
+    clearChatList: (state) => {
+      state.chatList = [];
+    },
   },
   extraReducers: {},
 });
 
-export const { joinGameRoom, updateAllRooms, updateRoom, addChat } = gameRoomSlice.actions;
+export const { joinGameRoom, updateAllRooms, updateRoom, addChat, clearChatList } = gameRoomSlice.actions;
 
 export default gameRoomSlice;
