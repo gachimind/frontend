@@ -26,3 +26,14 @@ export interface Participant {
   audio?: boolean;
   video?: boolean;
 }
+
+export interface ChatBaseType {
+  message: string;
+}
+
+export interface Chat extends ChatBaseType {
+  userId: number;
+  socketId: string;
+  nickname: string;
+  type: 'chat' | 'notification' | 'answer';
+}
