@@ -20,9 +20,9 @@ const CamButton = () => {
     emitUpdateUserStream({ video: changedCamState });
   };
   return (
-    <CAMButton onClick={handleClick} aria-label={`캠 ${userCam ? '켜짐' : '꺼짐'}`}>
+    <CamButtonLayout onClick={handleClick} aria-label={`캠 ${userCam ? '켜짐' : '꺼짐'}`}>
       {userCam ? 'CAM켜짐' : <img src={camIcon} />}
-    </CAMButton>
+    </CamButtonLayout>
   );
 };
 
