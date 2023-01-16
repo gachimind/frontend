@@ -51,6 +51,7 @@ const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: scale(${(props) => props.theme.layout.scale});
   left: 0;
   top: 0;
   right: 0;
