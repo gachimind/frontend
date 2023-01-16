@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
+import styled from 'styled-components';
+
 import useGameSocket from '@hooks/socket/useGameSocket';
 
 import Modal from '@components/common/Modal';
@@ -31,17 +33,72 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
     onShowCreatedRoomId(navigate, '/room/');
   };
   return (
-    <Modal visible={visible} onClose={onClose}>
-      <input type="text" value={roomTitle} onChange={(e) => setRoomTitle(e.target.value)} placeholder="방제목" />
-      <input
-        type="number"
-        value={maxCount}
-        onChange={(e) => setMaxCount(parseInt(e.target.value))}
-        placeholder="최대인원"
-      />
-      <button onClick={handleCreateGameButtonClick}>생성하기</button>
+    <Modal visible={visible} onClose={onClose} height={700} title="MAKE A ROOM">
+      <CreateGameModalLayout>
+        <InputBox>
+          <span>방제</span>
+          <input type="text" value={roomTitle} onChange={(e) => setRoomTitle(e.target.value)} placeholder="방제목" />
+        </InputBox>
+        <InputBox>
+          <span>인원</span>
+          <input
+            type="number"
+            value={maxCount}
+            onChange={(e) => setMaxCount(parseInt(e.target.value))}
+            placeholder="최대인원"
+          />
+        </InputBox>
+        <InputBox>
+          <span>라운드</span>
+          <input type="number" placeholder="라운드가 들어간당" />
+        </InputBox>
+        <InputBox>
+          <span>카운트</span>
+          <input placeholder="카운트가 들어간당" />
+        </InputBox>
+        <CreateRoomButton onClick={handleCreateGameButtonClick}>생성하기</CreateRoomButton>
+      </CreateGameModalLayout>
     </Modal>
   );
 };
+
+const CreateGameModalLayout = styled.div`
+  background-color: white;
+  height: 100%;
+  font-family: ${(props) => props.theme.font.korean};
+  padding: 40px 70px 48px 70px;
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const InputBox = styled.div`
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  span {
+    font-family: inherit;
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  input {
+    font-family: inherit;
+    font-size: 24px;
+    background-color: ${(props) => props.theme.colors.outline};
+    height: 56px;
+    ::placeholder {
+      padding-left: 20px;
+    }
+  }
+`;
+
+const CreateRoomButton = styled.button`
+  font-family: inherit;
+  font-size: 24px;
+  color: ${(props) => props.theme.colors.outline};
+  background-color: ${(props) => props.theme.colors.footer};
+  height: 56px;
+  margin-top: 60px;
+`;
 
 export default CreateGameModal;
