@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
+
+import LoginModal from '@components/home/LoginModal';
 
 import Container from '../Container';
 import Footer from '../Footer';
 import Header from '../Header';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
+  const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
+
   return (
     <Container>
       <Header>
-        <LoginButton>LOGIN</LoginButton>
+        {loginModalVisible && <LoginModal visible={loginModalVisible} onClose={() => setLoginModalVisible(false)} />}
+        <LoginButton onClick={() => setLoginModalVisible(true)}>LOGIN</LoginButton>
       </Header>
       <MainContentsBox>{children}</MainContentsBox>
       <Footer></Footer>
