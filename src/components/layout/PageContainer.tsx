@@ -26,8 +26,8 @@ const ContainerLayout = styled.div`
 `;
 
 const ContainerInnerBox = styled.div`
-  width: 1830px;
-  height: 968px;
+  width: 1760px;
+  height: 928px;
   border: ${(props) => props.theme.borders.template};
   box-shadow: ${(props) => props.theme.boxShadows.boxShadow};
   display: flex;
