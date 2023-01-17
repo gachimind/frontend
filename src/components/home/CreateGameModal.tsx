@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router';
 
 import styled from 'styled-components';
 
+import { PARTICIPANTS_OPTIONS, ROUND_OPTIONS } from '@constants/options';
 import useGameSocket from '@hooks/socket/useGameSocket';
 
 import Modal from '@components/common/Modal';
+import Selection from '@components/common/Selection';
 
 import { CreateRoomRequest } from '@customTypes/socketType';
 
@@ -41,16 +43,18 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
         </InputBox>
         <InputBox>
           <span>인원</span>
-          <input
+          <Selection options={PARTICIPANTS_OPTIONS} />
+          {/* <input
             type="number"
             value={maxCount}
             onChange={(e) => setMaxCount(parseInt(e.target.value))}
             placeholder="최대인원"
-          />
+          /> */}
         </InputBox>
         <InputBox>
           <span>라운드</span>
-          <input type="number" placeholder="라운드가 들어간당" />
+          <Selection options={ROUND_OPTIONS} />
+          {/* <input type="number" placeholder="라운드가 들어간당" /> */}
         </InputBox>
         <InputBox>
           <span>카운트</span>
