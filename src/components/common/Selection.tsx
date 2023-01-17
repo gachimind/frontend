@@ -9,7 +9,7 @@ const Selection = ({ width, options }: { width?: number; options: Array<{ value:
   const ref = useRef(null);
   useClickAway(ref, () => setShowOptions(false));
 
-  const [currentValue, setCurrentValue] = useState(options[0]?.label);
+  const [currentValue, setCurrentValue] = useState(options[0]?.value);
   const [showOptions, setShowOptions] = useState(false);
 
   return (
@@ -18,7 +18,7 @@ const Selection = ({ width, options }: { width?: number; options: Array<{ value:
       <label>{currentValue}</label>
       <SelectOptions ref={ref} show={showOptions} width={width}>
         {options?.map((option) => (
-          <Option key={option.value} value={option.label} onClick={() => setCurrentValue(option.label)} width={width}>
+          <Option key={option.label} value={option.value} onClick={() => setCurrentValue(option.value)} width={width}>
             {option.label}
           </Option>
         ))}
