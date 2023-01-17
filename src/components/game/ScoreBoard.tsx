@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import boardImage from '../../assets/scoreBoard.svg';
+import boardImage from '@assets/scoreBoard.svg';
 
 const ScoreBoard = () => {
   return <BoardImage src={boardImage} />;

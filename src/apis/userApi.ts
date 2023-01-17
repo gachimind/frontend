@@ -1,6 +1,6 @@
-import { MyProfileResponse } from '@customTypes/userType';
+import { authInstance, noAuthInstance } from '@apis/instance';
 
-import { authInstance, noAuthInstance } from './instance';
+import { MyProfileResponse } from '@customTypes/userType';
 
 const USER_API = '/api/users';
 

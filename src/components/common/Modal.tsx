@@ -3,9 +3,8 @@ import { createPortal } from 'react-dom';
 
 import styled from 'styled-components';
 
+import closeButton from '@assets/closeButton.svg';
 import useClickAway from '@hooks/useClickAway';
-
-import closeButton from '../../assets/closeButton.svg';
 
 interface ModalProps {
   visible: boolean;

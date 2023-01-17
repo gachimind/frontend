@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
+import micIcon from '@assets/micIcon.svg';
 import useStreamUpdateSocket from '@hooks/socket/useStreamUpdateSocket';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { setUserMic } from '@redux/modules/userMediaSlice';
-
-import micIcon from '../../assets/micIcon.svg';
 
 const MicButton = () => {
   const { userMic, localDevice, userStreamRef } = useAppSelector((state) => state.userMedia);

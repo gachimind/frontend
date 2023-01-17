@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import circleIcon from '../../assets/circleIcon.svg';
-import micOnCamIcon from '../../assets/micOnCamIcon.svg';
+import circleIcon from '@assets/circleIcon.svg';
+import micOnCamIcon from '@assets/micOnCamIcon.svg';
 
 const Presenter = () => {
   return (

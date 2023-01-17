@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import headerIcon from '../../assets/headerIcon.svg';
+import headerIcon from '@assets/headerIcon.svg';
 
 const ContentContainer = ({ title, children }: { title: string; children?: React.ReactNode }) => {
   return (

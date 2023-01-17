@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
+import camIcon from '@assets/camIcon.svg';
 import useStreamUpdateSocket from '@hooks/socket/useStreamUpdateSocket';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { setUserCam } from '@redux/modules/userMediaSlice';
-
-import camIcon from '../../assets/camIcon.svg';
 
 const CamButton = () => {
   const { userCam, localDevice, userStreamRef } = useAppSelector((state) => state.userMedia);

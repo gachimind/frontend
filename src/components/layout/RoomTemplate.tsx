@@ -2,10 +2,11 @@ import React from 'react';
 
 import styled from 'styled-components';
 
+import ruleIcon from '@assets/ruleIcon.svg';
+
 import CamButton from '@components/game/CamButton';
 import MicButton from '@components/game/MicButton';
 
-import ruleIcon from '../../assets/ruleIcon.svg';
 import Footer from './Footer';
 import Header from './Header';
 import PageContainer from './PageContainer';
