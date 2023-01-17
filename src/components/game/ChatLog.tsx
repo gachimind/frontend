@@ -13,24 +13,31 @@ const ChatLog = () => {
 };
 
 const ChatLogLayout = styled.div`
-  height: 92.1%;
-  display: grid;
-  grid-template-rows: 7fr 1fr;
+  height: 100%;
 `;
 
 const ChatBox = styled.div`
-  font-size: 24px;
+  font-size: 20px;
   color: ${(props) => props.theme.colors.lightGrey4};
+  height: 401px;
   padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse;
 `;
 
 const ChatInput = styled.input`
+  font-size: 18px;
   background-color: ${(props) => props.theme.colors.lightGrey1};
-  padding-top: 7px;
-  padding-left: 20px;
+  width: 100%;
+  padding: 14px 0 11px 20px;
+  color: ${(props) => props.theme.colors.ivory1};
   ::placeholder {
     color: ${(props) => props.theme.colors.ivory1};
-    font-size: 24px;
+    opacity: 0.6;
+  }
+  :focus {
+    outline: none;
   }
 `;
 
