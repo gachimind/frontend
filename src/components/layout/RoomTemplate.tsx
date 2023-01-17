@@ -5,14 +5,14 @@ import styled from 'styled-components';
 import CamButton from '@components/game/CamButton';
 import MicButton from '@components/game/MicButton';
 
-import ruleIcon from '../../../assets/ruleIcon.svg';
-import Container from '../Container';
-import Footer from '../Footer';
-import Header from '../Header';
+import ruleIcon from '../../assets/ruleIcon.svg';
+import Footer from './Footer';
+import Header from './Header';
+import PageContainer from './PageContainer';
 
-const RoomLayout = ({ children }: { children: React.ReactNode }) => {
+const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Container>
+    <PageContainer>
       <Header page="ROOM"></Header>
       <RoomContentsBox>{children}</RoomContentsBox>
       <Footer>
@@ -25,7 +25,7 @@ const RoomLayout = ({ children }: { children: React.ReactNode }) => {
           <LeaveRoomButton>나가기</LeaveRoomButton>
         </FooterButtonsBox>
       </Footer>
-    </Container>
+    </PageContainer>
   );
 };
 
@@ -63,4 +63,4 @@ const LeaveRoomButton = styled.button`
   margin-left: 450px;
 `;
 
-export default RoomLayout;
+export default RoomTemplate;

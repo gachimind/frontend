@@ -13,8 +13,8 @@ import CamList from '@components/game/CamList';
 import ChatLog from '@components/game/ChatLog';
 import Presenter from '@components/game/Presenter';
 import ScoreBoard from '@components/game/ScoreBoard';
-import ContentBox from '@components/layout/ContentBox';
-import RoomLayout from '@components/layout/room/RoomLayout';
+import ContentContainer from '@components/layout/ContentContainer';
+import RoomTemplate from '@components/layout/RoomTemplate';
 
 const Room = () => {
   const { id } = useParams();
@@ -45,27 +45,27 @@ const Room = () => {
   }, [id, authorized]);
 
   return (
-    <RoomLayout>
-      <ContentBox title="SCORE">
+    <RoomTemplate>
+      <ContentContainer title="SCORE">
         <ScoreBoard />
-      </ContentBox>
+      </ContentContainer>
       <MiddleSectionBox>
-        <ContentBox title="PRESENTER">
+        <ContentContainer title="PRESENTER">
           <Presenter />
-        </ContentBox>
+        </ContentContainer>
         <CamListBox>
           <CamList />
         </CamListBox>
       </MiddleSectionBox>
       <RightSectionBox>
-        <ContentBox title="TIMER">
+        <ContentContainer title="TIMER">
           <TimerBox>00:00</TimerBox>
-        </ContentBox>
-        <ContentBox title="CHATTING">
+        </ContentContainer>
+        <ContentContainer title="CHATTING">
           <ChatLog />
-        </ContentBox>
+        </ContentContainer>
       </RightSectionBox>
-    </RoomLayout>
+    </RoomTemplate>
   );
 };
 

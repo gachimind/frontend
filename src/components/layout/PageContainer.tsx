@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-const Container = ({ children }: { children: React.ReactNode }) => {
+const PageContainer = ({ children }: { children: React.ReactNode }) => {
   return (
     <ContainerLayout>
       <ContainerInnerBox>{children}</ContainerInnerBox>
@@ -35,4 +35,4 @@ const ContainerInnerBox = styled.div`
   justify-content: space-between;
 `;
 
-export default Container;
+export default PageContainer;

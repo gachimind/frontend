@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import headerIcon from '../../assets/headerIcon.svg';
 
-const ContentBox = ({ title, children }: { title: string; children?: React.ReactNode }) => {
+const ContentContainer = ({ title, children }: { title: string; children?: React.ReactNode }) => {
   return (
     <RoomContentLayout>
       {title !== 'TIMER' && title !== 'CHATTING' && title !== 'GROWTH TOWER' && <HeaderIcon src={headerIcon} />}
@@ -35,4 +35,4 @@ const HeaderIcon = styled.img`
   margin-left: 20px;
 `;
 
-export default ContentBox;
+export default ContentContainer;
