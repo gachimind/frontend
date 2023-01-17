@@ -62,6 +62,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
   );
 };
 
+// TODO: 임시 색상으로 추후 변경되어야 한다.
 const CreateGameModalLayout = styled.div`
   background-color: white;
   height: 100%;
@@ -84,7 +85,7 @@ const InputBox = styled.div`
   input {
     font-family: inherit;
     font-size: 24px;
-    background-color: ${(props) => props.theme.colors.outline};
+    background-color: ${(props) => props.theme.colors.ivory1};
     height: 56px;
     ::placeholder {
       padding-left: 20px;
@@ -95,8 +96,8 @@ const InputBox = styled.div`
 const CreateRoomButton = styled.button`
   font-family: inherit;
   font-size: 24px;
-  color: ${(props) => props.theme.colors.outline};
-  background-color: ${(props) => props.theme.colors.footer};
+  color: ${(props) => props.theme.colors.ivory1};
+  background-color: ${(props) => props.theme.colors.darkGrey1};
   height: 56px;
   margin-top: 60px;
 `;

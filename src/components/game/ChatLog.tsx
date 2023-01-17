@@ -20,16 +20,16 @@ const ChatLogLayout = styled.div`
 
 const ChatBox = styled.div`
   font-size: 24px;
-  color: ${(props) => props.theme.colors.chatBoxFont};
+  color: ${(props) => props.theme.colors.lightGrey4};
   padding: 20px;
 `;
 
 const ChatInput = styled.input`
-  background-color: ${(props) => props.theme.colors.footer};
+  background-color: ${(props) => props.theme.colors.lightGrey1};
   padding-top: 7px;
   padding-left: 20px;
   ::placeholder {
-    color: ${(props) => props.theme.colors.outline};
+    color: ${(props) => props.theme.colors.ivory1};
     font-size: 24px;
   }
 `;

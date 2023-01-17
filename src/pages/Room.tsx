@@ -90,7 +90,7 @@ const RightSectionBox = styled.div`
 
 const TimerBox = styled.div`
   font-size: 40px;
-  color: ${(props) => props.theme.colors.outline};
+  color: ${(props) => props.theme.colors.ivory1};
   margin-top: 30px;
   display: flex;
   justify-content: center;

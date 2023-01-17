@@ -45,7 +45,7 @@ const SliderIconBox = styled.div`
   height: 40px;
   padding: 8px 12px;
   border-radius: 100%;
-  background-color: ${(props) => props.theme.colors.button};
+  background-color: ${(props) => props.theme.colors.darkGrey1};
   cursor: pointer;
   :hover {
     opacity: 0.85;

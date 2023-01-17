@@ -21,7 +21,7 @@ const RoomContentLayout = styled.div`
 const Title = styled.div`
   font-size: 24px;
   font-weight: 500;
-  background-color: ${(props) => props.theme.colors.outline};
+  background-color: ${(props) => props.theme.colors.ivory1};
   height: 39px;
   display: flex;
   justify-content: center;

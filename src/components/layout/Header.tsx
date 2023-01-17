@@ -11,7 +11,7 @@ const Header = ({ page, children }: { page?: string; children?: React.ReactNode 
 
 const HeaderLayout = styled.div`
   position: relative;
-  background-color: ${(props) => props.theme.colors.outline};
+  background-color: ${(props) => props.theme.colors.ivory1};
   height: 56px;
   display: flex;
   justify-content: space-between;
@@ -19,9 +19,9 @@ const HeaderLayout = styled.div`
 
 const LogoBox = styled.div<{ page?: string }>`
   position: relative;
-  color: ${(props) => props.theme.colors.logo};
+  color: ${(props) => props.theme.colors.ivory2};
   font-size: 24px;
-  background-color: ${(props) => props.theme.colors.footer};
+  background-color: ${(props) => props.theme.colors.lightGrey2};
   width: 250px;
   height: 100%;
   margin-left: ${(props) => (props.page === 'ROOM' ? '50px' : '150px')};

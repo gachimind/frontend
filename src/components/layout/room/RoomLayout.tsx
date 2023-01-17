@@ -57,7 +57,7 @@ const MediaControlBox = styled.div`
 const LeaveRoomButton = styled.button`
   font-family: ${(props) => props.theme.font.korean};
   font-size: 20px;
-  background-color: ${(props) => props.theme.colors.button};
+  background-color: ${(props) => props.theme.colors.darkGrey1};
   width: 200px;
   height: 48px;
   margin-left: 450px;

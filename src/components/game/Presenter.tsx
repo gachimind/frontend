@@ -5,21 +5,21 @@ import micOnCamIcon from '../../assets/micOnCamIcon.svg';
 
 const Presenter = () => {
   return (
-    <PresenterBarBox>
+    <PresenterBarLayout>
       <CamNicknameBox>
         <img src={circleIcon} />
         <span>닉네임</span>
       </CamNicknameBox>
       <img src={micOnCamIcon} />
-    </PresenterBarBox>
+    </PresenterBarLayout>
   );
 };
 
-const PresenterBarBox = styled.div`
+const PresenterBarLayout = styled.div`
   font-family: ${(props) => props.theme.font.korean};
   font-weight: 600;
   font-size: 18px;
-  color: ${(props) => props.theme.colors.presenterFont};
+  color: ${(props) => props.theme.colors.white};
   position: absolute;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;

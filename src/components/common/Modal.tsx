@@ -44,7 +44,7 @@ const Modal = ({ visible, height, title, children, onClose }: ModalProps) => {
   );
 };
 
-// TODO: 임시 스타일링으로 추후 변경되어야 한다.
+// TODO: 임시 색상으로 추후 변경되어야 한다.
 const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
   display: ${({ visible }) => (visible ? 'block' : 'none')};
   position: fixed;
@@ -74,9 +74,9 @@ const ModalBox = styled.div<{ height: number }>`
 const ModalHeader = styled.div`
   position: relative;
   font-size: 24px;
-  color: ${(props) => props.theme.colors.outline};
+  color: ${(props) => props.theme.colors.ivory1};
   height: 48px;
-  background-color: ${(props) => props.theme.colors.footer};
+  background-color: ${(props) => props.theme.colors.darkGrey1};
   display: flex;
   justify-content: center;
   align-items: center;

@@ -38,6 +38,7 @@ const UserInfo = () => {
   );
 };
 
+// TODO: 임시 색상으로 추후 변경되어야 한다.
 const UserInfoLayout = styled.div`
   height: 94.3%;
   padding: 40px;
@@ -57,7 +58,7 @@ const ImageBox = styled.div`
 
 const UserInfoBox = styled.div`
   font-size: 20px;
-  background-color: ${(props) => props.theme.colors.footer};
+  background-color: ${(props) => props.theme.colors.darkGrey1};
   gap: 53px;
   display: flex;
   justify-content: center;
@@ -85,7 +86,7 @@ const ScoreContentBox = styled.div`
 `;
 
 const ScoreBoxIcon = styled.div`
-  background-color: ${(props) => props.theme.colors.footer};
+  background-color: ${(props) => props.theme.colors.darkGrey1};
   width: 48px;
   height: 48px;
 `;
