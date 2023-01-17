@@ -11,6 +11,8 @@ export interface UserMediaStateType {
   userCam: boolean;
   userMic: boolean;
   localDevice: ConstraintsType;
+  isMediaLoading: boolean;
+  isMediaSuccess: boolean;
 }
 
 const initialState: UserMediaStateType = {
@@ -21,6 +23,8 @@ const initialState: UserMediaStateType = {
     video: false,
     audio: false,
   },
+  isMediaLoading: false,
+  isMediaSuccess: false,
 };
 
 const userMediaSlice = createSlice({
@@ -45,10 +49,30 @@ const userMediaSlice = createSlice({
     setLocalDeviceAudio: (state, action: PayloadAction<boolean>) => {
       state.localDevice = { ...state.localDevice, audio: action.payload };
     },
+    setMediaLoading: (state) => {
+      state.isMediaLoading = true;
+    },
+    setMediaDone: (state) => {
+      state.isMediaLoading = false;
+      state.isMediaSuccess = true;
+    },
+    initMediaStatus: (state) => {
+      state.isMediaLoading = false;
+      state.isMediaSuccess = false;
+    },
   },
 });
 
-export const { setUserStream, setUserStreamRef, setUserCam, setUserMic, setLocalDeviceVideo, setLocalDeviceAudio } =
-  userMediaSlice.actions;
+export const {
+  setUserStream,
+  setUserStreamRef,
+  setUserCam,
+  setUserMic,
+  setLocalDeviceVideo,
+  setLocalDeviceAudio,
+  setMediaLoading,
+  setMediaDone,
+  initMediaStatus,
+} = userMediaSlice.actions;
 
 export default userMediaSlice;
