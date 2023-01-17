@@ -80,7 +80,7 @@ const MiddleSectionBox = styled.div`
 
 const CamListBox = styled.div`
   border: ${(props) => props.theme.borders.camList};
-  padding: 16px 23px;
+  padding: 13px 21px;
 `;
 
 const RightSectionBox = styled.div`
