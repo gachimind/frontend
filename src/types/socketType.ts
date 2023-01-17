@@ -44,3 +44,10 @@ export interface EnterRoomRequest {
 export interface UpdateRoomResponse extends GameRoomBaseInfo, GameRoomPlayDetailInfo {
   participants: Participant[];
 }
+
+export interface EventUserInfo {
+  socketId: string;
+  userId: number;
+  nickname: string;
+  profileImg?: string;
+}
