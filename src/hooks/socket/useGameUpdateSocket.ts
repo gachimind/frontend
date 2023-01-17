@@ -39,6 +39,7 @@ const useGameUpdateSocket = () => {
         };
       }) => {
         console.log('[on] update-room');
+        console.log(data);
         const { nickname, socketId, userId } = data.eventUserInfo;
         dispatch(updateRoom(data.room));
         dispatch(setPlayerList(data.room.participants));
@@ -79,13 +80,11 @@ const useGameUpdateSocket = () => {
     emit(PUBLISH.startGame);
   };
 
-  useEffect(() => {
-    return () => {
-      off(SUBSCRIBE.announceRenewedRoomForRoomMembers);
-    };
-  }, []);
+  const offAnnounceRoomUpdate = () => {
+    off(SUBSCRIBE.announceRenewedRoomForRoomMembers);
+  };
 
-  return { onAnnounceRoomUpdate, emitGameReady, emitGameStart };
+  return { onAnnounceRoomUpdate, emitGameReady, emitGameStart, offAnnounceRoomUpdate };
 };
 
 export default useGameUpdateSocket;
