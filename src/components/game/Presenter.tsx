@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 
-import circleIcon from '@assets/circleIcon.svg';
-import micOnCamIcon from '@assets/micOnCamIcon.svg';
+import ImageHolderIcon from '@assets/svg_imageHolderIcon.svg';
+import MicOnIcon from '@assets/svg_micOnIcon.svg';
 
+// TODO: 마이크 꺼졌을때 아이콘 추가하기
 const Presenter = () => {
   return (
     <PresenterBarLayout>
       <CamNicknameBox>
-        <img src={circleIcon} />
+        <img src={ImageHolderIcon} />
         <span>닉네임</span>
       </CamNicknameBox>
-      <img src={micOnCamIcon} />
+      <img src={MicOnIcon} />
     </PresenterBarLayout>
   );
 };

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import SlideLeftIcon from '@assets/slideLeftIcon.svg';
-import SlideRightIcon from '@assets/slideRightIcon.svg';
+import SlideLeftIcon from '@assets/svg_slideLeftIcon.svg';
+import SlideRightIcon from '@assets/svg_slideRightIcon.svg';
 interface SliderNextArrowProps {
   direction: 'left' | 'right';
   onClick?: React.MouseEventHandler<HTMLDivElement>;

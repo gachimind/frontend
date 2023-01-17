@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 
 import styled from 'styled-components';
 
-import closeButton from '@assets/closeButton.svg';
+import CloseModalIcon from '@assets/svg_closeModalIcon.svg';
 import useClickAway from '@hooks/useClickAway';
 
 interface ModalProps {
@@ -31,7 +31,7 @@ const Modal = ({ visible, height, title, children, onClose }: ModalProps) => {
               <ModalHeader>
                 {title}
                 <ModalCloseButton onClick={() => onClose && onClose()}>
-                  <img src={closeButton} />
+                  <img src={CloseModalIcon} />
                 </ModalCloseButton>
               </ModalHeader>
               {children}

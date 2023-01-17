@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-import headerIcon from '@assets/headerIcon.svg';
+import ThreeLightsIcon from '@assets/svg_threeLightsIcon.svg';
 
 const ContentContainer = ({ title, children }: { title: string; children?: React.ReactNode }) => {
   return (
     <RoomContentLayout>
-      {title !== 'TIMER' && title !== 'CHATTING' && title !== 'GROWTH TOWER' && <HeaderIcon src={headerIcon} />}
+      {title !== 'TIMER' && title !== 'CHATTING' && title !== 'GROWTH TOWER' && <HeaderIcon src={ThreeLightsIcon} />}
       <Title>{title}</Title>
       {children}
     </RoomContentLayout>

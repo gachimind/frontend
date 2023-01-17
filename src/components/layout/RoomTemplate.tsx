@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import ruleIcon from '@assets/ruleIcon.svg';
+import GameRuleIcon from '@assets/svg_gameRuleIcon.svg';
 
 import CamButton from '@components/game/CamButton';
 import MicButton from '@components/game/MicButton';
@@ -18,7 +18,7 @@ const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
       <RoomContentsBox>{children}</RoomContentsBox>
       <Footer>
         <FooterButtonsBox>
-          <RuleButton src={ruleIcon} />
+          <RuleButton src={GameRuleIcon} />
           <MediaControlBox>
             <CamButton />
             <MicButton />
