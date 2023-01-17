@@ -2,27 +2,27 @@ import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
-import EnterRoomModal from '@components/home/EnterRoomModal';
+import EnterPrivateRoomModal from '@components/home/EnterPrivateRoomModal';
 import LoginModal from '@components/home/LoginModal';
 
 import Footer from './Footer';
 import Header from './Header';
 import PageContainer from './PageContainer';
 
-// TODO: 방 참가하기 버튼에 모달을 연결한다.
+// TODO: 방 참가하기 버튼에 비밀방 참가하기 모달을 연결한다.
 const MainTemplate = ({ children }: { children: React.ReactNode }) => {
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
-  // const [enterRoomModalVisible, setEnterRoomModalVisible] = useState<boolean>(false);
+  // const [enterPrivateRoomModalVisible, setEnterPrivateRoomModalVisible] = useState<boolean>(false);
 
   return (
     <PageContainer>
       <Header>
         {loginModalVisible && <LoginModal visible={loginModalVisible} onClose={() => setLoginModalVisible(false)} />}
         <LoginButton onClick={() => setLoginModalVisible(true)}>LOGIN</LoginButton>
-        {/* {enterRoomModalVisible && (
-          <EnterRoomModal visible={enterRoomModalVisible} onClose={() => setEnterRoomModalVisible(false)} />
+        {/* {enterPrivateRoomModalVisible && (
+          <EnterPrivateRoomModal visible={enterPrivateRoomModalVisible} onClose={() => setEnterPrivateRoomModalVisible(false)} />
         )}
-        <LoginButton onClick={() => setEnterRoomModalVisible(true)}>LOGIN</LoginButton> */}
+        <LoginButton onClick={() => setEnterPrivateRoomModalVisible(true)}>LOGIN</LoginButton> */}
       </Header>
       <MainContentsBox>{children}</MainContentsBox>
       <Footer></Footer>

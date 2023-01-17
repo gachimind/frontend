@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 import Modal from '@components/common/Modal';
 
-const EnterRoomModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
+const EnterPrivateRoomModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
   return (
     <Modal visible={visible} onClose={onClose} title="ENTER THE ROOM">
-      <EnterRoomModalLayout>
+      <EnterPrivateRoomModalLayout>
         <InputBox>
           <span>방 제목</span>
           <input placeholder="방 제목이 들어간당" />
@@ -15,13 +15,13 @@ const EnterRoomModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
           <input placeholder="비밀번호가 들어간당" />
         </InputBox>
         <EnterRoomButton>생성하기</EnterRoomButton>
-      </EnterRoomModalLayout>
+      </EnterPrivateRoomModalLayout>
     </Modal>
   );
 };
 
 // TODO: 임시 색상으로 추후 변경되어야 한다.
-const EnterRoomModalLayout = styled.div`
+const EnterPrivateRoomModalLayout = styled.div`
   font-family: ${(props) => props.theme.font.korean};
   padding: 40px 70px;
   gap: 28px;
@@ -60,4 +60,4 @@ const EnterRoomButton = styled.button`
   margin-bottom: 56px;
 `;
 
-export default EnterRoomModal;
+export default EnterPrivateRoomModal;
