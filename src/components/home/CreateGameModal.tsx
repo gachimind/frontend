@@ -33,7 +33,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
     onShowCreatedRoomId(navigate, '/room/');
   };
   return (
-    <Modal visible={visible} onClose={onClose} height={700} title="MAKE A ROOM">
+    <Modal visible={visible} onClose={onClose} title="MAKE A ROOM">
       <CreateGameModalLayout>
         <InputBox>
           <span>방제</span>
@@ -65,7 +65,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
 // TODO: 임시 색상으로 추후 변경되어야 한다.
 const CreateGameModalLayout = styled.div`
   background-color: white;
-  height: 100%;
+  /* height: 100%; */
   font-family: ${(props) => props.theme.font.korean};
   padding: 40px 70px 48px 70px;
   gap: 24px;
