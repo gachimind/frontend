@@ -1,15 +1,20 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 import styled from 'styled-components';
 
 import useGameSocket from '@hooks/socket/useGameSocket';
 import useLocalStream from '@hooks/useLocalStream';
 import { useAppSelector } from '@redux/hooks';
+import { getParam } from '@utils/common';
+
+import GlobalLoading from '@components/common/GlobalLoading';
 
 const RoomList = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const rooms = useAppSelector((state) => state.gameRoom);
+  const { isMediaLoading, isMediaSuccess } = useAppSelector((state) => state.userMedia);
   const { onBroadcastWholeRooms } = useGameSocket();
   const { initLocalStream } = useLocalStream();
 
@@ -17,14 +22,27 @@ const RoomList = () => {
     onBroadcastWholeRooms();
   }, []);
 
+  useEffect(() => {
+    if (location.search && getParam('roomId')) {
+      initLocalStream();
+    }
+  }, [location]);
+
+  useEffect(() => {
+    if (!isMediaLoading && isMediaSuccess) {
+      const roomId = getParam('roomId');
+      roomId && navigate('/room/' + roomId, { replace: true });
+    }
+  }, [isMediaLoading, isMediaSuccess]);
+
   const handleJoinRoomClick = async (roomId: number) => {
-    await initLocalStream();
-    navigate('/room/' + roomId);
+    navigate('/?roomId=' + roomId);
   };
 
   return (
     <>
       <RoomListLayout>
+        <GlobalLoading isLoading={isMediaLoading && !isMediaSuccess} />
         {rooms.broadcastedRooms.map((room) => (
           <RoomCard key={room.roomId}>
             <CardContentsBox>
