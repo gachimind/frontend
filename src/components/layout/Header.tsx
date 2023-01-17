@@ -23,8 +23,7 @@ const LogoBox = styled.div<{ page?: string }>`
   font-size: 24px;
   background-color: ${(props) => props.theme.colors.lightGrey2};
   width: 250px;
-  height: 100%;
-  margin-left: ${(props) => (props.page === 'ROOM' ? '50px' : '150px')};
+  margin-left: ${(props) => (props.page === 'ROOM' ? '56px' : '150px')};
   display: flex;
   justify-content: center;
   align-items: center;
