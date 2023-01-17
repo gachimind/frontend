@@ -99,7 +99,7 @@ const CamList = () => {
 };
 
 const CamListLayout = styled(Slider)`
-  width: 560px;
+  width: 500px;
 `;
 
 export default CamList;

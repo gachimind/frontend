@@ -46,11 +46,11 @@ const Room = () => {
 
   return (
     <RoomTemplate>
-      <ContentContainer title="SCORE">
+      <ContentContainer title="SCORE" lights={true}>
         <ScoreBoard />
       </ContentContainer>
       <MiddleSectionBox>
-        <ContentContainer title="PRESENTER">
+        <ContentContainer title="PRESENTER" lights={true}>
           <Presenter />
         </ContentContainer>
         <CamListBox>
@@ -59,7 +59,9 @@ const Room = () => {
       </MiddleSectionBox>
       <RightSectionBox>
         <ContentContainer title="TIMER">
-          <TimerBox>00:00</TimerBox>
+          <TimerBox>
+            <span>00:00</span>
+          </TimerBox>
         </ContentContainer>
         <ContentContainer title="CHATTING">
           <ChatLog />
@@ -78,22 +80,26 @@ const MiddleSectionBox = styled.div`
 
 const CamListBox = styled.div`
   border: ${(props) => props.theme.borders.camList};
-  padding: 16px 39px;
+  padding: 16px 23px;
 `;
 
 const RightSectionBox = styled.div`
   height: inherit;
   gap: 23px;
   display: grid;
-  grid-template-rows: 1fr 3fr;
+  grid-template-rows: 2500fr 8183fr;
 `;
 
 const TimerBox = styled.div`
-  font-size: 40px;
-  color: ${(props) => props.theme.colors.ivory1};
-  margin-top: 30px;
+  margin-top: 25px;
   display: flex;
   justify-content: center;
+  align-items: center;
+
+  span {
+    font-size: 40px;
+    color: ${(props) => props.theme.colors.ivory1};
+  }
 `;
 
 export default Room;

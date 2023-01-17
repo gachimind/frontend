@@ -31,12 +31,11 @@ const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
 };
 
 const RoomContentsBox = styled.div`
-  background-color: green;
   height: 664px;
   gap: 40px;
   padding: 0px 152px;
   display: grid;
-  grid-template-columns: 3fr 4fr 3fr;
+  grid-template-columns: 5fr 7fr 5fr;
 `;
 
 const FooterBox = styled.div`
