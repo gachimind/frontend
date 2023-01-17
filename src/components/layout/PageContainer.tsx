@@ -15,8 +15,8 @@ const ContainerLayout = styled.div`
   width: ${(props) => props.theme.layout.maxWidth};
   height: ${(props) => props.theme.layout.maxHeight};
   transform: scale(${(props) => props.theme.layout.scale});
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 76px;
+  padding-bottom: 76px;
   padding-left: 80px;
   padding-right: 80px;
   display: flex;
