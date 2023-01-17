@@ -11,3 +11,5 @@ export const ROUND_OPTIONS = [
   { value: '2', label: '2' },
   { value: '3', label: '3' },
 ];
+
+export const BUG_OPTIONS = [{ value: '버그', label: '버그' }];

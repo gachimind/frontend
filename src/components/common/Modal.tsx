@@ -9,11 +9,12 @@ import useClickAway from '@hooks/useClickAway';
 interface ModalProps {
   visible: boolean;
   title: string;
+  width?: number;
   children: React.ReactNode;
   onClose: () => void;
 }
 
-const Modal = ({ visible, title, children, onClose }: ModalProps) => {
+const Modal = ({ visible, title, width, children, onClose }: ModalProps) => {
   const ref = useRef(null);
   useClickAway(ref, () => onClose && onClose());
   const portalDiv = document.querySelector('#modal-root');
@@ -26,7 +27,7 @@ const Modal = ({ visible, title, children, onClose }: ModalProps) => {
       {visible &&
         createPortal(
           <ModalBackgroundLayout visible={visible}>
-            <ModalBox ref={ref}>
+            <ModalBox ref={ref} width={width}>
               <ModalHeader>
                 {title}
                 <ModalCloseButton onClick={() => onClose && onClose()}>
@@ -60,10 +61,10 @@ const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
   padding-left: 15vw;
 `;
 
-const ModalBox = styled.div`
+const ModalBox = styled.div<{ width?: number }>`
   background-color: white;
   box-shadow: ${(props) => props.theme.boxShadows.boxShadow};
-  width: 560px;
+  width: ${(props) => (props.width ? props.width : 560)}px;
   height: fit-content;
   position: relative;
   z-index: 20;
