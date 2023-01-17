@@ -15,7 +15,7 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
         </InputBox>
         <InputBox>
           <span>카테고리</span>
-          <Selection options={BUG_OPTIONS} />
+          <Selection options={BUG_OPTIONS} width={560} />
         </InputBox>
         <InputBox>
           <span>내용</span>

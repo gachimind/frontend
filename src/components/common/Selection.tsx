@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import SelectIcon from '@assets/svg_selectIcon.svg';
 import useClickAway from '@hooks/useClickAway';
 
-const Selection = ({ options }: { options: Array<{ value: string; label: string }> }) => {
+const Selection = ({ width, options }: { width?: number; options: Array<{ value: string; label: string }> }) => {
   const ref = useRef(null);
   useClickAway(ref, () => setShowOptions(false));
 
@@ -16,9 +16,9 @@ const Selection = ({ options }: { options: Array<{ value: string; label: string 
     <SelectBox onClick={() => setShowOptions((prev) => !prev)}>
       <img src={SelectIcon}></img>
       <label>{currentValue}</label>
-      <SelectOptions ref={ref} show={showOptions}>
+      <SelectOptions ref={ref} show={showOptions} width={width}>
         {options?.map((option) => (
-          <Option key={option.value} value={option.label} onClick={() => setCurrentValue(option.label)}>
+          <Option key={option.value} value={option.label} onClick={() => setCurrentValue(option.label)} width={width}>
             {option.label}
           </Option>
         ))}
@@ -49,7 +49,7 @@ const SelectBox = styled.div`
   }
 `;
 
-const SelectOptions = styled.ul<{ show: boolean }>`
+const SelectOptions = styled.ul<{ show: boolean; width?: number }>`
   position: absolute;
   z-index: 998;
   font-family: inherit;
@@ -61,11 +61,11 @@ const SelectOptions = styled.ul<{ show: boolean }>`
   overflow: hidden;
 `;
 
-const Option = styled.li`
+const Option = styled.li<{ width?: number }>`
   z-index: 999;
   font-family: inherit;
   font-size: 24px;
-  width: 420px;
+  width: ${(props) => (props.width ? props.width : 420)}px;
   height: 56px;
   padding-left: 20px;
   display: flex;
