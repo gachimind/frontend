@@ -93,7 +93,7 @@ const CamList = () => {
           </div>
         );
       })}
-      {emptyUserCount !== 0 && [...Array(emptyUserCount)].map((v) => <Cam key={v} nickname={'EMPTY'} />)}
+      {emptyUserCount !== 0 && [...Array(emptyUserCount)].map((v, i) => <Cam key={i} nickname={'EMPTY'} />)}
     </CamListLayout>
   );
 };
