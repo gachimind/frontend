@@ -1,7 +1,6 @@
 import { NavigateFunction } from 'react-router-dom';
 
 import { PUBLISH, SUBSCRIBE } from '@constants/socket';
-import useLocalStream from '@hooks/useLocalStream';
 
 import { CreateRoomRequest, EnterRoomRequest } from '@customTypes/socketType';
 
@@ -18,7 +17,6 @@ interface UseGameSocketType {
 
 const useGameSocket = (): UseGameSocketType => {
   const { on, emit } = socketInstance;
-  const { initLocalStream } = useLocalStream();
 
   const onBroadcastWholeRooms = () => {
     //
@@ -27,7 +25,6 @@ const useGameSocket = (): UseGameSocketType => {
   const onShowCreatedRoomId = (navigate: NavigateFunction, path: string) => {
     on(SUBSCRIBE.showCreatedRoomIdForOwner, async ({ data }: { data: { roomId: string } }) => {
       console.log('[on] create-room');
-      await initLocalStream();
       navigate(path + data.roomId);
     });
   };

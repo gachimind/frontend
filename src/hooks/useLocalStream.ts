@@ -1,10 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { useAppDispatch } from '@redux/hooks';
 import {
   ConstraintsType,
+  initMediaStatus,
   setLocalDeviceAudio,
   setLocalDeviceVideo,
+  setMediaDone,
+  setMediaLoading,
   setUserCam,
   setUserMic,
   setUserStream,
@@ -19,15 +22,18 @@ const useLocalStream = () => {
 
   const initLocalStream = async () => {
     await getLocalStream();
+    dispatch(setMediaDone());
     console.log('[ready] local stream');
   };
 
   const destroyLocalStream = (streamRef: React.MutableRefObject<MediaStream | undefined>) => {
     streamRef?.current?.getTracks().forEach((track) => track.stop());
     dispatch(setUserStreamRef(streamRef));
+    dispatch(initMediaStatus());
   };
 
   const getLocalStream = async () => {
+    dispatch(setMediaLoading());
     const devices = await navigator.mediaDevices.enumerateDevices();
     const hasCam = devices.some((device) => device.kind === 'videoinput');
     const hasMic = devices.some((device) => device.kind === 'audioinput');

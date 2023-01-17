@@ -30,7 +30,8 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
       round: 1,
     };
     emitCreateRoom(createRoom);
-    onShowCreatedRoomId(navigate, '/room/');
+    onClose();
+    onShowCreatedRoomId(navigate, '/?roomId=');
   };
   return (
     <Modal visible={visible} onClose={onClose} height={700} title="MAKE A ROOM">
