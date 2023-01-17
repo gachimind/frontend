@@ -2,25 +2,32 @@ import styled from 'styled-components';
 
 import ThreeLightsIcon from '@assets/svg_threeLightsIcon.svg';
 
-const ContentContainer = ({ title, children }: { title: string; children?: React.ReactNode }) => {
+interface ContentContainerProps {
+  lights?: boolean;
+  title: string;
+  children?: React.ReactNode;
+}
+
+const ContentContainer = ({ lights, title, children }: ContentContainerProps) => {
   return (
-    <RoomContentLayout>
-      {title !== 'TIMER' && title !== 'CHATTING' && title !== 'GROWTH TOWER' && <HeaderIcon src={ThreeLightsIcon} />}
-      <Title>{title}</Title>
+    <ContentContainerLayout>
+      {lights && <HeaderIcon src={ThreeLightsIcon} />}
+      <TitleBox>{title}</TitleBox>
       {children}
-    </RoomContentLayout>
+    </ContentContainerLayout>
   );
 };
 
-const RoomContentLayout = styled.div`
+const ContentContainerLayout = styled.div`
   position: relative;
   border: ${(props) => props.theme.borders.card};
   box-shadow: ${(props) => props.theme.boxShadows.boxShadow};
 `;
 
-const Title = styled.div`
+const TitleBox = styled.div`
+  color: ${(props) => props.theme.colors.darkGrey2};
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 600;
   background-color: ${(props) => props.theme.colors.ivory1};
   height: 39px;
   display: flex;
@@ -31,8 +38,8 @@ const HeaderIcon = styled.img`
   position: absolute;
   width: 61px;
   height: 15px;
-  margin-top: 10px;
-  margin-left: 20px;
+  margin-top: 11px;
+  margin-left: 24px;
 `;
 
 export default ContentContainer;
