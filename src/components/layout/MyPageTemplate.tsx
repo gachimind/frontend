@@ -2,26 +2,26 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import Container from '../Container';
-import Footer from '../Footer';
-import Header from '../Header';
+import Footer from './Footer';
+import Header from './Header';
+import PageContainer from './PageContainer';
 
-const MyPageLayout = ({ children }: { children?: React.ReactNode }) => {
+const MyPageTemplate = ({ children }: { children?: React.ReactNode }) => {
   return (
-    <Container>
+    <PageContainer>
       <Header></Header>
       <MyPageContentsBox>{children}</MyPageContentsBox>
       <Footer></Footer>
-    </Container>
+    </PageContainer>
   );
 };
 
 const MyPageContentsBox = styled.div`
-  height: 684px;
+  height: 664px;
   gap: 40px;
   padding: 0px 152px;
   display: grid;
   grid-template-columns: 3fr 3fr 4fr;
 `;
 
-export default MyPageLayout;
+export default MyPageTemplate;

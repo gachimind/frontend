@@ -2,20 +2,20 @@ import { useAuthSocket } from '@hooks/socket/useAuthSocket';
 
 import RoomList from '@components/home/RoomList';
 import UserInfo from '@components/home/UserInfo';
-import ContentBox from '@components/layout/ContentBox';
-import MainLayout from '@components/layout/main/MainLayout';
+import ContentContainer from '@components/layout/ContentContainer';
+import MainTemplate from '@components/layout/MainTemplate';
 
 const Main = () => {
   useAuthSocket();
   return (
-    <MainLayout>
-      <ContentBox title="SCORE">
+    <MainTemplate>
+      <ContentContainer title="SCORE" lights={true}>
         <UserInfo />
-      </ContentBox>
-      <ContentBox title="ROOM SELECTION">
+      </ContentContainer>
+      <ContentContainer title="ROOM SELECTION" lights={true}>
         <RoomList />
-      </ContentBox>
-    </MainLayout>
+      </ContentContainer>
+    </MainTemplate>
   );
 };
 

@@ -14,6 +14,7 @@ const LoginModal = ({ visible, onClose }: { visible: boolean; onClose: () => voi
   );
 };
 
+// TODO: 임시 색상으로 추후 변경되어야 한다.
 const LoginModalLayout = styled.div`
   padding: 118px 70px;
   gap: 24px;
@@ -25,8 +26,9 @@ const LoginModalLayout = styled.div`
 const LoginButton = styled.button`
   font-family: ${(props) => props.theme.font.korean};
   font-size: 24px;
-  color: ${(props) => props.theme.colors.outline};
-  background-color: ${(props) => props.theme.colors.footer};
+  color: ${(props) => props.theme.colors.ivory1};
+  background-color: ${(props) => props.theme.colors.darkGrey1};
   height: 56px;
 `;
+
 export default LoginModal;

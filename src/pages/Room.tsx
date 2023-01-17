@@ -13,8 +13,8 @@ import CamList from '@components/game/CamList';
 import ChatLog from '@components/game/ChatLog';
 import Presenter from '@components/game/Presenter';
 import ScoreBoard from '@components/game/ScoreBoard';
-import ContentBox from '@components/layout/ContentBox';
-import RoomLayout from '@components/layout/room/RoomLayout';
+import ContentContainer from '@components/layout/ContentContainer';
+import RoomTemplate from '@components/layout/RoomTemplate';
 
 const Room = () => {
   const { id } = useParams();
@@ -45,27 +45,29 @@ const Room = () => {
   }, [id, authorized]);
 
   return (
-    <RoomLayout>
-      <ContentBox title="SCORE">
+    <RoomTemplate>
+      <ContentContainer title="SCORE" lights={true}>
         <ScoreBoard />
-      </ContentBox>
+      </ContentContainer>
       <MiddleSectionBox>
-        <ContentBox title="PRESENTER">
+        <ContentContainer title="PRESENTER" lights={true}>
           <Presenter />
-        </ContentBox>
+        </ContentContainer>
         <CamListBox>
           <CamList />
         </CamListBox>
       </MiddleSectionBox>
       <RightSectionBox>
-        <ContentBox title="TIMER">
-          <TimerBox>00:00</TimerBox>
-        </ContentBox>
-        <ContentBox title="CHATTING">
+        <ContentContainer title="TIMER">
+          <TimerBox>
+            <span>00:00</span>
+          </TimerBox>
+        </ContentContainer>
+        <ContentContainer title="CHATTING">
           <ChatLog />
-        </ContentBox>
+        </ContentContainer>
       </RightSectionBox>
-    </RoomLayout>
+    </RoomTemplate>
   );
 };
 
@@ -78,22 +80,26 @@ const MiddleSectionBox = styled.div`
 
 const CamListBox = styled.div`
   border: ${(props) => props.theme.borders.camList};
-  padding: 16px 39px;
+  padding: 13px 21px;
 `;
 
 const RightSectionBox = styled.div`
   height: inherit;
   gap: 23px;
   display: grid;
-  grid-template-rows: 1fr 3fr;
+  grid-template-rows: 2500fr 8183fr;
 `;
 
 const TimerBox = styled.div`
-  font-size: 40px;
-  color: ${(props) => props.theme.colors.outline};
-  margin-top: 30px;
+  margin-top: 25px;
   display: flex;
   justify-content: center;
+  align-items: center;
+
+  span {
+    font-size: 40px;
+    color: ${(props) => props.theme.colors.ivory1};
+  }
 `;
 
 export default Room;

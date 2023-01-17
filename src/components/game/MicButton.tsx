@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
+import MicButtonIcon from '@assets/svg_micButtonIcon.svg';
 import useStreamUpdateSocket from '@hooks/socket/useStreamUpdateSocket';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { setUserMic } from '@redux/modules/userMediaSlice';
-
-import micIcon from '../../assets/micIcon.svg';
 
 const MicButton = () => {
   const { userMic, localDevice, userStreamRef } = useAppSelector((state) => state.userMedia);
@@ -22,13 +21,12 @@ const MicButton = () => {
   };
   return (
     <MicButtonLayout onClick={handleClick} aria-label={`마이크 ${userMic ? '켜짐' : '꺼짐'}`}>
-      {userMic ? 'MIC켜짐' : <img src={micIcon} />}
+      {userMic ? 'MIC켜짐' : <img src={MicButtonIcon} />}
     </MicButtonLayout>
   );
 };
 
 // TODO: MIC 커짐/켜짐 아이콘 바꾸기
-
 const MicButtonLayout = styled.button`
   background-color: transparent;
   display: flex;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-const Container = ({ children }: { children: React.ReactNode }) => {
+const PageContainer = ({ children }: { children: React.ReactNode }) => {
   return (
     <ContainerLayout>
       <ContainerInnerBox>{children}</ContainerInnerBox>
@@ -11,12 +11,12 @@ const Container = ({ children }: { children: React.ReactNode }) => {
 };
 
 const ContainerLayout = styled.div`
-  background-color: ${(props) => props.theme.colors.background};
+  background-color: ${(props) => props.theme.colors.darkGrey2};
   width: ${(props) => props.theme.layout.maxWidth};
   height: ${(props) => props.theme.layout.maxHeight};
   transform: scale(${(props) => props.theme.layout.scale});
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 76px;
+  padding-bottom: 76px;
   padding-left: 80px;
   padding-right: 80px;
   display: flex;
@@ -26,8 +26,8 @@ const ContainerLayout = styled.div`
 `;
 
 const ContainerInnerBox = styled.div`
-  width: 1830px;
-  height: 968px;
+  width: 1760px;
+  height: 928px;
   border: ${(props) => props.theme.borders.template};
   box-shadow: ${(props) => props.theme.boxShadows.boxShadow};
   display: flex;
@@ -35,4 +35,4 @@ const ContainerInnerBox = styled.div`
   justify-content: space-between;
 `;
 
-export default Container;
+export default PageContainer;

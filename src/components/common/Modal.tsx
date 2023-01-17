@@ -3,9 +3,8 @@ import { createPortal } from 'react-dom';
 
 import styled from 'styled-components';
 
+import CloseModalIcon from '@assets/svg_closeModalIcon.svg';
 import useClickAway from '@hooks/useClickAway';
-
-import closeButton from '../../assets/closeButton.svg';
 
 interface ModalProps {
   visible: boolean;
@@ -32,7 +31,7 @@ const Modal = ({ visible, height, title, children, onClose }: ModalProps) => {
               <ModalHeader>
                 {title}
                 <ModalCloseButton onClick={() => onClose && onClose()}>
-                  <img src={closeButton} />
+                  <img src={CloseModalIcon} />
                 </ModalCloseButton>
               </ModalHeader>
               {children}
@@ -55,7 +54,7 @@ const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
   left: 0;
   top: 0;
   right: 0;
-  bottom: auto;
+  bottom: 0;
   z-index: 999;
   min-height: 100vh;
   padding-right: 15vw;
@@ -63,9 +62,9 @@ const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
 `;
 
 const ModalBox = styled.div<{ height: number }>`
+  background-color: white;
   width: 560px;
   height: ${(props) => props.height}px;
-  background-color: white;
   position: relative;
   z-index: 20;
   margin: auto;
@@ -74,9 +73,9 @@ const ModalBox = styled.div<{ height: number }>`
 const ModalHeader = styled.div`
   position: relative;
   font-size: 24px;
-  color: ${(props) => props.theme.colors.outline};
+  color: ${(props) => props.theme.colors.ivory1};
   height: 48px;
-  background-color: ${(props) => props.theme.colors.footer};
+  background-color: ${(props) => props.theme.colors.darkGrey1};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,10 +83,10 @@ const ModalHeader = styled.div`
 
 const ModalCloseButton = styled.button`
   cursor: pointer;
-  background-color: transparent;
   position: absolute;
   font-size: inherit;
   color: inherit;
+  background-color: transparent;
   right: 27px;
   display: flex;
   justify-content: center;

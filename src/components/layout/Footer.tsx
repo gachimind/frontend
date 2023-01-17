@@ -5,7 +5,7 @@ const Footer = ({ children }: { children?: React.ReactNode }) => {
 };
 
 const FooterLayout = styled.div`
-  background-color: ${(props) => props.theme.colors.footer};
+  background-color: ${(props) => props.theme.colors.lightGrey1};
   height: 80px;
 `;
 

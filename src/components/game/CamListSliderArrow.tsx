@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import SlideLeftIcon from '@assets/slideLeftIcon.svg';
-import SlideRightIcon from '@assets/slideRightIcon.svg';
+import SlideLeftIcon from '@assets/svg_slideLeftIcon.svg';
+import SlideRightIcon from '@assets/svg_slideRightIcon.svg';
 interface SliderNextArrowProps {
   direction: 'left' | 'right';
   onClick?: React.MouseEventHandler<HTMLDivElement>;
@@ -45,7 +45,7 @@ const SliderIconBox = styled.div`
   height: 40px;
   padding: 8px 12px;
   border-radius: 100%;
-  background-color: ${(props) => props.theme.colors.button};
+  background-color: ${(props) => props.theme.colors.darkGrey1};
   cursor: pointer;
   :hover {
     opacity: 0.85;

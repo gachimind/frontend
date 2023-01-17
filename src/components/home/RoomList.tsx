@@ -24,17 +24,16 @@ const RoomList = () => {
 
   return (
     <>
-      <br />
       <RoomListLayout>
         {rooms.broadcastedRooms.map((room) => (
           <RoomCard key={room.roomId}>
-            <RoomContentsBox>
-              <RoomTitle>방제목</RoomTitle>
-              <RoomParticipants>
+            <CardContentsBox>
+              <Title>방제목</Title>
+              <Participants>
                 참여인원: {room.participants.toString()} / {room.maxCount}
-              </RoomParticipants>
-              <EnterRoomButton onClick={() => handleJoinRoomClick(room.roomId)}>참가하기</EnterRoomButton>
-            </RoomContentsBox>
+              </Participants>
+              <EnterButton onClick={() => handleJoinRoomClick(room.roomId)}>참가하기</EnterButton>
+            </CardContentsBox>
           </RoomCard>
         ))}
       </RoomListLayout>
@@ -43,7 +42,7 @@ const RoomList = () => {
 };
 
 const RoomListLayout = styled.div`
-  height: 637px;
+  height: 94.3%;
   padding: 35px 58px;
   column-gap: 22px;
   row-gap: 16px;
@@ -56,7 +55,7 @@ const RoomCard = styled.div`
   background-color: white;
 `;
 
-const RoomContentsBox = styled.div`
+const CardContentsBox = styled.div`
   font-family: inherit;
   margin-left: 11.27%;
   margin-right: 45.77%;
@@ -66,17 +65,17 @@ const RoomContentsBox = styled.div`
   flex-direction: column;
 `;
 
-const RoomTitle = styled.span`
+const Title = styled.span`
   font-family: inherit;
   font-size: 24px;
 `;
 
-const RoomParticipants = styled.span`
+const Participants = styled.span`
   font-family: inherit;
   font-size: 16px;
 `;
 
-const EnterRoomButton = styled.button`
+const EnterButton = styled.button`
   font-family: inherit;
   font-size: 20px;
   border-radius: 24px;

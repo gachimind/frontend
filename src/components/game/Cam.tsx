@@ -49,6 +49,7 @@ const Video = styled.video`
   width: 150px;
   height: 130px;
 `;
+
 const EmptyVideo = styled.div`
   margin-top: 8px;
   position: relative;

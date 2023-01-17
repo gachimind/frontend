@@ -2,65 +2,65 @@ import React from 'react';
 
 import styled from 'styled-components';
 
+import GameRuleIcon from '@assets/svg_gameRuleIcon.svg';
+
 import CamButton from '@components/game/CamButton';
 import MicButton from '@components/game/MicButton';
 
-import ruleIcon from '../../../assets/ruleIcon.svg';
-import Container from '../Container';
-import Footer from '../Footer';
-import Header from '../Header';
+import Footer from './Footer';
+import Header from './Header';
+import PageContainer from './PageContainer';
 
-const RoomLayout = ({ children }: { children: React.ReactNode }) => {
+const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Container>
+    <PageContainer>
       <Header page="ROOM"></Header>
       <RoomContentsBox>{children}</RoomContentsBox>
       <Footer>
-        <FooterButtonsBox>
-          <RuleButton src={ruleIcon} />
+        <FooterBox>
+          <RuleButton src={GameRuleIcon} />
           <MediaControlBox>
             <CamButton />
             <MicButton />
           </MediaControlBox>
-          <LeaveRoomButton>나가기</LeaveRoomButton>
-        </FooterButtonsBox>
+          <LeaveButton>나가기</LeaveButton>
+        </FooterBox>
       </Footer>
-    </Container>
+    </PageContainer>
   );
 };
 
 const RoomContentsBox = styled.div`
-  height: 684px;
+  height: 664px;
   gap: 40px;
   padding: 0px 152px;
   display: grid;
-  grid-template-columns: 3fr 4fr 3fr;
+  grid-template-columns: 5fr 7fr 5fr;
 `;
 
-const FooterButtonsBox = styled.div`
+const FooterBox = styled.div`
   height: inherit;
-  gap: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const RuleButton = styled.img`
-  margin-right: 550px;
+  margin-right: 613px;
 `;
 
 const MediaControlBox = styled.div`
-  gap: 53px;
+  gap: 55px;
   display: flex;
 `;
 
-const LeaveRoomButton = styled.button`
+const LeaveButton = styled.button`
   font-family: ${(props) => props.theme.font.korean};
   font-size: 20px;
-  background-color: ${(props) => props.theme.colors.button};
+  background-color: ${(props) => props.theme.colors.darkGrey1};
   width: 200px;
   height: 48px;
-  margin-left: 450px;
+  margin-left: 454px;
 `;
 
-export default RoomLayout;
+export default RoomTemplate;

@@ -66,23 +66,23 @@ const ChatLogLayout = styled.div`
 
 // TODO: 스크롤 스타일링
 const ChatBox = styled.div`
+  font-size: 20px;
+  color: ${(props) => props.theme.colors.lightGrey4};
+  height: 401px;
+  padding: 20px;
+  overflow-y: auto;
   display: flex;
   flex-direction: column-reverse;
-  height: 401px;
-  overflow-y: auto;
-  font-size: 20px;
-  color: ${(props) => props.theme.colors.chatBoxFont};
-  padding: 20px;
 `;
 
 const ChatInput = styled.input`
-  background-color: ${(props) => props.theme.colors.footer};
-  padding: 14px 0 11px 20px;
   font-size: 18px;
+  background-color: ${(props) => props.theme.colors.lightGrey1};
   width: 100%;
-  color: ${(props) => props.theme.colors.outline};
+  padding: 14px 0 11px 20px;
+  color: ${(props) => props.theme.colors.ivory1};
   ::placeholder {
-    color: ${(props) => props.theme.colors.outline};
+    color: ${(props) => props.theme.colors.ivory1};
     opacity: 0.6;
   }
   :focus {
