@@ -17,7 +17,7 @@ const MyPageTemplate = ({ children }: { children?: React.ReactNode }) => {
 };
 
 const MyPageContentsBox = styled.div`
-  height: 684px;
+  height: 664px;
   gap: 40px;
   padding: 0px 152px;
   display: grid;

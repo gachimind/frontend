@@ -6,11 +6,11 @@ import Keyword from '@components/mypage/Keyword';
 const Mypage = () => {
   return (
     <MyPageTemplate>
-      <ContentContainer title="SCORE">
+      <ContentContainer title="SCORE" lights={true}>
         <UserInfo />
       </ContentContainer>
       <ContentContainer title="GROWTH TOWER"></ContentContainer>
-      <ContentContainer title="KEYWORD LIST">
+      <ContentContainer title="KEYWORD LIST" lights={true}>
         <Keyword />
       </ContentContainer>
     </MyPageTemplate>

@@ -13,7 +13,7 @@ export default Keyword;
 
 const KeywordLayout = styled.div`
   height: 94.3%;
-  padding: 40px;
+  padding: 52px 40px;
   gap: 36px;
   display: grid;
   grid-template-rows: 1fr 1fr;
