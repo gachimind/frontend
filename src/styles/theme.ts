@@ -3,7 +3,7 @@ import { DefaultTheme } from 'styled-components';
 const SCALE =
   window.innerWidth / window.innerHeight < 1.83
     ? Number((window.innerWidth / 1960).toFixed(2))
-    : Number((window.innerHeight * 2.1) / 1960).toFixed(2);
+    : Number((window.innerHeight * 1.95) / 1960).toFixed(2);
 
 export const colors = {
   /**
