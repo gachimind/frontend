@@ -9,10 +9,10 @@ const Main = () => {
   useAuthSocket();
   return (
     <MainTemplate>
-      <ContentContainer title="SCORE">
+      <ContentContainer title="SCORE" lights={true}>
         <UserInfo />
       </ContentContainer>
-      <ContentContainer title="ROOM SELECTION">
+      <ContentContainer title="ROOM SELECTION" lights={true}>
         <RoomList />
       </ContentContainer>
     </MainTemplate>

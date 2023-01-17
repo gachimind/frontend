@@ -43,7 +43,7 @@ const Modal = ({ visible, height, title, children, onClose }: ModalProps) => {
   );
 };
 
-// TODO: 임시 색상으로 추후 변경되어야 한다.
+// TODO: 임시 스타일링으로 추후 변경되어야 한다.
 const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
   display: ${({ visible }) => (visible ? 'block' : 'none')};
   position: fixed;
@@ -54,7 +54,7 @@ const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
   left: 0;
   top: 0;
   right: 0;
-  bottom: auto;
+  bottom: 0;
   z-index: 999;
   min-height: 100vh;
   padding-right: 15vw;
@@ -62,9 +62,9 @@ const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
 `;
 
 const ModalBox = styled.div<{ height: number }>`
+  background-color: white;
   width: 560px;
   height: ${(props) => props.height}px;
-  background-color: white;
   position: relative;
   z-index: 20;
   margin: auto;
@@ -83,10 +83,10 @@ const ModalHeader = styled.div`
 
 const ModalCloseButton = styled.button`
   cursor: pointer;
-  background-color: transparent;
   position: absolute;
   font-size: inherit;
   color: inherit;
+  background-color: transparent;
   right: 27px;
   display: flex;
   justify-content: center;

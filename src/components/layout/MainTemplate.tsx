@@ -29,7 +29,7 @@ const LoginButton = styled.button`
 `;
 
 const MainContentsBox = styled.div`
-  height: 684px;
+  height: 664px;
   gap: 40px;
   padding: 0px 152px;
   display: grid;
