@@ -2,10 +2,13 @@ import { useState } from 'react';
 
 import styled from 'styled-components';
 
+import EditProfileModal from '@components/mypage/EditProfileModal';
+
 import CreateGameModal from './CreateGameModal';
 
-const UserInfo = () => {
+const UserInfo = ({ mypage }: { mypage?: boolean }) => {
   const [createGameModalVisible, setCreateGameModalVisible] = useState<boolean>(false);
+  const [EditProfileModalVisible, setEditProfileModalVisible] = useState<boolean>(false);
 
   return (
     <UserInfoLayout>
@@ -20,7 +23,12 @@ const UserInfo = () => {
       {createGameModalVisible && (
         <CreateGameModal visible={createGameModalVisible} onClose={() => setCreateGameModalVisible(false)} />
       )}
-      <MakeRoomButton onClick={() => setCreateGameModalVisible(true)}>게임방 만들기</MakeRoomButton>
+      {!mypage && <MakeRoomButton onClick={() => setCreateGameModalVisible(true)}>게임방 만들기</MakeRoomButton>}
+
+      {EditProfileModalVisible && (
+        <EditProfileModal visible={EditProfileModalVisible} onClose={() => setEditProfileModalVisible(false)} />
+      )}
+      {mypage && <MakeRoomButton onClick={() => setEditProfileModalVisible(true)}>회원정보 수정</MakeRoomButton>}
       <ScoreBox>
         <img></img>
         <div>

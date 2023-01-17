@@ -69,7 +69,6 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
 // TODO: 임시 색상으로 추후 변경되어야 한다.
 const CreateGameModalLayout = styled.div`
   background-color: white;
-  /* height: 100%; */
   font-family: ${(props) => props.theme.font.korean};
   padding: 40px 70px 48px 70px;
   gap: 24px;

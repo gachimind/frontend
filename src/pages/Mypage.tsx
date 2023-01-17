@@ -7,7 +7,7 @@ const Mypage = () => {
   return (
     <MyPageTemplate>
       <ContentContainer title="SCORE" lights={true}>
-        <UserInfo />
+        <UserInfo mypage={true} />
       </ContentContainer>
       <ContentContainer title="GROWTH TOWER"></ContentContainer>
       <ContentContainer title="KEYWORD LIST" lights={true}>
