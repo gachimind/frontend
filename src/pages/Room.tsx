@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -18,12 +18,17 @@ import RoomTemplate from '@components/layout/RoomTemplate';
 
 const Room = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { authorized } = useAuthSocket();
-  const { userStreamRef } = useAppSelector((state) => state.userMedia);
+  const { userStreamRef, isMediaSuccess } = useAppSelector((state) => state.userMedia);
   const { destroyLocalStream } = useLocalStream();
   const { onAnnounceRoomUpdate, offAnnounceRoomUpdate } = useGameUpdateSocket();
   const { emitUserLeaveRoom, emitJoinRoom, onJoinRoom } = useGameSocket();
+
   useEffect(() => {
+    if (!isMediaSuccess) {
+      navigate('/?roomId=' + id);
+    }
     return () => {
       offAnnounceRoomUpdate();
       emitUserLeaveRoom();
@@ -41,8 +46,9 @@ const Room = () => {
 
   useEffect(() => {
     onAnnounceRoomUpdate();
-    if (authorized) {
-      id && emitJoinRoom({ roomId: parseInt(id, 10) });
+    if (authorized && id) {
+      const intId = parseInt(id, 10);
+      !Number.isNaN(id) && emitJoinRoom({ roomId: parseInt(id, 10) });
       onJoinRoom();
     }
   }, [id, authorized]);

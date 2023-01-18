@@ -2,23 +2,48 @@ import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
+import GameResultModal from '@components/game/GameResultModal';
+import EnterPrivateRoomModal from '@components/home/EnterPrivateRoomModal';
 import LoginModal from '@components/home/LoginModal';
+import ReportBugModal from '@components/home/ReportBugModal';
 
 import Footer from './Footer';
 import Header from './Header';
 import PageContainer from './PageContainer';
 
+// TODO: 방 참가하기 버튼에 비밀방 참가하기 모달을 연결한다.
+// TODO: 게임 결과창 모달을 필요한 컴포넌트에 연결한다.
 const MainTemplate = ({ children }: { children: React.ReactNode }) => {
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
+  // const [enterPrivateRoomModalVisible, setEnterPrivateRoomModalVisible] = useState<boolean>(false);
+  const [reportBugModalVisible, setReportBugModalVisible] = useState<boolean>(false);
+  const [gameResultModalVisible, setgameResultModalVisible] = useState<boolean>(false);
 
   return (
     <PageContainer>
       <Header>
         {loginModalVisible && <LoginModal visible={loginModalVisible} onClose={() => setLoginModalVisible(false)} />}
         <LoginButton onClick={() => setLoginModalVisible(true)}>LOGIN</LoginButton>
+        {/* {enterPrivateRoomModalVisible && (
+          <EnterPrivateRoomModal visible={enterPrivateRoomModalVisible} onClose={() => setEnterPrivateRoomModalVisible(false)} />
+        )}
+        <LoginButton onClick={() => setEnterPrivateRoomModalVisible(true)}>LOGIN</LoginButton> */}
       </Header>
       <MainContentsBox>{children}</MainContentsBox>
-      <Footer></Footer>
+      <Footer>
+        <FooterBox>
+          <button></button>
+          <button></button>
+          {gameResultModalVisible && (
+            <GameResultModal visible={gameResultModalVisible} onClose={() => setgameResultModalVisible(false)} />
+          )}
+          <button onClick={() => setgameResultModalVisible(true)}>결과</button>
+          {reportBugModalVisible && (
+            <ReportBugModal visible={reportBugModalVisible} onClose={() => setReportBugModalVisible(false)} />
+          )}
+          <button onClick={() => setReportBugModalVisible(true)}>버그</button>
+        </FooterBox>
+      </Footer>
     </PageContainer>
   );
 };
@@ -34,6 +59,20 @@ const MainContentsBox = styled.div`
   padding: 0px 152px;
   display: grid;
   grid-template-columns: 3fr 7fr;
+`;
+
+const FooterBox = styled.div`
+  height: inherit;
+  gap: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    background-color: ${(props) => props.theme.colors.darkGrey1};
+    width: 48px;
+    height: 48px;
+  }
 `;
 
 export default MainTemplate;

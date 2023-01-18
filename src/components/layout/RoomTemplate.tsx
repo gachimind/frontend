@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
 import GameRuleIcon from '@assets/svg_gameRuleIcon.svg';
 
 import CamButton from '@components/game/CamButton';
+import GameRuleModal from '@components/game/GameRuleModal';
 import MicButton from '@components/game/MicButton';
 
 import Footer from './Footer';
@@ -12,13 +13,17 @@ import Header from './Header';
 import PageContainer from './PageContainer';
 
 const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
+  const [GameRuleModalVisible, setGameRuleModalVisible] = useState<boolean>(false);
   return (
     <PageContainer>
       <Header page="ROOM"></Header>
       <RoomContentsBox>{children}</RoomContentsBox>
       <Footer>
         <FooterBox>
-          <RuleButton src={GameRuleIcon} />
+          {GameRuleModalVisible && (
+            <GameRuleModal visible={GameRuleModalVisible} onClose={() => setGameRuleModalVisible(false)} />
+          )}
+          <RuleButton onClick={() => setGameRuleModalVisible(true)} src={GameRuleIcon} />
           <MediaControlBox>
             <CamButton />
             <MicButton />
