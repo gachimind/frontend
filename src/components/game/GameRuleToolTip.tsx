@@ -1,68 +1,60 @@
 import { useRef } from 'react';
-import { createPortal } from 'react-dom';
 
 import styled from 'styled-components';
 
 import CloseModalIcon from '@assets/svg_closeModalIcon.svg';
 import useClickAway from '@hooks/useClickAway';
 
-const GameRuleModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
+const GameRuleToolTip = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
   const ref = useRef(null);
   useClickAway(ref, () => onClose && onClose());
-  const portalDiv = document.querySelector('#modal-root');
 
-  if (!portalDiv) {
-    return null;
-  }
   return (
     <>
-      {visible &&
-        createPortal(
-          <GameRuleModalLayout visible={visible}>
-            <ModalBox ref={ref}>
-              <ModalHeader>
-                HELP
-                <ModalCloseButton onClick={() => onClose && onClose()}>
-                  <img src={CloseModalIcon} />
-                </ModalCloseButton>
-              </ModalHeader>
-              <RuleBox>
-                <ul>
-                  <label>게임 규칙</label>
-                  <li className="first-rule">1. 발표자와 . . .</li>
-                  <li>2. 참여자는 . . .</li>
-                  <li>3. </li>
-                </ul>
-              </RuleBox>
-            </ModalBox>
-            ,
-          </GameRuleModalLayout>,
-          portalDiv,
-        )}
+      {visible && (
+        <GameRuleToolTipLayout visible={visible}>
+          <ModalBox ref={ref}>
+            <ModalHeader>
+              HELP
+              <ModalCloseButton onClick={() => onClose && onClose()}>
+                <img src={CloseModalIcon} />
+              </ModalCloseButton>
+            </ModalHeader>
+            <RuleBox>
+              <ul>
+                <label>게임 규칙</label>
+                <li className="first-rule">1. 발표자와 . . .</li>
+                <li>2. 참여자는 . . .</li>
+                <li>3. </li>
+              </ul>
+            </RuleBox>
+          </ModalBox>
+        </GameRuleToolTipLayout>
+      )}
     </>
   );
 };
 
-const GameRuleModalLayout = styled.div<{ visible: boolean }>`
+const GameRuleToolTipLayout = styled.div<{ visible: boolean }>`
   display: ${({ visible }) => (visible ? 'block' : 'none')};
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform: scale(${(props) => props.theme.layout.scale});
-  left: 11.2%;
-  bottom: 4%;
-  z-index: 999;
+  position: absolute;
+  width: 1760px;
+  height: 928px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  margin: auto;
 `;
 
 const ModalBox = styled.div`
   background-color: white;
   box-shadow: ${(props) => props.theme.boxShadows.boxShadow};
+  position: absolute;
   width: 409px;
   height: 511px;
-  position: relative;
-  z-index: 20;
-  margin: auto;
+  left: 148px;
+  bottom: 88px;
 `;
 
 const ModalHeader = styled.div`
@@ -108,4 +100,4 @@ const RuleBox = styled.div`
   }
 `;
 
-export default GameRuleModal;
+export default GameRuleToolTip;

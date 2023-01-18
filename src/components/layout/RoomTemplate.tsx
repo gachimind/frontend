@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import GameRuleIcon from '@assets/svg_gameRuleIcon.svg';
 
 import CamButton from '@components/game/CamButton';
-import GameRuleModal from '@components/game/GameRuleModal';
+import GameRuleToolTip from '@components/game/GameRuleToolTip';
 import MicButton from '@components/game/MicButton';
 
 import Footer from './Footer';
@@ -21,7 +21,7 @@ const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
       <Footer>
         <FooterBox>
           {GameRuleModalVisible && (
-            <GameRuleModal visible={GameRuleModalVisible} onClose={() => setGameRuleModalVisible(false)} />
+            <GameRuleToolTip visible={GameRuleModalVisible} onClose={() => setGameRuleModalVisible(false)} />
           )}
           <RuleButton onClick={() => setGameRuleModalVisible(true)} src={GameRuleIcon} />
           <MediaControlBox>
