@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
+import Toast from '@components/common/ToastProvider';
 import GameResultModal from '@components/game/GameResultModal';
 import EnterPrivateRoomModal from '@components/home/EnterPrivateRoomModal';
 import LoginModal from '@components/home/LoginModal';
