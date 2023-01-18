@@ -13,7 +13,9 @@ const useErrorSocket = () => {
   const onError = (condition?: { target: keyof ErrorResponse; value: string | number }, callback?: () => void) => {
     on('error', ({ error }: { error: ErrorResponse }) => {
       notify(error.errorMessage, 'warning');
-      condition && callback?.();
+      if (condition) {
+        error[condition.target] === condition.value && callback?.();
+      }
     });
   };
 
