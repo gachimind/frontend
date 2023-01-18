@@ -68,7 +68,7 @@ const ModalBox = styled.div<{ width?: number }>`
   height: fit-content;
   position: relative;
   z-index: 20;
-  margin: auto;
+  margin: 0 auto;
 `;
 
 const ModalHeader = styled.div`
