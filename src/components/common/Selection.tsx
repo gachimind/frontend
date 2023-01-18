@@ -13,10 +13,10 @@ const Selection = ({ width, options }: { width?: number; options: Array<{ value:
   const [showOptions, setShowOptions] = useState(false);
 
   return (
-    <SelectBox onClick={() => setShowOptions((prev) => !prev)}>
+    <SelectBox ref={ref} onClick={() => setShowOptions((prev) => !prev)}>
       <img src={SelectIcon}></img>
       <label>{currentValue}</label>
-      <SelectOptions ref={ref} show={showOptions} width={width}>
+      <SelectOptions show={showOptions} width={width}>
         {options?.map((option) => (
           <Option key={option.label} value={option.value} onClick={() => setCurrentValue(option.value)} width={width}>
             {option.label}
