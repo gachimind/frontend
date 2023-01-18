@@ -6,15 +6,7 @@ import styled from 'styled-components';
 import CloseModalIcon from '@assets/svg_closeModalIcon.svg';
 import useClickAway from '@hooks/useClickAway';
 
-interface ModalProps {
-  visible: boolean;
-  title: string;
-  width?: number;
-  children: React.ReactNode;
-  onClose: () => void;
-}
-
-const Modal = ({ visible, title, width, children, onClose }: ModalProps) => {
+const GameRuleModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
   const ref = useRef(null);
   useClickAway(ref, () => onClose && onClose());
   const portalDiv = document.querySelector('#modal-root');
@@ -26,46 +18,48 @@ const Modal = ({ visible, title, width, children, onClose }: ModalProps) => {
     <>
       {visible &&
         createPortal(
-          <ModalBackgroundLayout visible={visible}>
-            <ModalBox ref={ref} width={width}>
+          <GameRuleModalLayout visible={visible}>
+            <ModalBox ref={ref}>
               <ModalHeader>
-                {title}
+                HELP
                 <ModalCloseButton onClick={() => onClose && onClose()}>
                   <img src={CloseModalIcon} />
                 </ModalCloseButton>
               </ModalHeader>
-              {children}
+              <RuleBox>
+                <ul>
+                  <label>게임 규칙</label>
+                  <li className="first-rule">1. 발표자와 . . .</li>
+                  <li>2. 참여자는 . . .</li>
+                  <li>3. </li>
+                </ul>
+              </RuleBox>
             </ModalBox>
-          </ModalBackgroundLayout>,
+            ,
+          </GameRuleModalLayout>,
           portalDiv,
         )}
     </>
   );
 };
 
-// TODO: 임시 스타일링으로 추후 변경되어야 한다.
-const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
+const GameRuleModalLayout = styled.div<{ visible: boolean }>`
   display: ${({ visible }) => (visible ? 'block' : 'none')};
   position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
   transform: scale(${(props) => props.theme.layout.scale});
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  left: 11.2%;
+  bottom: 4%;
   z-index: 999;
-  min-height: 100vh;
-  padding-right: 15vw;
-  padding-left: 15vw;
 `;
 
-const ModalBox = styled.div<{ width?: number }>`
+const ModalBox = styled.div`
   background-color: white;
   box-shadow: ${(props) => props.theme.boxShadows.boxShadow};
-  width: ${(props) => (props.width ? props.width : 560)}px;
-  height: fit-content;
+  width: 409px;
+  height: 511px;
   position: relative;
   z-index: 20;
   margin: auto;
@@ -94,4 +88,24 @@ const ModalCloseButton = styled.button`
   align-items: center;
 `;
 
-export default Modal;
+const RuleBox = styled.div`
+  padding: 40px 70px;
+  ul {
+    font-family: ${(props) => props.theme.font.korean};
+    font-size: 24px;
+    list-style: none;
+    label {
+      font-family: inherit;
+      font-size: inherit;
+    }
+    li {
+      font-family: inherit;
+      font-size: inherit;
+    }
+    .first-rule {
+      padding-top: 24px;
+    }
+  }
+`;
+
+export default GameRuleModal;

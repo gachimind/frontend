@@ -4,7 +4,7 @@ import Modal from '@components/common/Modal';
 
 const LoginModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
   return (
-    <Modal visible={visible} onClose={onClose} height={500} title="LOGIN">
+    <Modal visible={visible} onClose={onClose} title="LOGIN">
       <LoginModalLayout>
         <LoginButton>카카오 로그인</LoginButton>
         <LoginButton>구글 로그인</LoginButton>

@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router';
 
 import styled from 'styled-components';
 
+import { PARTICIPANTS_OPTIONS, ROUND_OPTIONS } from '@constants/options';
 import useGameSocket from '@hooks/socket/useGameSocket';
 
 import Modal from '@components/common/Modal';
+import Selection from '@components/common/Selection';
 
 import { CreateRoomRequest } from '@customTypes/socketType';
 
@@ -34,29 +36,31 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
     onShowCreatedRoomId(navigate, '/?roomId=');
   };
   return (
-    <Modal visible={visible} onClose={onClose} height={700} title="MAKE A ROOM">
+    <Modal visible={visible} onClose={onClose} title="MAKE A ROOM">
       <CreateGameModalLayout>
-        <InputBox>
+        <RoomInfoBox>
           <span>방제</span>
-          <input type="text" value={roomTitle} onChange={(e) => setRoomTitle(e.target.value)} placeholder="방제목" />
-        </InputBox>
-        <InputBox>
+          <div>방제</div>
+        </RoomInfoBox>
+        <RoomInfoBox>
           <span>인원</span>
-          <input
+          <Selection options={PARTICIPANTS_OPTIONS} />
+          {/* <input
             type="number"
             value={maxCount}
             onChange={(e) => setMaxCount(parseInt(e.target.value))}
             placeholder="최대인원"
-          />
-        </InputBox>
-        <InputBox>
+          /> */}
+        </RoomInfoBox>
+        <RoomInfoBox>
           <span>라운드</span>
-          <input type="number" placeholder="라운드가 들어간당" />
-        </InputBox>
-        <InputBox>
+          <Selection options={ROUND_OPTIONS} />
+          {/* <input type="number" placeholder="라운드가 들어간당" /> */}
+        </RoomInfoBox>
+        <RoomInfoBox>
           <span>카운트</span>
           <input placeholder="카운트가 들어간당" />
-        </InputBox>
+        </RoomInfoBox>
         <CreateRoomButton onClick={handleCreateGameButtonClick}>생성하기</CreateRoomButton>
       </CreateGameModalLayout>
     </Modal>
@@ -66,7 +70,6 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
 // TODO: 임시 색상으로 추후 변경되어야 한다.
 const CreateGameModalLayout = styled.div`
   background-color: white;
-  height: 100%;
   font-family: ${(props) => props.theme.font.korean};
   padding: 40px 70px 48px 70px;
   gap: 24px;
@@ -74,7 +77,7 @@ const CreateGameModalLayout = styled.div`
   flex-direction: column;
 `;
 
-const InputBox = styled.div`
+const RoomInfoBox = styled.div`
   font-family: inherit;
   display: flex;
   flex-direction: column;
@@ -83,14 +86,21 @@ const InputBox = styled.div`
     font-size: 24px;
     margin-bottom: 8px;
   }
+  div {
+    font-family: inherit;
+    font-size: 24px;
+    background-color: ${(props) => props.theme.colors.ivory1};
+    height: 56px;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+  }
   input {
     font-family: inherit;
     font-size: 24px;
     background-color: ${(props) => props.theme.colors.ivory1};
     height: 56px;
-    ::placeholder {
-      padding-left: 20px;
-    }
+    padding-left: 20px;
   }
 `;
 
