@@ -12,6 +12,8 @@ const ToastProvider = () => {
         toastStyle={{
           backgroundColor: theme.colors.darkGrey1,
           color: theme.colors.white,
+          width: '380px',
+          fontWeight: 600,
         }}
         position="top-center"
         autoClose={2400}

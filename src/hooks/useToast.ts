@@ -5,13 +5,13 @@ import { Id, toast } from 'react-toastify';
 const IconType = {
   success: '😽',
   info: '🐱',
-  error: '😿',
+  warning: '😿',
 };
 
 const useToast = () => {
   const toastRef = useRef<Id>();
 
-  const notify = (message: string, type: 'info' | 'success' | 'error') => {
+  const notify = (message: string, type: 'info' | 'success' | 'warning') => {
     dismissToast();
     toastRef.current = toast[type](message + IconType[type]);
   };
