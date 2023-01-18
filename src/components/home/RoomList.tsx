@@ -43,17 +43,19 @@ const RoomList = () => {
     <>
       <RoomListLayout>
         <GlobalLoading isLoading={isMediaLoading && !isMediaSuccess} />
-        {rooms.broadcastedRooms.map((room) => (
-          <RoomCard key={room.roomId}>
-            <CardContentsBox>
-              <Title>방제목</Title>
-              <Participants>
-                참여인원: {room.participants.toString()} / {room.maxCount}
-              </Participants>
-              <EnterButton onClick={() => handleJoinRoomClick(room.roomId)}>참가하기</EnterButton>
-            </CardContentsBox>
-          </RoomCard>
-        ))}
+        {rooms.broadcastedRooms
+          .filter((room) => room.participants !== 0)
+          .map((room) => (
+            <RoomCard key={room.roomId}>
+              <CardContentsBox>
+                <Title>방제목</Title>
+                <Participants>
+                  참여인원: {room.participants.toString()} / {room.maxCount}
+                </Participants>
+                <EnterButton onClick={() => handleJoinRoomClick(room.roomId)}>참가하기</EnterButton>
+              </CardContentsBox>
+            </RoomCard>
+          ))}
       </RoomListLayout>
     </>
   );
