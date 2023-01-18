@@ -22,14 +22,17 @@ const Room = () => {
   const { authorized } = useAuthSocket();
   const { userStreamRef, isMediaSuccess } = useAppSelector((state) => state.userMedia);
   const { destroyLocalStream } = useLocalStream();
-  const { onAnnounceRoomUpdate } = useGameUpdateSocket();
+  const { onAnnounceRoomUpdate, offAnnounceRoomUpdate } = useGameUpdateSocket();
   const { emitUserLeaveRoom, emitJoinRoom, onJoinRoom } = useGameSocket();
 
   useEffect(() => {
     if (!isMediaSuccess) {
       navigate('/?roomId=' + id);
     }
-    return () => emitUserLeaveRoom();
+    return () => {
+      offAnnounceRoomUpdate();
+      emitUserLeaveRoom();
+    };
   }, []);
 
   useEffect(() => {

@@ -4,6 +4,8 @@ export const PUBLISH = Object.freeze({
   joinGame: 'enter-room', // 방 입장 요청을 발행한다.
   leaveGame: 'leave-room', // 방 나가기 요청을 발행한다.
   sendChat: 'send-chat', // 채팅 보내기 요청을 발행한다.
+  startGame: 'start',
+  readyGame: 'ready',
 
   // webRTC
   webRTCIce: 'webrtc-ice',

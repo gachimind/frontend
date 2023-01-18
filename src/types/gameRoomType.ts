@@ -15,6 +15,7 @@ export interface GameRoomDetail extends GameRoomBaseInfo, GameRoomPlayDetailInfo
   roomId: number;
   isGameOn: boolean;
   participants: Participant[];
+  isGameReadyToStart?: boolean;
 }
 
 export interface Participant {
@@ -25,6 +26,7 @@ export interface Participant {
   socketId: string;
   audio?: boolean;
   video?: boolean;
+  isHost?: boolean;
 }
 
 export interface ChatBaseType {
