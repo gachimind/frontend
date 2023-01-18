@@ -6,10 +6,10 @@ const EnterPrivateRoomModal = ({ visible, onClose }: { visible: boolean; onClose
   return (
     <Modal visible={visible} onClose={onClose} title="ENTER THE ROOM">
       <EnterPrivateRoomModalLayout>
-        <InputBox>
+        <RoomInfoBox>
           <span>방 제목</span>
-          <input placeholder="방 제목이 들어간당" />
-        </InputBox>
+          <div>방제</div>
+        </RoomInfoBox>
         <InputBox>
           <span>비밀번호</span>
           <input placeholder="비밀번호가 들어간당" />
@@ -30,6 +30,25 @@ const EnterPrivateRoomModalLayout = styled.div`
   justify-content: center;
 `;
 
+const RoomInfoBox = styled.div`
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  span {
+    font-family: inherit;
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  div {
+    font-family: inherit;
+    font-size: 24px;
+    background-color: ${(props) => props.theme.colors.ivory1};
+    height: 56px;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+  }
+`;
 const InputBox = styled.div`
   font-family: inherit;
   display: flex;

@@ -38,11 +38,11 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
   return (
     <Modal visible={visible} onClose={onClose} title="MAKE A ROOM">
       <CreateGameModalLayout>
-        <RoomInfoBox>
+        <InputBox>
           <span>방제</span>
-          <div>방제</div>
-        </RoomInfoBox>
-        <RoomInfoBox>
+          <input type="text" value={roomTitle} onChange={(e) => setRoomTitle(e.target.value)} placeholder="방제목" />
+        </InputBox>
+        <InputBox>
           <span>인원</span>
           <Selection options={PARTICIPANTS_OPTIONS} />
           {/* <input
@@ -51,16 +51,16 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
             onChange={(e) => setMaxCount(parseInt(e.target.value))}
             placeholder="최대인원"
           /> */}
-        </RoomInfoBox>
-        <RoomInfoBox>
+        </InputBox>
+        <InputBox>
           <span>라운드</span>
           <Selection options={ROUND_OPTIONS} />
           {/* <input type="number" placeholder="라운드가 들어간당" /> */}
-        </RoomInfoBox>
-        <RoomInfoBox>
+        </InputBox>
+        <InputBox>
           <span>카운트</span>
           <input placeholder="카운트가 들어간당" />
-        </RoomInfoBox>
+        </InputBox>
         <CreateRoomButton onClick={handleCreateGameButtonClick}>생성하기</CreateRoomButton>
       </CreateGameModalLayout>
     </Modal>
@@ -77,7 +77,7 @@ const CreateGameModalLayout = styled.div`
   flex-direction: column;
 `;
 
-const RoomInfoBox = styled.div`
+const InputBox = styled.div`
   font-family: inherit;
   display: flex;
   flex-direction: column;
@@ -86,21 +86,14 @@ const RoomInfoBox = styled.div`
     font-size: 24px;
     margin-bottom: 8px;
   }
-  div {
-    font-family: inherit;
-    font-size: 24px;
-    background-color: ${(props) => props.theme.colors.ivory1};
-    height: 56px;
-    padding-left: 20px;
-    display: flex;
-    align-items: center;
-  }
   input {
     font-family: inherit;
     font-size: 24px;
     background-color: ${(props) => props.theme.colors.ivory1};
     height: 56px;
-    padding-left: 20px;
+    ::placeholder {
+      padding-left: 20px;
+    }
   }
 `;
 

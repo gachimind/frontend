@@ -45,7 +45,7 @@ const Room = () => {
     onAnnounceRoomUpdate();
     if (authorized && id) {
       const intId = parseInt(id, 10);
-      !Number.isNaN(id) && emitJoinRoom({ roomId: parseInt(id, 10) });
+      !Number.isNaN(intId) && emitJoinRoom({ roomId: intId });
       onJoinRoom();
     }
   }, [id, authorized]);
