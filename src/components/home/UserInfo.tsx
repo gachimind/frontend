@@ -2,11 +2,17 @@ import { useState } from 'react';
 
 import styled from 'styled-components';
 
+import { useAppSelector } from '@redux/hooks';
+
 import EditProfileModal from '@components/mypage/EditProfileModal';
 
 import CreateGameModal from './CreateGameModal';
+import LoginModal from './LoginModal';
 
 const UserInfo = ({ mypage }: { mypage?: boolean }) => {
+  const isLogined = useAppSelector((state) => state.user.isLogined);
+
+  const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [createGameModalVisible, setCreateGameModalVisible] = useState<boolean>(false);
   const [EditProfileModalVisible, setEditProfileModalVisible] = useState<boolean>(false);
 
@@ -15,15 +21,27 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
       <ProfileBox>
         <UserImageBox></UserImageBox>
         <UserStatusBox>
-          <span className="nickname">닉네임</span>
-          <span>|</span>
-          <span>10TH</span>
+          {!isLogined ? (
+            <span>로그인이 필요한 서비스입니다.</span>
+          ) : (
+            <>
+              <span className="nickname">닉네임</span>
+              <span>|</span>
+              <span>10TH</span>
+            </>
+          )}
         </UserStatusBox>
       </ProfileBox>
+      {loginModalVisible && <LoginModal visible={loginModalVisible} onClose={() => setLoginModalVisible(false)} />}
+
       {createGameModalVisible && (
         <CreateGameModal visible={createGameModalVisible} onClose={() => setCreateGameModalVisible(false)} />
       )}
-      {!mypage && <MakeRoomButton onClick={() => setCreateGameModalVisible(true)}>게임방 만들기</MakeRoomButton>}
+      {!mypage && (
+        <MakeRoomButton onClick={() => (!isLogined ? setLoginModalVisible(true) : setCreateGameModalVisible(true))}>
+          게임방 만들기
+        </MakeRoomButton>
+      )}
 
       {EditProfileModalVisible && (
         <EditProfileModal visible={EditProfileModalVisible} onClose={() => setEditProfileModalVisible(false)} />
@@ -72,13 +90,16 @@ const UserStatusBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  span {
+    font-family: ${(props) => props.theme.font.korean};
+  }
   .nickname {
     font-family: ${(props) => props.theme.font.korean};
   }
 `;
 
 const MakeRoomButton = styled.button`
+  cursor: pointer;
   font-family: ${(props) => props.theme.font.korean};
   font-size: 24px;
 `;

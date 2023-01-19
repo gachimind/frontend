@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import GameResultModal from '@components/game/GameResultModal';
-import EnterPrivateRoomModal from '@components/home/EnterPrivateRoomModal';
+import { useAppSelector } from '@redux/hooks';
+
 import LoginModal from '@components/home/LoginModal';
 import ReportBugModal from '@components/home/ReportBugModal';
 
@@ -11,33 +12,30 @@ import Footer from './Footer';
 import Header from './Header';
 import PageContainer from './PageContainer';
 
-// TODO: 방 참가하기 버튼에 비밀방 참가하기 모달을 연결한다.
-// TODO: 게임 결과창 모달을 필요한 컴포넌트에 연결한다.
 const MainTemplate = ({ children }: { children: React.ReactNode }) => {
+  const isLogined = useAppSelector((state) => state.user.isLogined);
+
+  const navigate = useNavigate();
+
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
-  // const [enterPrivateRoomModalVisible, setEnterPrivateRoomModalVisible] = useState<boolean>(false);
   const [reportBugModalVisible, setReportBugModalVisible] = useState<boolean>(false);
-  const [gameResultModalVisible, setgameResultModalVisible] = useState<boolean>(false);
 
   return (
     <PageContainer>
       <Header>
         {loginModalVisible && <LoginModal visible={loginModalVisible} onClose={() => setLoginModalVisible(false)} />}
-        <LoginButton onClick={() => setLoginModalVisible(true)}>LOGIN</LoginButton>
-        {/* {enterPrivateRoomModalVisible && (
-          <EnterPrivateRoomModal visible={enterPrivateRoomModalVisible} onClose={() => setEnterPrivateRoomModalVisible(false)} />
+        {!isLogined ? (
+          <LoginButton onClick={() => setLoginModalVisible(true)}>LOGIN</LoginButton>
+        ) : (
+          <LoginButton onClick={() => navigate('/mypage')}>MYPAGE</LoginButton>
         )}
-        <LoginButton onClick={() => setEnterPrivateRoomModalVisible(true)}>LOGIN</LoginButton> */}
       </Header>
       <MainContentsBox>{children}</MainContentsBox>
       <Footer>
         <FooterBox>
           <button></button>
           <button></button>
-          {gameResultModalVisible && (
-            <GameResultModal visible={gameResultModalVisible} onClose={() => setgameResultModalVisible(false)} />
-          )}
-          <button onClick={() => setgameResultModalVisible(true)}>결과</button>
+          <button></button>
           {reportBugModalVisible && (
             <ReportBugModal visible={reportBugModalVisible} onClose={() => setReportBugModalVisible(false)} />
           )}
@@ -49,6 +47,7 @@ const MainTemplate = ({ children }: { children: React.ReactNode }) => {
 };
 
 const LoginButton = styled.button`
+  cursor: pointer;
   font-size: 24px;
   margin-right: 150px;
 `;
