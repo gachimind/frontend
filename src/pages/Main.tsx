@@ -17,8 +17,7 @@ const Main = () => {
   const { onError } = useErrorSocket();
 
   useEffect(() => {
-    // XXX: 이것 말고 메인 페이지에서 날만한 예외가 없을까 모르겠다..?? 예외정보가 너무 추상적이다.
-    onError({ target: 'event', value: PUBLISH.login }, () => dispatch(logout()));
+    onError([{ target: 'status', value: 403, callback: () => dispatch(logout()) }]);
   }, []);
 
   return (

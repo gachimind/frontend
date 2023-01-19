@@ -1,21 +1,30 @@
 import { useEffect } from 'react';
 
-import useToast from '@hooks/useToast';
+import { alertToast } from '@utils/toast';
 
 import { ErrorResponse } from '@customTypes/socketType';
 
 import socketInstance from './socketInstance';
 
+interface ErrorConditionType {
+  target: keyof ErrorResponse;
+  value: string | number;
+  callback?: () => void;
+  skipAlert?: boolean;
+}
+
 const useErrorSocket = () => {
   const { on, off } = socketInstance;
-  const { notify } = useToast();
 
-  const onError = (condition?: { target: keyof ErrorResponse; value: string | number }, callback?: () => void) => {
+  const onError = (conditions?: ErrorConditionType[]) => {
     on('error', ({ error }: { error: ErrorResponse }) => {
-      notify(error.errorMessage, 'warning');
-      if (condition) {
-        error[condition.target] === condition.value && callback?.();
-      }
+      console.log(error);
+      conditions?.forEach((condition, i) => {
+        if (error[condition.target] === condition.value) {
+          !condition.skipAlert && alertToast(error.errorMessage, 'warning');
+          condition?.callback?.();
+        }
+      });
     });
   };
 

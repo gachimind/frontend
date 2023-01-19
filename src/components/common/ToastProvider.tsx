@@ -16,8 +16,7 @@ const ToastProvider = () => {
           fontWeight: 600,
         }}
         position="top-center"
-        autoClose={2400}
-        hideProgressBar
+        autoClose={2000}
         newestOnTop={false}
         closeOnClick
         rtl={false}
