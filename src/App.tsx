@@ -12,12 +12,15 @@ import store from '@redux/store';
 import { GlobalStyle } from '@styles/GlobalStyle';
 import { theme } from '@styles/theme';
 
+import ToastProvider from '@components/common/ToastProvider';
+
 const App = (): JSX.Element => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Provider store={store}>
         <SingletonHooksContainer />
+        <ToastProvider />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Main />} />

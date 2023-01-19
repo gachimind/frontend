@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
 import styled from 'styled-components';
 
+import { useAuthSocket } from '@hooks/socket/useAuthSocket';
 import useGameSocket from '@hooks/socket/useGameSocket';
 import useLocalStream from '@hooks/useLocalStream';
 import { useAppSelector } from '@redux/hooks';
@@ -10,13 +11,21 @@ import { getParam } from '@utils/common';
 
 import GlobalLoading from '@components/common/GlobalLoading';
 
+import { GameRoomBroadcastResponse } from '@customTypes/socketType';
+
+import EnterPrivateRoomModal from './EnterPrivateRoomModal';
+
 const RoomList = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const rooms = useAppSelector((state) => state.gameRoom);
+  const { broadcastedRooms } = useAppSelector((state) => state.gameRoom);
   const { isMediaLoading, isMediaSuccess } = useAppSelector((state) => state.userMedia);
+  const [selectedRoom, setSelectedRoom] = useState<GameRoomBroadcastResponse>();
   const { onBroadcastWholeRooms } = useGameSocket();
+  useAuthSocket();
   const { initLocalStream } = useLocalStream();
+
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     onBroadcastWholeRooms();
@@ -36,14 +45,30 @@ const RoomList = () => {
   }, [isMediaLoading, isMediaSuccess]);
 
   const handleJoinRoomClick = async (roomId: number) => {
+    const room = broadcastedRooms.find((room) => room.roomId === roomId);
+    if (!room) {
+      return;
+    }
+    setSelectedRoom(room);
+    const hasPassword = room?.isSecreteRoom;
+    if (hasPassword) {
+      setIsPasswordModalOpen(true);
+      return;
+    }
     navigate('/?roomId=' + roomId);
   };
 
   return (
     <>
       <RoomListLayout>
+        <EnterPrivateRoomModal
+          roomId={selectedRoom?.roomId}
+          roomTitle={selectedRoom?.roomTitle}
+          visible={isPasswordModalOpen}
+          onClose={() => setIsPasswordModalOpen(false)}
+        />
         <GlobalLoading isLoading={isMediaLoading && !isMediaSuccess} />
-        {rooms.broadcastedRooms
+        {broadcastedRooms
           .filter((room) => room.participants !== 0)
           .map((room) => (
             <RoomCard key={room.roomId}>
