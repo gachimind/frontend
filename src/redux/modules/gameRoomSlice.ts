@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import storage from '@utils/stroage';
 
 import { Chat, GameRoomDetail } from '@customTypes/gameRoomType';
 import { GameRoomBroadcastResponse } from '@customTypes/socketType';
@@ -8,12 +9,17 @@ interface InitialGameRoomStateType {
   room: GameRoomDetail | null;
   broadcastedRooms: GameRoomBroadcastResponse[];
   chatList: Chat[];
+  lastEnteredRoom?: {
+    roomId: number;
+    password?: number;
+  };
 }
 
 const initialState: InitialGameRoomStateType = {
   room: null,
   broadcastedRooms: [],
   chatList: [],
+  lastEnteredRoom: storage.getCurrentEnteredRoom(),
 };
 
 const gameRoomSlice = createSlice({
@@ -35,10 +41,16 @@ const gameRoomSlice = createSlice({
     clearChatList: (state) => {
       state.chatList = [];
     },
+    setLastEnteredRoom: (state, action) => {
+      const { roomId, password } = action.payload;
+      state.lastEnteredRoom = { roomId, password };
+      storage.setCurrentEnteredRoom(roomId, password);
+    },
   },
   extraReducers: {},
 });
 
-export const { joinGameRoom, updateAllRooms, updateRoom, addChat, clearChatList } = gameRoomSlice.actions;
+export const { joinGameRoom, updateAllRooms, updateRoom, addChat, clearChatList, setLastEnteredRoom } =
+  gameRoomSlice.actions;
 
 export default gameRoomSlice;

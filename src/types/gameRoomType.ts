@@ -1,7 +1,7 @@
 export interface GameRoomBaseInfo {
   roomTitle: string;
   maxCount: number;
-  isSecretRoom: boolean;
+  isSecreteRoom: boolean;
 }
 
 export interface GameRoomPlayDetailInfo {

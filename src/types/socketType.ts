@@ -51,3 +51,13 @@ export interface EventUserInfo {
   nickname: string;
   profileImg?: string;
 }
+
+/**
+ * on [error]
+ */
+
+export interface ErrorResponse {
+  errorMessage: string;
+  event: string;
+  status: number | string;
+}

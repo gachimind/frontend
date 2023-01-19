@@ -1,3 +1,5 @@
+import { stat } from 'fs';
+
 import userApi from '@apis/userApi';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
@@ -32,6 +34,11 @@ const userSlice = createSlice({
       state.isLogined = false;
       state.user = action.payload;
     },
+    logout: (state) => {
+      // TODO: 스토리지에 로그인상태와 jwt토큰을 저장하게 된다면 같이 지워줄 것
+      state.isLogined = false;
+      state.user = null;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(__getUserInfo.fulfilled, (state, action) => {
@@ -41,6 +48,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, logout } = userSlice.actions;
 
 export default userSlice;

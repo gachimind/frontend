@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-import useGameUpdateSocket from '@hooks/socket/useGameUpdateSocket';
+import useGameInitiationSocket from '@hooks/socket/useGameInitiationSocket';
 
 // TODO: 디자인을 반영해야 한다.
 const GameStart = ({ isGameReadyToStart }: { isGameReadyToStart: boolean }) => {
-  const { emitGameStart } = useGameUpdateSocket();
+  const { emitGameStart } = useGameInitiationSocket();
 
   return (
     <GameStartLayout>

@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { useAppSelector } from '@redux/hooks';
-
+import Toast from '@components/common/ToastProvider';
+import GameResultModal from '@components/game/GameResultModal';
+import EnterPrivateRoomModal from '@components/home/EnterPrivateRoomModal';
 import LoginModal from '@components/home/LoginModal';
 import ReportBugModal from '@components/home/ReportBugModal';
 

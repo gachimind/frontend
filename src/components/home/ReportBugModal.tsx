@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 import { BUG_OPTIONS } from '@constants/options';
 
+import Input from '@components/common/Input';
+import InputContainer from '@components/common/InputContainer';
 import Modal from '@components/common/Modal';
 import Selection from '@components/common/Selection';
 
@@ -9,18 +11,16 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
   return (
     <Modal visible={visible} onClose={onClose} title="REPORT" width={700}>
       <ReportBugModalLayout>
-        <InputBox>
-          <span>제목</span>
-          <input placeholder="제목이 들어간당" />
-        </InputBox>
-        <InputBox>
-          <span>카테고리</span>
+        <InputContainer label="제목">
+          <Input placeholder="제목이 들어간당" />
+        </InputContainer>
+        <InputContainer label="카테고리">
           <Selection options={BUG_OPTIONS} width={560} />
-        </InputBox>
-        <InputBox>
-          <span>내용</span>
-          <input className="contents" placeholder="내용이 들어간당" />
-        </InputBox>
+        </InputContainer>
+        <InputContainer label="내용">
+          {/* FIXME: textarea로 바꿀 것 */}
+          <Input style={{ height: '200px' }} placeholder="내용이 들어간당" />
+        </InputContainer>
         <ButtonBox>
           <button onClick={onClose}>취소하기</button>
           <button>제보하기</button>
@@ -38,29 +38,6 @@ const ReportBugModalLayout = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`;
-
-const InputBox = styled.div`
-  font-family: inherit;
-  display: flex;
-  flex-direction: column;
-  span {
-    font-family: inherit;
-    font-size: 24px;
-    margin-bottom: 8px;
-  }
-  input {
-    font-family: inherit;
-    font-size: 24px;
-    background-color: ${(props) => props.theme.colors.ivory1};
-    height: 56px;
-    ::placeholder {
-      padding-left: 20px;
-    }
-  }
-  .contents {
-    height: 200px;
-  }
 `;
 
 const ButtonBox = styled.div`
