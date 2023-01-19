@@ -1,6 +1,8 @@
 import { NavigateFunction } from 'react-router-dom';
 
 import { PUBLISH, SUBSCRIBE } from '@constants/socket';
+import { useAppDispatch } from '@redux/hooks';
+import { setLastEnteredRoom } from '@redux/modules/gameRoomSlice';
 
 import { CreateRoomRequest, EnterRoomRequest } from '@customTypes/socketType';
 
@@ -8,7 +10,7 @@ import socketInstance from './socketInstance';
 
 interface UseGameSocketType {
   onBroadcastWholeRooms: () => void;
-  onShowCreatedRoomId: (navigate: NavigateFunction, path: string) => void;
+  onShowCreatedRoomId: (navigate: NavigateFunction, path: string, password: number) => void;
   onJoinRoom: () => void;
   emitUserLeaveRoom: () => void;
   emitJoinRoom: ({ roomId, roomPassword }: EnterRoomRequest) => void;
@@ -17,14 +19,21 @@ interface UseGameSocketType {
 
 const useGameSocket = (): UseGameSocketType => {
   const { on, emit } = socketInstance;
+  const dispatch = useAppDispatch();
 
   const onBroadcastWholeRooms = () => {
     //
   };
 
-  const onShowCreatedRoomId = (navigate: NavigateFunction, path: string) => {
+  const onShowCreatedRoomId = (navigate: NavigateFunction, path: string, password?: number) => {
     on(SUBSCRIBE.showCreatedRoomIdForOwner, async ({ data }: { data: { roomId: string } }) => {
       console.log('[on] create-room');
+      dispatch(
+        setLastEnteredRoom({
+          roomId: data.roomId,
+          password: password,
+        }),
+      );
       navigate(path + data.roomId);
     });
   };

@@ -19,11 +19,11 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
   const [maxCount, setMaxCount] = useState<number>(2);
   const { onShowCreatedRoomId, emitCreateRoom } = useGameSocket();
   const navigate = useNavigate();
+
   const handleCreateGameButtonClick = () => {
     if (!roomTitle || maxCount < 2 || maxCount > 6) {
       return;
     }
-
     const createRoom: CreateRoomRequest = {
       roomTitle,
       maxCount,
@@ -36,7 +36,8 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
     };
     emitCreateRoom(createRoom);
     onClose();
-    onShowCreatedRoomId(navigate, '/?roomId=');
+    // TODO: 비밀번호 input 구현 후 적용
+    onShowCreatedRoomId(navigate, '/?roomId=', 1234);
   };
   return (
     <Modal visible={visible} onClose={onClose} title="MAKE A ROOM">
