@@ -8,18 +8,18 @@ interface InitialUserStateType {
   isLogined: boolean;
 }
 
-// FIXME: 소켓 통신 시 인증 상태 가정을 위해 로그인 된 상태로 초기 설정하였으며 로그인 상태 기능 구현 시 null로 처리되어야 한다.
 const initialState: InitialUserStateType = {
   user: null,
   isLogined: false,
 };
 
-export const __getUserInfo = createAsyncThunk('getUserInfo', async () => {
+// FIXME: 실제 서버 연결 시 response 구조분해할당 하지 않기
+export const __getUserInfo = createAsyncThunk('getUserInfo', async (_, thunkAPI) => {
   try {
-    const userInfo = await userApi.getUserInfo();
-    return userInfo;
+    const { OAuth, nickname, profileImg, userId } = await userApi.getUserInfo();
+    return thunkAPI.fulfillWithValue({ OAuth, nickname, profileImg, userId });
   } catch (error) {
-    return error;
+    return thunkAPI.rejectWithValue(error);
   }
 });
 
@@ -29,11 +29,16 @@ const userSlice = createSlice({
   reducers: {
     // FIXME: 인증 구현 후 지울 것
     setUser: (state, action) => {
-      state.isLogined = true;
+      state.isLogined = false;
       state.user = action.payload;
     },
   },
-  extraReducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(__getUserInfo.fulfilled, (state, action) => {
+      state.isLogined = true;
+      state.user = action.payload;
+    });
+  },
 });
 
 export const { setUser } = userSlice.actions;
