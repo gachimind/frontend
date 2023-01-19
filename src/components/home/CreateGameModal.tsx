@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import { PARTICIPANTS_OPTIONS, ROUND_OPTIONS } from '@constants/options';
 import useGameSocket from '@hooks/socket/useGameSocket';
 
+import Input from '@components/common/Input';
+import InputContainer from '@components/common/InputContainer';
 import Modal from '@components/common/Modal';
 import Selection from '@components/common/Selection';
 
@@ -25,11 +27,12 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
     const createRoom: CreateRoomRequest = {
       roomTitle,
       maxCount,
-      isSecretRoom: false,
       discussionTime: 60,
       readyTime: 30,
       speechTime: 30,
       round: 1,
+      roomPassword: 1234,
+      isSecreteRoom: true,
     };
     emitCreateRoom(createRoom);
     onClose();
@@ -38,29 +41,18 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
   return (
     <Modal visible={visible} onClose={onClose} title="MAKE A ROOM">
       <CreateGameModalLayout>
-        <InputBox>
-          <span>방제</span>
-          <input type="text" value={roomTitle} onChange={(e) => setRoomTitle(e.target.value)} placeholder="방제목" />
-        </InputBox>
-        <InputBox>
-          <span>인원</span>
+        <InputContainer label="방제목">
+          <Input type="text" value={roomTitle} onChange={(e) => setRoomTitle(e.target.value)} placeholder="방제목" />
+        </InputContainer>
+        <InputContainer label="인원">
           <Selection options={PARTICIPANTS_OPTIONS} />
-          {/* <input
-            type="number"
-            value={maxCount}
-            onChange={(e) => setMaxCount(parseInt(e.target.value))}
-            placeholder="최대인원"
-          /> */}
-        </InputBox>
-        <InputBox>
-          <span>라운드</span>
+        </InputContainer>
+        <InputContainer label="라운드">
           <Selection options={ROUND_OPTIONS} />
-          {/* <input type="number" placeholder="라운드가 들어간당" /> */}
-        </InputBox>
-        <InputBox>
-          <span>카운트</span>
-          <input placeholder="카운트가 들어간당" />
-        </InputBox>
+        </InputContainer>
+        <InputContainer label="카운트">
+          <Input placeholder="카운트가 들어간당" />
+        </InputContainer>
         <CreateRoomButton onClick={handleCreateGameButtonClick}>생성하기</CreateRoomButton>
       </CreateGameModalLayout>
     </Modal>
@@ -75,26 +67,6 @@ const CreateGameModalLayout = styled.div`
   gap: 24px;
   display: flex;
   flex-direction: column;
-`;
-
-const InputBox = styled.div`
-  font-family: inherit;
-  display: flex;
-  flex-direction: column;
-  span {
-    font-family: inherit;
-    font-size: 24px;
-    margin-bottom: 8px;
-  }
-  input {
-    font-family: inherit;
-    font-size: 24px;
-    background-color: ${(props) => props.theme.colors.ivory1};
-    height: 56px;
-    ::placeholder {
-      padding-left: 20px;
-    }
-  }
 `;
 
 const CreateRoomButton = styled.button`
