@@ -3,10 +3,9 @@ import styled from 'styled-components';
 import Modal from '@components/common/Modal';
 
 const LoginModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
-  // const KAKAO_AUTH_URL = process.env.REACT_APP_KAKAO_AUTH_URL;
-  const KAKAO_AUTH_URL = `http://localhost:3001/api/users/login/kakao`;
-  const GOOGLE_AUTH_URL = `http://localhost:3001/api/users/login/google`;
-  const GITHUB_AUTH_URL = `http://localhost:3001/api/users/login/github`;
+  const KAKAO_AUTH_URL = process.env.REACT_APP_API_ENDPOINT + '/api/users/login/kakao';
+  const GOOGLE_AUTH_URL = process.env.REACT_APP_API_ENDPOINT + '/api/users/login/google';
+  const GITHUB_AUTH_URL = process.env.REACT_APP_API_ENDPOINT + '/api/users/login/github';
 
   const handleLoginKakaoButtonClick = () => {
     KAKAO_AUTH_URL && (window.location.href = KAKAO_AUTH_URL);
