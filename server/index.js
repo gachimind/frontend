@@ -34,7 +34,10 @@ server.get('/api/users/login/github', (req, res) => {
 // 내 프로필 조회
 server.get('/me', (req, res) => {
   const authenticatedUserId = validAuthentication(req, res);
-  return res.jsonp(router.db.__wrapped__.me.find((user) => user.userId == authenticatedUserId));
+  const result = {
+    data: router.db.__wrapped__.me.find((user) => user.userId == authenticatedUserId),
+  };
+  return res.jsonp(result);
 });
 
 server.use(router);
