@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 
-import { useAuthSocket } from '@hooks/socket/useAuthSocket';
+import useErrorSocket from '@hooks/socket/useErrorSocket';
 import { useAppDispatch } from '@redux/hooks';
+import { logout } from '@redux/modules/userSlice';
 import { __getUserInfo } from '@redux/modules/userSlice';
 
 import RoomList from '@components/home/RoomList';
@@ -12,12 +13,17 @@ import MainTemplate from '@components/layout/MainTemplate';
 const Main = () => {
   const dispatch = useAppDispatch();
 
+  const { onError } = useErrorSocket();
+
+  useEffect(() => {
+    onError([{ target: 'status', value: 403, callback: () => dispatch(logout()) }]);
+  }, []);
+
   useEffect(() => {
     sessionStorage.setItem('accessToken', 'token1');
     dispatch(__getUserInfo());
   }, []);
 
-  useAuthSocket();
   return (
     <MainTemplate>
       <ContentContainer title="SCORE" lights={true}>
