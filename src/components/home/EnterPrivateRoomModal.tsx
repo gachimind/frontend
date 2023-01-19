@@ -1,21 +1,65 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
+
+import { useAppDispatch } from '@redux/hooks';
+import { setLastEnteredRoom } from '@redux/modules/gameRoomSlice';
 
 import Input from '@components/common/Input';
 import InputContainer from '@components/common/InputContainer';
 import Modal from '@components/common/Modal';
 
-const EnterPrivateRoomModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
+interface EnterPrivateRoomModalProps {
+  visible: boolean;
+  onClose: () => void;
+  roomId?: number;
+  roomTitle?: string;
+}
+
+const EnterPrivateRoomModal = ({ visible, onClose, roomId, roomTitle }: EnterPrivateRoomModalProps) => {
+  const [password, setPassword] = useState<string>('');
+  const [submitDisabled, setSubmitDisabled] = useState<boolean>(true);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const regex = /^(\d{4})$/;
+    if (regex.test(password)) {
+      setSubmitDisabled(false);
+      return;
+    }
+    setSubmitDisabled(true);
+  }, [password]);
+
+  const handlePasswordWithEnterClick = () => {
+    dispatch(
+      setLastEnteredRoom({
+        roomId,
+        password: parseInt(password, 10),
+      }),
+    );
+    navigate('/?roomId=' + roomId);
+  };
+
   return (
     <Modal visible={visible} onClose={onClose} title="ENTER THE ROOM">
       <EnterPrivateRoomModalLayout>
         <RoomInfoBox>
           <span>방 제목</span>
-          <div>방제</div>
+          <div>{roomTitle}</div>
         </RoomInfoBox>
         <InputContainer label="비밀번호">
-          <Input placeholder="비밀번호가 들어간당" type="password" />
+          <Input
+            placeholder="비밀번호가 들어간당"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </InputContainer>
-        <EnterRoomButton>입장하기</EnterRoomButton>
+        <EnterRoomButton onClick={handlePasswordWithEnterClick} isDisabled={submitDisabled}>
+          입장하기
+        </EnterRoomButton>
       </EnterPrivateRoomModalLayout>
     </Modal>
   );
@@ -51,7 +95,7 @@ const RoomInfoBox = styled.div`
   }
 `;
 
-const EnterRoomButton = styled.button`
+const EnterRoomButton = styled.button<{ isDisabled: boolean }>`
   font-family: inherit;
   font-size: 24px;
   color: ${(props) => props.theme.colors.ivory1};
@@ -59,6 +103,8 @@ const EnterRoomButton = styled.button`
   height: 56px;
   margin-top: 26px;
   margin-bottom: 56px;
+  opacity: ${(props) => (props.isDisabled ? 0.5 : 1)};
+  cursor: ${(props) => !props.isDisabled && 'pointer'};
 `;
 
 export default EnterPrivateRoomModal;

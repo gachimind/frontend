@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { useAuthSocket } from '@hooks/socket/useAuthSocket';
+import useErrorSocket from '@hooks/socket/useErrorSocket';
 import useGameSocket from '@hooks/socket/useGameSocket';
 import useGameUpdateSocket from '@hooks/socket/useGameUpdateSocket';
 import useLocalStream from '@hooks/useLocalStream';
@@ -21,9 +22,11 @@ const Room = () => {
   const navigate = useNavigate();
   const { authorized } = useAuthSocket();
   const { userStreamRef, isMediaSuccess } = useAppSelector((state) => state.userMedia);
+  const { lastEnteredRoom } = useAppSelector((state) => state.gameRoom);
   const { destroyLocalStream } = useLocalStream();
   const { onAnnounceRoomUpdate, offAnnounceRoomUpdate } = useGameUpdateSocket();
   const { emitUserLeaveRoom, emitJoinRoom, onJoinRoom } = useGameSocket();
+  const { onError } = useErrorSocket();
 
   useEffect(() => {
     if (!isMediaSuccess) {
@@ -48,7 +51,8 @@ const Room = () => {
     onAnnounceRoomUpdate();
     if (authorized && id) {
       const intId = parseInt(id, 10);
-      !Number.isNaN(intId) && emitJoinRoom({ roomId: intId });
+      !Number.isNaN(intId) && emitJoinRoom({ roomId: intId, roomPassword: lastEnteredRoom?.password });
+      onError([{ target: 'event', value: 'enter-room', callback: () => navigate('/', { replace: true }) }]);
       onJoinRoom();
     }
   }, [id, authorized]);
