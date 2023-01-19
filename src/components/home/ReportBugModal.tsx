@@ -71,6 +71,7 @@ const ButtonBox = styled.div`
   grid-template-columns: 1fr 1fr;
   margin-top: 20px;
   button {
+    cursor: pointer;
     font-family: inherit;
     font-size: 24px;
     color: ${(props) => props.theme.colors.ivory1};
