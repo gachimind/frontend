@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
-
-import { PUBLISH, SUBSCRIBE } from '@constants/socket';
+import { SUBSCRIBE } from '@constants/socket';
 import useWebRTC from '@hooks/useWebRTC';
 import { useAppDispatch } from '@redux/hooks';
 import { addChat, updateRoom } from '@redux/modules/gameRoomSlice';
@@ -20,7 +18,7 @@ interface InOutEventMessageType {
 const useGameUpdateSocket = () => {
   const dispatch = useAppDispatch();
   const { createOffers } = useWebRTC();
-  const { on, off, emit } = socketInstance;
+  const { on, off } = socketInstance;
 
   function isInOutEvent(event: string) {
     return event === 'enter' || event === 'leave' || event === 'leave-force';
@@ -72,19 +70,11 @@ const useGameUpdateSocket = () => {
     );
   };
 
-  const emitGameReady = () => {
-    emit(PUBLISH.readyGame);
-  };
-
-  const emitGameStart = () => {
-    emit(PUBLISH.startGame);
-  };
-
   const offAnnounceRoomUpdate = () => {
     off(SUBSCRIBE.announceRenewedRoomForRoomMembers);
   };
 
-  return { onAnnounceRoomUpdate, emitGameReady, emitGameStart, offAnnounceRoomUpdate };
+  return { onAnnounceRoomUpdate, offAnnounceRoomUpdate };
 };
 
 export default useGameUpdateSocket;
