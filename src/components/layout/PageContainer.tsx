@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
+import { Cookies } from 'react-cookie';
 import styled from 'styled-components';
 
+import { useAppDispatch } from '@redux/hooks';
+import { __getUserInfo } from '@redux/modules/userSlice';
+
 const PageContainer = ({ children }: { children: React.ReactNode }) => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const cookies = new Cookies();
+
+    const getCookie = (name: string) => {
+      return cookies.get(name);
+    };
+
+    getCookie('jwt') && sessionStorage.setItem('accessToken', getCookie('jwt'));
+
+    sessionStorage.getItem('accessToken') && dispatch(__getUserInfo());
+  }, []);
+
   return (
     <ContainerLayout>
       <ContainerInnerBox>{children}</ContainerInnerBox>
