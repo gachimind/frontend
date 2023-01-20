@@ -6,6 +6,7 @@ export const PUBLISH = Object.freeze({
   sendChat: 'send-chat', // 채팅 보내기 요청을 발행한다.
   startGame: 'start',
   readyGame: 'ready',
+  validRoomPassword: 'valid-room-password',
 
   // webRTC
   webRTCIce: 'webrtc-ice',
@@ -23,6 +24,7 @@ export const SUBSCRIBE = Object.freeze({
   receiveChat: 'receive-chat', // 유저의 방에서 발생된 채팅을 응답한다.
   login: 'log-in', // 로그인 성공 응답 메시지
   joinGame: 'enter-room', // 방 입장 시도에 대한 서버의 응답을 받는다.
+  validRoomPassword: 'valid-room-password',
 
   // webRTC
   webRTCIce: 'webrtc-ice',

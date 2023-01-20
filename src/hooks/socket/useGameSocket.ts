@@ -9,21 +9,18 @@ import { CreateRoomRequest, EnterRoomRequest } from '@customTypes/socketType';
 import socketInstance from './socketInstance';
 
 interface UseGameSocketType {
-  onBroadcastWholeRooms: () => void;
   onShowCreatedRoomId: (navigate: NavigateFunction, path: string, password: number) => void;
   onJoinRoom: () => void;
+  onValidRoomPassword: (callback: () => void) => void;
   emitUserLeaveRoom: () => void;
   emitJoinRoom: ({ roomId, roomPassword }: EnterRoomRequest) => void;
   emitCreateRoom: (createRoom: CreateRoomRequest) => void;
+  emitValidRoomPassword: (roomId: number, roomPassword: number) => void;
 }
 
 const useGameSocket = (): UseGameSocketType => {
   const { on, emit } = socketInstance;
   const dispatch = useAppDispatch();
-
-  const onBroadcastWholeRooms = () => {
-    //
-  };
 
   const onShowCreatedRoomId = (navigate: NavigateFunction, path: string, password?: number) => {
     on(SUBSCRIBE.showCreatedRoomIdForOwner, async ({ data }: { data: { roomId: string } }) => {
@@ -35,6 +32,12 @@ const useGameSocket = (): UseGameSocketType => {
         }),
       );
       navigate(path + data.roomId);
+    });
+  };
+
+  const onValidRoomPassword = (callback: () => void) => {
+    on(SUBSCRIBE.validRoomPassword, () => {
+      callback();
     });
   };
 
@@ -58,13 +61,18 @@ const useGameSocket = (): UseGameSocketType => {
     emit(PUBLISH.createGame, { data: createRoom });
   };
 
+  const emitValidRoomPassword = (roomId: number, password: number) => {
+    emit(PUBLISH.validRoomPassword, { data: { roomId, password } });
+  };
+
   return {
-    onBroadcastWholeRooms,
     onShowCreatedRoomId,
     onJoinRoom,
+    onValidRoomPassword,
     emitUserLeaveRoom,
     emitJoinRoom,
     emitCreateRoom,
+    emitValidRoomPassword,
   };
 };
 
