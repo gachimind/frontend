@@ -68,7 +68,7 @@ const useWebRTC = () => {
         offerToReceiveAudio: localDevice.audio,
         offerToReceiveVideo: localDevice.video,
       });
-      await peerConnection.setLocalDescription(new RTCSessionDescription(localSessionDescription));
+      peerConnection.setLocalDescription(new RTCSessionDescription(localSessionDescription));
       emit(PUBLISH.webRTCOffer, {
         data: {
           sessionDescription: localSessionDescription,
@@ -96,7 +96,7 @@ const useWebRTC = () => {
         try {
           await peerconnection.setRemoteDescription(new RTCSessionDescription(sessionDescription));
           const localSessionDescription = await peerconnection.createAnswer();
-          await peerconnection.setLocalDescription(new RTCSessionDescription(localSessionDescription));
+          peerconnection.setLocalDescription(new RTCSessionDescription(localSessionDescription));
           emit(PUBLISH.webRTCAnswer, {
             data: {
               sessionDescription: localSessionDescription,
