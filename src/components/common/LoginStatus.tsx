@@ -7,7 +7,7 @@ const LoginStatus = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(__getUserInfo());
+    sessionStorage.getItem('accessToken') && dispatch(__getUserInfo());
   }, []);
   return <></>;
 };
