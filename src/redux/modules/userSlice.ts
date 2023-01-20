@@ -33,9 +33,9 @@ const userSlice = createSlice({
       state.user = action.payload;
     },
     logout: (state) => {
-      // TODO: 스토리지에 로그인상태와 jwt토큰을 저장하게 된다면 같이 지워줄 것
       state.isLogined = false;
       state.user = null;
+      sessionStorage.clear();
     },
   },
   extraReducers: (builder) => {

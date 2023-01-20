@@ -47,18 +47,10 @@ const useAuthSocketImpl = () => {
   const dispatch = useDispatch();
   const { emit, on } = socketInstance;
 
-  // FIXME: 인증 구현 후 지울 것
-  useEffect(() => {
-    if (!isLogined) {
-      const token = localStorage.getItem('accessToken') as 'token1' | 'token2' | 'token3';
-      dispatch(setUser(fakeDBUserTable[authentication[token] - 1]));
-    }
-  }, [isLogined]);
-
   useEffect(() => {
     if (isLogined) {
       if (!authorized) {
-        emit(PUBLISH.login, { data: { authorization: localStorage.getItem('accessToken') } });
+        emit(PUBLISH.login, { data: { authorization: sessionStorage.getItem('accessToken') } });
         setAuthorized(true);
       }
     }
