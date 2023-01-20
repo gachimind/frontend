@@ -135,10 +135,12 @@ const useWebRTC = () => {
         if (!ice) {
           console.log(ice);
         }
-        setTimeout(() => {
+        try {
           const rtcIceCandidate = new RTCIceCandidate(ice);
-          peerconnection.addIceCandidate(rtcIceCandidate);
-        }, 200);
+          await peerconnection.addIceCandidate(rtcIceCandidate);
+        } catch (error) {
+          console.log('no candidate');
+        }
       },
     );
 
