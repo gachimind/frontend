@@ -18,6 +18,7 @@ import { CreateRoomRequest } from '@customTypes/socketType';
 const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
   const [roomTitle, setRoomTitle] = useState<string>('');
   const [maxCount, setMaxCount] = useState<number>(2);
+  const [time, setTime] = useState<string>('30:30:60');
   const { onShowCreatedRoomId, emitCreateRoom } = useGameSocket();
   const navigate = useNavigate();
 
@@ -28,9 +29,9 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
     const createRoom: CreateRoomRequest = {
       roomTitle,
       maxCount,
-      discussionTime: 60,
-      readyTime: 30,
-      speechTime: 30,
+      discussionTime: Number(time.split(':')[0]),
+      readyTime: Number(time.split(':')[1]),
+      speechTime: Number(time.split(':')[2]),
       round: 1,
       roomPassword: 1234,
       isSecretRoom: true,
@@ -59,7 +60,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
           <Selection options={PARTICIPANTS_OPTIONS} />
         </InputContainer>
         <InputContainer label="카운트">
-          <Input type="number" value={maxCount} onChange={(e) => setMaxCount(parseInt(e.target.value))} />
+          <Input type="text" value={time} onChange={(e) => setTime(e.target.value)} />
         </InputContainer>
         <CreateRoomButton onClick={handleCreateGameButtonClick}>생성하기</CreateRoomButton>
       </CreateGameModalLayout>
