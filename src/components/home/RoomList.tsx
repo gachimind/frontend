@@ -56,12 +56,13 @@ const RoomList = () => {
   return (
     <>
       <RoomListLayout>
-        {isPasswordModalOpen && (
+        {isPasswordModalOpen && selectedRoom && (
           <EnterPrivateRoomModal
-            roomId={selectedRoom?.roomId}
-            roomTitle={selectedRoom?.roomTitle}
+            roomId={selectedRoom.roomId}
+            roomTitle={selectedRoom.roomTitle}
             visible={isPasswordModalOpen}
             onClose={() => setIsPasswordModalOpen(false)}
+            successHandler={() => navigate('/?roomId=' + selectedRoom.roomId)}
           />
         )}
         <GlobalLoading isLoading={isMediaLoading && !isMediaSuccess} />

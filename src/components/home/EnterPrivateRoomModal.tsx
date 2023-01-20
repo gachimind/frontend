@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -18,15 +17,15 @@ interface EnterPrivateRoomModalProps {
   onClose: () => void;
   roomId?: number;
   roomTitle?: string;
+  successHandler: () => void;
 }
 
-const EnterPrivateRoomModal = ({ visible, onClose, roomId, roomTitle }: EnterPrivateRoomModalProps) => {
+const EnterPrivateRoomModal = ({ visible, onClose, roomId, roomTitle, successHandler }: EnterPrivateRoomModalProps) => {
   const [password, setPassword] = useState<string>('');
   const [isPasswordConfirmed, setIsPasswordConfirmed] = useState<boolean>(false);
   const [submitDisabled, setSubmitDisabled] = useState<boolean>(true);
   const [isPasswordSubmitted, setIsPasswordSubmitted] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const { onValidRoomPassword, emitValidRoomPassword } = useGameSocket();
   const { onError, offError } = useErrorSocket();
   const debouncedPasswordSubmitted = useDebounce(isPasswordSubmitted, 1000);
@@ -71,7 +70,7 @@ const EnterPrivateRoomModal = ({ visible, onClose, roomId, roomTitle }: EnterPri
           password: parseInt(password, 10),
         }),
       );
-      navigate('/?roomId=' + roomId);
+      successHandler();
     }
   }, [isPasswordConfirmed, password]);
 
