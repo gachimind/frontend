@@ -28,8 +28,8 @@ const ContainerLayout = styled.div`
 const ContainerInnerBox = styled.div`
   width: 1760px;
   height: 928px;
-  border: ${(props) => props.theme.borders.template};
-  box-shadow: ${(props) => props.theme.boxShadows.boxShadow};
+  border: ${(props) => props.theme.borders.thickIvory};
+  box-shadow: ${(props) => props.theme.boxShadows.boxShadow1};
   display: flex;
   flex-direction: column;
   justify-content: space-between;

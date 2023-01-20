@@ -1,3 +1,5 @@
+import './app.css';
+
 import { Provider } from 'react-redux';
 import { SingletonHooksContainer } from 'react-singleton-hook';
 import { ThemeProvider } from 'styled-components';

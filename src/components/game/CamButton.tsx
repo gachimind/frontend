@@ -27,6 +27,7 @@ const CamButton = () => {
 
 // TODO: CAM 커짐/켜짐 아이콘 바꾸기
 const CamButtonLayout = styled.button`
+  cursor: pointer;
   background-color: transparent;
   display: flex;
   justify-content: center;

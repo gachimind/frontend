@@ -1,15 +1,16 @@
 import styled from 'styled-components';
 
+import Input from '@components/common/Input';
+import InputContainer from '@components/common/InputContainer';
 import Modal from '@components/common/Modal';
 
 const EditProfileModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
   return (
     <Modal visible={visible} onClose={onClose} title="EDIT NICKNAME">
       <EditProfileModalLayout>
-        <InputBox>
-          <span>닉네임 변경</span>
-          <input placeholder="닉네임이 들어간당" />
-        </InputBox>
+        <InputContainer label="닉네임 변경">
+          <Input type="text" />
+        </InputContainer>
         <EditProfileButton>제보하기..?</EditProfileButton>
       </EditProfileModalLayout>
     </Modal>
@@ -26,33 +27,18 @@ const EditProfileModalLayout = styled.div`
   justify-content: center;
 `;
 
-const InputBox = styled.div`
-  font-family: inherit;
-  display: flex;
-  flex-direction: column;
-  span {
-    font-family: inherit;
-    font-size: 24px;
-    margin-bottom: 8px;
-  }
-  input {
-    font-family: inherit;
-    font-size: 24px;
-    background-color: ${(props) => props.theme.colors.ivory1};
-    height: 56px;
-    ::placeholder {
-      padding-left: 20px;
-    }
-  }
-`;
-
 const EditProfileButton = styled.button`
   cursor: pointer;
   font-family: inherit;
   font-size: 24px;
   color: ${(props) => props.theme.colors.ivory1};
-  background-color: ${(props) => props.theme.colors.darkGrey1};
+  background-color: ${(props) => props.theme.colors.darkGrey2};
   height: 56px;
+
+  border-top: ${(props) => props.theme.borders.normalwhite};
+  border-right: ${(props) => props.theme.borders.normalblack};
+  border-bottom: ${(props) => props.theme.borders.normalblack};
+  border-left: ${(props) => props.theme.borders.normalwhite};
 `;
 
 export default EditProfileModal;

@@ -43,13 +43,9 @@ const Modal = ({ visible, title, width, children, onClose }: ModalProps) => {
   );
 };
 
-// TODO: 임시 스타일링으로 추후 변경되어야 한다.
 const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
   display: ${({ visible }) => (visible ? 'block' : 'none')};
   position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   transform: scale(${(props) => props.theme.layout.scale});
   left: 0;
   top: 0;
@@ -59,14 +55,18 @@ const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
   min-height: 100vh;
   padding-right: 15vw;
   padding-left: 15vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ModalBox = styled.div<{ width?: number }>`
-  background-color: white;
-  box-shadow: ${(props) => props.theme.boxShadows.boxShadow};
+  position: relative;
+  background-color: ${(props) => props.theme.colors.darkGrey2};
+  box-shadow: ${(props) => props.theme.boxShadows.boxShadow2};
+  border: ${(props) => props.theme.borders.normalIvory};
   width: ${(props) => (props.width ? props.width : 560)}px;
   height: fit-content;
-  position: relative;
   z-index: 20;
   margin: 0 auto;
 `;
@@ -74,9 +74,9 @@ const ModalBox = styled.div<{ width?: number }>`
 const ModalHeader = styled.div`
   position: relative;
   font-size: 24px;
-  color: ${(props) => props.theme.colors.ivory1};
+  color: ${(props) => props.theme.colors.black1};
   height: 48px;
-  background-color: ${(props) => props.theme.colors.darkGrey1};
+  background-color: ${(props) => props.theme.colors.ivory1};
   display: flex;
   justify-content: center;
   align-items: center;

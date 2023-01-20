@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
+import lockIcon from '@assets/svg_lockIcon.svg';
 import { useAppDispatch } from '@redux/hooks';
 import { setLastEnteredRoom } from '@redux/modules/gameRoomSlice';
 
@@ -45,10 +46,12 @@ const EnterPrivateRoomModal = ({ visible, onClose, roomId, roomTitle }: EnterPri
   return (
     <Modal visible={visible} onClose={onClose} title="ENTER THE ROOM">
       <EnterPrivateRoomModalLayout>
-        <RoomInfoBox>
-          <span>방 제목</span>
-          <div>{roomTitle}</div>
-        </RoomInfoBox>
+        <InputContainer label="방제">
+          <RoomTitle>
+            {roomTitle}
+            <img src={lockIcon} />
+          </RoomTitle>
+        </InputContainer>
         <InputContainer label="비밀번호">
           <Input
             placeholder="비밀번호가 들어간당"
@@ -65,46 +68,50 @@ const EnterPrivateRoomModal = ({ visible, onClose, roomId, roomTitle }: EnterPri
   );
 };
 
-// TODO: 임시 색상으로 추후 변경되어야 한다.
 const EnterPrivateRoomModalLayout = styled.div`
   font-family: ${(props) => props.theme.font.korean};
-  padding: 40px 70px;
+  padding: 56px 80px 64px 80px;
   gap: 28px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 `;
 
-const RoomInfoBox = styled.div`
+const RoomTitle = styled.div`
   font-family: inherit;
+  font-size: 24px;
+  color: ${(props) => props.theme.colors.ivory2};
+  background-color: ${(props) => props.theme.colors.darkGrey2};
+  width: 328px;
+  height: 56px;
   display: flex;
-  flex-direction: column;
-  span {
-    font-family: inherit;
-    font-size: 24px;
-    margin-bottom: 8px;
-  }
-  div {
-    font-family: inherit;
-    font-size: 24px;
-    background-color: ${(props) => props.theme.colors.ivory1};
-    height: 56px;
-    padding-left: 20px;
-    display: flex;
-    align-items: center;
+
+  border-top: ${(props) => props.theme.borders.normalblack};
+  border-right: ${(props) => props.theme.borders.normalwhite};
+  border-bottom: ${(props) => props.theme.borders.normalwhite};
+  border-left: ${(props) => props.theme.borders.normalblack};
+
+  img {
+    position: absolute;
+    right: 78px;
+    margin-top: -2px;
   }
 `;
 
 const EnterRoomButton = styled.button<{ isDisabled: boolean }>`
+  cursor: ${(props) => !props.isDisabled && 'pointer'};
   font-family: inherit;
   font-size: 24px;
   color: ${(props) => props.theme.colors.ivory1};
-  background-color: ${(props) => props.theme.colors.darkGrey1};
-  height: 56px;
-  margin-top: 26px;
-  margin-bottom: 56px;
+  background-color: ${(props) => props.theme.colors.darkGrey2};
   opacity: ${(props) => (props.isDisabled ? 0.5 : 1)};
-  cursor: ${(props) => !props.isDisabled && 'pointer'};
+  height: 72px;
+  margin-top: 20px;
+
+  border-top: ${(props) => props.theme.borders.normalwhite};
+  border-right: ${(props) => props.theme.borders.normalblack};
+  border-bottom: ${(props) => props.theme.borders.normalblack};
+  border-left: ${(props) => props.theme.borders.normalwhite};
 `;
 
 export default EnterPrivateRoomModal;

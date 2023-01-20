@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router';
 
 import styled from 'styled-components';
 
-import { PARTICIPANTS_OPTIONS, ROUND_OPTIONS } from '@constants/options';
+import lockIcon from '@assets/svg_lockIcon.svg';
+import { PARTICIPANTS_OPTIONS } from '@constants/options';
 import useGameSocket from '@hooks/socket/useGameSocket';
 
 import Input from '@components/common/Input';
@@ -42,17 +43,23 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
   return (
     <Modal visible={visible} onClose={onClose} title="MAKE A ROOM">
       <CreateGameModalLayout>
-        <InputContainer label="방제목">
-          <Input type="text" value={roomTitle} onChange={(e) => setRoomTitle(e.target.value)} placeholder="방제목" />
+        <InputContainer label="방제">
+          <Input
+            style={{ width: '340px' }}
+            type="text"
+            value={roomTitle}
+            onChange={(e) => setRoomTitle(e.target.value)}
+          />
+          <img style={{ position: 'absolute', right: '68px', marginTop: '34px' }} src={lockIcon} />
+        </InputContainer>
+        <InputContainer label="비밀번호">
+          <Input type="text" />
         </InputContainer>
         <InputContainer label="인원">
           <Selection options={PARTICIPANTS_OPTIONS} />
         </InputContainer>
-        <InputContainer label="라운드">
-          <Selection options={ROUND_OPTIONS} />
-        </InputContainer>
         <InputContainer label="카운트">
-          <Input placeholder="카운트가 들어간당" />
+          <Input />
         </InputContainer>
         <CreateRoomButton onClick={handleCreateGameButtonClick}>생성하기</CreateRoomButton>
       </CreateGameModalLayout>
@@ -60,9 +67,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
   );
 };
 
-// TODO: 임시 색상으로 추후 변경되어야 한다.
 const CreateGameModalLayout = styled.div`
-  background-color: white;
   font-family: ${(props) => props.theme.font.korean};
   padding: 40px 70px 48px 70px;
   gap: 24px;
@@ -75,9 +80,14 @@ const CreateRoomButton = styled.button`
   font-family: inherit;
   font-size: 24px;
   color: ${(props) => props.theme.colors.ivory1};
-  background-color: ${(props) => props.theme.colors.darkGrey1};
-  height: 56px;
-  margin-top: 60px;
+  background-color: ${(props) => props.theme.colors.darkGrey2};
+  height: 72px;
+  margin-top: 20px;
+
+  border-top: ${(props) => props.theme.borders.normalwhite};
+  border-right: ${(props) => props.theme.borders.normalblack};
+  border-bottom: ${(props) => props.theme.borders.normalblack};
+  border-left: ${(props) => props.theme.borders.normalwhite};
 `;
 
 export default CreateGameModal;

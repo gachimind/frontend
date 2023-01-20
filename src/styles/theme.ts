@@ -35,6 +35,10 @@ export const colors = {
    */
   lightGrey4: '#AAAAAA',
   /**
+   * light grey5: #d7d7d7
+   */
+  lightGrey5: '#d7d7d7',
+  /**
    * dark grey1: #444444
    */
   darkGrey1: '#444444',
@@ -42,10 +46,33 @@ export const colors = {
    * dark grey2: #2C2C2C
    */
   darkGrey2: '#2C2C2C',
+  /**
+   * dark grey3: #3A3A3A
+   */
+  darkGrey3: '#3A3A3A',
+  /**
+   * black1: #272727
+   */
+  black1: '#272727',
+  /**
+   * black2: #202020
+   */
+  black2: '  #202020',
+  /**
+   * black3: #1C1C1C
+   */
+  black3: '#1C1C1C',
 };
 
 export const boxShadows = {
-  boxShadow: '14px 8px 0px #000000',
+  /**
+   * boxShadow1: 14px 8px 0px #000000
+   */
+  boxShadow1: '14px 8px 0px #000000',
+  /**
+   * boxShadow2: 16px 12px 0px #797979
+   */
+  boxShadow2: '16px 12px 0px #797979',
 };
 
 export const layout = {
@@ -55,13 +82,39 @@ export const layout = {
 };
 
 export const borders = {
-  template: '8px solid #F0F0F0',
-  card: '4px solid #F0F0F0',
-  camList: '2px solid #444444',
+  /**
+   * thickIvory: 8px solid #F0F0F0
+   */
+  thickIvory: '8px solid #F0F0F0',
+  /**
+   * normalIvory: 4px solid #F0F0F0
+   */
+  normalIvory: '4px solid #F0F0F0',
+  /**
+   * thinGrey: 2px solid #444444
+   */
+  thinGrey: '2px solid #444444',
+  /**
+   * black: 4px solid black
+   */
+  normalblack: '4px solid black',
+  /**
+   * white: 4px solid white
+   */
+  normalwhite: '4px solid white',
+  /**
+   * normalGrey: 4px solid #d7d7d7
+   */
+  normalGrey: '4px solid #d7d7d7',
 };
 
 export const font = {
-  korean: "'Noto Sans KR', sans-serif",
+  korean: 'neodgm',
+  Mono: 'IBM Plex Mono',
+};
+
+export const textShadow = {
+  textShadow: '-1px 0 #797979, 0 1px #797979, 1px 0 #797979, 0 -1px #797979',
 };
 
 export type ColorTypes = typeof colors;
@@ -69,6 +122,7 @@ export type BoxShadowTypes = typeof boxShadows;
 export type LayoutTypes = typeof layout;
 export type BorderTypes = typeof borders;
 export type FontTypes = typeof font;
+export type TextShadowTypes = typeof textShadow;
 
 export const theme: DefaultTheme = {
   colors,
@@ -76,4 +130,5 @@ export const theme: DefaultTheme = {
   layout,
   borders,
   font,
+  textShadow,
 };

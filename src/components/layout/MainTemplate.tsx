@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
+import bugIcon from '@assets/svg_bugIcon.svg';
 import { useAppSelector } from '@redux/hooks';
 
 import Toast from '@components/common/ToastProvider';
@@ -20,7 +21,6 @@ const MainTemplate = ({ children }: { children: React.ReactNode }) => {
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [reportBugModalVisible, setReportBugModalVisible] = useState<boolean>(false);
-
   return (
     <PageContainer>
       <Header>
@@ -34,13 +34,13 @@ const MainTemplate = ({ children }: { children: React.ReactNode }) => {
       <MainContentsBox>{children}</MainContentsBox>
       <Footer>
         <FooterBox>
-          <button></button>
-          <button></button>
-          <button></button>
           {reportBugModalVisible && (
             <ReportBugModal visible={reportBugModalVisible} onClose={() => setReportBugModalVisible(false)} />
           )}
-          <button onClick={() => setReportBugModalVisible(true)}>버그</button>
+          <button onClick={() => setReportBugModalVisible(true)}>
+            버그 제보
+            <img src={bugIcon} />
+          </button>
         </FooterBox>
       </Footer>
     </PageContainer>
@@ -49,8 +49,9 @@ const MainTemplate = ({ children }: { children: React.ReactNode }) => {
 
 const LoginButton = styled.button`
   cursor: pointer;
-  font-size: 24px;
+  font-size: 20px;
   margin-right: 150px;
+  background-color: transparent;
 `;
 
 const MainContentsBox = styled.div`
@@ -63,15 +64,28 @@ const MainContentsBox = styled.div`
 
 const FooterBox = styled.div`
   height: inherit;
-  gap: 56px;
+  margin-right: 138px;
   display: flex;
-  justify-content: center;
+  justify-content: right;
   align-items: center;
 
   button {
-    background-color: ${(props) => props.theme.colors.darkGrey1};
-    width: 48px;
-    height: 48px;
+    cursor: pointer;
+    font-family: ${(props) => props.theme.font.korean};
+    font-size: 16px;
+    color: ${(props) => props.theme.colors.ivory2};
+    text-shadow: -1px 0 #797979, 0 1px #797979, 1px 0 #797979, 0 -1px #797979;
+    border-top: 4px solid white;
+    border-right: 4px solid black;
+    border-bottom: 4px solid black;
+    border-left: 4px solid white;
+    background-color: ${(props) => props.theme.colors.darkGrey2};
+    width: 152px;
+    height: 56px;
+    gap: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 

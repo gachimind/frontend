@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'joystick';
+  src: url('./assets/ttf_joystick.ttf');
+}
+
+@font-face {
+  font-family: 'neodgm';
+  src: url('./assets/ttf_neodgm.ttf');
+}
