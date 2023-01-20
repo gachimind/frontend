@@ -1,0 +1,67 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "plugins": ["react", "@typescript-eslint", "import"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/function-component-definition": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": true,
+        "ignoreDeclarationSort": true
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", "object"],
+        "pathGroups": [
+          { "pattern": "react", "group": "builtin" },
+          { "pattern": "react-dom", "group": "builtin" },
+          {
+            "pattern": "react-router**",
+            "group": "builtin"
+          },
+          {
+            "pattern": "@components/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@customTypes/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@**/**",
+            "group": "external",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react", "react-dom", "react-router"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  }
+}
