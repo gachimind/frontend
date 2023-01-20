@@ -33,6 +33,10 @@ const useWebRTC = () => {
             });
           }
         };
+        peerConnection.ontrack = (e) => {
+          dispatch(addPlayerStream({ socketId: peerSocketId, stream: e.streams[0] }));
+          dispatch(addPlayerPeer({ socketId: peerSocketId, peer: peerConnection }));
+        };
         if (!userStreamRef?.current) {
           alert('no selfStream');
           return;
@@ -40,10 +44,6 @@ const useWebRTC = () => {
         userStreamRef.current.getTracks().forEach((track) => {
           userStreamRef.current && peerConnection.addTrack(track, userStreamRef.current);
         });
-        peerConnection.ontrack = (e) => {
-          dispatch(addPlayerStream({ socketId: peerSocketId, stream: e.streams[0] }));
-          dispatch(addPlayerPeer({ socketId: peerSocketId, peer: peerConnection }));
-        };
         resolve(peerConnection);
       } catch (error) {
         console.log(error);
@@ -54,9 +54,9 @@ const useWebRTC = () => {
   }, []);
 
   const createOffers = async (socketId: string) => {
-    if (pcsRef.current[socketId]) {
-      return;
-    }
+    // if (pcsRef.current[socketId]) {
+    //   return;
+    // }
     const peerConnection: RTCPeerConnection = await createPeerConnection(socketId);
     if (!peerConnection) {
       alert('no peerconnnection');
@@ -132,7 +132,11 @@ const useWebRTC = () => {
         if (!peerconnection) {
           return;
         }
-        await peerconnection.addIceCandidate(new RTCIceCandidate(ice));
+        if (ice) {
+          await peerconnection.addIceCandidate(ice);
+        } else {
+          console.log(ice);
+        }
       },
     );
 
