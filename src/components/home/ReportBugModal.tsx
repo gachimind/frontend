@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import styled from 'styled-components';
 
 import { BUG_OPTIONS } from '@constants/options';
@@ -8,6 +10,9 @@ import Modal from '@components/common/Modal';
 import Selection from '@components/common/Selection';
 
 const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [category, setCategory] = useState<string>('');
+
   return (
     <Modal visible={visible} onClose={onClose} title="REPORT" width={700}>
       <ReportBugModalLayout>
@@ -15,7 +20,7 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
           <Input placeholder="제목이 들어간당" />
         </InputContainer>
         <InputContainer label="카테고리">
-          <Selection options={BUG_OPTIONS} width={560} />
+          <Selection options={BUG_OPTIONS} width={560} setValue={setCategory} />
         </InputContainer>
         <InputContainer label="내용">
           {/* FIXME: textarea로 바꿀 것 */}

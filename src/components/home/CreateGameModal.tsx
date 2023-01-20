@@ -58,7 +58,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
           <Input type="text" value={roomPassword} onChange={(e) => setRoomPassword(e.target.value)} />
         </InputContainer>
         <InputContainer label="인원">
-          <Selection options={PARTICIPANTS_OPTIONS} />
+          <Selection options={PARTICIPANTS_OPTIONS} setValue={setMaxCount} />
         </InputContainer>
         <InputContainer label="카운트">
           <Input type="text" value={time} onChange={(e) => setTime(e.target.value)} />
