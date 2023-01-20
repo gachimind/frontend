@@ -15,17 +15,17 @@ server.use(
 
 // 카카오 소셜 로그인
 server.get('/api/users/login/kakao', (req, res) => {
-  res.redirect('http://localhost:3000/login?token=Bearer token1');
+  res.redirect('http://localhost:3000/login?token=token1');
 });
 
 // 구글 소셜 로그인
 server.get('/api/users/login/google', (req, res) => {
-  res.redirect('http://localhost:3000/login?token=Bearer token2');
+  res.redirect('http://localhost:3000/login?token=token2');
 });
 
 // 깃헙 소셜 로그인
 server.get('/api/users/login/github', (req, res) => {
-  res.redirect('http://localhost:3000/login?token=Bearer token3');
+  res.redirect('http://localhost:3000/login?token=token3');
 });
 
 // 내 프로필 조회
