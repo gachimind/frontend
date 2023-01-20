@@ -8,7 +8,7 @@ const LoginStatus = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    getCookie('jwt') && sessionStorage.setItem('accessToken', getCookie('jwt'));
+    getCookie('jwt') && sessionStorage.setItem('accessToken', getCookie('jwt').split(' ')[1]);
 
     dispatch(__getUserInfo());
   }, []);
