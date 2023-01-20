@@ -1,25 +1,20 @@
 import styled from 'styled-components';
 
+import smallMicOffIcon from '@assets/svg_smallMicOffIcon.svg';
 import smallMicOnIcon from '@assets/svg_smallMicOnIcon.svg';
 
 interface CamUserStatusProps {
   nickname: string;
-  isCamOn?: boolean;
   isMicOn?: boolean;
 }
 
-const CamUserStatus = ({ nickname, isCamOn, isMicOn }: CamUserStatusProps) => {
+const CamUserStatus = ({ nickname, isMicOn }: CamUserStatusProps) => {
   return (
     <CamUserStatusLayout>
       <div>
-        {/* TODO: 아이콘 넣기 */}
-        {isCamOn ? 'cam-on' : 'cam-off'}
         <NicknameText>{nickname}</NicknameText>
       </div>
-      <div>
-        {/* TODO: 아이콘 넣기 */}
-        {isMicOn ? <img src={smallMicOnIcon} /> : 'mic-off'}
-      </div>
+      <div>{isMicOn ? <img src={smallMicOnIcon} /> : <img src={smallMicOffIcon} />}</div>
     </CamUserStatusLayout>
   );
 };

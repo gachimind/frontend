@@ -8,12 +8,11 @@ interface CamProps {
   userStream?: MediaStream;
   nickname: string;
   audio?: boolean;
-  video?: boolean;
   isMe?: boolean;
   isHost?: boolean;
 }
 
-const Cam = ({ userStream, nickname, audio, video, isMe, isHost }: CamProps) => {
+const Cam = ({ userStream, nickname, audio, isMe, isHost }: CamProps) => {
   const videoRef: React.RefObject<HTMLVideoElement> | null = useRef(null);
 
   // FIXME: 적용하고 지울 것
@@ -30,7 +29,7 @@ const Cam = ({ userStream, nickname, audio, video, isMe, isHost }: CamProps) => 
       {userStream ? (
         <VideoBox>
           <Video ref={videoRef} autoPlay playsInline muted={isMe} />
-          <CamUserStatus isCamOn={video} isMicOn={audio} nickname={nickname} />
+          <CamUserStatus isMicOn={audio} nickname={nickname} />
         </VideoBox>
       ) : (
         <EmptyVideo>{nickname}</EmptyVideo>
