@@ -90,8 +90,8 @@ const ChatInput = styled.input`
   }
 `;
 
-// TODO: 폰트 변경할 것
 const Chat = styled.p<{ chatColor: string }>`
+  font-family: ${(props) => props.theme.font.korean};
   font-size: 15px;
   margin-top: 6px;
   color: ${(props) => props.chatColor};
