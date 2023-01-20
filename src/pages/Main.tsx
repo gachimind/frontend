@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import useErrorSocket from '@hooks/socket/useErrorSocket';
 import { useAppDispatch } from '@redux/hooks';
 import { logout } from '@redux/modules/userSlice';
-import { __getUserInfo } from '@redux/modules/userSlice';
 
 import RoomList from '@components/home/RoomList';
 import UserInfo from '@components/home/UserInfo';
@@ -17,7 +16,7 @@ const Main = () => {
   useEffect(() => {
     onError([{ target: 'status', value: 403, callback: () => dispatch(logout()) }]);
   }, []);
- 
+
   return (
     <MainTemplate>
       <ContentContainer title="SCORE" lights={true}>
