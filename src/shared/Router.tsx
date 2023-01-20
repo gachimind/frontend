@@ -6,6 +6,7 @@ import Mypage from '@pages/Mypage';
 import Room from '@pages/Room';
 
 import LoginStatus from '@components/common/LoginStatus';
+import OAuthRedirectHandler from '@components/home/OAuthRedirectHandler';
 
 const Router = () => {
   return (
@@ -15,6 +16,7 @@ const Router = () => {
         <Route path="/" element={<Main />} />
         <Route path="/room/:id" element={<Room />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/login" element={<OAuthRedirectHandler />} />
       </Routes>
     </BrowserRouter>
   );

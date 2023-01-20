@@ -15,20 +15,17 @@ server.use(
 
 // 카카오 소셜 로그인
 server.get('/api/users/login/kakao', (req, res) => {
-  res.cookie('jwt', 'Bearer token1', { maxAge: 4000 });
-  res.redirect('http://localhost:3000');
+  res.redirect('http://localhost:3000/login?token=token1');
 });
 
 // 구글 소셜 로그인
 server.get('/api/users/login/google', (req, res) => {
-  res.cookie('jwt', 'Bearer token2', { maxAge: 4000 });
-  res.redirect('http://localhost:3000');
+  res.redirect('http://localhost:3000/login?token=token2');
 });
 
 // 깃헙 소셜 로그인
 server.get('/api/users/login/github', (req, res) => {
-  res.cookie('jwt', 'Bearer token3', { maxAge: 4000 });
-  res.redirect('http://localhost:3000');
+  res.redirect('http://localhost:3000/login?token=token3');
 });
 
 // 내 프로필 조회
