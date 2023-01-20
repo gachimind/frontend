@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 import roomCard from '@assets/svg_roomCard.svg';
 import { useAuthSocket } from '@hooks/socket/useAuthSocket';
-import useGameSocket from '@hooks/socket/useGameSocket';
 import useLocalStream from '@hooks/useLocalStream';
 import { useAppSelector } from '@redux/hooks';
 import { getParam } from '@utils/common';

@@ -6,40 +6,14 @@ import { singletonHook } from 'react-singleton-hook';
 import { PUBLISH, SUBSCRIBE } from '@constants/socket';
 import { useAppSelector } from '@redux/hooks';
 import { updateAllRooms } from '@redux/modules/gameRoomSlice';
-import { setUser } from '@redux/modules/userSlice';
 
 import { GameRoomBroadcastResponse } from '@customTypes/socketType';
-import { MyProfile } from '@customTypes/userType';
 
 import socketInstance from './socketInstance';
 
 const initValue = {
   authorized: false,
 };
-
-// FIXME: 인증 구현 후 모두 지울 것
-const authentication = { token1: 1, token2: 2, token3: 3 }; // {token : userId} in db
-const fakeDBUserTable: MyProfile[] = [
-  {
-    userId: 1,
-    nickname: '세현1',
-    profileImg: 'https://t3.ftcdn.net/jpg/02/95/94/94/360_F_295949484_8BrlWkTrPXTYzgMn3UebDl1O13PcVNMU.jpg',
-    OAuth: 'kakao',
-  },
-  {
-    userId: 2,
-    nickname: '예나1',
-    profileImg: 'https://t3.ftcdn.net/jpg/02/95/94/94/360_F_295949484_8BrlWkTrPXTYzgMn3UebDl1O13PcVNMU.jpg',
-    OAuth: 'kakao',
-  },
-  {
-    userId: 3,
-    nickname: '도영1',
-    profileImg: 'https://t3.ftcdn.net/jpg/02/95/94/94/360_F_295949484_8BrlWkTrPXTYzgMn3UebDl1O13PcVNMU.jpg',
-    OAuth: 'kakao',
-  },
-];
-// eslint-disable-next-line prefer-const
 
 const useAuthSocketImpl = () => {
   const [authorized, setAuthorized] = useState<boolean>(false);

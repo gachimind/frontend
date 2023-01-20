@@ -11,9 +11,13 @@ const CamUserStatus = ({ nickname, isCamOn, isMicOn }: CamUserStatusProps) => {
     <CamUserStatusLayout>
       <div>
         {/* TODO: 아이콘 넣기 */}
+        {isCamOn ? 'cam-on' : 'cam-off'}
         <NicknameText>{nickname}</NicknameText>
       </div>
-      <div>{/* TODO: 아이콘 넣기 */}</div>
+      <div>
+        {/* TODO: 아이콘 넣기 */}
+        {isMicOn ? 'mic-on' : 'mic-off'}
+      </div>
     </CamUserStatusLayout>
   );
 };

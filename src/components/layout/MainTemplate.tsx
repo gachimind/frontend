@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import bugIcon from '@assets/svg_bugIcon.svg';
 import { useAppSelector } from '@redux/hooks';
 
-import Toast from '@components/common/ToastProvider';
 import LoginModal from '@components/home/LoginModal';
 import ReportBugModal from '@components/home/ReportBugModal';
 
