@@ -21,11 +21,6 @@ const useWebRTC = () => {
             {
               urls: 'stun:stun.l.google.com:19302',
             },
-            {
-              urls: 'turn:3.38.150.98',
-              username: 'abc',
-              credential: '123',
-            },
           ],
         });
         peerConnection.onicecandidate = (e) => {
