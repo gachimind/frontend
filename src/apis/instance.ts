@@ -6,7 +6,7 @@ const authInstance = axios.create({ baseURL: BASE_URL });
 
 authInstance.interceptors.request.use((config) => {
   config.headers = {
-    authorization: sessionStorage.getItem('accessToken'),
+    authorization: 'Bearer ' + sessionStorage.getItem('accessToken'),
   };
 
   return config;

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -9,11 +9,13 @@ import useGameSocket from '@hooks/socket/useGameSocket';
 import useGameUpdateSocket from '@hooks/socket/useGameUpdateSocket';
 import useLocalStream from '@hooks/useLocalStream';
 import { useAppSelector } from '@redux/hooks';
+import { alertToast } from '@utils/toast';
 
 import CamList from '@components/game/CamList';
 import ChatLog from '@components/game/ChatLog';
 import Presenter from '@components/game/Presenter';
 import ScoreBoard from '@components/game/ScoreBoard';
+import EnterPrivateRoomModal from '@components/home/EnterPrivateRoomModal';
 import ContentContainer from '@components/layout/ContentContainer';
 import RoomTemplate from '@components/layout/RoomTemplate';
 
@@ -22,24 +24,44 @@ const Room = () => {
   const navigate = useNavigate();
   const { authorized } = useAuthSocket();
   const { userStreamRef, isMediaSuccess } = useAppSelector((state) => state.userMedia);
-  const { lastEnteredRoom } = useAppSelector((state) => state.gameRoom);
+  const { lastEnteredRoom, broadcastedRooms } = useAppSelector((state) => state.gameRoom);
   const { destroyLocalStream } = useLocalStream();
   const { onAnnounceRoomUpdate, offAnnounceRoomUpdate } = useGameUpdateSocket();
   const { emitUserLeaveRoom, emitJoinRoom, onJoinRoom } = useGameSocket();
-  const { onError } = useErrorSocket();
+  const { onError, offError } = useErrorSocket();
+
+  const [isConfirmedUser, setIsConfirmedUser] = useState<boolean>(false);
+  const [passwordModalVisible, setPasswordModalVisible] = useState<boolean>(false);
+  const parsedId = parseInt(id ?? '', 10);
 
   useEffect(() => {
     if (!isMediaSuccess) {
       navigate('/?roomId=' + id);
     }
+    onAnnounceRoomUpdate();
     return () => {
       offAnnounceRoomUpdate();
       emitUserLeaveRoom();
+      offError();
     };
   }, []);
 
   useEffect(() => {
     if (userStreamRef) {
+      if (!authorized) {
+        alertToast('로그인이 필요한 서비스입니다!', 'warning', {
+          hideProgressBar: true,
+        });
+        navigate('/');
+        return;
+      }
+      if (lastEnteredRoom?.roomId === parsedId) {
+        setIsConfirmedUser(true);
+        return;
+      }
+      if (broadcastedRooms.find((room) => room.roomId === parsedId)?.isSecreteRoom) {
+        setPasswordModalVisible(true);
+      }
       return () => {
         destroyLocalStream(userStreamRef);
         console.log('[destroy] local stream');
@@ -48,17 +70,37 @@ const Room = () => {
   }, [userStreamRef]);
 
   useEffect(() => {
-    onAnnounceRoomUpdate();
-    if (authorized && id) {
+    if (authorized && id && isConfirmedUser) {
       const intId = parseInt(id, 10);
       !Number.isNaN(intId) && emitJoinRoom({ roomId: intId, roomPassword: lastEnteredRoom?.password });
-      onError([{ target: 'event', value: 'enter-room', callback: () => navigate('/', { replace: true }) }]);
       onJoinRoom();
+      onError([{ target: 'event', value: 'enter-room', callback: () => navigate('/', { replace: true }) }]);
     }
-  }, [id, authorized]);
+  }, [id, authorized, isConfirmedUser]);
+
+  const handlePasswordModalClose = () => {
+    setPasswordModalVisible(false);
+    // TODO: beforeunload 이벤트 활용 또는 확인창 컴포넌트 구현해 적용
+    // TODO: 바깥을 클릭해도 안닫히게, 모달 주위를 어둡게
+    navigate('/');
+  };
+
+  const passwordValidationSuccessHandler = () => {
+    setIsConfirmedUser(true);
+    setPasswordModalVisible(false);
+  };
 
   return (
     <RoomTemplate>
+      {passwordModalVisible && (
+        <EnterPrivateRoomModal
+          roomId={parsedId}
+          roomTitle={broadcastedRooms.find((room) => room.roomId === parsedId)?.roomTitle}
+          onClose={handlePasswordModalClose}
+          visible={passwordModalVisible}
+          successHandler={passwordValidationSuccessHandler}
+        />
+      )}
       <ContentContainer title="SCORE" lights={true}>
         <ScoreBoard />
       </ContentContainer>

@@ -22,15 +22,10 @@ const RoomList = () => {
   const { broadcastedRooms } = useAppSelector((state) => state.gameRoom);
   const { isMediaLoading, isMediaSuccess } = useAppSelector((state) => state.userMedia);
   const [selectedRoom, setSelectedRoom] = useState<GameRoomBroadcastResponse>();
-  const { onBroadcastWholeRooms } = useGameSocket();
   useAuthSocket();
   const { initLocalStream } = useLocalStream();
 
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState<boolean>(false);
-
-  useEffect(() => {
-    onBroadcastWholeRooms();
-  }, []);
 
   useEffect(() => {
     if (location.search && getParam('roomId')) {
@@ -62,12 +57,15 @@ const RoomList = () => {
   return (
     <>
       <RoomListLayout>
-        <EnterPrivateRoomModal
-          roomId={selectedRoom?.roomId}
-          roomTitle={selectedRoom?.roomTitle}
-          visible={isPasswordModalOpen}
-          onClose={() => setIsPasswordModalOpen(false)}
-        />
+        {isPasswordModalOpen && selectedRoom && (
+          <EnterPrivateRoomModal
+            roomId={selectedRoom.roomId}
+            roomTitle={selectedRoom.roomTitle}
+            visible={isPasswordModalOpen}
+            onClose={() => setIsPasswordModalOpen(false)}
+            successHandler={() => navigate('/?roomId=' + selectedRoom.roomId)}
+          />
+        )}
         <GlobalLoading isLoading={isMediaLoading && !isMediaSuccess} />
         {broadcastedRooms
           .filter((room) => room.participants !== 0)
