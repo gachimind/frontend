@@ -19,7 +19,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
   const [roomTitle, setRoomTitle] = useState<string>('');
   const [maxCount, setMaxCount] = useState<number>(2);
   const [time, setTime] = useState<string>('30:30:60');
-  const [roomPassword, setRoomPassword] = useState<string>();
+  const [roomPassword, setRoomPassword] = useState<string>('');
   const { onShowCreatedRoomId, emitCreateRoom } = useGameSocket();
   const navigate = useNavigate();
 
