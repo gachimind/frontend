@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 import roomCard from '@assets/svg_roomCard.svg';
 import { useAuthSocket } from '@hooks/socket/useAuthSocket';
-import useGameSocket from '@hooks/socket/useGameSocket';
 import useLocalStream from '@hooks/useLocalStream';
 import { useAppSelector } from '@redux/hooks';
 import { getParam } from '@utils/common';
@@ -46,7 +45,7 @@ const RoomList = () => {
       return;
     }
     setSelectedRoom(room);
-    const hasPassword = room?.isSecreteRoom;
+    const hasPassword = room?.isSecretRoom;
     if (hasPassword) {
       setIsPasswordModalOpen(true);
       return;

@@ -16,6 +16,8 @@ interface CamProps {
 const Cam = ({ userStream, nickname, audio, video, isMe, isHost }: CamProps) => {
   const videoRef: React.RefObject<HTMLVideoElement> | null = useRef(null);
 
+  // FIXME: 적용하고 지울 것
+  isHost;
   useEffect(() => {
     if (!videoRef.current || !userStream) {
       return;

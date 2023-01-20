@@ -33,7 +33,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
       speechTime: 30,
       round: 1,
       roomPassword: 1234,
-      isSecreteRoom: true,
+      isSecretRoom: true,
     };
     emitCreateRoom(createRoom);
     onClose();
@@ -59,7 +59,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
           <Selection options={PARTICIPANTS_OPTIONS} />
         </InputContainer>
         <InputContainer label="카운트">
-          <Input />
+          <Input type="number" value={maxCount} onChange={(e) => setMaxCount(parseInt(e.target.value))} />
         </InputContainer>
         <CreateRoomButton onClick={handleCreateGameButtonClick}>생성하기</CreateRoomButton>
       </CreateGameModalLayout>

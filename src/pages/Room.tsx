@@ -59,7 +59,7 @@ const Room = () => {
         setIsConfirmedUser(true);
         return;
       }
-      if (broadcastedRooms.find((room) => room.roomId === parsedId)?.isSecreteRoom) {
+      if (broadcastedRooms.find((room) => room.roomId === parsedId)?.isSecretRoom) {
         setPasswordModalVisible(true);
       }
       return () => {
