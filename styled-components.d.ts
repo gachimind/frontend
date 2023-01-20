@@ -1,5 +1,5 @@
 import 'styled-components';
-import { BorderTypes, BoxShadowTypes, ColorTypes, FontTypes, LayoutTypes } from './src/styles/theme';
+import { BorderTypes, BoxShadowTypes, ColorTypes, FontTypes, LayoutTypes, TextShadowTypes } from './src/styles/theme';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
@@ -8,5 +8,6 @@ declare module 'styled-components' {
     layout: LayoutTypes;
     borders: BorderTypes;
     font: FontTypes;
+    textShadow: TextShadowTypes;
   }
 }
