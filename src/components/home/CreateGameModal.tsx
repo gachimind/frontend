@@ -19,6 +19,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
   const [roomTitle, setRoomTitle] = useState<string>('');
   const [maxCount, setMaxCount] = useState<number>(2);
   const [time, setTime] = useState<string>('30:30:60');
+  const [roomPassword, setRoomPassword] = useState<string>();
   const { onShowCreatedRoomId, emitCreateRoom } = useGameSocket();
   const navigate = useNavigate();
 
@@ -33,13 +34,13 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
       readyTime: Number(time.split(':')[1]),
       speechTime: Number(time.split(':')[2]),
       round: 1,
-      roomPassword: 1234,
+      roomPassword: Number(roomPassword),
       isSecretRoom: true,
     };
     emitCreateRoom(createRoom);
     onClose();
     // TODO: 비밀번호 input 구현 후 적용
-    onShowCreatedRoomId(navigate, '/?roomId=', 1234);
+    roomPassword && onShowCreatedRoomId(navigate, '/?roomId=', Number(roomPassword));
   };
   return (
     <Modal visible={visible} onClose={onClose} title="MAKE A ROOM">
@@ -54,7 +55,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
           <img style={{ position: 'absolute', right: '68px', marginTop: '34px' }} src={lockIcon} />
         </InputContainer>
         <InputContainer label="비밀번호">
-          <Input type="text" />
+          <Input type="text" value={roomPassword} onChange={(e) => setRoomPassword(e.target.value)} />
         </InputContainer>
         <InputContainer label="인원">
           <Selection options={PARTICIPANTS_OPTIONS} />
