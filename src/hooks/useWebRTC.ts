@@ -94,7 +94,7 @@ const useWebRTC = () => {
         }
         pcsRef.current = { ...pcsRef.current, [offerSendSocketId]: peerconnection };
         try {
-          await peerconnection.setRemoteDescription(new RTCSessionDescription(sessionDescription));
+          peerconnection.setRemoteDescription(new RTCSessionDescription(sessionDescription));
           const localSessionDescription = await peerconnection.createAnswer();
           peerconnection.setLocalDescription(new RTCSessionDescription(localSessionDescription));
           emit(PUBLISH.webRTCAnswer, {
@@ -121,9 +121,7 @@ const useWebRTC = () => {
           alert('[on] webrtc-answer - no peerconnection!');
           return;
         }
-        (async () => {
-          await peerconnection.setRemoteDescription(new RTCSessionDescription(sessionDescription));
-        })();
+        peerconnection.setRemoteDescription(new RTCSessionDescription(sessionDescription));
       },
     );
 
@@ -152,7 +150,7 @@ const useWebRTC = () => {
 
   useEffect(() => {
     return () => {
-      emit('webrtc-leave');
+      emit('webrtc- leave');
       Object.entries(playerStreamMap).forEach((map) => {
         const socketId = map[0];
         const stream = map[1];
