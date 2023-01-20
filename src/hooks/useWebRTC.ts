@@ -19,7 +19,7 @@ const useWebRTC = () => {
         const peerConnection = new RTCPeerConnection({
           iceServers: [
             {
-              urls: ['stun:stun.l.google.com:19302'],
+              urls: ['stun:stun.l.google.com:19302', 'stun:stun.l.google.com:19302', 'stun:stun.l.google.com:19302'],
             },
           ],
         });
@@ -33,10 +33,6 @@ const useWebRTC = () => {
             });
           }
         };
-        peerConnection.ontrack = (e) => {
-          dispatch(addPlayerStream({ socketId: peerSocketId, stream: e.streams[0] }));
-          dispatch(addPlayerPeer({ socketId: peerSocketId, peer: peerConnection }));
-        };
         if (!userStreamRef?.current) {
           alert('no selfStream');
           return;
@@ -44,6 +40,10 @@ const useWebRTC = () => {
         userStreamRef.current.getTracks().forEach((track) => {
           userStreamRef.current && peerConnection.addTrack(track, userStreamRef.current);
         });
+        peerConnection.ontrack = (e) => {
+          dispatch(addPlayerStream({ socketId: peerSocketId, stream: e.streams[0] }));
+          dispatch(addPlayerPeer({ socketId: peerSocketId, peer: peerConnection }));
+        };
         resolve(peerConnection);
       } catch (error) {
         console.log(error);
@@ -132,15 +132,7 @@ const useWebRTC = () => {
         if (!peerconnection) {
           return;
         }
-        if (!ice) {
-          console.log(ice);
-        }
-        try {
-          const rtcIceCandidate = new RTCIceCandidate(ice);
-          await peerconnection.addIceCandidate(rtcIceCandidate);
-        } catch (error) {
-          console.log('no candidate');
-        }
+        await peerconnection.addIceCandidate(new RTCIceCandidate(ice));
       },
     );
 
@@ -149,8 +141,8 @@ const useWebRTC = () => {
     });
 
     return () => {
-      // off(SUBSCRIBE.webRTCOffer);
-      // off(SUBSCRIBE.webRTCAnswer);
+      off(SUBSCRIBE.webRTCOffer);
+      off(SUBSCRIBE.webRTCAnswer);
       off(SUBSCRIBE.webRTCIce);
       off(SUBSCRIBE.webRTCLeave);
     };
