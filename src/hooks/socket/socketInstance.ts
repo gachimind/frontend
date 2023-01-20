@@ -1,6 +1,6 @@
 import { io, Socket } from 'socket.io-client';
 
-const socketInstance: Socket = io(process.env.REACT_APP_API_SOCKET || 'http://localhost:8080');
+const socketInstance: Socket = io(process.env.REACT_APP_API_SOCKET || process.env.REACT_APP_API_ENDPOINT);
 
 const on = (event: string, callback: (...args: any[]) => void) => {
   socketInstance.on(event, callback);
