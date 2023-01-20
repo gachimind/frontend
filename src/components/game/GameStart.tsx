@@ -8,7 +8,7 @@ const GameStart = ({ isGameReadyToStart }: { isGameReadyToStart: boolean }) => {
   const { emitGameStart } = useGameInitiationSocket();
 
   return (
-    <GameStartLayout>
+    <GameStartLayout isReady={isGameReadyToStart}>
       <button onClick={emitGameStart} disabled={!isGameReadyToStart}>
         <img src={startButton} />
       </button>
@@ -16,12 +16,16 @@ const GameStart = ({ isGameReadyToStart }: { isGameReadyToStart: boolean }) => {
   );
 };
 
-const GameStartLayout = styled.div`
+const GameStartLayout = styled.div<{ isReady: boolean }>`
   button {
     background-color: ${(props) => props.theme.colors.darkGrey2};
     width: 628px;
     height: 232px;
     border: ${(props) => props.theme.borders.normalIvory};
+  }
+
+  img {
+    opacity: ${(props) => (props.isReady ? 0.3 : 1)};
   }
 `;
 
