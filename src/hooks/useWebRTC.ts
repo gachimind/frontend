@@ -54,9 +54,9 @@ const useWebRTC = () => {
   }, []);
 
   const createOffers = async (socketId: string) => {
-    // if (pcsRef.current[socketId]) {
-    //   return;
-    // }
+    if (pcsRef.current[socketId]) {
+      return;
+    }
     const peerConnection: RTCPeerConnection = await createPeerConnection(socketId);
     if (!peerConnection) {
       alert('no peerconnnection');
