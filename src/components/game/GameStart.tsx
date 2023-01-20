@@ -25,7 +25,7 @@ const GameStartLayout = styled.div<{ isReady: boolean }>`
   }
 
   img {
-    opacity: ${(props) => (props.isReady ? 0.3 : 1)};
+    opacity: ${(props) => (props.isReady ? 1 : 0.3)};
   }
 `;
 
