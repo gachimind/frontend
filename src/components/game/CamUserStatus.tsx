@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import smallMicOnIcon from '@assets/svg_smallMicOnIcon.svg';
+
 interface CamUserStatusProps {
   nickname: string;
   isCamOn?: boolean;
@@ -16,7 +18,7 @@ const CamUserStatus = ({ nickname, isCamOn, isMicOn }: CamUserStatusProps) => {
       </div>
       <div>
         {/* TODO: 아이콘 넣기 */}
-        {isMicOn ? 'mic-on' : 'mic-off'}
+        {isMicOn ? <img src={smallMicOnIcon} /> : 'mic-off'}
       </div>
     </CamUserStatusLayout>
   );
