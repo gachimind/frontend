@@ -20,6 +20,7 @@ jobs:
         run: |
           touch .env
           echo REACT_APP_API_ENDPOINT=${{ secrets.REACT_APP_API_ENDPOINT }} >> .env
+          echo REACT_APP_API_ENDPOINT=${{ secrets.REACT_APP_API_SOCKET }} >> .env
           cat .env
       - name: Npm Install
         run: |
