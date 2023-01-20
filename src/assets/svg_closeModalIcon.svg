@@ -1,4 +1,24 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M21 21L3 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M21.0001 3L3 21.0001" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="16.5" y="16.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="14.5" y="14.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="12.5" y="16.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="14.5" y="14.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="24.5" y="4.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="4.5" y="24.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="16.5" y="12.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="6.5" y="22.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="18.5" y="10.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="8.5" y="20.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="20.5" y="8.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="10.5" y="18.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="22.5" y="6.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="24.5" y="24.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="12.5" y="12.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="22.5" y="22.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="10.5" y="10.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="20.5" y="20.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="8.5" y="8.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="4.5" y="4.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="18.5" y="18.5" width="1" height="1" fill="black" stroke="black"/>
+<rect x="6.5" y="6.5" width="1" height="1" fill="black" stroke="black"/>
 </svg>
