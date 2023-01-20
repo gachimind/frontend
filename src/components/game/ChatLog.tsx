@@ -76,14 +76,14 @@ const ChatBox = styled.div`
 `;
 
 const ChatInput = styled.input`
-  font-size: 18px;
+  font-family: ${(props) => props.theme.font.korean};
+  font-size: 24px;
   background-color: ${(props) => props.theme.colors.lightGrey1};
   width: 100%;
   padding: 14px 0 11px 20px;
   color: ${(props) => props.theme.colors.ivory1};
   ::placeholder {
     color: ${(props) => props.theme.colors.ivory1};
-    opacity: 0.6;
   }
   :focus {
     outline: none;
