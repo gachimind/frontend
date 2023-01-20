@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router';
 
 import styled from 'styled-components';
 
+import roomCard from '@assets/svg_roomCard.svg';
 import { useAuthSocket } from '@hooks/socket/useAuthSocket';
 import useGameSocket from '@hooks/socket/useGameSocket';
 import useLocalStream from '@hooks/useLocalStream';
@@ -73,7 +74,7 @@ const RoomList = () => {
               <CardContentsBox>
                 <Title>방제목</Title>
                 <Participants>
-                  참여인원: {room.participants.toString()} / {room.maxCount}
+                  참여인원: {room.participants.toString()}/{room.maxCount}
                 </Participants>
                 <EnterButton onClick={() => handleJoinRoomClick(room.roomId)}>참가하기</EnterButton>
               </CardContentsBox>
@@ -85,45 +86,56 @@ const RoomList = () => {
 };
 
 const RoomListLayout = styled.div`
-  height: 94.3%;
-  padding: 35px 58px;
-  column-gap: 22px;
+  padding: 29px 46px;
+  column-gap: 32px;
   row-gap: 16px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 const RoomCard = styled.div`
+  background-image: url(${roomCard});
   font-family: ${(props) => props.theme.font.korean};
-  background-color: white;
+  width: 272px;
+  height: 176px;
 `;
 
 const CardContentsBox = styled.div`
   font-family: inherit;
-  margin-left: 11.27%;
-  margin-right: 45.77%;
-  margin-top: 8%;
-  margin-bottom: 6%;
+  margin-left: 32px;
+  margin-top: 48px;
   display: flex;
   flex-direction: column;
 `;
 
 const Title = styled.span`
+  color: ${(props) => props.theme.colors.ivory2};
   font-family: inherit;
-  font-size: 24px;
+  font-size: 20px;
+  line-height: 150%;
 `;
 
 const Participants = styled.span`
   font-family: inherit;
-  font-size: 16px;
+  font-size: 12px;
+  color: ${(props) => props.theme.colors.lightGrey5};
 `;
 
 const EnterButton = styled.button`
+  cursor: pointer;
   font-family: inherit;
-  font-size: 20px;
-  border-radius: 24px;
-  margin-top: 28.53px;
-  padding: 8px 24px;
+  font-size: 14px;
+  color: ${(props) => props.theme.colors.ivory2};
+  text-shadow: ${(props) => props.theme.textShadow.textShadow};
+  background-color: ${(props) => props.theme.colors.darkGrey2};
+  margin-top: 12px;
+  width: 96px;
+  height: 40px;
+
+  border-top: ${(props) => props.theme.borders.normalGrey};
+  border-right: ${(props) => props.theme.borders.normalblack};
+  border-bottom: ${(props) => props.theme.borders.normalblack};
+  border-left: ${(props) => props.theme.borders.normalGrey};
 `;
 
 export default RoomList;

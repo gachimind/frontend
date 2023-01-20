@@ -4,7 +4,7 @@ import { colors } from './theme';
 
 export const GlobalStyle = createGlobalStyle`
 * {
-    font-family: 'IBM Plex Mono', monospace;
+  font-family: "joystick";
     margin: 0;
     padding: 0;
     border: 0;

@@ -27,7 +27,7 @@ const Presenter = () => {
           <img src={ImageHolderIcon} />
           <span>{user?.nickname}</span>
         </div>
-        <img className="mic-icon" src={MicOnIcon} />
+        <img src={MicOnIcon} />
       </PresenterStatusBox>
     </PresenterLayout>
   );
@@ -49,8 +49,8 @@ const PresenterCamBox = styled.div`
 // TODO: 디자인 보고 수정
 const GameReadyBox = styled.div`
   position: absolute;
-  top: 39px;
-  right: 0;
+  top: 110px;
+  right: -40px;
 `;
 
 const PresenterStatusBox = styled.div`
@@ -60,7 +60,9 @@ const PresenterStatusBox = styled.div`
   height: 58px;
   bottom: 0;
   padding-left: 24px;
+  padding-right: 24px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 
   div {
@@ -71,14 +73,8 @@ const PresenterStatusBox = styled.div`
 
     span {
       color: ${(props) => props.theme.colors.white};
-      font-family: ${(props) => props.theme.font.korean};
-      font-weight: 700;
       font-size: 16px;
     }
-  }
-
-  .mic-icon {
-    margin-left: 319px;
   }
 `;
 

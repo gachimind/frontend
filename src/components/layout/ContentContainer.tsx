@@ -20,18 +20,18 @@ const ContentContainer = ({ lights, title, children }: ContentContainerProps) =>
 
 const ContentContainerLayout = styled.div`
   position: relative;
-  border: ${(props) => props.theme.borders.card};
-  box-shadow: ${(props) => props.theme.boxShadows.boxShadow};
+  border: ${(props) => props.theme.borders.normalIvory};
+  box-shadow: ${(props) => props.theme.boxShadows.boxShadow1};
 `;
 
 const TitleBox = styled.div`
   color: ${(props) => props.theme.colors.darkGrey2};
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 20px;
   background-color: ${(props) => props.theme.colors.ivory1};
   height: 39px;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 const HeaderIcon = styled.img`

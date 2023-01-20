@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import GameRuleIcon from '@assets/svg_gameRuleIcon.svg';
+import leaveRoomIcon from '@assets/svg_leaveRoomIcon.svg';
 
 import CamButton from '@components/game/CamButton';
 import GameRuleToolTip from '@components/game/GameRuleToolTip';
@@ -31,7 +32,10 @@ const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
             <CamButton />
             <MicButton />
           </MediaControlBox>
-          <LeaveButton onClick={() => navigate('/')}>나가기</LeaveButton>
+          <LeaveButton onClick={() => navigate('/')}>
+            게임방 나가기
+            <img src={leaveRoomIcon} />
+          </LeaveButton>
         </FooterBox>
       </Footer>
     </PageContainer>
@@ -54,6 +58,7 @@ const FooterBox = styled.div`
 `;
 
 const RuleButton = styled.img`
+  cursor: pointer;
   margin-right: 613px;
 `;
 
@@ -63,12 +68,24 @@ const MediaControlBox = styled.div`
 `;
 
 const LeaveButton = styled.button`
+  cursor: pointer;
   font-family: ${(props) => props.theme.font.korean};
-  font-size: 20px;
-  background-color: ${(props) => props.theme.colors.darkGrey1};
-  width: 200px;
-  height: 48px;
+  font-size: 16px;
+  color: ${(props) => props.theme.colors.ivory2};
+  text-shadow: ${(props) => props.theme.textShadow.textShadow};
+  background-color: ${(props) => props.theme.colors.darkGrey2};
+  width: 176px;
+  height: 56px;
   margin-left: 454px;
+  gap: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-top: ${(props) => props.theme.borders.normalwhite};
+  border-right: ${(props) => props.theme.borders.normalblack};
+  border-bottom: ${(props) => props.theme.borders.normalblack};
+  border-left: ${(props) => props.theme.borders.normalwhite};
 `;
 
 export default RoomTemplate;
