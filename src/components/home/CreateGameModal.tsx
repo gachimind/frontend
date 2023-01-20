@@ -33,7 +33,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
       speechTime: 30,
       round: 1,
       roomPassword: 1234,
-      isSecreteRoom: true,
+      isSecretRoom: true,
     };
     emitCreateRoom(createRoom);
     onClose();

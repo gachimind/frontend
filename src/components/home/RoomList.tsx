@@ -46,7 +46,7 @@ const RoomList = () => {
       return;
     }
     setSelectedRoom(room);
-    const hasPassword = room?.isSecreteRoom;
+    const hasPassword = room?.isSecretRoom;
     if (hasPassword) {
       setIsPasswordModalOpen(true);
       return;
