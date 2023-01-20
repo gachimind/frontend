@@ -92,7 +92,7 @@ const MiddleSectionBox = styled.div`
 `;
 
 const CamListBox = styled.div`
-  border: ${(props) => props.theme.borders.camList};
+  border: ${(props) => props.theme.borders.thinGrey};
   padding: 13px 21px;
 `;
 
@@ -104,14 +104,14 @@ const RightSectionBox = styled.div`
 `;
 
 const TimerBox = styled.div`
-  margin-top: 25px;
   display: flex;
   justify-content: center;
-  align-items: center;
 
   span {
+    margin-top: 30px;
     font-size: 40px;
     color: ${(props) => props.theme.colors.ivory1};
+    font-family: ${(props) => props.theme.font.korean};
   }
 `;
 

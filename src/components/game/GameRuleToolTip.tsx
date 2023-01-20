@@ -49,7 +49,7 @@ const GameRuleToolTipLayout = styled.div<{ visible: boolean }>`
 
 const ModalBox = styled.div`
   background-color: white;
-  box-shadow: ${(props) => props.theme.boxShadows.boxShadow};
+  box-shadow: ${(props) => props.theme.boxShadows.boxShadow2};
   position: absolute;
   width: 409px;
   height: 511px;

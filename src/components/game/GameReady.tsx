@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
+import readyButton from '@assets/svg_readyButton.svg';
 import useGameInitiationSocket from '@hooks/socket/useGameInitiationSocket';
 import useDebounce from '@hooks/useDebounce';
 
@@ -24,11 +25,21 @@ const GameReady = ({ readyStatus }: { readyStatus: boolean }) => {
 
   return (
     <GameReadyLayout>
-      <button onClick={() => setIsReady(!isReady)}>{isReady ? '레디취소' : '레디하기'}</button>
+      <button onClick={() => setIsReady(!isReady)}>
+        <img src={readyButton} />
+      </button>
     </GameReadyLayout>
   );
 };
 
-const GameReadyLayout = styled.div``;
+const GameReadyLayout = styled.div`
+  button {
+    cursor: pointer;
+    background-color: ${(props) => props.theme.colors.darkGrey2};
+    width: 628px;
+    height: 232px;
+    border: ${(props) => props.theme.borders.normalIvory};
+  }
+`;
 
 export default GameReady;
