@@ -43,9 +43,14 @@ const LoginButton = styled.button`
   cursor: pointer;
   font-family: ${(props) => props.theme.font.korean};
   font-size: 24px;
-  color: ${(props) => props.theme.colors.ivory1};
-  background-color: ${(props) => props.theme.colors.darkGrey1};
-  height: 56px;
+  color: ${(props) => props.theme.colors.ivory2};
+  background-color: ${(props) => props.theme.colors.darkGrey2};
+  height: 72px;
+
+  border-top: ${(props) => props.theme.borders.normalwhite};
+  border-right: ${(props) => props.theme.borders.normalblack};
+  border-bottom: ${(props) => props.theme.borders.normalblack};
+  border-left: ${(props) => props.theme.borders.normalwhite};
 `;
 
 export default LoginModal;
