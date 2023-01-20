@@ -1,9 +1,15 @@
+import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
 
 const Header = ({ page, children }: { page?: string; children?: React.ReactNode }) => {
+  const navigate = useNavigate();
+
   return (
     <HeaderLayout>
-      <LogoBox page={page}>LOG0</LogoBox>
+      <LogoBox page={page} onClick={() => page !== 'ROOM' && navigate('/')}>
+        LOG0
+      </LogoBox>
       {children}
     </HeaderLayout>
   );
@@ -18,6 +24,7 @@ const HeaderLayout = styled.div`
 `;
 
 const LogoBox = styled.div<{ page?: string }>`
+  cursor: pointer;
   position: relative;
   color: ${(props) => props.theme.colors.ivory2};
   font-size: 24px;

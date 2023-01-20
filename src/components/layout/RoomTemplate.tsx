@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -13,6 +14,8 @@ import Header from './Header';
 import PageContainer from './PageContainer';
 
 const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
+  const navigate = useNavigate();
+
   const [GameRuleModalVisible, setGameRuleModalVisible] = useState<boolean>(false);
   return (
     <PageContainer>
@@ -28,7 +31,7 @@ const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
             <CamButton />
             <MicButton />
           </MediaControlBox>
-          <LeaveButton>나가기</LeaveButton>
+          <LeaveButton onClick={() => navigate('/')}>나가기</LeaveButton>
         </FooterBox>
       </Footer>
     </PageContainer>

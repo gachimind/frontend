@@ -71,6 +71,7 @@ const CreateGameModalLayout = styled.div`
 `;
 
 const CreateRoomButton = styled.button`
+  cursor: pointer;
   font-family: inherit;
   font-size: 24px;
   color: ${(props) => props.theme.colors.ivory1};

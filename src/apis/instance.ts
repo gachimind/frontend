@@ -12,10 +12,8 @@ authInstance.interceptors.request.use((config) => {
   return config;
 });
 
-// TODO: 실제 서버 사용시 주석 처리된 return으로 변경 필요
 authInstance.interceptors.response.use((res) => {
-  // return res.data.data;
-  return res.data;
+  return res.data.data;
 });
 
 export { authInstance };
