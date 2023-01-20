@@ -14,13 +14,10 @@ const GameReady = ({ readyStatus }: { readyStatus: boolean }) => {
   const { emitGameReady } = useGameInitiationSocket();
 
   useEffect(() => {
-    return () => {
-      if (isRenderedFirstTime) {
-        setIsRenderedFirstTime(false);
-        return;
-      }
-      emitGameReady();
-    };
+    if (isRenderedFirstTime) {
+      setIsRenderedFirstTime(false);
+    }
+    emitGameReady();
   }, [debouncedReadyState]);
 
   return (
