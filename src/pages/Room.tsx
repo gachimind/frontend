@@ -9,6 +9,7 @@ import useGameSocket from '@hooks/socket/useGameSocket';
 import useGameUpdateSocket from '@hooks/socket/useGameUpdateSocket';
 import useLocalStream from '@hooks/useLocalStream';
 import { useAppSelector } from '@redux/hooks';
+import { alertToast } from '@utils/toast';
 
 import CamList from '@components/game/CamList';
 import ChatLog from '@components/game/ChatLog';
@@ -26,7 +27,7 @@ const Room = () => {
   const { destroyLocalStream } = useLocalStream();
   const { onAnnounceRoomUpdate, offAnnounceRoomUpdate } = useGameUpdateSocket();
   const { emitUserLeaveRoom, emitJoinRoom, onJoinRoom } = useGameSocket();
-  const { onError } = useErrorSocket();
+  const { onError, offError } = useErrorSocket();
 
   useEffect(() => {
     if (!isMediaSuccess) {
@@ -35,25 +36,31 @@ const Room = () => {
     return () => {
       offAnnounceRoomUpdate();
       emitUserLeaveRoom();
+      offError();
     };
   }, []);
 
   useEffect(() => {
     if (userStreamRef) {
+      if (!authorized) {
+        alertToast('로그인이 필요한 서비스입니다!', 'warning', {
+          hideProgressBar: true,
+        });
+        navigate('/');
+      }
       return () => {
         destroyLocalStream(userStreamRef);
         console.log('[destroy] local stream');
       };
     }
   }, [userStreamRef]);
-
   useEffect(() => {
     onAnnounceRoomUpdate();
     if (authorized && id) {
       const intId = parseInt(id, 10);
       !Number.isNaN(intId) && emitJoinRoom({ roomId: intId, roomPassword: lastEnteredRoom?.password });
-      onError([{ target: 'event', value: 'enter-room', callback: () => navigate('/', { replace: true }) }]);
       onJoinRoom();
+      onError([{ target: 'event', value: 'enter-room', callback: () => navigate('/', { replace: true }) }]);
     }
   }, [id, authorized]);
 

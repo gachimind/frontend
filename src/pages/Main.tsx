@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import { PUBLISH } from '@constants/socket';
 import useErrorSocket from '@hooks/socket/useErrorSocket';
 import { useAppDispatch } from '@redux/hooks';
 import { logout } from '@redux/modules/userSlice';
@@ -14,7 +15,7 @@ const Main = () => {
   const { onError } = useErrorSocket();
 
   useEffect(() => {
-    onError([{ target: 'status', value: 403, callback: () => dispatch(logout()) }]);
+    onError([{ target: 'event', value: PUBLISH.login, callback: () => dispatch(logout()) }]);
   }, []);
 
   return (
