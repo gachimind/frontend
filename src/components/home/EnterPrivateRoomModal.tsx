@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
+import lockIcon from '@assets/svg_lockIcon.svg';
 import useErrorSocket from '@hooks/socket/useErrorSocket';
 import useGameSocket from '@hooks/socket/useGameSocket';
 import useDebounce from '@hooks/useDebounce';
-import lockIcon from '@assets/svg_lockIcon.svg';
 import { useAppDispatch } from '@redux/hooks';
 import { setLastEnteredRoom } from '@redux/modules/gameRoomSlice';
 
