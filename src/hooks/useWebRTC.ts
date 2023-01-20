@@ -19,7 +19,12 @@ const useWebRTC = () => {
         const peerConnection = new RTCPeerConnection({
           iceServers: [
             {
-              urls: ['stun:stun.l.google.com:19302', 'stun:stun.l.google.com:19302', 'stun:stun.l.google.com:19302'],
+              urls: 'stun:stun.l.google.com:19302',
+            },
+            {
+              urls: 'turn:3.38.150.98',
+              username: 'abc',
+              credential: '123',
             },
           ],
         });
@@ -132,7 +137,11 @@ const useWebRTC = () => {
         if (!peerconnection) {
           return;
         }
-        await peerconnection.addIceCandidate(new RTCIceCandidate(ice));
+        try {
+          await peerconnection.addIceCandidate(new RTCIceCandidate(ice));
+        } catch (e) {
+          console.log('ice-candidate-error');
+        }
       },
     );
 
