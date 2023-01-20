@@ -132,11 +132,13 @@ const useWebRTC = () => {
         if (!peerconnection) {
           return;
         }
-        if (ice) {
-          await peerconnection.addIceCandidate(ice);
-        } else {
+        if (!ice) {
           console.log(ice);
         }
+        setTimeout(() => {
+          const rtcIceCandidate = new RTCIceCandidate(ice);
+          peerconnection.addIceCandidate(rtcIceCandidate);
+        }, 200);
       },
     );
 
@@ -145,8 +147,8 @@ const useWebRTC = () => {
     });
 
     return () => {
-      off(SUBSCRIBE.webRTCOffer);
-      off(SUBSCRIBE.webRTCAnswer);
+      // off(SUBSCRIBE.webRTCOffer);
+      // off(SUBSCRIBE.webRTCAnswer);
       off(SUBSCRIBE.webRTCIce);
       off(SUBSCRIBE.webRTCLeave);
     };
