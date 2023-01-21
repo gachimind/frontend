@@ -22,8 +22,9 @@ const GameRuleToolTip = ({ visible, onClose }: { visible: boolean; onClose: () =
             </ModalHeader>
             <RuleBox>
               <ul>
-                <label>게임 규칙</label>
-                <li className="first-rule">1. 발표자와 . . .</li>
+                <li>게임 규칙</li>
+                <br />
+                <li>1. 발표자와 . . .</li>
                 <li>2. 참여자는 . . .</li>
                 <li>3. </li>
               </ul>
@@ -85,17 +86,6 @@ const RuleBox = styled.div`
   ul {
     font-size: 24px;
     list-style: none;
-    label {
-      font-family: inherit;
-      font-size: inherit;
-    }
-    li {
-      font-family: inherit;
-      font-size: inherit;
-    }
-    .first-rule {
-      padding-top: 24px;
-    }
   }
 `;
 

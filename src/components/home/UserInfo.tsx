@@ -52,24 +52,20 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
       <ScoreBox>
         <img src={medalIcon} />
         <div>
-          <span className="title">오늘 획득한 점수</span>
-          <span className="score">
+          <span className="score-box-title">오늘 획득한 점수</span>
+          <span className="score-box-score">
             10000
-            <span className="title" id="fix">
-              점
-            </span>
+            <span>점</span>
           </span>
         </div>
       </ScoreBox>
       <ScoreBox>
         <img src={trophyIcon} />
         <div>
-          <span className="title">누적 점수</span>
-          <span className="score">
+          <span className="score-box-title">누적 점수</span>
+          <span className="score-box-score">
             10000
-            <span className="title" id="fix">
-              점
-            </span>
+            <span>점</span>
           </span>
         </div>
       </ScoreBox>
@@ -154,17 +150,18 @@ const ScoreBox = styled.div`
     display: flex;
     flex-direction: column;
 
-    .title {
+    .score-box-title {
       font-size: 12px;
     }
 
-    .score {
+    .score-box-score {
       text-shadow: ${(props) => props.theme.textShadow.textShadow};
       font-size: 24px;
       gap: 4px;
       display: flex;
       align-items: center;
-      #fix {
+      span {
+        font-size: 12px;
         text-shadow: none;
       }
     }
