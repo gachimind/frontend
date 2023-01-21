@@ -12,7 +12,7 @@ import CreateGameModal from './CreateGameModal';
 import LoginModal from './LoginModal';
 
 const UserInfo = ({ mypage }: { mypage?: boolean }) => {
-  const isLogined = useAppSelector((state) => state.user.isLogined);
+  const { user, isLogined } = useAppSelector((state) => state.user);
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [createGameModalVisible, setCreateGameModalVisible] = useState<boolean>(false);
@@ -27,7 +27,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
             <span>로그인이 필요합니다.</span>
           ) : (
             <>
-              <span className="nickname">닉네임</span>
+              <span className="nickname">{user && user.nickname}</span>
               <span>|</span>
               <span>10TH</span>
             </>

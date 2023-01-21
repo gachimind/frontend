@@ -14,17 +14,14 @@ const GameReady = ({ readyStatus }: { readyStatus: boolean }) => {
   const { emitGameReady } = useGameInitiationSocket();
 
   useEffect(() => {
-    return () => {
-      if (isRenderedFirstTime) {
-        setIsRenderedFirstTime(false);
-        return;
-      }
-      emitGameReady();
-    };
+    if (isRenderedFirstTime) {
+      setIsRenderedFirstTime(false);
+    }
+    emitGameReady();
   }, [debouncedReadyState]);
 
   return (
-    <GameReadyLayout>
+    <GameReadyLayout isReady={isReady}>
       <button onClick={() => setIsReady(!isReady)}>
         <img src={readyButton} />
       </button>
@@ -32,13 +29,17 @@ const GameReady = ({ readyStatus }: { readyStatus: boolean }) => {
   );
 };
 
-const GameReadyLayout = styled.div`
+const GameReadyLayout = styled.div<{ isReady: boolean }>`
   button {
     cursor: pointer;
     background-color: ${(props) => props.theme.colors.darkGrey2};
     width: 628px;
     height: 232px;
     border: ${(props) => props.theme.borders.normalIvory};
+  }
+
+  img {
+    opacity: ${(props) => (props.isReady ? 0.3 : 1)};
   }
 `;
 

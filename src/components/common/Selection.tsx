@@ -5,7 +5,13 @@ import styled from 'styled-components';
 import SelectIcon from '@assets/svg_selectIcon.svg';
 import useClickAway from '@hooks/useClickAway';
 
-const Selection = ({ width, options }: { width?: number; options: Array<{ value: string; label: string }> }) => {
+interface SelectionProps {
+  width?: number;
+  options: Array<{ value: string; label: string }>;
+  setValue: React.Dispatch<React.SetStateAction<any>>;
+}
+
+const Selection = ({ width, options, setValue }: SelectionProps) => {
   const ref = useRef(null);
   useClickAway(ref, () => setShowOptions(false));
 
@@ -18,7 +24,16 @@ const Selection = ({ width, options }: { width?: number; options: Array<{ value:
       <label>{currentValue}</label>
       <SelectOptions show={showOptions} width={width}>
         {options?.map((option) => (
-          <Option key={option.label} value={option.value} onClick={() => setCurrentValue(option.value)} width={width}>
+          <Option
+            key={option.label}
+            value={option.value}
+            onClick={() => {
+              const value = option.value;
+              setCurrentValue(value);
+              setValue(value);
+            }}
+            width={width}
+          >
             {option.label}
           </Option>
         ))}

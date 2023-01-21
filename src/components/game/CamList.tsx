@@ -14,7 +14,7 @@ import CamListSliderArrow from './CamListSliderArrow';
 
 // TODO: 사용자들의 캠 대신 이름으로 참여 여부를 먼저 나타냈다. 수정되어야 한다.
 const CamList = () => {
-  const { userStream, userCam, userMic, userStreamRef } = useAppSelector((state) => state.userMedia);
+  const { userStream, userMic, userStreamRef } = useAppSelector((state) => state.userMedia);
   const { playerList, playerStreamMap } = useAppSelector((state) => state.playerMedia);
   const [hasSlider, setHasSlider] = useState<{ hasPrev: boolean; hasNext: boolean }>({
     hasPrev: false,
@@ -72,20 +72,12 @@ const CamList = () => {
         return (
           <div key={player.userId}>
             {player.userId === user?.userId ? (
-              <Cam
-                userStream={userStream}
-                nickname={user.nickname}
-                video={userCam}
-                audio={userMic}
-                isMe={true}
-                isHost={index === 0}
-              />
+              <Cam userStream={userStream} nickname={user.nickname} audio={userMic} isMe={true} isHost={index === 0} />
             ) : (
               <Cam
                 key={player.userId}
                 userStream={playerStreamMap[player.socketId]}
                 nickname={player.nickname}
-                video={player.video}
                 audio={player.audio}
                 isHost={index === 0}
               />

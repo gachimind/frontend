@@ -43,6 +43,8 @@ const Room = () => {
       offAnnounceRoomUpdate();
       emitUserLeaveRoom();
       offError();
+      userStreamRef && destroyLocalStream(userStreamRef);
+      console.log('[destroy] local stream');
     };
   }, []);
 
@@ -62,10 +64,6 @@ const Room = () => {
       if (broadcastedRooms.find((room) => room.roomId === parsedId)?.isSecretRoom) {
         setPasswordModalVisible(true);
       }
-      return () => {
-        destroyLocalStream(userStreamRef);
-        console.log('[destroy] local stream');
-      };
     }
   }, [userStreamRef]);
 
