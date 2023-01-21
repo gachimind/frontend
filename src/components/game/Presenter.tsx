@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-import ImageHolderIcon from '@assets/svg_imageHolderIcon.svg';
 import MicOnIcon from '@assets/svg_micOnIcon.svg';
 import { useAppSelector } from '@redux/hooks';
 
@@ -24,7 +23,7 @@ const Presenter = () => {
       </GameReadyBox>
       <PresenterStatusBox>
         <div>
-          <img src={ImageHolderIcon} />
+          <ImageHolder></ImageHolder>
           <span>{user?.nickname}</span>
         </div>
         <img src={MicOnIcon} />
@@ -78,6 +77,15 @@ const PresenterStatusBox = styled.div`
       font-weight: 500;
     }
   }
+`;
+
+const ImageHolder = styled.span`
+  background-color: ${(props) => props.theme.colors.white};
+  box-shadow: 0 0 0 3px #000 inset;
+  border: 2px solid ${(props) => props.theme.colors.white};
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 `;
 
 export default Presenter;
