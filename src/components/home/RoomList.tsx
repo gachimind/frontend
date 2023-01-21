@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router';
 import styled from 'styled-components';
 
 import enterRoomIcon from '@assets/svg_enterRoomIcon.svg';
+import privateRoomIcon from '@assets/svg_privateRoomIcon.svg';
 import roomCard from '@assets/svg_roomCard.svg';
 import { useAuthSocket } from '@hooks/socket/useAuthSocket';
 import useLocalStream from '@hooks/useLocalStream';
@@ -81,6 +82,7 @@ const RoomList = () => {
                   <img src={enterRoomIcon} />
                 </EnterButton>
               </CardContentsBox>
+              {room.isSecretRoom && <img className="secret-room-icon" src={privateRoomIcon} />}
             </RoomCard>
           ))}
       </RoomListLayout>
@@ -100,6 +102,13 @@ const RoomCard = styled.div`
   background-image: url(${roomCard});
   width: 272px;
   height: 176px;
+  display: flex;
+  .secret-room-icon {
+    width: 86px;
+    height: 86px;
+    margin-top: 50px;
+    margin-left: 20px;
+  }
 `;
 
 const CardContentsBox = styled.div`
