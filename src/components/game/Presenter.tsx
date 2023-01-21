@@ -17,7 +17,7 @@ const Presenter = () => {
       <PresenterCamBox>CAM</PresenterCamBox>
       <GameReadyBox>
         {!room?.isGameOn && currentUser?.isHost ? (
-          <GameStart isGameReadyToStart={room?.isGameReadyToStart ?? false} />
+          <GameStart />
         ) : (
           <GameReady readyStatus={currentUser?.isReady ?? false} />
         )}

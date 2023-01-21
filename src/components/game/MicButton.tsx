@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import MicButtonIcon from '@assets/svg_micButtonIcon.svg';
+import MicButtonOffIcon from '@assets/svg_micButtonOffIcon.svg';
 import useStreamUpdateSocket from '@hooks/socket/useStreamUpdateSocket';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { setUserMic } from '@redux/modules/userMediaSlice';
@@ -21,7 +22,7 @@ const MicButton = () => {
   };
   return (
     <MicButtonLayout onClick={handleClick} aria-label={`마이크 ${userMic ? '켜짐' : '꺼짐'}`}>
-      {userMic ? 'MIC켜짐' : <img src={MicButtonIcon} />}
+      {userMic ? <img src={MicButtonIcon} /> : <img src={MicButtonOffIcon} />}
     </MicButtonLayout>
   );
 };

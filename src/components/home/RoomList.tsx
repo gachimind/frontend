@@ -71,7 +71,7 @@ const RoomList = () => {
           .map((room) => (
             <RoomCard key={room.roomId}>
               <CardContentsBox>
-                <Title>방제목</Title>
+                <Title>{room.roomTitle}</Title>
                 <Participants>
                   참여인원: {room.participants.toString()}/{room.maxCount}
                 </Participants>
