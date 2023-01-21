@@ -14,9 +14,7 @@ import Footer from './Footer';
 import Header from './Header';
 import PageContainer from './PageContainer';
 
-const MainTemplate = ({ children }: { children: React.ReactNode }) => {
-  const isLogined = useAppSelector((state) => state.user.isLogined);
-
+const MainTemplate = ({ children, isLogined }: { children: React.ReactNode; isLogined: boolean }) => {
   const navigate = useNavigate();
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);

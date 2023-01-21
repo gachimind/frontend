@@ -11,8 +11,8 @@ import EditProfileModal from '@components/mypage/EditProfileModal';
 import CreateGameModal from './CreateGameModal';
 import LoginModal from './LoginModal';
 
-const UserInfo = ({ mypage }: { mypage?: boolean }) => {
-  const { user, isLogined } = useAppSelector((state) => state.user);
+const UserInfo = ({ mypage, isLogined }: { mypage?: boolean; isLogined: boolean }) => {
+  const user = useAppSelector((state) => state.user.user);
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [createGameModalVisible, setCreateGameModalVisible] = useState<boolean>(false);
