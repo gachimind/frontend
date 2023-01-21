@@ -23,8 +23,7 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
           <Selection options={BUG_OPTIONS} width={560} setValue={setCategory} />
         </InputContainer>
         <InputContainer label="내용">
-          {/* FIXME: textarea로 바꿀 것 */}
-          <Input style={{ height: '200px' }} placeholder="내용이 들어간당" />
+          <ReportTextarea spellCheck={false}></ReportTextarea>
         </InputContainer>
         <ButtonBox>
           <button onClick={onClose}>취소하기</button>
@@ -61,6 +60,25 @@ const ButtonBox = styled.div`
     border-right: ${(props) => props.theme.borders.normalBlack};
     border-bottom: ${(props) => props.theme.borders.normalBlack};
     border-left: ${(props) => props.theme.borders.normalWhite};
+  }
+`;
+
+const ReportTextarea = styled.textarea`
+  font-family: inherit;
+  font-size: 24px;
+  color: ${(props) => props.theme.colors.ivory2};
+  background-color: ${(props) => props.theme.colors.darkGrey2};
+  height: 200px;
+  padding: 10px;
+  resize: none;
+
+  border-top: ${(props) => props.theme.borders.normalBlack};
+  border-right: ${(props) => props.theme.borders.normalWhite};
+  border-bottom: ${(props) => props.theme.borders.normalWhite};
+  border-left: ${(props) => props.theme.borders.normalBlack};
+
+  :focus {
+    outline: none;
   }
 `;
 
