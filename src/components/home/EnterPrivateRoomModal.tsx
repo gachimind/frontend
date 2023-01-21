@@ -125,10 +125,10 @@ const RoomTitle = styled.div`
   height: 56px;
   display: flex;
 
-  border-top: ${(props) => props.theme.borders.normalblack};
-  border-right: ${(props) => props.theme.borders.normalwhite};
-  border-bottom: ${(props) => props.theme.borders.normalwhite};
-  border-left: ${(props) => props.theme.borders.normalblack};
+  border-top: ${(props) => props.theme.borders.normalBlack};
+  border-right: ${(props) => props.theme.borders.normalWhite};
+  border-bottom: ${(props) => props.theme.borders.normalWhite};
+  border-left: ${(props) => props.theme.borders.normalBlack};
 
   img {
     position: absolute;
@@ -147,10 +147,10 @@ const EnterRoomButton = styled.button<{ isDisabled: boolean }>`
   height: 72px;
   margin-top: 20px;
 
-  border-top: ${(props) => props.theme.borders.normalwhite};
-  border-right: ${(props) => props.theme.borders.normalblack};
-  border-bottom: ${(props) => props.theme.borders.normalblack};
-  border-left: ${(props) => props.theme.borders.normalwhite};
+  border-top: ${(props) => props.theme.borders.normalWhite};
+  border-right: ${(props) => props.theme.borders.normalBlack};
+  border-bottom: ${(props) => props.theme.borders.normalBlack};
+  border-left: ${(props) => props.theme.borders.normalWhite};
 `;
 
 export default EnterPrivateRoomModal;

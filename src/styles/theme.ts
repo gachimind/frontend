@@ -97,11 +97,11 @@ export const borders = {
   /**
    * black: 4px solid black
    */
-  normalblack: '4px solid black',
+  normalBlack: '4px solid black',
   /**
    * white: 4px solid white
    */
-  normalwhite: '4px solid white',
+  normalWhite: '4px solid white',
   /**
    * normalGrey: 4px solid #d7d7d7
    */
@@ -112,8 +112,6 @@ export const font = {
   ibmPlexMono: 'IBMPlexMono',
   joystick: 'Joystick',
   notoSansKR: 'NotoSansKR',
-  // korean: 'neodgm',
-  // Mono: 'IBM Plex Mono',
 };
 
 export const textShadow = {

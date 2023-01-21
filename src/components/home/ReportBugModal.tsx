@@ -57,10 +57,10 @@ const ButtonBox = styled.div`
     color: ${(props) => props.theme.colors.ivory1};
     background-color: ${(props) => props.theme.colors.darkGrey2};
 
-    border-top: ${(props) => props.theme.borders.normalwhite};
-    border-right: ${(props) => props.theme.borders.normalblack};
-    border-bottom: ${(props) => props.theme.borders.normalblack};
-    border-left: ${(props) => props.theme.borders.normalwhite};
+    border-top: ${(props) => props.theme.borders.normalWhite};
+    border-right: ${(props) => props.theme.borders.normalBlack};
+    border-bottom: ${(props) => props.theme.borders.normalBlack};
+    border-left: ${(props) => props.theme.borders.normalWhite};
   }
 `;
 

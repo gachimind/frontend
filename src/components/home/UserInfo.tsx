@@ -89,10 +89,10 @@ const ProfileBox = styled.div`
   position: relative;
   margin-bottom: 18px;
 
-  border-top: ${(props) => props.theme.borders.normalblack};
-  border-right: ${(props) => props.theme.borders.normalwhite};
-  border-bottom: ${(props) => props.theme.borders.normalwhite};
-  border-left: ${(props) => props.theme.borders.normalblack};
+  border-top: ${(props) => props.theme.borders.normalBlack};
+  border-right: ${(props) => props.theme.borders.normalWhite};
+  border-bottom: ${(props) => props.theme.borders.normalWhite};
+  border-left: ${(props) => props.theme.borders.normalBlack};
 `;
 
 const UserImageBox = styled.div`
@@ -124,10 +124,10 @@ const MakeRoomButton = styled.button`
   text-shadow: ${(props) => props.theme.textShadow.textShadow};
   background-color: ${(props) => props.theme.colors.darkGrey2};
 
-  border-top: ${(props) => props.theme.borders.normalwhite};
-  border-right: ${(props) => props.theme.borders.normalblack};
-  border-bottom: ${(props) => props.theme.borders.normalblack};
-  border-left: ${(props) => props.theme.borders.normalwhite};
+  border-top: ${(props) => props.theme.borders.normalWhite};
+  border-right: ${(props) => props.theme.borders.normalBlack};
+  border-bottom: ${(props) => props.theme.borders.normalBlack};
+  border-left: ${(props) => props.theme.borders.normalWhite};
 `;
 
 const ScoreBox = styled.div`
@@ -139,10 +139,10 @@ const ScoreBox = styled.div`
   justify-content: center;
   align-items: center;
 
-  border-top: ${(props) => props.theme.borders.normalblack};
-  border-right: ${(props) => props.theme.borders.normalwhite};
-  border-bottom: ${(props) => props.theme.borders.normalwhite};
-  border-left: ${(props) => props.theme.borders.normalblack};
+  border-top: ${(props) => props.theme.borders.normalBlack};
+  border-right: ${(props) => props.theme.borders.normalWhite};
+  border-bottom: ${(props) => props.theme.borders.normalWhite};
+  border-left: ${(props) => props.theme.borders.normalBlack};
 
   img {
     background-color: ${(props) => props.theme.colors.darkGrey1};

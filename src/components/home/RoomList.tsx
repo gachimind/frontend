@@ -131,8 +131,8 @@ const EnterButton = styled.button`
   height: 40px;
 
   border-top: ${(props) => props.theme.borders.normalGrey};
-  border-right: ${(props) => props.theme.borders.normalblack};
-  border-bottom: ${(props) => props.theme.borders.normalblack};
+  border-right: ${(props) => props.theme.borders.normalBlack};
+  border-bottom: ${(props) => props.theme.borders.normalBlack};
   border-left: ${(props) => props.theme.borders.normalGrey};
 `;
 
