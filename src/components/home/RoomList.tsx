@@ -107,7 +107,12 @@ const CardContentsBox = styled.div`
 `;
 
 const Title = styled.span`
-  color: ${(props) => props.theme.colors.ivory2};
+  background-image: linear-gradient(0deg, rgba(121, 121, 121, 0.5) 50%, #ffffff 50%);
+  background-size: 100%;
+  background-clip: text;
+  -webkit-text-stroke: 1px #797979;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-family: inherit;
   font-size: 20px;
   line-height: 150%;
@@ -117,6 +122,7 @@ const Participants = styled.span`
   font-family: inherit;
   font-size: 12px;
   color: ${(props) => props.theme.colors.lightGrey5};
+  opacity: 0.5;
 `;
 
 const EnterButton = styled.button`
