@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import bugIcon from '@assets/svg_bugIcon.svg';
+import worldIcon from '@assets/svg_worldIcon.svg';
 import { useAppSelector } from '@redux/hooks';
 
 import LoginModal from '@components/home/LoginModal';
@@ -25,7 +26,10 @@ const MainTemplate = ({ children }: { children: React.ReactNode }) => {
       <Header>
         {loginModalVisible && <LoginModal visible={loginModalVisible} onClose={() => setLoginModalVisible(false)} />}
         {!isLogined ? (
-          <LoginButton onClick={() => setLoginModalVisible(true)}>LOGIN</LoginButton>
+          <LoginButton onClick={() => setLoginModalVisible(true)}>
+            <img src={worldIcon} />
+            LOGIN
+          </LoginButton>
         ) : (
           <LoginButton onClick={() => navigate('/mypage')}>MYPAGE</LoginButton>
         )}
@@ -48,10 +52,14 @@ const MainTemplate = ({ children }: { children: React.ReactNode }) => {
 
 const LoginButton = styled.button`
   cursor: pointer;
+  color: ${(props) => props.theme.colors.darkGrey2};
   font-family: ${(props) => props.theme.font.joystick};
   font-size: 20px;
   margin-right: 150px;
   background-color: transparent;
+  gap: 16px;
+  display: flex;
+  align-items: center;
 `;
 
 const MainContentsBox = styled.div`
