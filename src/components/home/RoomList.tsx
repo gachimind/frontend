@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router';
 
 import styled from 'styled-components';
 
+import enterRoomIcon from '@assets/svg_enterRoomIcon.svg';
 import roomCard from '@assets/svg_roomCard.svg';
 import { useAuthSocket } from '@hooks/socket/useAuthSocket';
 import useLocalStream from '@hooks/useLocalStream';
@@ -75,7 +76,10 @@ const RoomList = () => {
                 <Participants>
                   참여인원: {room.participants.toString()}/{room.maxCount}
                 </Participants>
-                <EnterButton onClick={() => handleJoinRoomClick(room.roomId)}>참가하기</EnterButton>
+                <EnterButton onClick={() => handleJoinRoomClick(room.roomId)}>
+                  참가하기
+                  <img src={enterRoomIcon} />
+                </EnterButton>
               </CardContentsBox>
             </RoomCard>
           ))}
@@ -110,7 +114,7 @@ const Title = styled.span`
   background-image: linear-gradient(0deg, rgba(121, 121, 121, 0.5) 50%, #ffffff 50%);
   background-size: 100%;
   background-clip: text;
-  -webkit-text-stroke: 1px #797979;
+  -webkit-text-stroke: 1px ${(props) => props.theme.colors.darkGrey4};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: inherit;
@@ -135,6 +139,10 @@ const EnterButton = styled.button`
   margin-top: 12px;
   width: 96px;
   height: 40px;
+  gap: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   border-top: ${(props) => props.theme.borders.normalGrey};
   border-right: ${(props) => props.theme.borders.normalBlack};
