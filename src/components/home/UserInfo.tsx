@@ -27,7 +27,7 @@ const UserInfo = ({ mypage, isLogined }: { mypage?: boolean; isLogined: boolean 
             <span>로그인이 필요합니다.</span>
           ) : (
             <>
-              <span className="nickname">{user && user.nickname}</span>
+              <span>{user && user.nickname}</span>
               <span>|</span>
               <span>10TH</span>
             </>
@@ -107,10 +107,6 @@ const UserStatusBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  span {
-  }
-  .nickname {
-  }
 `;
 
 const MakeRoomButton = styled.button`

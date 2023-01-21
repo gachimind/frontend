@@ -79,11 +79,7 @@ const FooterBox = styled.div`
     cursor: pointer;
     font-size: 16px;
     color: ${(props) => props.theme.colors.ivory2};
-    text-shadow: -1px 0 #797979, 0 1px #797979, 1px 0 #797979, 0 -1px #797979;
-    border-top: 4px solid white;
-    border-right: 4px solid black;
-    border-bottom: 4px solid black;
-    border-left: 4px solid white;
+    text-shadow: ${(props) => props.theme.textShadow.textShadow};
     background-color: ${(props) => props.theme.colors.darkGrey2};
     width: 152px;
     height: 56px;
@@ -91,6 +87,11 @@ const FooterBox = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    border-top: ${(props) => props.theme.borders.normalWhite};
+    border-right: ${(props) => props.theme.borders.normalBlack};
+    border-bottom: ${(props) => props.theme.borders.normalBlack};
+    border-left: ${(props) => props.theme.borders.normalWhite};
   }
 `;
 

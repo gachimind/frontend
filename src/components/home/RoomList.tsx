@@ -144,7 +144,7 @@ const CardContentsBox = styled.div`
 `;
 
 const Title = styled.span`
-  background-image: linear-gradient(0deg, rgba(121, 121, 121, 0.5) 50%, #ffffff 50%);
+  background-image: linear-gradient(0deg, rgba(121, 121, 121, 0.5) 50%, ${(props) => props.theme.colors.ivory2} 50%);
   background-size: 100%;
   background-clip: text;
   -webkit-text-stroke: 1px ${(props) => props.theme.colors.darkGrey4};
