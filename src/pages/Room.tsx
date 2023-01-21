@@ -151,7 +151,6 @@ const TimerBox = styled.div`
     margin-top: 30px;
     font-size: 40px;
     color: ${(props) => props.theme.colors.ivory1};
-    font-family: ${(props) => props.theme.font.korean};
   }
 `;
 

@@ -112,16 +112,13 @@ const UserStatusBox = styled.div`
   justify-content: center;
   align-items: center;
   span {
-    font-family: ${(props) => props.theme.font.korean};
   }
   .nickname {
-    font-family: ${(props) => props.theme.font.korean};
   }
 `;
 
 const MakeRoomButton = styled.button`
   cursor: pointer;
-  font-family: ${(props) => props.theme.font.korean};
   font-size: 24px;
   color: ${(props) => props.theme.colors.ivory2};
   text-shadow: ${(props) => props.theme.textShadow.textShadow};
@@ -135,7 +132,6 @@ const MakeRoomButton = styled.button`
 
 const ScoreBox = styled.div`
   color: ${(props) => props.theme.colors.ivory2};
-  font-family: ${(props) => props.theme.font.korean};
   padding: 0px 40px;
   gap: 24px;
   display: grid;
@@ -159,12 +155,10 @@ const ScoreBox = styled.div`
     flex-direction: column;
 
     .title {
-      font-family: ${(props) => props.theme.font.korean};
       font-size: 12px;
     }
 
     .score {
-      font-family: ${(props) => props.theme.font.korean};
       text-shadow: ${(props) => props.theme.textShadow.textShadow};
       font-size: 24px;
       gap: 4px;

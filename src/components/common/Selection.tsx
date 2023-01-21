@@ -45,7 +45,6 @@ const Selection = ({ width, options, setValue }: SelectionProps) => {
 const SelectBox = styled.div`
   cursor: pointer;
   position: relative;
-  font-family: ${(props) => props.theme.font.korean};
   background-color: ${(props) => props.theme.colors.darkGrey2};
   height: 56px;
   padding-left: 20px;

@@ -94,7 +94,6 @@ const RoomListLayout = styled.div`
 
 const RoomCard = styled.div`
   background-image: url(${roomCard});
-  font-family: ${(props) => props.theme.font.korean};
   width: 272px;
   height: 176px;
 `;

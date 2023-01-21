@@ -69,7 +69,6 @@ const MediaControlBox = styled.div`
 
 const LeaveButton = styled.button`
   cursor: pointer;
-  font-family: ${(props) => props.theme.font.korean};
   font-size: 16px;
   color: ${(props) => props.theme.colors.ivory2};
   text-shadow: ${(props) => props.theme.textShadow.textShadow};

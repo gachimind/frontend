@@ -70,7 +70,6 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
 };
 
 const CreateGameModalLayout = styled.div`
-  font-family: ${(props) => props.theme.font.korean};
   padding: 40px 70px 48px 70px;
   gap: 24px;
   display: flex;

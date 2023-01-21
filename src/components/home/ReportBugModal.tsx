@@ -36,7 +36,6 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
 };
 
 const ReportBugModalLayout = styled.div`
-  font-family: ${(props) => props.theme.font.korean};
   padding: 40px 70px 52px 70px;
   gap: 28px;
   display: flex;

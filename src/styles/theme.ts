@@ -109,8 +109,11 @@ export const borders = {
 };
 
 export const font = {
-  korean: 'neodgm',
-  Mono: 'IBM Plex Mono',
+  ibmPlexMono: 'IBMPlexMono',
+  joystick: 'Joystick',
+  notoSansKR: 'NotoSansKR',
+  // korean: 'neodgm',
+  // Mono: 'IBM Plex Mono',
 };
 
 export const textShadow = {

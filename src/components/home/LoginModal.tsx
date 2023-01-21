@@ -41,7 +41,6 @@ const LoginModalLayout = styled.div`
 
 const LoginButton = styled.button`
   cursor: pointer;
-  font-family: ${(props) => props.theme.font.korean};
   font-size: 24px;
   color: ${(props) => props.theme.colors.ivory2};
   background-color: ${(props) => props.theme.colors.darkGrey2};

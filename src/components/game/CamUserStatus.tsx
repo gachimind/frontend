@@ -31,8 +31,8 @@ const CamUserStatusLayout = styled.div`
 `;
 
 const NicknameText = styled.span`
-  font-family: ${(props) => props.theme.font.korean};
-  font-weight: 700;
+  font-family: ${(props) => props.theme.font.notoSansKR};
+  font-weight: 500;
   font-size: 12px;
   color: white;
 `;

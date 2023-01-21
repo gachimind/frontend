@@ -4,7 +4,7 @@ import { colors } from './theme';
 
 export const GlobalStyle = createGlobalStyle`
 * {
-  font-family: "joystick";
+  font-family: "NeoDunggeunmo";
     margin: 0;
     padding: 0;
     border: 0;

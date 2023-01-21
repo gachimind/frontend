@@ -48,6 +48,7 @@ const MainTemplate = ({ children }: { children: React.ReactNode }) => {
 
 const LoginButton = styled.button`
   cursor: pointer;
+  font-family: ${(props) => props.theme.font.joystick};
   font-size: 20px;
   margin-right: 150px;
   background-color: transparent;
@@ -70,7 +71,6 @@ const FooterBox = styled.div`
 
   button {
     cursor: pointer;
-    font-family: ${(props) => props.theme.font.korean};
     font-size: 16px;
     color: ${(props) => props.theme.colors.ivory2};
     text-shadow: -1px 0 #797979, 0 1px #797979, 1px 0 #797979, 0 -1px #797979;

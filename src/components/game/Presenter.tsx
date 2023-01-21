@@ -74,6 +74,8 @@ const PresenterStatusBox = styled.div`
     span {
       color: ${(props) => props.theme.colors.white};
       font-size: 16px;
+      font-family: ${(props) => props.theme.font.notoSansKR};
+      font-weight: 500;
     }
   }
 `;

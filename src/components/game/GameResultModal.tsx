@@ -20,7 +20,6 @@ const GameResultModal = ({ visible, onClose }: { visible: boolean; onClose: () =
 
 // TODO: 임시 색상으로 추후 변경되어야 한다.
 const GameResultModalLayout = styled.div`
-  font-family: ${(props) => props.theme.font.korean};
   padding: 78px 54px 56px 54px;
   gap: 32px;
   display: flex;

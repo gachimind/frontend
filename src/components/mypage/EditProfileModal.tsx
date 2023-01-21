@@ -19,7 +19,6 @@ const EditProfileModal = ({ visible, onClose }: { visible: boolean; onClose: () 
 
 // TODO: 임시 색상으로 추후 변경되어야 한다.
 const EditProfileModalLayout = styled.div`
-  font-family: ${(props) => props.theme.font.korean};
   padding: 120px 70px;
   gap: 68px;
   display: flex;

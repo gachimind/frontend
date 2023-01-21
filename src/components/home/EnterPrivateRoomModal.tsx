@@ -109,7 +109,6 @@ const EnterPrivateRoomModal = ({ visible, onClose, roomId, roomTitle, successHan
 };
 
 const EnterPrivateRoomModalLayout = styled.div`
-  font-family: ${(props) => props.theme.font.korean};
   padding: 56px 80px 64px 80px;
   gap: 28px;
   display: flex;

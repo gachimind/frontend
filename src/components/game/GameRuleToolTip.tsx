@@ -83,7 +83,6 @@ const ModalCloseButton = styled.button`
 const RuleBox = styled.div`
   padding: 40px 70px;
   ul {
-    font-family: ${(props) => props.theme.font.korean};
     font-size: 24px;
     list-style: none;
     label {
