@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import enterRoomIcon from '@assets/svg_enterRoomIcon.svg';
 import privateRoomIcon from '@assets/svg_privateRoomIcon.svg';
 import roomCard from '@assets/svg_roomCard.svg';
+import roomListLeftIcon from '@assets/svg_roomListLeftIcon.svg';
+import roomListRightIcon from '@assets/svg_roomListRightIcon.svg';
 import { useAuthSocket } from '@hooks/socket/useAuthSocket';
 import useLocalStream from '@hooks/useLocalStream';
 import { useAppSelector } from '@redux/hooks';
@@ -58,6 +60,14 @@ const RoomList = () => {
   return (
     <>
       <RoomListLayout>
+        <RoomPaginationBox>
+          <button>
+            <img src={roomListLeftIcon} />
+          </button>
+          <button>
+            <img src={roomListRightIcon} />
+          </button>
+        </RoomPaginationBox>
         {isPasswordModalOpen && selectedRoom && (
           <EnterPrivateRoomModal
             roomId={selectedRoom.roomId}
@@ -91,11 +101,25 @@ const RoomList = () => {
 };
 
 const RoomListLayout = styled.div`
+  position: relative;
   padding: 29px 46px;
   column-gap: 32px;
   row-gap: 16px;
   display: flex;
   flex-wrap: wrap;
+`;
+
+const RoomPaginationBox = styled.div`
+  position: absolute;
+  gap: 32px;
+  top: -35px;
+  right: 56px;
+  display: flex;
+
+  button {
+    cursor: pointer;
+    background: none;
+  }
 `;
 
 const RoomCard = styled.div`
