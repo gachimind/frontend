@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import bugIcon from '@assets/svg_bugIcon.svg';
+import worldIcon from '@assets/svg_worldIcon.svg';
 import { useAppSelector } from '@redux/hooks';
 
 import LoginModal from '@components/home/LoginModal';
@@ -13,9 +14,7 @@ import Footer from './Footer';
 import Header from './Header';
 import PageContainer from './PageContainer';
 
-const MainTemplate = ({ children }: { children: React.ReactNode }) => {
-  const isLogined = useAppSelector((state) => state.user.isLogined);
-
+const MainTemplate = ({ children, isLogined }: { children: React.ReactNode; isLogined: boolean }) => {
   const navigate = useNavigate();
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
@@ -25,7 +24,10 @@ const MainTemplate = ({ children }: { children: React.ReactNode }) => {
       <Header>
         {loginModalVisible && <LoginModal visible={loginModalVisible} onClose={() => setLoginModalVisible(false)} />}
         {!isLogined ? (
-          <LoginButton onClick={() => setLoginModalVisible(true)}>LOGIN</LoginButton>
+          <LoginButton onClick={() => setLoginModalVisible(true)}>
+            <img src={worldIcon} />
+            LOGIN
+          </LoginButton>
         ) : (
           <LoginButton onClick={() => navigate('/mypage')}>MYPAGE</LoginButton>
         )}
@@ -48,9 +50,14 @@ const MainTemplate = ({ children }: { children: React.ReactNode }) => {
 
 const LoginButton = styled.button`
   cursor: pointer;
+  color: ${(props) => props.theme.colors.darkGrey2};
+  font-family: ${(props) => props.theme.font.joystick};
   font-size: 20px;
   margin-right: 150px;
   background-color: transparent;
+  gap: 16px;
+  display: flex;
+  align-items: center;
 `;
 
 const MainContentsBox = styled.div`
@@ -70,14 +77,9 @@ const FooterBox = styled.div`
 
   button {
     cursor: pointer;
-    font-family: ${(props) => props.theme.font.korean};
     font-size: 16px;
     color: ${(props) => props.theme.colors.ivory2};
-    text-shadow: -1px 0 #797979, 0 1px #797979, 1px 0 #797979, 0 -1px #797979;
-    border-top: 4px solid white;
-    border-right: 4px solid black;
-    border-bottom: 4px solid black;
-    border-left: 4px solid white;
+    text-shadow: ${(props) => props.theme.textShadow.textShadow};
     background-color: ${(props) => props.theme.colors.darkGrey2};
     width: 152px;
     height: 56px;
@@ -85,6 +87,11 @@ const FooterBox = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    border-top: ${(props) => props.theme.borders.normalWhite};
+    border-right: ${(props) => props.theme.borders.normalBlack};
+    border-bottom: ${(props) => props.theme.borders.normalBlack};
+    border-left: ${(props) => props.theme.borders.normalWhite};
   }
 `;
 

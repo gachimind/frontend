@@ -51,6 +51,10 @@ export const colors = {
    */
   darkGrey3: '#3A3A3A',
   /**
+   * dark grey4: #797979
+   */
+  darkGrey4: '#797979',
+  /**
    * black1: #272727
    */
   black1: '#272727',
@@ -97,11 +101,11 @@ export const borders = {
   /**
    * black: 4px solid black
    */
-  normalblack: '4px solid black',
+  normalBlack: '4px solid black',
   /**
    * white: 4px solid white
    */
-  normalwhite: '4px solid white',
+  normalWhite: '4px solid white',
   /**
    * normalGrey: 4px solid #d7d7d7
    */
@@ -109,8 +113,9 @@ export const borders = {
 };
 
 export const font = {
-  korean: 'neodgm',
-  Mono: 'IBM Plex Mono',
+  ibmPlexMono: 'IBMPlexMono',
+  joystick: 'Joystick',
+  notoSansKR: 'NotoSansKR',
 };
 
 export const textShadow = {

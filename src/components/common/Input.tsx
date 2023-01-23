@@ -13,10 +13,10 @@ const InputLayout = styled.input`
   height: 56px;
   text-align: center;
 
-  border-top: ${(props) => props.theme.borders.normalblack};
-  border-right: ${(props) => props.theme.borders.normalwhite};
-  border-bottom: ${(props) => props.theme.borders.normalwhite};
-  border-left: ${(props) => props.theme.borders.normalblack};
+  border-top: ${(props) => props.theme.borders.normalBlack};
+  border-right: ${(props) => props.theme.borders.normalWhite};
+  border-bottom: ${(props) => props.theme.borders.normalWhite};
+  border-left: ${(props) => props.theme.borders.normalBlack};
 
   :focus {
     outline: none;

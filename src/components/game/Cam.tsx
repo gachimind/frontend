@@ -12,6 +12,7 @@ interface CamProps {
   isHost?: boolean;
 }
 
+// TODO: 게임 레디 전/레디 후/캠 키기 전 디자인을 추가해야한다.
 const Cam = ({ userStream, nickname, audio, isMe, isHost }: CamProps) => {
   const videoRef: React.RefObject<HTMLVideoElement> | null = useRef(null);
 

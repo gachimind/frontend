@@ -19,7 +19,6 @@ const EditProfileModal = ({ visible, onClose }: { visible: boolean; onClose: () 
 
 // TODO: 임시 색상으로 추후 변경되어야 한다.
 const EditProfileModalLayout = styled.div`
-  font-family: ${(props) => props.theme.font.korean};
   padding: 120px 70px;
   gap: 68px;
   display: flex;
@@ -35,10 +34,10 @@ const EditProfileButton = styled.button`
   background-color: ${(props) => props.theme.colors.darkGrey2};
   height: 56px;
 
-  border-top: ${(props) => props.theme.borders.normalwhite};
-  border-right: ${(props) => props.theme.borders.normalblack};
-  border-bottom: ${(props) => props.theme.borders.normalblack};
-  border-left: ${(props) => props.theme.borders.normalwhite};
+  border-top: ${(props) => props.theme.borders.normalWhite};
+  border-right: ${(props) => props.theme.borders.normalBlack};
+  border-bottom: ${(props) => props.theme.borders.normalBlack};
+  border-left: ${(props) => props.theme.borders.normalWhite};
 `;
 
 export default EditProfileModal;

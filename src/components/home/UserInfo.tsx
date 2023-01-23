@@ -11,8 +11,8 @@ import EditProfileModal from '@components/mypage/EditProfileModal';
 import CreateGameModal from './CreateGameModal';
 import LoginModal from './LoginModal';
 
-const UserInfo = ({ mypage }: { mypage?: boolean }) => {
-  const { user, isLogined } = useAppSelector((state) => state.user);
+const UserInfo = ({ mypage, isLogined }: { mypage?: boolean; isLogined: boolean }) => {
+  const user = useAppSelector((state) => state.user.user);
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [createGameModalVisible, setCreateGameModalVisible] = useState<boolean>(false);
@@ -27,7 +27,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
             <span>로그인이 필요합니다.</span>
           ) : (
             <>
-              <span className="nickname">{user && user.nickname}</span>
+              <span>{user && user.nickname}</span>
               <span>|</span>
               <span>10TH</span>
             </>
@@ -52,24 +52,20 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
       <ScoreBox>
         <img src={medalIcon} />
         <div>
-          <span className="title">오늘 획득한 점수</span>
-          <span className="score">
+          <span className="score-box-title">오늘 획득한 점수</span>
+          <span className="score-box-score">
             10000
-            <span className="title" id="fix">
-              점
-            </span>
+            <span>점</span>
           </span>
         </div>
       </ScoreBox>
       <ScoreBox>
         <img src={trophyIcon} />
         <div>
-          <span className="title">누적 점수</span>
-          <span className="score">
+          <span className="score-box-title">누적 점수</span>
+          <span className="score-box-score">
             10000
-            <span className="title" id="fix">
-              점
-            </span>
+            <span>점</span>
           </span>
         </div>
       </ScoreBox>
@@ -89,10 +85,10 @@ const ProfileBox = styled.div`
   position: relative;
   margin-bottom: 18px;
 
-  border-top: ${(props) => props.theme.borders.normalblack};
-  border-right: ${(props) => props.theme.borders.normalwhite};
-  border-bottom: ${(props) => props.theme.borders.normalwhite};
-  border-left: ${(props) => props.theme.borders.normalblack};
+  border-top: ${(props) => props.theme.borders.normalBlack};
+  border-right: ${(props) => props.theme.borders.normalWhite};
+  border-bottom: ${(props) => props.theme.borders.normalWhite};
+  border-left: ${(props) => props.theme.borders.normalBlack};
 `;
 
 const UserImageBox = styled.div`
@@ -111,31 +107,23 @@ const UserStatusBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  span {
-    font-family: ${(props) => props.theme.font.korean};
-  }
-  .nickname {
-    font-family: ${(props) => props.theme.font.korean};
-  }
 `;
 
 const MakeRoomButton = styled.button`
   cursor: pointer;
-  font-family: ${(props) => props.theme.font.korean};
   font-size: 24px;
   color: ${(props) => props.theme.colors.ivory2};
   text-shadow: ${(props) => props.theme.textShadow.textShadow};
   background-color: ${(props) => props.theme.colors.darkGrey2};
 
-  border-top: ${(props) => props.theme.borders.normalwhite};
-  border-right: ${(props) => props.theme.borders.normalblack};
-  border-bottom: ${(props) => props.theme.borders.normalblack};
-  border-left: ${(props) => props.theme.borders.normalwhite};
+  border-top: ${(props) => props.theme.borders.normalWhite};
+  border-right: ${(props) => props.theme.borders.normalBlack};
+  border-bottom: ${(props) => props.theme.borders.normalBlack};
+  border-left: ${(props) => props.theme.borders.normalWhite};
 `;
 
 const ScoreBox = styled.div`
   color: ${(props) => props.theme.colors.ivory2};
-  font-family: ${(props) => props.theme.font.korean};
   padding: 0px 40px;
   gap: 24px;
   display: grid;
@@ -143,10 +131,10 @@ const ScoreBox = styled.div`
   justify-content: center;
   align-items: center;
 
-  border-top: ${(props) => props.theme.borders.normalblack};
-  border-right: ${(props) => props.theme.borders.normalwhite};
-  border-bottom: ${(props) => props.theme.borders.normalwhite};
-  border-left: ${(props) => props.theme.borders.normalblack};
+  border-top: ${(props) => props.theme.borders.normalBlack};
+  border-right: ${(props) => props.theme.borders.normalWhite};
+  border-bottom: ${(props) => props.theme.borders.normalWhite};
+  border-left: ${(props) => props.theme.borders.normalBlack};
 
   img {
     background-color: ${(props) => props.theme.colors.darkGrey1};
@@ -158,19 +146,18 @@ const ScoreBox = styled.div`
     display: flex;
     flex-direction: column;
 
-    .title {
-      font-family: ${(props) => props.theme.font.korean};
+    .score-box-title {
       font-size: 12px;
     }
 
-    .score {
-      font-family: ${(props) => props.theme.font.korean};
+    .score-box-score {
       text-shadow: ${(props) => props.theme.textShadow.textShadow};
       font-size: 24px;
       gap: 4px;
       display: flex;
       align-items: center;
-      #fix {
+      span {
+        font-size: 12px;
         text-shadow: none;
       }
     }

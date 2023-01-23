@@ -3,7 +3,11 @@ import { useLocation, useNavigate } from 'react-router';
 
 import styled from 'styled-components';
 
+import enterRoomIcon from '@assets/svg_enterRoomIcon.svg';
+import privateRoomIcon from '@assets/svg_privateRoomIcon.svg';
 import roomCard from '@assets/svg_roomCard.svg';
+import roomListLeftIcon from '@assets/svg_roomListLeftIcon.svg';
+import roomListRightIcon from '@assets/svg_roomListRightIcon.svg';
 import { useAuthSocket } from '@hooks/socket/useAuthSocket';
 import useLocalStream from '@hooks/useLocalStream';
 import { useAppSelector } from '@redux/hooks';
@@ -56,6 +60,14 @@ const RoomList = () => {
   return (
     <>
       <RoomListLayout>
+        <RoomPaginationBox>
+          <button>
+            <img src={roomListLeftIcon} />
+          </button>
+          <button>
+            <img src={roomListRightIcon} />
+          </button>
+        </RoomPaginationBox>
         {isPasswordModalOpen && selectedRoom && (
           <EnterPrivateRoomModal
             roomId={selectedRoom.roomId}
@@ -75,8 +87,12 @@ const RoomList = () => {
                 <Participants>
                   참여인원: {room.participants.toString()}/{room.maxCount}
                 </Participants>
-                <EnterButton onClick={() => handleJoinRoomClick(room.roomId)}>참가하기</EnterButton>
+                <EnterButton onClick={() => handleJoinRoomClick(room.roomId)}>
+                  참가하기
+                  <img src={enterRoomIcon} />
+                </EnterButton>
               </CardContentsBox>
+              {room.isSecretRoom && <img className="secret-room-icon" src={privateRoomIcon} />}
             </RoomCard>
           ))}
       </RoomListLayout>
@@ -85,6 +101,7 @@ const RoomList = () => {
 };
 
 const RoomListLayout = styled.div`
+  position: relative;
   padding: 29px 46px;
   column-gap: 32px;
   row-gap: 16px;
@@ -92,11 +109,30 @@ const RoomListLayout = styled.div`
   flex-wrap: wrap;
 `;
 
+const RoomPaginationBox = styled.div`
+  position: absolute;
+  gap: 32px;
+  top: -35px;
+  right: 56px;
+  display: flex;
+
+  button {
+    cursor: pointer;
+    background: none;
+  }
+`;
+
 const RoomCard = styled.div`
   background-image: url(${roomCard});
-  font-family: ${(props) => props.theme.font.korean};
   width: 272px;
   height: 176px;
+  display: flex;
+  .secret-room-icon {
+    width: 86px;
+    height: 86px;
+    margin-top: 50px;
+    margin-left: 20px;
+  }
 `;
 
 const CardContentsBox = styled.div`
@@ -108,7 +144,12 @@ const CardContentsBox = styled.div`
 `;
 
 const Title = styled.span`
-  color: ${(props) => props.theme.colors.ivory2};
+  background-image: linear-gradient(0deg, rgba(121, 121, 121, 0.5) 50%, ${(props) => props.theme.colors.ivory2} 50%);
+  background-size: 100%;
+  background-clip: text;
+  -webkit-text-stroke: 1px ${(props) => props.theme.colors.darkGrey4};
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-family: inherit;
   font-size: 20px;
   line-height: 150%;
@@ -118,6 +159,7 @@ const Participants = styled.span`
   font-family: inherit;
   font-size: 12px;
   color: ${(props) => props.theme.colors.lightGrey5};
+  opacity: 0.5;
 `;
 
 const EnterButton = styled.button`
@@ -130,10 +172,14 @@ const EnterButton = styled.button`
   margin-top: 12px;
   width: 96px;
   height: 40px;
+  gap: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   border-top: ${(props) => props.theme.borders.normalGrey};
-  border-right: ${(props) => props.theme.borders.normalblack};
-  border-bottom: ${(props) => props.theme.borders.normalblack};
+  border-right: ${(props) => props.theme.borders.normalBlack};
+  border-bottom: ${(props) => props.theme.borders.normalBlack};
   border-left: ${(props) => props.theme.borders.normalGrey};
 `;
 

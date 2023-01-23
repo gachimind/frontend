@@ -69,7 +69,6 @@ const MediaControlBox = styled.div`
 
 const LeaveButton = styled.button`
   cursor: pointer;
-  font-family: ${(props) => props.theme.font.korean};
   font-size: 16px;
   color: ${(props) => props.theme.colors.ivory2};
   text-shadow: ${(props) => props.theme.textShadow.textShadow};
@@ -82,10 +81,10 @@ const LeaveButton = styled.button`
   justify-content: center;
   align-items: center;
 
-  border-top: ${(props) => props.theme.borders.normalwhite};
-  border-right: ${(props) => props.theme.borders.normalblack};
-  border-bottom: ${(props) => props.theme.borders.normalblack};
-  border-left: ${(props) => props.theme.borders.normalwhite};
+  border-top: ${(props) => props.theme.borders.normalWhite};
+  border-right: ${(props) => props.theme.borders.normalBlack};
+  border-bottom: ${(props) => props.theme.borders.normalBlack};
+  border-left: ${(props) => props.theme.borders.normalWhite};
 `;
 
 export default RoomTemplate;

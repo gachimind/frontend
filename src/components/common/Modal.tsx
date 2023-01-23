@@ -73,6 +73,7 @@ const ModalBox = styled.div<{ width?: number }>`
 
 const ModalHeader = styled.div`
   position: relative;
+  font-family: ${(props) => props.theme.font.joystick};
   font-size: 24px;
   color: ${(props) => props.theme.colors.black1};
   height: 48px;

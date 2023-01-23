@@ -23,8 +23,7 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
           <Selection options={BUG_OPTIONS} width={560} setValue={setCategory} />
         </InputContainer>
         <InputContainer label="내용">
-          {/* FIXME: textarea로 바꿀 것 */}
-          <Input style={{ height: '200px' }} placeholder="내용이 들어간당" />
+          <ReportTextarea spellCheck={false}></ReportTextarea>
         </InputContainer>
         <ButtonBox>
           <button onClick={onClose}>취소하기</button>
@@ -36,7 +35,6 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
 };
 
 const ReportBugModalLayout = styled.div`
-  font-family: ${(props) => props.theme.font.korean};
   padding: 40px 70px 52px 70px;
   gap: 28px;
   display: flex;
@@ -58,10 +56,29 @@ const ButtonBox = styled.div`
     color: ${(props) => props.theme.colors.ivory1};
     background-color: ${(props) => props.theme.colors.darkGrey2};
 
-    border-top: ${(props) => props.theme.borders.normalwhite};
-    border-right: ${(props) => props.theme.borders.normalblack};
-    border-bottom: ${(props) => props.theme.borders.normalblack};
-    border-left: ${(props) => props.theme.borders.normalwhite};
+    border-top: ${(props) => props.theme.borders.normalWhite};
+    border-right: ${(props) => props.theme.borders.normalBlack};
+    border-bottom: ${(props) => props.theme.borders.normalBlack};
+    border-left: ${(props) => props.theme.borders.normalWhite};
+  }
+`;
+
+const ReportTextarea = styled.textarea`
+  font-family: inherit;
+  font-size: 24px;
+  color: ${(props) => props.theme.colors.ivory2};
+  background-color: ${(props) => props.theme.colors.darkGrey2};
+  height: 200px;
+  padding: 10px;
+  resize: none;
+
+  border-top: ${(props) => props.theme.borders.normalBlack};
+  border-right: ${(props) => props.theme.borders.normalWhite};
+  border-bottom: ${(props) => props.theme.borders.normalWhite};
+  border-left: ${(props) => props.theme.borders.normalBlack};
+
+  :focus {
+    outline: none;
   }
 `;
 

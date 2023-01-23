@@ -45,7 +45,6 @@ const Selection = ({ width, options, setValue }: SelectionProps) => {
 const SelectBox = styled.div`
   cursor: pointer;
   position: relative;
-  font-family: ${(props) => props.theme.font.korean};
   background-color: ${(props) => props.theme.colors.darkGrey2};
   height: 56px;
   padding-left: 20px;
@@ -53,10 +52,10 @@ const SelectBox = styled.div`
   justify-content: center;
   align-items: center;
 
-  border-top: ${(props) => props.theme.borders.normalblack};
-  border-right: ${(props) => props.theme.borders.normalwhite};
-  border-bottom: ${(props) => props.theme.borders.normalwhite};
-  border-left: ${(props) => props.theme.borders.normalblack};
+  border-top: ${(props) => props.theme.borders.normalBlack};
+  border-right: ${(props) => props.theme.borders.normalWhite};
+  border-bottom: ${(props) => props.theme.borders.normalWhite};
+  border-left: ${(props) => props.theme.borders.normalBlack};
 
   img {
     position: absolute;
@@ -82,10 +81,10 @@ const SelectOptions = styled.ul<{ show: boolean; width?: number }>`
   display: ${(props) => (props.show ? 'block' : 'none')};
   overflow: hidden;
 
-  border-top: ${(props) => props.theme.borders.normalblack};
-  border-right: ${(props) => props.theme.borders.normalwhite};
-  border-bottom: ${(props) => props.theme.borders.normalwhite};
-  border-left: ${(props) => props.theme.borders.normalblack};
+  border-top: ${(props) => props.theme.borders.normalBlack};
+  border-right: ${(props) => props.theme.borders.normalWhite};
+  border-bottom: ${(props) => props.theme.borders.normalWhite};
+  border-left: ${(props) => props.theme.borders.normalBlack};
 `;
 
 const Option = styled.li<{ width?: number }>`

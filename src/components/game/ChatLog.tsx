@@ -76,7 +76,6 @@ const ChatBox = styled.div`
 `;
 
 const ChatInput = styled.input`
-  font-family: ${(props) => props.theme.font.korean};
   font-size: 24px;
   background-color: ${(props) => props.theme.colors.lightGrey1};
   width: 100%;
@@ -91,7 +90,6 @@ const ChatInput = styled.input`
 `;
 
 const Chat = styled.p<{ chatColor: string }>`
-  font-family: ${(props) => props.theme.font.korean};
   font-size: 18px;
   margin-top: 6px;
   color: ${(props) => props.chatColor};
