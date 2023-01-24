@@ -55,7 +55,9 @@ const UserInfo = ({ mypage, isLogined }: { mypage?: boolean; isLogined: boolean 
         <OnClickHandleButton onClick={() => setEditProfileModalVisible(true)}>회원정보 수정</OnClickHandleButton>
       )}
       <ScoreBox>
-        <img src={medalIcon} />
+        <div className="score-box-icon">
+          <img src={medalIcon} />
+        </div>
         <div>
           <span className="score-box-title">오늘 획득한 점수</span>
           <span className="score-box-score">
@@ -65,7 +67,9 @@ const UserInfo = ({ mypage, isLogined }: { mypage?: boolean; isLogined: boolean 
         </div>
       </ScoreBox>
       <ScoreBox>
-        <img src={trophyIcon} />
+        <div className="score-box-icon">
+          <img src={trophyIcon} />
+        </div>
         <div>
           <span className="score-box-title">누적 점수</span>
           <span className="score-box-score">
@@ -132,10 +136,10 @@ const ScoreBox = styled.div`
   border-bottom: ${(props) => props.theme.borders.normalWhite};
   border-left: ${(props) => props.theme.borders.normalBlack};
 
-  img {
-    background-color: ${(props) => props.theme.colors.darkGrey1};
-    width: 48px;
-    height: 48px;
+  .score-box-icon {
+    background-color: ${(props) => props.theme.colors.lightGrey6};
+    width: 40px;
+    height: 40px;
   }
 
   div {
