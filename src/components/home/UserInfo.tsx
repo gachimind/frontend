@@ -151,7 +151,7 @@ const ScoreBox = styled.div`
     }
 
     .score-box-score {
-      text-shadow: ${(props) => props.theme.textShadow.textShadow};
+      text-shadow: ${(props) => props.theme.textShadow.textShadow1};
       font-size: 24px;
       gap: 4px;
       display: flex;

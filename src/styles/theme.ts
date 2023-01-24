@@ -134,7 +134,7 @@ export const textShadow = {
   /**
    * textShadow1: '-1px 0 #797979, 0 1px #797979, 1px 0 #797979, 0 -1px #797979'
    */
-  textShadow: '-1px 0 #797979, 0 1px #797979, 1px 0 #797979, 0 -1px #797979',
+  textShadow1: '-1px 0 #797979, 0 1px #797979, 1px 0 #797979, 0 -1px #797979',
   /**
    * textShadow2: '-1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000'
    */

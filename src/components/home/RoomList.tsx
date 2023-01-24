@@ -167,7 +167,7 @@ const EnterButton = styled.button`
   font-family: inherit;
   font-size: 14px;
   color: ${(props) => props.theme.colors.ivory2};
-  text-shadow: ${(props) => props.theme.textShadow.textShadow};
+  text-shadow: ${(props) => props.theme.textShadow.textShadow1};
   background-color: ${(props) => props.theme.colors.darkGrey2};
   margin-top: 12px;
   width: 96px;
