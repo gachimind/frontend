@@ -17,9 +17,7 @@ const GameStart = () => {
       setIsGameReadyToStart(false);
       return;
     }
-    setIsGameReadyToStart(
-      room?.participants.every((participant) => participant.isHost || participant.isReady) ?? false,
-    );
+    setIsGameReadyToStart(room?.isGameReadyToStart ?? false);
   }, [isGameReadyToStart, room]);
 
   return (
