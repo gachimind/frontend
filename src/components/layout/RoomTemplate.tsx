@@ -28,7 +28,9 @@ const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
           {GameRuleModalVisible && (
             <GameRuleToolTip visible={GameRuleModalVisible} onClose={() => setGameRuleModalVisible(false)} />
           )}
-          <RuleButton onClick={() => setGameRuleModalVisible(true)} src={GameRuleIcon} />
+          <RuleButton onClick={() => setGameRuleModalVisible(true)}>
+            <img src={GameRuleIcon} />
+          </RuleButton>
           <MediaControlBox>
             <CamButton />
             <MicButton />
@@ -58,9 +60,13 @@ const FooterBox = styled.div`
   align-items: center;
 `;
 
-const RuleButton = styled.img`
-  cursor: pointer;
+const RuleButton = styled(Button)`
+  width: 56px;
+  height: 56px;
   margin-right: 613px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const MediaControlBox = styled.div`
