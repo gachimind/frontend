@@ -55,9 +55,37 @@ export interface EventUserInfo {
 /**
  * on [error]
  */
-
 export interface ErrorResponse {
   errorMessage: string;
   event: string;
   status: number | string;
+}
+
+export interface GameTimer {
+  timer: number;
+  event: 'startCount' | 'readyTimer' | 'speechTimer' | 'discussionTimer';
+}
+
+/**
+ * on [game-start]
+ */
+export interface GameStartResponse extends GameTimer {
+  currentTurn: number;
+}
+
+/**
+ * on [game-end]
+ */
+export interface GameEndResponse extends GameTimer {
+  nextTurn?: number;
+  currentTurn?: number;
+}
+
+/**
+ * on [game-info]
+ */
+export interface GameInfoResponse {
+  currentTurn: number;
+  speechPlayer: number;
+  keyword: string;
 }
