@@ -11,7 +11,7 @@ const Mypage = () => {
 
     if (!accessToken) {
       sessionStorage.clear();
-      window.location.assign('/');
+      window.location.replace('/');
     }
   }, []);
 

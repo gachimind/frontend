@@ -25,7 +25,9 @@ const GameStart = () => {
 
   return (
     <GameStartLayout>
-      <GameStartButton onClick={emitGameStart} disabled={!isGameReadyToStart}></GameStartButton>
+      <GameStartButton onClick={emitGameStart} disabled={!isGameReadyToStart}>
+        START
+      </GameStartButton>
     </GameStartLayout>
   );
 };
