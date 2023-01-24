@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { GameInfoResponse, GameTimer } from '@customTypes/socketType';
+import { GameTimer, GameTurnInfoResponse } from '@customTypes/socketType';
 
 interface GamePlayStateType {
   playState?: GameTimer;
-  turn?: GameInfoResponse;
+  turn?: GameTurnInfoResponse;
 }
 
 const initialState: GamePlayStateType = {};
@@ -16,10 +16,13 @@ const gamePlaySlice = createSlice({
     setPlayState: (state, action: PayloadAction<GameTimer>) => {
       state.playState = action.payload;
     },
+    setTurn: (state, action: PayloadAction<GameTurnInfoResponse>) => {
+      state.turn = action.payload;
+    },
   },
   extraReducers: {},
 });
 
-export const { setPlayState } = gamePlaySlice.actions;
+export const { setPlayState, setTurn } = gamePlaySlice.actions;
 
 export default gamePlaySlice;

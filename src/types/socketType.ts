@@ -84,7 +84,7 @@ export interface GameEndResponse extends GameTimer {
 /**
  * on [game-info]
  */
-export interface GameInfoResponse {
+export interface GameTurnInfoResponse {
   currentTurn: number;
   speechPlayer: number;
   keyword: string;

@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 
 import { SUBSCRIBE } from '@constants/socket';
 import { useAppDispatch } from '@redux/hooks';
-import { setPlayState } from '@redux/modules/gamePlaySlice';
+import { setPlayState, setTurn } from '@redux/modules/gamePlaySlice';
 import { setIsGameOnState } from '@redux/modules/gameRoomSlice';
 
-import { GameEndResponse, GameStartResponse } from '@customTypes/socketType';
+import { GameEndResponse, GameStartResponse, GameTurnInfoResponse } from '@customTypes/socketType';
 
 import socketInstance from './socketInstance';
 
@@ -37,9 +37,9 @@ const useGamePlaySocket = () => {
       }
     });
 
-    on(SUBSCRIBE.getGameInfo, (data) => {
+    on(SUBSCRIBE.getGameInfo, ({ data }: { data: GameTurnInfoResponse }) => {
       console.log('[on] game-info');
-      console.log(data);
+      dispatch(setTurn(data));
     });
 
     return () => {
