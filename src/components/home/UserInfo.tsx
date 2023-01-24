@@ -12,8 +12,10 @@ import EditProfileModal from '@components/mypage/EditProfileModal';
 import CreateGameModal from './CreateGameModal';
 import LoginModal from './LoginModal';
 
-const UserInfo = ({ mypage, isLogined }: { mypage?: boolean; isLogined: boolean }) => {
+const UserInfo = ({ mypage }: { mypage?: boolean }) => {
   const user = useAppSelector((state) => state.user.user);
+
+  const nickname = sessionStorage.getItem('nickname');
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [createGameModalVisible, setCreateGameModalVisible] = useState<boolean>(false);
@@ -24,11 +26,11 @@ const UserInfo = ({ mypage, isLogined }: { mypage?: boolean; isLogined: boolean 
       <ProfileBox>
         <UserImageBox></UserImageBox>
         <UserStatusBox>
-          {!isLogined ? (
+          {!nickname ? (
             <span>로그인이 필요합니다.</span>
           ) : (
             <>
-              <span>{user && user.nickname}</span>
+              <span>{user?.nickname === nickname ? user.nickname : nickname}</span>
               <span>|</span>
               <span>10TH</span>
             </>
@@ -41,9 +43,7 @@ const UserInfo = ({ mypage, isLogined }: { mypage?: boolean; isLogined: boolean 
         <CreateGameModal visible={createGameModalVisible} onClose={() => setCreateGameModalVisible(false)} />
       )}
       {!mypage && (
-        <OnClickHandleButton
-          onClick={() => (!isLogined ? setLoginModalVisible(true) : setCreateGameModalVisible(true))}
-        >
+        <OnClickHandleButton onClick={() => (!user ? setLoginModalVisible(true) : setCreateGameModalVisible(true))}>
           게임방 만들기
         </OnClickHandleButton>
       )}

@@ -14,8 +14,10 @@ import Footer from './Footer';
 import Header from './Header';
 import PageContainer from './PageContainer';
 
-const MainTemplate = ({ children, isLogined }: { children: React.ReactNode; isLogined: boolean }) => {
+const MainTemplate = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate();
+
+  const accessToken = sessionStorage.getItem('accessToken');
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [reportBugModalVisible, setReportBugModalVisible] = useState<boolean>(false);
@@ -23,7 +25,7 @@ const MainTemplate = ({ children, isLogined }: { children: React.ReactNode; isLo
     <PageContainer>
       <Header>
         {loginModalVisible && <LoginModal visible={loginModalVisible} onClose={() => setLoginModalVisible(false)} />}
-        {!isLogined ? (
+        {!accessToken ? (
           <LoginButton onClick={() => setLoginModalVisible(true)}>
             <img src={worldIcon} />
             LOGIN
