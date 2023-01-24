@@ -1,18 +1,15 @@
 import styled from 'styled-components';
 
 import useGameTimeCountDown from '@hooks/useGameTimeCountDown';
+import { convertLeaveCounterFormat } from '@utils/common';
 
 const Timer = () => {
   const { count, description } = useGameTimeCountDown();
 
-  function convertTimeFormat(counter: number) {
-    return `0${Math.floor(counter / 60000)}:${((counter % 60000) / 1000).toString().padStart(2, '0')}`;
-  }
-
   return (
     <TimerLayout>
       <TimeDescriptionText>{description}</TimeDescriptionText>
-      <TimeLeaveText>{convertTimeFormat(count)}</TimeLeaveText>
+      <TimeLeaveText>{convertLeaveCounterFormat(count, true)}</TimeLeaveText>
     </TimerLayout>
   );
 };
