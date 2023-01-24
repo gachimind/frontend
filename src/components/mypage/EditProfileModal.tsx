@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import Button from '@components/common/Button';
 import Input from '@components/common/Input';
 import InputContainer from '@components/common/InputContainer';
 import Modal from '@components/common/Modal';
@@ -11,7 +12,7 @@ const EditProfileModal = ({ visible, onClose }: { visible: boolean; onClose: () 
         <InputContainer label="닉네임 변경">
           <Input type="text" />
         </InputContainer>
-        <EditProfileButton>제보하기..?</EditProfileButton>
+        <EditProfileButton>변경하기</EditProfileButton>
       </EditProfileModalLayout>
     </Modal>
   );
@@ -26,18 +27,9 @@ const EditProfileModalLayout = styled.div`
   justify-content: center;
 `;
 
-const EditProfileButton = styled.button`
-  cursor: pointer;
-  font-family: inherit;
+const EditProfileButton = styled(Button)`
   font-size: 24px;
-  color: ${(props) => props.theme.colors.ivory1};
-  background-color: ${(props) => props.theme.colors.darkGrey2};
   height: 56px;
-
-  border-top: ${(props) => props.theme.borders.normalWhite};
-  border-right: ${(props) => props.theme.borders.normalBlack};
-  border-bottom: ${(props) => props.theme.borders.normalBlack};
-  border-left: ${(props) => props.theme.borders.normalWhite};
 `;
 
 export default EditProfileModal;

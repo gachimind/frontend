@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import Button from '@components/common/Button';
 import Modal from '@components/common/Modal';
 
 // TODO: SCORE 폰트가 만약 한번만 사용되면 구글 링크가 없는 관계로 이미지를 활용한다.
@@ -10,8 +11,8 @@ const GameResultModal = ({ visible, onClose }: { visible: boolean; onClose: () =
         <span>SCORE</span>
         <ResultBox>점수냥이</ResultBox>
         <ButtonBox>
-          <button>나가기</button>
-          <button>계속하기</button>
+          <LeaveRoomButton>나가기</LeaveRoomButton>
+          <ContinueGameButton>계속하기</ContinueGameButton>
         </ButtonBox>
       </GameResultModalLayout>
     </Modal>
@@ -39,18 +40,23 @@ const ResultBox = styled.div`
 
 const ButtonBox = styled.div`
   font-family: inherit;
-  gap: 20px;
+  gap: 24px;
   display: flex;
   justify-content: center;
   margin-top: 24px;
-  button {
-    font-family: inherit;
-    font-size: 24px;
-    color: ${(props) => props.theme.colors.ivory1};
-    background-color: ${(props) => props.theme.colors.darkGrey1};
-    width: 200px;
-    height: 56px;
-  }
+`;
+
+const LeaveRoomButton = styled(Button)`
+  font-size: 24px;
+  width: 250px;
+  height: 72px;
+`;
+
+const ContinueGameButton = styled(Button)`
+  font-size: 24px;
+  background-color: ${(props) => props.theme.colors.purple1};
+  width: 250px;
+  height: 72px;
 `;
 
 export default GameResultModal;

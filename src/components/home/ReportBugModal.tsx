@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { BUG_OPTIONS } from '@constants/options';
 
+import Button from '@components/common/Button';
 import Input from '@components/common/Input';
 import InputContainer from '@components/common/InputContainer';
 import Modal from '@components/common/Modal';
@@ -26,8 +27,8 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
           <ReportTextarea spellCheck={false}></ReportTextarea>
         </InputContainer>
         <ButtonBox>
-          <button onClick={onClose}>취소하기</button>
-          <button>제보하기</button>
+          <OnClickHandleButton onClick={onClose}>취소하기</OnClickHandleButton>
+          <OnClickHandleButton>제보하기</OnClickHandleButton>
         </ButtonBox>
       </ReportBugModalLayout>
     </Modal>
@@ -49,18 +50,11 @@ const ButtonBox = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: 20px;
-  button {
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 24px;
-    color: ${(props) => props.theme.colors.ivory1};
-    background-color: ${(props) => props.theme.colors.darkGrey2};
+`;
 
-    border-top: ${(props) => props.theme.borders.normalWhite};
-    border-right: ${(props) => props.theme.borders.normalBlack};
-    border-bottom: ${(props) => props.theme.borders.normalBlack};
-    border-left: ${(props) => props.theme.borders.normalWhite};
-  }
+const OnClickHandleButton = styled(Button)`
+  font-family: inherit;
+  font-size: 24px;
 `;
 
 const ReportTextarea = styled.textarea`
@@ -71,11 +65,7 @@ const ReportTextarea = styled.textarea`
   height: 200px;
   padding: 10px;
   resize: none;
-
-  border-top: ${(props) => props.theme.borders.normalBlack};
-  border-right: ${(props) => props.theme.borders.normalWhite};
-  border-bottom: ${(props) => props.theme.borders.normalWhite};
-  border-left: ${(props) => props.theme.borders.normalBlack};
+  ${(props) => props.theme.borders.bottomRightWhiteBorder}
 
   :focus {
     outline: none;

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 
 import { useAppDispatch } from '@redux/hooks';
 import { __getUserInfo } from '@redux/modules/userSlice';
@@ -6,7 +6,7 @@ import { __getUserInfo } from '@redux/modules/userSlice';
 const LoginStatus = () => {
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     sessionStorage.getItem('accessToken') && dispatch(__getUserInfo());
   }, []);
   return <></>;

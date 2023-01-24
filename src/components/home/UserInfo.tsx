@@ -6,13 +6,16 @@ import medalIcon from '@assets/svg_medalIcon.svg';
 import trophyIcon from '@assets/svg_trophyIcon.svg';
 import { useAppSelector } from '@redux/hooks';
 
+import Button from '@components/common/Button';
 import EditProfileModal from '@components/mypage/EditProfileModal';
 
 import CreateGameModal from './CreateGameModal';
 import LoginModal from './LoginModal';
 
-const UserInfo = ({ mypage, isLogined }: { mypage?: boolean; isLogined: boolean }) => {
+const UserInfo = ({ mypage }: { mypage?: boolean }) => {
   const user = useAppSelector((state) => state.user.user);
+
+  const nickname = sessionStorage.getItem('nickname');
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [createGameModalVisible, setCreateGameModalVisible] = useState<boolean>(false);
@@ -23,11 +26,11 @@ const UserInfo = ({ mypage, isLogined }: { mypage?: boolean; isLogined: boolean 
       <ProfileBox>
         <UserImageBox></UserImageBox>
         <UserStatusBox>
-          {!isLogined ? (
+          {!nickname ? (
             <span>로그인이 필요합니다.</span>
           ) : (
             <>
-              <span>{user && user.nickname}</span>
+              <span>{user?.nickname === nickname ? user.nickname : nickname}</span>
               <span>|</span>
               <span>10TH</span>
             </>
@@ -40,17 +43,21 @@ const UserInfo = ({ mypage, isLogined }: { mypage?: boolean; isLogined: boolean 
         <CreateGameModal visible={createGameModalVisible} onClose={() => setCreateGameModalVisible(false)} />
       )}
       {!mypage && (
-        <MakeRoomButton onClick={() => (!isLogined ? setLoginModalVisible(true) : setCreateGameModalVisible(true))}>
+        <OnClickHandleButton onClick={() => (!user ? setLoginModalVisible(true) : setCreateGameModalVisible(true))}>
           게임방 만들기
-        </MakeRoomButton>
+        </OnClickHandleButton>
       )}
 
       {EditProfileModalVisible && (
         <EditProfileModal visible={EditProfileModalVisible} onClose={() => setEditProfileModalVisible(false)} />
       )}
-      {mypage && <MakeRoomButton onClick={() => setEditProfileModalVisible(true)}>회원정보 수정</MakeRoomButton>}
+      {mypage && (
+        <OnClickHandleButton onClick={() => setEditProfileModalVisible(true)}>회원정보 수정</OnClickHandleButton>
+      )}
       <ScoreBox>
-        <img src={medalIcon} />
+        <div className="score-box-icon">
+          <img src={medalIcon} />
+        </div>
         <div>
           <span className="score-box-title">오늘 획득한 점수</span>
           <span className="score-box-score">
@@ -60,7 +67,9 @@ const UserInfo = ({ mypage, isLogined }: { mypage?: boolean; isLogined: boolean 
         </div>
       </ScoreBox>
       <ScoreBox>
-        <img src={trophyIcon} />
+        <div className="score-box-icon">
+          <img src={trophyIcon} />
+        </div>
         <div>
           <span className="score-box-title">누적 점수</span>
           <span className="score-box-score">
@@ -84,11 +93,7 @@ const UserInfoLayout = styled.div`
 const ProfileBox = styled.div`
   position: relative;
   margin-bottom: 18px;
-
-  border-top: ${(props) => props.theme.borders.normalBlack};
-  border-right: ${(props) => props.theme.borders.normalWhite};
-  border-bottom: ${(props) => props.theme.borders.normalWhite};
-  border-left: ${(props) => props.theme.borders.normalBlack};
+  ${(props) => props.theme.borders.bottomRightWhiteBorder}
 `;
 
 const UserImageBox = styled.div`
@@ -109,17 +114,8 @@ const UserStatusBox = styled.div`
   align-items: center;
 `;
 
-const MakeRoomButton = styled.button`
-  cursor: pointer;
+const OnClickHandleButton = styled(Button)`
   font-size: 24px;
-  color: ${(props) => props.theme.colors.ivory2};
-  text-shadow: ${(props) => props.theme.textShadow.textShadow};
-  background-color: ${(props) => props.theme.colors.darkGrey2};
-
-  border-top: ${(props) => props.theme.borders.normalWhite};
-  border-right: ${(props) => props.theme.borders.normalBlack};
-  border-bottom: ${(props) => props.theme.borders.normalBlack};
-  border-left: ${(props) => props.theme.borders.normalWhite};
 `;
 
 const ScoreBox = styled.div`
@@ -131,15 +127,12 @@ const ScoreBox = styled.div`
   justify-content: center;
   align-items: center;
 
-  border-top: ${(props) => props.theme.borders.normalBlack};
-  border-right: ${(props) => props.theme.borders.normalWhite};
-  border-bottom: ${(props) => props.theme.borders.normalWhite};
-  border-left: ${(props) => props.theme.borders.normalBlack};
+  ${(props) => props.theme.borders.bottomRightWhiteBorder}
 
-  img {
-    background-color: ${(props) => props.theme.colors.darkGrey1};
-    width: 48px;
-    height: 48px;
+  .score-box-icon {
+    background-color: ${(props) => props.theme.colors.lightGrey6};
+    width: 40px;
+    height: 40px;
   }
 
   div {
@@ -151,7 +144,7 @@ const ScoreBox = styled.div`
     }
 
     .score-box-score {
-      text-shadow: ${(props) => props.theme.textShadow.textShadow};
+      text-shadow: ${(props) => props.theme.textShadow.textShadow1};
       font-size: 24px;
       gap: 4px;
       display: flex;
