@@ -99,13 +99,13 @@ export const borders = {
    */
   thinGrey: '2px solid #444444',
   /**
-   * black: 4px solid black
+   * black: 4px solid #000000
    */
-  normalBlack: '4px solid black',
+  normalBlack: '4px solid #000000',
   /**
-   * white: 4px solid white
+   * white: 4px solid #FFFFFF
    */
-  normalWhite: '4px solid white',
+  normalWhite: '4px solid #FFFFFF',
   /**
    * normalGrey: 4px solid #d7d7d7
    */
