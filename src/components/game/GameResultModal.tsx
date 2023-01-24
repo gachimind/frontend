@@ -54,7 +54,7 @@ const LeaveRoomButton = styled(Button)`
 
 const ContinueGameButton = styled(Button)`
   font-size: 24px;
-  background-color: #402f5c;
+  background-color: ${(props) => props.theme.colors.purple1};
   width: 250px;
   height: 72px;
 `;

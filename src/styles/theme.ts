@@ -66,6 +66,10 @@ export const colors = {
    * black3: #1C1C1C
    */
   black3: '#1C1C1C',
+  /**
+   * purple1: #402f5c
+   */
+  purple1: '#402f5c',
 };
 
 export const boxShadows = {
