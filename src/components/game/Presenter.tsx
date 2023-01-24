@@ -14,13 +14,7 @@ const Presenter = () => {
   return (
     <PresenterLayout>
       <PresenterCamBox>CAM</PresenterCamBox>
-      <GameReadyBox>
-        {!room?.isGameOn && currentUser?.isHost ? (
-          <GameStart />
-        ) : (
-          <GameReady readyStatus={currentUser?.isReady ?? false} />
-        )}
-      </GameReadyBox>
+      {!room?.isGameOn && <GameReadyBox>{currentUser?.isHost ? <GameStart /> : <GameReady />}</GameReadyBox>}
       <PresenterStatusBox>
         <div>
           <ImageHolder></ImageHolder>
