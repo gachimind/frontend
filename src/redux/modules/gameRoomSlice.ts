@@ -46,11 +46,21 @@ const gameRoomSlice = createSlice({
       state.lastEnteredRoom = { roomId, password };
       storage.setCurrentEnteredRoom(roomId, password);
     },
+    setIsGameOnState: (state, action: PayloadAction<boolean>) => {
+      state.room = { ...(state.room as GameRoomDetail), isGameOn: action.payload };
+    },
   },
   extraReducers: {},
 });
 
-export const { joinGameRoom, updateAllRooms, updateRoom, addChat, clearChatList, setLastEnteredRoom } =
-  gameRoomSlice.actions;
+export const {
+  joinGameRoom,
+  updateAllRooms,
+  updateRoom,
+  addChat,
+  clearChatList,
+  setLastEnteredRoom,
+  setIsGameOnState,
+} = gameRoomSlice.actions;
 
 export default gameRoomSlice;
