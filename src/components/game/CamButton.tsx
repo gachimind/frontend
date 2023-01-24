@@ -28,7 +28,6 @@ const CamButton = () => {
   );
 };
 
-// TODO: CAM 커짐/켜짐 아이콘 바꾸기
 const CamButtonLayout = styled(Button)`
   width: 56px;
   height: 56px;
