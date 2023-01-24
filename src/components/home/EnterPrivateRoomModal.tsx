@@ -125,11 +125,7 @@ const RoomTitle = styled.div`
   width: 328px;
   height: 56px;
   display: flex;
-
-  border-top: ${(props) => props.theme.borders.normalBlack};
-  border-right: ${(props) => props.theme.borders.normalWhite};
-  border-bottom: ${(props) => props.theme.borders.normalWhite};
-  border-left: ${(props) => props.theme.borders.normalBlack};
+  ${(props) => props.theme.borders.bottomRightWhiteBorder}
 
   img {
     position: absolute;

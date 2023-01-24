@@ -51,11 +51,7 @@ const SelectBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  border-top: ${(props) => props.theme.borders.normalBlack};
-  border-right: ${(props) => props.theme.borders.normalWhite};
-  border-bottom: ${(props) => props.theme.borders.normalWhite};
-  border-left: ${(props) => props.theme.borders.normalBlack};
+  ${(props) => props.theme.borders.bottomRightWhiteBorder}
 
   img {
     position: absolute;
@@ -80,11 +76,7 @@ const SelectOptions = styled.ul<{ show: boolean; width?: number }>`
   left: -4px;
   display: ${(props) => (props.show ? 'block' : 'none')};
   overflow: hidden;
-
-  border-top: ${(props) => props.theme.borders.normalBlack};
-  border-right: ${(props) => props.theme.borders.normalWhite};
-  border-bottom: ${(props) => props.theme.borders.normalWhite};
-  border-left: ${(props) => props.theme.borders.normalBlack};
+  ${(props) => props.theme.borders.bottomRightWhiteBorder}
 `;
 
 const Option = styled.li<{ width?: number }>`

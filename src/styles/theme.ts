@@ -111,17 +111,44 @@ export const borders = {
    */
   thinGrey: '2px solid #444444',
   /**
-   * black: 4px solid #000000
+   * topLeftWhiteBorder:
+     border-top: 4px solid #FFFFFF;
+     border-right: 4px solid #000000;
+     border-bottom: 4px solid #000000;
+     border-left: 4px solid #FFFFFF;
    */
-  normalBlack: '4px solid #000000',
+  topLeftWhiteBorder: `
+    border-top: 4px solid #FFFFFF;
+    border-right: 4px solid #000000;
+    border-bottom: 4px solid #000000;
+    border-left: 4px solid #FFFFFF;
+  `,
+  /** 
+   * bottomRightWhiteBorder:
+    border-top: 4px solid #000000;
+    border-right: 4px solid #FFFFFF;
+    border-bottom: 4px solid #FFFFFF;
+    border-left: 4px solid #000000;
+   */
+  bottomRightWhiteBorder: `
+  border-top: 4px solid #000000;
+  border-right: 4px solid #FFFFFF;
+  border-bottom: 4px solid #FFFFFF;
+  border-left: 4px solid #000000;
+  `,
   /**
-   * white: 4px solid #FFFFFF
+   * topLeftGreyBorder:
+    border-top: 4px solid #d7d7d7;
+    border-right: 4px solid #000000;
+    border-bottom: 4px solid #000000;
+    border-left: 4px solid #d7d7d7;
    */
-  normalWhite: '4px solid #FFFFFF',
-  /**
-   * normalGrey: 4px solid #d7d7d7
-   */
-  normalGrey: '4px solid #d7d7d7',
+  topLeftGreyBorder: `
+  border-top: 4px solid #d7d7d7;
+  border-right: 4px solid #000000;
+  border-bottom: 4px solid #000000;
+  border-left: 4px solid #d7d7d7;
+  `,
 };
 
 export const font = {

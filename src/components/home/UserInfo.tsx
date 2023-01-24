@@ -93,11 +93,7 @@ const UserInfoLayout = styled.div`
 const ProfileBox = styled.div`
   position: relative;
   margin-bottom: 18px;
-
-  border-top: ${(props) => props.theme.borders.normalBlack};
-  border-right: ${(props) => props.theme.borders.normalWhite};
-  border-bottom: ${(props) => props.theme.borders.normalWhite};
-  border-left: ${(props) => props.theme.borders.normalBlack};
+  ${(props) => props.theme.borders.bottomRightWhiteBorder}
 `;
 
 const UserImageBox = styled.div`
@@ -131,10 +127,7 @@ const ScoreBox = styled.div`
   justify-content: center;
   align-items: center;
 
-  border-top: ${(props) => props.theme.borders.normalBlack};
-  border-right: ${(props) => props.theme.borders.normalWhite};
-  border-bottom: ${(props) => props.theme.borders.normalWhite};
-  border-left: ${(props) => props.theme.borders.normalBlack};
+  ${(props) => props.theme.borders.bottomRightWhiteBorder}
 
   .score-box-icon {
     background-color: ${(props) => props.theme.colors.lightGrey6};

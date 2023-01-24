@@ -65,11 +65,7 @@ const ReportTextarea = styled.textarea`
   height: 200px;
   padding: 10px;
   resize: none;
-
-  border-top: ${(props) => props.theme.borders.normalBlack};
-  border-right: ${(props) => props.theme.borders.normalWhite};
-  border-bottom: ${(props) => props.theme.borders.normalWhite};
-  border-left: ${(props) => props.theme.borders.normalBlack};
+  ${(props) => props.theme.borders.bottomRightWhiteBorder}
 
   :focus {
     outline: none;

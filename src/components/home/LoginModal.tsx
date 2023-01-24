@@ -31,7 +31,6 @@ const LoginModal = ({ visible, onClose }: { visible: boolean; onClose: () => voi
   );
 };
 
-// TODO: 임시 색상으로 추후 변경되어야 한다.
 const LoginModalLayout = styled.div`
   padding: 118px 70px;
   gap: 24px;
