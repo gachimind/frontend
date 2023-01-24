@@ -13,17 +13,15 @@ import MainTemplate from '@components/layout/MainTemplate';
 const Main = () => {
   const dispatch = useAppDispatch();
   const { onError } = useErrorSocket();
-  const [isLogined, setIsLogined] = useState(false);
 
   useEffect(() => {
     onError([{ target: 'event', value: PUBLISH.login, callback: () => dispatch(logout()) }]);
-    sessionStorage.getItem('accessToken') && setIsLogined(true);
   }, []);
 
   return (
-    <MainTemplate isLogined={isLogined}>
+    <MainTemplate>
       <ContentContainer title="SCORE" lights={true}>
-        <UserInfo isLogined={isLogined} />
+        <UserInfo />
       </ContentContainer>
       <ContentContainer title="ROOM SELECTION" lights={true}>
         <RoomList />

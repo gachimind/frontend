@@ -167,7 +167,7 @@ const EnterButton = styled.button`
   font-family: inherit;
   font-size: 14px;
   color: ${(props) => props.theme.colors.ivory2};
-  text-shadow: ${(props) => props.theme.textShadow.textShadow};
+  text-shadow: ${(props) => props.theme.textShadow.textShadow1};
   background-color: ${(props) => props.theme.colors.darkGrey2};
   margin-top: 12px;
   width: 96px;
@@ -177,10 +177,7 @@ const EnterButton = styled.button`
   justify-content: center;
   align-items: center;
 
-  border-top: ${(props) => props.theme.borders.normalGrey};
-  border-right: ${(props) => props.theme.borders.normalBlack};
-  border-bottom: ${(props) => props.theme.borders.normalBlack};
-  border-left: ${(props) => props.theme.borders.normalGrey};
+  ${(props) => props.theme.borders.topLeftGreyBorder}
 `;
 
 export default RoomList;

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import GameRuleIcon from '@assets/svg_gameRuleIcon.svg';
 import leaveRoomIcon from '@assets/svg_leaveRoomIcon.svg';
 
+import Button from '@components/common/Button';
 import CamButton from '@components/game/CamButton';
 import GameRuleToolTip from '@components/game/GameRuleToolTip';
 import MicButton from '@components/game/MicButton';
@@ -27,7 +28,9 @@ const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
           {GameRuleModalVisible && (
             <GameRuleToolTip visible={GameRuleModalVisible} onClose={() => setGameRuleModalVisible(false)} />
           )}
-          <RuleButton onClick={() => setGameRuleModalVisible(true)} src={GameRuleIcon} />
+          <RuleButton onClick={() => setGameRuleModalVisible(true)}>
+            <img src={GameRuleIcon} />
+          </RuleButton>
           <MediaControlBox>
             <CamButton />
             <MicButton />
@@ -57,9 +60,13 @@ const FooterBox = styled.div`
   align-items: center;
 `;
 
-const RuleButton = styled.img`
-  cursor: pointer;
+const RuleButton = styled(Button)`
+  width: 56px;
+  height: 56px;
   margin-right: 613px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const MediaControlBox = styled.div`
@@ -67,12 +74,8 @@ const MediaControlBox = styled.div`
   display: flex;
 `;
 
-const LeaveButton = styled.button`
-  cursor: pointer;
+const LeaveButton = styled(Button)`
   font-size: 16px;
-  color: ${(props) => props.theme.colors.ivory2};
-  text-shadow: ${(props) => props.theme.textShadow.textShadow};
-  background-color: ${(props) => props.theme.colors.darkGrey2};
   width: 176px;
   height: 56px;
   margin-left: 454px;
@@ -80,11 +83,6 @@ const LeaveButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  border-top: ${(props) => props.theme.borders.normalWhite};
-  border-right: ${(props) => props.theme.borders.normalBlack};
-  border-bottom: ${(props) => props.theme.borders.normalBlack};
-  border-left: ${(props) => props.theme.borders.normalWhite};
 `;
 
 export default RoomTemplate;

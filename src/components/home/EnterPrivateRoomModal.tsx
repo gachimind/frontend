@@ -9,6 +9,7 @@ import useDebounce from '@hooks/useDebounce';
 import { useAppDispatch } from '@redux/hooks';
 import { setLastEnteredRoom } from '@redux/modules/gameRoomSlice';
 
+import Button from '@components/common/Button';
 import Input from '@components/common/Input';
 import InputContainer from '@components/common/InputContainer';
 import Modal from '@components/common/Modal';
@@ -124,11 +125,7 @@ const RoomTitle = styled.div`
   width: 328px;
   height: 56px;
   display: flex;
-
-  border-top: ${(props) => props.theme.borders.normalBlack};
-  border-right: ${(props) => props.theme.borders.normalWhite};
-  border-bottom: ${(props) => props.theme.borders.normalWhite};
-  border-left: ${(props) => props.theme.borders.normalBlack};
+  ${(props) => props.theme.borders.bottomRightWhiteBorder}
 
   img {
     position: absolute;
@@ -137,20 +134,12 @@ const RoomTitle = styled.div`
   }
 `;
 
-const EnterRoomButton = styled.button<{ isDisabled: boolean }>`
-  cursor: ${(props) => !props.isDisabled && 'pointer'};
-  font-family: inherit;
+const EnterRoomButton = styled(Button)<{ isDisabled: boolean }>`
+  cursor: ${(props) => props.isDisabled && 'auto'};
   font-size: 24px;
-  color: ${(props) => props.theme.colors.ivory1};
-  background-color: ${(props) => props.theme.colors.darkGrey2};
   opacity: ${(props) => (props.isDisabled ? 0.5 : 1)};
   height: 72px;
   margin-top: 20px;
-
-  border-top: ${(props) => props.theme.borders.normalWhite};
-  border-right: ${(props) => props.theme.borders.normalBlack};
-  border-bottom: ${(props) => props.theme.borders.normalBlack};
-  border-left: ${(props) => props.theme.borders.normalWhite};
 `;
 
 export default EnterPrivateRoomModal;
