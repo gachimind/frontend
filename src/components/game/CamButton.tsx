@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
-import CamButtonIcon from '@assets/svg_camButtonIcon.svg';
 import CamButtonOffIcon from '@assets/svg_camButtonOffIcon.svg';
+import CamButtonOnIcon from '@assets/svg_camButtonOnIcon.svg';
 import useStreamUpdateSocket from '@hooks/socket/useStreamUpdateSocket';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { setUserCam } from '@redux/modules/userMediaSlice';
+
+import Button from '@components/common/Button';
 
 const CamButton = () => {
   const { userCam, localDevice, userStreamRef } = useAppSelector((state) => state.userMedia);
@@ -21,15 +23,15 @@ const CamButton = () => {
   };
   return (
     <CamButtonLayout onClick={handleClick} aria-label={`캠 ${userCam ? '켜짐' : '꺼짐'}`}>
-      {userCam ? <img src={CamButtonIcon} /> : <img src={CamButtonOffIcon} />}
+      {userCam ? <img src={CamButtonOnIcon} /> : <img src={CamButtonOffIcon} />}
     </CamButtonLayout>
   );
 };
 
 // TODO: CAM 커짐/켜짐 아이콘 바꾸기
-const CamButtonLayout = styled.button`
-  cursor: pointer;
-  background-color: transparent;
+const CamButtonLayout = styled(Button)`
+  width: 56px;
+  height: 56px;
   display: flex;
   justify-content: center;
   align-items: center;
