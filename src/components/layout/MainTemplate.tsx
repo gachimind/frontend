@@ -5,8 +5,8 @@ import styled from 'styled-components';
 
 import bugIcon from '@assets/svg_bugIcon.svg';
 import worldIcon from '@assets/svg_worldIcon.svg';
-import { useAppSelector } from '@redux/hooks';
 
+import Button from '@components/common/Button';
 import LoginModal from '@components/home/LoginModal';
 import ReportBugModal from '@components/home/ReportBugModal';
 
@@ -38,10 +38,10 @@ const MainTemplate = ({ children, isLogined }: { children: React.ReactNode; isLo
           {reportBugModalVisible && (
             <ReportBugModal visible={reportBugModalVisible} onClose={() => setReportBugModalVisible(false)} />
           )}
-          <button onClick={() => setReportBugModalVisible(true)}>
+          <ReportBugButton onClick={() => setReportBugModalVisible(true)}>
             버그 제보
             <img src={bugIcon} />
-          </button>
+          </ReportBugButton>
         </FooterBox>
       </Footer>
     </PageContainer>
@@ -74,25 +74,16 @@ const FooterBox = styled.div`
   display: flex;
   justify-content: right;
   align-items: center;
+`;
 
-  button {
-    cursor: pointer;
-    font-size: 16px;
-    color: ${(props) => props.theme.colors.ivory2};
-    text-shadow: ${(props) => props.theme.textShadow.textShadow};
-    background-color: ${(props) => props.theme.colors.darkGrey2};
-    width: 152px;
-    height: 56px;
-    gap: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border-top: ${(props) => props.theme.borders.normalWhite};
-    border-right: ${(props) => props.theme.borders.normalBlack};
-    border-bottom: ${(props) => props.theme.borders.normalBlack};
-    border-left: ${(props) => props.theme.borders.normalWhite};
-  }
+const ReportBugButton = styled(Button)`
+  font-size: 16px;
+  width: 152px;
+  height: 56px;
+  gap: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default MainTemplate;

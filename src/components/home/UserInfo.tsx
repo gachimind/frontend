@@ -6,6 +6,7 @@ import medalIcon from '@assets/svg_medalIcon.svg';
 import trophyIcon from '@assets/svg_trophyIcon.svg';
 import { useAppSelector } from '@redux/hooks';
 
+import Button from '@components/common/Button';
 import EditProfileModal from '@components/mypage/EditProfileModal';
 
 import CreateGameModal from './CreateGameModal';
@@ -40,15 +41,19 @@ const UserInfo = ({ mypage, isLogined }: { mypage?: boolean; isLogined: boolean 
         <CreateGameModal visible={createGameModalVisible} onClose={() => setCreateGameModalVisible(false)} />
       )}
       {!mypage && (
-        <MakeRoomButton onClick={() => (!isLogined ? setLoginModalVisible(true) : setCreateGameModalVisible(true))}>
+        <OnClickHandleButton
+          onClick={() => (!isLogined ? setLoginModalVisible(true) : setCreateGameModalVisible(true))}
+        >
           게임방 만들기
-        </MakeRoomButton>
+        </OnClickHandleButton>
       )}
 
       {EditProfileModalVisible && (
         <EditProfileModal visible={EditProfileModalVisible} onClose={() => setEditProfileModalVisible(false)} />
       )}
-      {mypage && <MakeRoomButton onClick={() => setEditProfileModalVisible(true)}>회원정보 수정</MakeRoomButton>}
+      {mypage && (
+        <OnClickHandleButton onClick={() => setEditProfileModalVisible(true)}>회원정보 수정</OnClickHandleButton>
+      )}
       <ScoreBox>
         <img src={medalIcon} />
         <div>
@@ -109,17 +114,8 @@ const UserStatusBox = styled.div`
   align-items: center;
 `;
 
-const MakeRoomButton = styled.button`
-  cursor: pointer;
+const OnClickHandleButton = styled(Button)`
   font-size: 24px;
-  color: ${(props) => props.theme.colors.ivory2};
-  text-shadow: ${(props) => props.theme.textShadow.textShadow};
-  background-color: ${(props) => props.theme.colors.darkGrey2};
-
-  border-top: ${(props) => props.theme.borders.normalWhite};
-  border-right: ${(props) => props.theme.borders.normalBlack};
-  border-bottom: ${(props) => props.theme.borders.normalBlack};
-  border-left: ${(props) => props.theme.borders.normalWhite};
 `;
 
 const ScoreBox = styled.div`

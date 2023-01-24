@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import GameRuleIcon from '@assets/svg_gameRuleIcon.svg';
 import leaveRoomIcon from '@assets/svg_leaveRoomIcon.svg';
 
+import Button from '@components/common/Button';
 import CamButton from '@components/game/CamButton';
 import GameRuleToolTip from '@components/game/GameRuleToolTip';
 import MicButton from '@components/game/MicButton';
@@ -67,12 +68,8 @@ const MediaControlBox = styled.div`
   display: flex;
 `;
 
-const LeaveButton = styled.button`
-  cursor: pointer;
+const LeaveButton = styled(Button)`
   font-size: 16px;
-  color: ${(props) => props.theme.colors.ivory2};
-  text-shadow: ${(props) => props.theme.textShadow.textShadow};
-  background-color: ${(props) => props.theme.colors.darkGrey2};
   width: 176px;
   height: 56px;
   margin-left: 454px;
@@ -80,11 +77,6 @@ const LeaveButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  border-top: ${(props) => props.theme.borders.normalWhite};
-  border-right: ${(props) => props.theme.borders.normalBlack};
-  border-bottom: ${(props) => props.theme.borders.normalBlack};
-  border-left: ${(props) => props.theme.borders.normalWhite};
 `;
 
 export default RoomTemplate;

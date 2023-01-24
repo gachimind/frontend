@@ -7,6 +7,7 @@ import lockIcon from '@assets/svg_lockIcon.svg';
 import { PARTICIPANTS_OPTIONS } from '@constants/options';
 import useGameSocket from '@hooks/socket/useGameSocket';
 
+import Button from '@components/common/Button';
 import Input from '@components/common/Input';
 import InputContainer from '@components/common/InputContainer';
 import Modal from '@components/common/Modal';
@@ -76,19 +77,10 @@ const CreateGameModalLayout = styled.div`
   flex-direction: column;
 `;
 
-const CreateRoomButton = styled.button`
-  cursor: pointer;
-  font-family: inherit;
+const CreateRoomButton = styled(Button)`
   font-size: 24px;
-  color: ${(props) => props.theme.colors.ivory1};
-  background-color: ${(props) => props.theme.colors.darkGrey2};
   height: 72px;
   margin-top: 20px;
-
-  border-top: ${(props) => props.theme.borders.normalWhite};
-  border-right: ${(props) => props.theme.borders.normalBlack};
-  border-bottom: ${(props) => props.theme.borders.normalBlack};
-  border-left: ${(props) => props.theme.borders.normalWhite};
 `;
 
 export default CreateGameModal;
