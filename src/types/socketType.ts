@@ -63,7 +63,7 @@ export interface ErrorResponse {
 
 export interface GameTimer {
   timer: number;
-  event: 'startCount' | 'readyTimer' | 'speechTimer' | 'discussionTimer';
+  event: 'startCount' | 'readyTimer' | 'speechTimer' | 'discussionTimer' | 'gameEnd';
 }
 
 /**

@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import storage from '@utils/stroage';
 
 import { GameInfoResponse, GameTimer } from '@customTypes/socketType';
 
