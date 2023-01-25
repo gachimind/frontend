@@ -7,31 +7,48 @@ interface PresentationInfoProps {
   isMe: boolean;
   keyword: string;
   nickname: string;
+  event: 'readyTimer' | 'startCount';
 }
 
-const PresentationInfo = ({ isMe, keyword, nickname }: PresentationInfoProps) => {
+const PresentationInfo = ({ isMe, keyword, nickname, event }: PresentationInfoProps) => {
   const { count } = useGameTimeCountDown();
-  return (
-    <PresentationInfoLayout>
-      <PresentationInfoTextBox>
-        <div>
-          {isMe ? (
-            <>
-              <p>당신이 설명할 제시어는</p>
-              <KeywordText>&apos;{keyword}&apos;</KeywordText>
-              <p>입니다.</p>
-            </>
-          ) : (
-            `다음 발표자는 '${nickname}'입니다.`
-          )}
-        </div>
-        <CounterText>
-          {convertLeaveCounterFormat(count)}
-          <span> 초</span>
-        </CounterText>
-      </PresentationInfoTextBox>
-    </PresentationInfoLayout>
-  );
+  if (event === 'startCount') {
+    return (
+      <PresentationInfoLayout>
+        <PresentationInfoTextBox>
+          <div>곧 게임이 시작됩니다.</div>
+          <CounterText>
+            {convertLeaveCounterFormat(count)}
+            <span> 초</span>
+          </CounterText>
+        </PresentationInfoTextBox>
+      </PresentationInfoLayout>
+    );
+  }
+  if (event === 'readyTimer') {
+    return (
+      <PresentationInfoLayout>
+        <PresentationInfoTextBox>
+          <div>
+            {isMe ? (
+              <>
+                <p>당신이 설명할 제시어는</p>
+                <KeywordText>&apos;{keyword}&apos;</KeywordText>
+                <p>입니다.</p>
+              </>
+            ) : (
+              `다음 발표자는 '${nickname}'입니다.`
+            )}
+          </div>
+          <CounterText>
+            {convertLeaveCounterFormat(count)}
+            <span> 초</span>
+          </CounterText>
+        </PresentationInfoTextBox>
+      </PresentationInfoLayout>
+    );
+  }
+  return <></>;
 };
 
 const PresentationInfoLayout = styled.div`
