@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
+import gamePlaySlice from './modules/gamePlaySlice';
 import gameRoomSlice from './modules/gameRoomSlice';
 import playerMediaSlice from './modules/playerMediaSlice';
 import userMediaSlice from './modules/userMediaSlice';
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   gameRoom: gameRoomSlice.reducer,
   userMedia: userMediaSlice.reducer,
   playerMedia: playerMediaSlice.reducer,
+  gamePlay: gamePlaySlice.reducer,
 });
 
 export const store = configureStore({

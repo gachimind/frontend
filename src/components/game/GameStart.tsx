@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import useGameInitiationSocket from '@hooks/socket/useGameInitiationSocket';
 import { useAppSelector } from '@redux/hooks';
 
-import Button from '@components/common/Button';
+import GameButton from '@components/common/GameButton';
 
 // TODO: 디자인을 반영해야 한다.
 const GameStart = () => {
@@ -18,14 +18,12 @@ const GameStart = () => {
       setIsGameReadyToStart(false);
       return;
     }
-    setIsGameReadyToStart(
-      room?.participants.every((participant) => participant.isHost || participant.isReady) ?? false,
-    );
+    setIsGameReadyToStart(room?.isGameReadyToStart ?? false);
   }, [isGameReadyToStart, room]);
 
   return (
     <GameStartLayout>
-      <GameStartButton onClick={emitGameStart} disabled={!isGameReadyToStart}>
+      <GameStartButton onClick={emitGameStart} disabled={!isGameReadyToStart} visible={isGameReadyToStart}>
         START
       </GameStartButton>
     </GameStartLayout>
@@ -42,22 +40,8 @@ const GameStartLayout = styled.div`
   align-items: center;
 `;
 
-const GameStartButton = styled(Button)`
-  font-family: ${(props) => props.theme.font.joystick};
-  font-size: 28px;
-  text-shadow: none;
-  background-image: linear-gradient(
-    0deg,
-    ${(props) => props.theme.colors.purple2} 50%,
-    ${(props) => props.theme.colors.ivory2} 50%
-  );
-  background-size: 100%;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  -webkit-text-stroke: 1px ${(props) => props.theme.colors.black1};
-  width: 328px;
-  height: 72px;
+const GameStartButton = styled(GameButton)`
+  cursor: ${(props) => (props.visible ? 'pointer' : 'not-allowed')};
 `;
 
 export default GameStart;

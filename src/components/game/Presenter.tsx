@@ -1,33 +1,39 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-import MicOnIcon from '@assets/svg_micOnIcon.svg';
 import { useAppSelector } from '@redux/hooks';
 
 import GameReady from './GameReady';
 import GameStart from './GameStart';
+import PresentationInfo from './PresentationInfo';
+import PresenterCam from './PresenterCam';
 
 // TODO: 마이크 꺼졌을때 아이콘 추가하기
 const Presenter = () => {
   const { user } = useAppSelector((state) => state.user);
   const { room } = useAppSelector((state) => state.gameRoom);
+  const { turn, playState } = useAppSelector((state) => state.gamePlay);
   const currentUser = room?.participants.find((participant) => participant.userId === user?.userId);
+  const presenterNickname =
+    room?.participants.find((participant) => participant.userId === turn?.speechPlayer)?.nickname ?? '';
+  const isMe = user?.userId === turn?.speechPlayer;
+
   return (
     <PresenterLayout>
-      <PresenterCamBox>CAM</PresenterCamBox>
-      <GameReadyBox>
-        {!room?.isGameOn && currentUser?.isHost ? (
-          <GameStart />
-        ) : (
-          <GameReady readyStatus={currentUser?.isReady ?? false} />
-        )}
-      </GameReadyBox>
-      <PresenterStatusBox>
-        <div>
-          <ImageHolder></ImageHolder>
-          <span>{user?.nickname}</span>
-        </div>
-        <img src={MicOnIcon} />
-      </PresenterStatusBox>
+      {(playState?.event === 'readyTimer' || playState?.event === 'startCount') && (
+        <PresentationInfo
+          isMe={isMe}
+          keyword={turn?.keyword as string}
+          nickname={presenterNickname}
+          event={playState.event}
+        />
+      )}
+      {isMe && playState?.event === 'speechTimer' && (
+        <PresenterKeywordBox>
+          제시어:&nbsp;<span>{turn?.keyword}</span>
+        </PresenterKeywordBox>
+      )}
+      {room?.isGameOn && turn && <PresenterCam nickname={presenterNickname} isMe={isMe} userId={turn.speechPlayer} />}
+      {!room?.isGameOn && <GameReadyBox>{currentUser?.isHost ? <GameStart /> : <GameReady />}</GameReadyBox>}
     </PresenterLayout>
   );
 };
@@ -35,57 +41,47 @@ const Presenter = () => {
 const PresenterLayout = styled.div`
   position: absolute;
   top: 0;
-  height: 100%;
   width: 100%;
+  height: 100%;
 `;
 
-const PresenterCamBox = styled.div`
-  position: absolute;
-  top: 39px;
-  left: 0;
-`;
-
-// TODO: 디자인 보고 수정
 const GameReadyBox = styled.div`
   position: absolute;
   top: 110px;
   right: -40px;
 `;
 
-const PresenterStatusBox = styled.div`
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  height: 58px;
-  bottom: 0;
-  padding-left: 24px;
-  padding-right: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  div {
-    gap: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    span {
-      color: ${(props) => props.theme.colors.white};
-      font-size: 16px;
-      font-family: ${(props) => props.theme.font.notoSansKR};
-      font-weight: 500;
-    }
+const KeywordSlide = keyframes`
+0% {
+  height: 220px;
+  background-color: inherit;
+  font-size: 40px;
+  color: red;
+}
+  100% {
+    height: 42px;
+    background-color: rgba(28, 28, 28, 0.7);
   }
 `;
 
-const ImageHolder = styled.span`
-  background-color: ${(props) => props.theme.colors.white};
-  box-shadow: 0 0 0 3px #000 inset;
-  border: 2px solid ${(props) => props.theme.colors.white};
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+const PresenterKeywordBox = styled.div`
+  position: absolute;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-end;
+  top: 38px;
+  background-color: rgba(28, 28, 28, 0.7);
+  z-index: 3;
+  padding: 10px 0;
+  color: ${(props) => props.theme.colors.white};
+  height: 42px;
+  animation: ${KeywordSlide} 0.75s 0s;
+  font-size: 14px;
+  & > span {
+    font-size: 20px;
+    font-weight: 500;
+  }
 `;
 
 export default Presenter;
