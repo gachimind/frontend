@@ -9,7 +9,7 @@ import socketInstance from './socketInstance';
 interface ErrorConditionType {
   target: keyof ErrorResponse;
   value: string | number;
-  callback?: () => void;
+  callback?: (msg?: string) => void;
   skipAlert?: boolean;
 }
 
@@ -24,7 +24,8 @@ const useErrorSocket = () => {
             alertToast(error.errorMessage, 'warning', {
               hideProgressBar: true,
             });
-          condition?.callback?.();
+          condition?.callback?.(error.errorMessage);
+          return;
         }
       });
     });
