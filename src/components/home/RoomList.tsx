@@ -83,8 +83,8 @@ const RoomList = () => {
         )}
         <GlobalLoading isLoading={isMediaLoading && !isMediaSuccess} />
         {broadcastedRooms
-          .slice(offset, offset + 9)
           .filter((room) => room.participants !== 0)
+          .slice(offset, offset + 9)
           .map((room) => (
             <RoomCard key={room.roomId}>
               <CardContentsBox>
