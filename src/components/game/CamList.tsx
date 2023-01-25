@@ -74,19 +74,23 @@ const CamList = () => {
             <div key={player.userId}>
               {player.userId === user?.userId ? (
                 <Cam
+                  userId={user.userId}
                   userStream={userStream}
                   nickname={user.nickname}
                   audio={userMic}
                   isMe={true}
                   isHost={index === 0}
+                  size="sub"
                 />
               ) : (
                 <Cam
+                  userId={player.userId}
                   key={player.userId}
                   userStream={playerStreamMap[player.socketId]}
                   nickname={player.nickname}
                   audio={player.audio}
                   isHost={index === 0}
+                  size="sub"
                 />
               )}
             </div>
@@ -98,6 +102,7 @@ const CamList = () => {
 
 const CamListLayout = styled(Slider)`
   width: 500px;
+  margin-top: -6px;
 `;
 
 export default CamList;

@@ -28,22 +28,24 @@ const PresenterCam = ({ nickname, isMe, userId }: PresenterCamProps) => {
     <PresenterCamLayout>
       {isMe ? (
         <Cam
+          userId={userId as number}
           userStream={userStream}
           nickname={nickname}
           isMe={isMe}
           audio={userMic}
           size="main"
           width={551}
-          height={440}
+          height={448}
         />
       ) : (
         <Cam
+          userId={userId as number}
           userStream={playerStreamMap[currentPlayer?.socketId as string]}
           nickname={nickname}
           audio={currentPlayer?.audio}
           size="main"
           width={551}
-          height={440}
+          height={448}
         />
       )}
     </PresenterCamLayout>
@@ -52,7 +54,7 @@ const PresenterCam = ({ nickname, isMe, userId }: PresenterCamProps) => {
 
 const PresenterCamLayout = styled.div`
   position: absolute;
-  top: 26px;
+  top: 16px;
   left: 0;
   z-index: 2;
 `;
