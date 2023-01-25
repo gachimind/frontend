@@ -37,7 +37,11 @@ const PresentationInfo = ({ isMe, keyword, nickname, event }: PresentationInfoPr
                 <p>입니다.</p>
               </>
             ) : (
-              `다음 발표자는 '${nickname}'입니다.`
+              <>
+                <p>현재 발표자는</p>
+                <PresenterAnnounceText>{nickname}</PresenterAnnounceText>
+                <p>입니다.</p>
+              </>
             )}
           </div>
           <CounterText>
@@ -74,6 +78,13 @@ const KeywordText = styled.p`
   font-size: 36px;
   margin: 10px 0;
   color: red;
+`;
+
+const PresenterAnnounceText = styled.p`
+  font-size: 28px;
+  margin: 12px 0;
+  padding: 0 40px;
+  font-weight: 600;
 `;
 
 const CounterText = styled.p`
