@@ -62,7 +62,12 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
         </InputContainer>
         {showPasswordInput && (
           <InputContainer label="비밀번호">
-            <Input type="text" value={roomPassword} onChange={(e) => setRoomPassword(e.target.value)} />
+            <Input
+              type="text"
+              value={roomPassword}
+              onChange={(e) => setRoomPassword(e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'))}
+              maxLength={4}
+            />
           </InputContainer>
         )}
         <InputContainer label="인원">
