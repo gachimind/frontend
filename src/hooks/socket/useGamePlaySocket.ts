@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { SUBSCRIBE } from '@constants/socket';
 import { useAppDispatch } from '@redux/hooks';
 import { setPlayState, setTurn } from '@redux/modules/gamePlaySlice';
-import { setIsGameOnState } from '@redux/modules/gameRoomSlice';
+import { setIsGameOnState, setScore } from '@redux/modules/gameRoomSlice';
 
 import { GameEndResponse, GameStartResponse, GameTurnInfoResponse } from '@customTypes/socketType';
 
@@ -42,8 +42,16 @@ const useGamePlaySocket = () => {
       dispatch(setTurn(data));
     });
 
+    on(SUBSCRIBE.getScore, ({ data }: { data: { userId: number; score: number } }) => {
+      console.log('[on] score');
+      dispatch(setScore({ ...data }));
+    });
+
     return () => {
       off(SUBSCRIBE.gameTimeStart);
+      off(SUBSCRIBE.gameTimeEnd);
+      off(SUBSCRIBE.getGameInfo);
+      off(SUBSCRIBE.getScore);
     };
   }, []);
 };

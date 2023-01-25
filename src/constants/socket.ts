@@ -28,6 +28,7 @@ export const SUBSCRIBE = Object.freeze({
   gameTimeStart: 'time-start',
   gameTimeEnd: 'time-end',
   getGameInfo: 'game-info',
+  getScore: 'score',
 
   // webRTC
   webRTCIce: 'webrtc-ice',
