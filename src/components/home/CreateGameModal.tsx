@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 
 import lockIcon from '@assets/svg_lockIcon.svg';
-import { PARTICIPANTS_OPTIONS } from '@constants/options';
+import { COUNT_OPTIONS, PARTICIPANTS_OPTIONS } from '@constants/options';
 import useGameSocket from '@hooks/socket/useGameSocket';
 
 import Button from '@components/common/Button';
@@ -31,9 +31,9 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
     const createRoom: CreateRoomRequest = {
       roomTitle,
       maxCount,
-      discussionTime: Number(time.split(':')[0]) * 1000,
-      readyTime: Number(time.split(':')[1]) * 1000,
-      speechTime: Number(time.split(':')[2]) * 1000,
+      readyTime: Number(time.split(':')[0]) * 1000,
+      speechTime: Number(time.split(':')[1]) * 1000,
+      discussionTime: Number(time.split(':')[2]) * 1000,
       round: 1,
       roomPassword: Number(roomPassword),
       isSecretRoom,
@@ -73,8 +73,8 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
         <InputContainer label="인원">
           <Selection options={PARTICIPANTS_OPTIONS} setValue={setMaxCount} />
         </InputContainer>
-        <InputContainer label="카운트">
-          <Input type="text" value={time} onChange={(e) => setTime(e.target.value)} />
+        <InputContainer label="카운트(발표/준비/토론)">
+          <Selection options={COUNT_OPTIONS} setValue={setTime} />
         </InputContainer>
         <CreateRoomButton onClick={handleCreateGameButtonClick}>생성하기</CreateRoomButton>
       </CreateGameModalLayout>
