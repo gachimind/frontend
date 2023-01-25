@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import medalIcon from '@assets/svg_medalIcon.svg';
 import trophyIcon from '@assets/svg_trophyIcon.svg';
@@ -30,9 +30,21 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
             <span>로그인이 필요합니다.</span>
           ) : (
             <>
-              <span>{user?.nickname === nickname ? user.nickname : nickname}</span>
-              <span>|</span>
-              <span>10TH</span>
+              <span className="user-status-box-nickname">
+                {user?.nickname === nickname ? (
+                  user.nickname.length > 4 ? (
+                    <div>user.nickname</div>
+                  ) : (
+                    user.nickname
+                  )
+                ) : nickname.length > 4 ? (
+                  <div>nickname</div>
+                ) : (
+                  nickname
+                )}
+              </span>
+              <span className="user-status-box-slash">|</span>
+              <span className="user-status-box-rank">10TH</span>
             </>
           )}
         </UserStatusBox>
@@ -100,6 +112,19 @@ const UserImageBox = styled.div`
   background-color: white;
 `;
 
+const nicknameAnimation = keyframes`
+  from {
+    -moz-transform: translateX(50%);
+    -webkit-transform: translateX(50%);
+    transform: translateX(50%);
+  }
+  to {
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+`;
+
 const UserStatusBox = styled.div`
   position: absolute;
   font-size: 20px;
@@ -110,8 +135,31 @@ const UserStatusBox = styled.div`
   gap: 52px;
   padding: 25px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  .user-status-box-nickname {
+    position: fixed;
+    width: 100px;
+    white-space: nowrap;
+    display: block;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+
+    div {
+      -moz-animation: ${nicknameAnimation} 7s linear infinite;
+      -webkit-animation: ${nicknameAnimation} 7s linear infinite;
+      animation: ${nicknameAnimation} 7s linear infinite;
+    }
+  }
+
+  .user-status-box-slash {
+    position: fixed;
+    margin-left: 127px;
+  }
+
+  .user-status-box-rank {
+    margin-left: 195px;
+  }
 `;
 
 const OnClickHandleButton = styled(Button)`
