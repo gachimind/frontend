@@ -12,10 +12,13 @@ import MainTemplate from '@components/layout/MainTemplate';
 
 const Main = () => {
   const dispatch = useAppDispatch();
-  const { onError } = useErrorSocket();
+  const { onError, offError } = useErrorSocket();
 
   useEffect(() => {
     onError([{ target: 'event', value: PUBLISH.login, callback: () => dispatch(logout()) }]);
+    return () => {
+      offError();
+    };
   }, []);
 
   return (
