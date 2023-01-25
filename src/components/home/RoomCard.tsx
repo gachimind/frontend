@@ -4,7 +4,7 @@ const RoomCard = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <GreyBox />
-      <RoomCardTopBox></RoomCardTopBox>
+      <RoomCardTopBox />
       <RoomCardMainBox>{children}</RoomCardMainBox>
     </div>
   );
