@@ -15,9 +15,8 @@ import Selection from '@components/common/Selection';
 
 import { CreateRoomRequest } from '@customTypes/socketType';
 
-// TODO: 모든 input을 추가하고 유효성 검사를 수행하여 방을 생성할 수 있어야 한다.
 const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
-  const [roomTitle, setRoomTitle] = useState<string>('');
+  const [roomTitle, setRoomTitle] = useState<string>('가치마인드 한 판 해요');
   const [maxCount, setMaxCount] = useState<number>(2);
   const [time, setTime] = useState<string>('30:30:60');
   const [roomPassword, setRoomPassword] = useState<string | undefined>();
