@@ -17,16 +17,16 @@ import { CreateRoomRequest } from '@customTypes/socketType';
 
 // TODO: 모든 input을 추가하고 유효성 검사를 수행하여 방을 생성할 수 있어야 한다.
 const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
-  const [showPasswordInput, setShowPasswordInput] = useState<boolean>(false);
   const [roomTitle, setRoomTitle] = useState<string>('');
   const [maxCount, setMaxCount] = useState<number>(2);
   const [time, setTime] = useState<string>('30:30:60');
-  const [roomPassword, setRoomPassword] = useState<string>('');
+  const [roomPassword, setRoomPassword] = useState<string | undefined>();
+  const [isSecretRoom, setIsSecretRoom] = useState<boolean>(false);
   const { onShowCreatedRoomId, emitCreateRoom } = useGameSocket();
   const navigate = useNavigate();
 
   const handleCreateGameButtonClick = () => {
-    if (!roomTitle || maxCount < 2 || maxCount > 6) {
+    if (!roomTitle || maxCount < 2 || maxCount > 6 || (isSecretRoom && String(roomPassword)?.length !== 4)) {
       return;
     }
     const createRoom: CreateRoomRequest = {
@@ -37,7 +37,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
       speechTime: Number(time.split(':')[2]) * 1000,
       round: 1,
       roomPassword: Number(roomPassword),
-      isSecretRoom: true,
+      isSecretRoom,
     };
     emitCreateRoom(createRoom);
     onClose();
@@ -56,12 +56,12 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
               onChange={(e) => setRoomTitle(e.target.value)}
               maxLength={12}
             />
-            <PasswordButton onClick={() => setShowPasswordInput((prev) => !prev)}>
+            <PasswordButton onClick={() => setIsSecretRoom((prev) => !prev)}>
               <img src={lockIcon} />
             </PasswordButton>
           </TitleInputBox>
         </InputContainer>
-        {showPasswordInput && (
+        {isSecretRoom && (
           <InputContainer label="비밀번호">
             <Input
               type="text"
