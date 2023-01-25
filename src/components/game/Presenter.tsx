@@ -33,7 +33,12 @@ const Presenter = () => {
         </PresenterKeywordBox>
       )}
       {room?.isGameOn && turn && <PresenterCam nickname={presenterNickname} isMe={isMe} userId={turn.speechPlayer} />}
-      {!room?.isGameOn && <GameReadyBox>{currentUser?.isHost ? <GameStart /> : <GameReady />}</GameReadyBox>}
+      {!room?.isGameOn && (
+        <GameReadyBox>
+          {currentUser?.isHost && <GameStart />}
+          {currentUser?.isHost === false && <GameReady />}
+        </GameReadyBox>
+      )}
     </PresenterLayout>
   );
 };
