@@ -30,6 +30,10 @@ const RoomList = () => {
 
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState<boolean>(false);
 
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * 9;
+  const numPages = Math.ceil(broadcastedRooms.length / 9);
+
   useEffect(() => {
     if (location.search && getParam('roomId')) {
       initLocalStream();
@@ -61,10 +65,10 @@ const RoomList = () => {
     <>
       <RoomListLayout>
         <RoomPaginationBox>
-          <button>
+          <button onClick={() => setPage(page - 1)} disabled={page === 1}>
             <img src={roomListLeftIcon} />
           </button>
-          <button>
+          <button onClick={() => setPage(page + 1)} disabled={page === numPages}>
             <img src={roomListRightIcon} />
           </button>
         </RoomPaginationBox>
@@ -79,6 +83,7 @@ const RoomList = () => {
         )}
         <GlobalLoading isLoading={isMediaLoading && !isMediaSuccess} />
         {broadcastedRooms
+          .slice(offset, offset + 9)
           .filter((room) => room.participants !== 0)
           .map((room) => (
             <RoomCard key={room.roomId}>
