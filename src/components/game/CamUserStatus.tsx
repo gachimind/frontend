@@ -3,47 +3,70 @@ import styled from 'styled-components';
 import smallMicOffIcon from '@assets/svg_smallMicOffIcon.svg';
 import smallMicOnIcon from '@assets/svg_smallMicOnIcon.svg';
 
+import PlayerImageHolder from '@components/game/PlayerImageHolder';
+
 interface CamUserStatusProps {
   nickname: string;
   isMicOn?: boolean;
+  size?: 'main' | 'sub';
 }
 
-const CamUserStatus = ({ nickname, isMicOn }: CamUserStatusProps) => {
+const CamStatusStyles = {
+  sub: {
+    fontSize: '12px',
+    gap: '6px',
+    padding: '8px 8px',
+  },
+  main: {
+    fontSize: '18px',
+    gap: '16px',
+    padding: '12px 24px',
+  },
+};
+
+interface CamStatusStylesProps {
+  fontSize: string;
+  gap: string;
+  padding: string;
+}
+
+const CamUserStatus = ({ nickname, isMicOn, size = 'sub' }: CamUserStatusProps) => {
   return (
-    <CamUserStatusLayout>
+    <CamUserStatusLayout customStyles={CamStatusStyles[size]}>
       <div>
-        <ImageHolder></ImageHolder>
+        <PlayerImageHolder size={size}></PlayerImageHolder>
         <NicknameText>{nickname}</NicknameText>
       </div>
-      <div>{isMicOn ? <img src={smallMicOnIcon} /> : <img src={smallMicOffIcon} />}</div>
+      <div>
+        <img
+          style={{ transform: size === 'main' ? 'scale(1.5)' : 'scale(1.0)' }}
+          src={isMicOn ? smallMicOnIcon : smallMicOffIcon}
+        />
+      </div>
     </CamUserStatusLayout>
   );
 };
-const CamUserStatusLayout = styled.div`
+
+const CamUserStatusLayout = styled.div<{ customStyles: CamStatusStylesProps }>`
   position: absolute;
-  bottom: 10px;
+  bottom: 0;
   display: flex;
   justify-content: space-between;
-  padding: 0 8px;
+  padding: ${(props) => props.customStyles.padding};
   align-items: center;
-  width: 150px;
-  height: 35px;
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 
   div {
-    gap: 4px;
+    gap: ${(props) => props.customStyles.gap};
     display: flex;
     align-items: center;
   }
-`;
-
-const ImageHolder = styled.span`
-  background-color: ${(props) => props.theme.colors.lightGrey3};
-  box-shadow: 0 0 0 1px #000 inset;
-  border: 1px solid ${(props) => props.theme.colors.lightGrey3};
-  border-radius: 50%;
-  width: 22px;
-  height: 22px;
+  span {
+    color: ${(props) => props.theme.colors.white};
+    font-size: ${(props) => props.customStyles.fontSize};
+    font-weight: 500;
+  }
 `;
 
 const NicknameText = styled.span`
