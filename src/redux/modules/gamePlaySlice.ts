@@ -19,10 +19,14 @@ const gamePlaySlice = createSlice({
     setTurn: (state, action: PayloadAction<GameTurnInfoResponse>) => {
       state.turn = action.payload;
     },
+    clearAllGamePlayState: (state) => {
+      state.playState = undefined;
+      state.turn = undefined;
+    },
   },
   extraReducers: {},
 });
 
-export const { setPlayState, setTurn } = gamePlaySlice.actions;
+export const { setPlayState, setTurn, clearAllGamePlayState } = gamePlaySlice.actions;
 
 export default gamePlaySlice;

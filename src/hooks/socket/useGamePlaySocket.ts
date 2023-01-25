@@ -1,22 +1,22 @@
 import { useEffect } from 'react';
 
-import { SUBSCRIBE } from '@constants/socket';
+import { PUBLISH, SUBSCRIBE } from '@constants/socket';
 import { useAppDispatch } from '@redux/hooks';
-import { setPlayState, setTurn } from '@redux/modules/gamePlaySlice';
+import { clearAllGamePlayState, setPlayState, setTurn } from '@redux/modules/gamePlaySlice';
 import { setIsGameOnState } from '@redux/modules/gameRoomSlice';
+import { alertToast } from '@utils/toast';
 
 import { GameEndResponse, GameStartResponse, GameTurnInfoResponse } from '@customTypes/socketType';
 
 import socketInstance from './socketInstance';
 
 const useGamePlaySocket = () => {
-  const { on, off } = socketInstance;
+  const { on, off, emit } = socketInstance;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     on(SUBSCRIBE.gameTimeStart, ({ data }: { data: GameStartResponse }) => {
       console.log('[on] game-start');
-      console.log(data);
       dispatch(setPlayState(data));
       switch (data.event) {
         case 'startCount':
@@ -32,8 +32,16 @@ const useGamePlaySocket = () => {
     on(SUBSCRIBE.gameTimeEnd, ({ data }: { data: GameEndResponse }) => {
       if (data.nextTurn === 0) {
         console.log('[on] game-end');
-        dispatch(setPlayState({ ...data, event: 'gameEnd' }));
+        dispatch(setPlayState({ ...data, event: 'gameEnd', timer: 2000 }));
         dispatch(setIsGameOnState(false));
+        alertToast('게임이 종료되었습니다!', 'info', {
+          hideProgressBar: true,
+        });
+        setTimeout(() => {
+          dispatch(clearAllGamePlayState());
+        }, 1500);
+        // FIXME: 서버에서 레디상태 초기화 해줄 경우 삭제할 것
+        emit(PUBLISH.readyGame);
       }
     });
 
