@@ -1,13 +1,60 @@
+import { useEffect, useState } from 'react';
+
 import styled from 'styled-components';
 
-const PresenterCam = () => {
-  return <PresenterCamLayout></PresenterCamLayout>;
+import { useAppSelector } from '@redux/hooks';
+import { WebRTCUser } from '@redux/modules/playerMediaSlice';
+
+import Cam from './Cam';
+
+interface PresenterCamProps {
+  nickname: string;
+  isMe: boolean;
+  userId?: number;
+}
+
+const PresenterCam = ({ nickname, isMe, userId }: PresenterCamProps) => {
+  const { playerStreamMap, playerList } = useAppSelector((state) => state.playerMedia);
+  const [currentPlayer, setCurrentPlayer] = useState<WebRTCUser>();
+  const { userStream, userMic } = useAppSelector((state) => state.userMedia);
+
+  useEffect(() => {
+    if (!isMe) {
+      setCurrentPlayer(playerList.find((player) => player.userId === userId));
+    }
+  }, [userId]);
+
+  return (
+    <PresenterCamLayout>
+      {isMe ? (
+        <Cam
+          userStream={userStream}
+          nickname={nickname}
+          isMe={isMe}
+          audio={userMic}
+          size="main"
+          width={551}
+          height={440}
+        />
+      ) : (
+        <Cam
+          userStream={playerStreamMap[currentPlayer?.socketId as string]}
+          nickname={nickname}
+          audio={currentPlayer?.audio}
+          size="main"
+          width={551}
+          height={440}
+        />
+      )}
+    </PresenterCamLayout>
+  );
 };
 
 const PresenterCamLayout = styled.div`
   position: absolute;
-  top: 39px;
+  top: 26px;
   left: 0;
+  z-index: 2;
 `;
 
 export default PresenterCam;
