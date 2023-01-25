@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 import enterRoomIcon from '@assets/svg_enterRoomIcon.svg';
 import privateRoomIcon from '@assets/svg_privateRoomIcon.svg';
-import roomCard from '@assets/svg_roomCard.svg';
 import roomListLeftIcon from '@assets/svg_roomListLeftIcon.svg';
 import roomListRightIcon from '@assets/svg_roomListRightIcon.svg';
 import { useAuthSocket } from '@hooks/socket/useAuthSocket';
@@ -18,6 +17,7 @@ import GlobalLoading from '@components/common/GlobalLoading';
 import { GameRoomBroadcastResponse } from '@customTypes/socketType';
 
 import EnterPrivateRoomModal from './EnterPrivateRoomModal';
+import RoomCard from './RoomCard';
 
 const RoomList = () => {
   const navigate = useNavigate();
@@ -29,6 +29,10 @@ const RoomList = () => {
   const { initLocalStream } = useLocalStream();
 
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState<boolean>(false);
+
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * 9;
+  const numPages = Math.ceil(broadcastedRooms.length / 9);
 
   useEffect(() => {
     if (location.search && getParam('roomId')) {
@@ -61,10 +65,10 @@ const RoomList = () => {
     <>
       <RoomListLayout>
         <RoomPaginationBox>
-          <button>
+          <button onClick={() => setPage(page - 1)} disabled={page === 1}>
             <img src={roomListLeftIcon} />
           </button>
-          <button>
+          <button onClick={() => setPage(page + 1)} disabled={page === numPages}>
             <img src={roomListRightIcon} />
           </button>
         </RoomPaginationBox>
@@ -80,6 +84,7 @@ const RoomList = () => {
         <GlobalLoading isLoading={isMediaLoading && !isMediaSuccess} />
         {broadcastedRooms
           .filter((room) => room.participants !== 0)
+          .slice(offset, offset + 9)
           .map((room) => (
             <RoomCard key={room.roomId}>
               <CardContentsBox>
@@ -102,9 +107,9 @@ const RoomList = () => {
 
 const RoomListLayout = styled.div`
   position: relative;
-  padding: 29px 46px;
-  column-gap: 32px;
-  row-gap: 16px;
+  padding: 29px 53px;
+  column-gap: 40px;
+  row-gap: 24px;
   display: flex;
   flex-wrap: wrap;
 `;
@@ -122,23 +127,10 @@ const RoomPaginationBox = styled.div`
   }
 `;
 
-const RoomCard = styled.div`
-  background-image: url(${roomCard});
-  width: 272px;
-  height: 176px;
-  display: flex;
-  .secret-room-icon {
-    width: 86px;
-    height: 86px;
-    margin-top: 50px;
-    margin-left: 20px;
-  }
-`;
-
 const CardContentsBox = styled.div`
   font-family: inherit;
   margin-left: 32px;
-  margin-top: 48px;
+  margin-top: 25px;
   display: flex;
   flex-direction: column;
 `;
