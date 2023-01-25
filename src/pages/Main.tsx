@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { PUBLISH } from '@constants/socket';
 import useErrorSocket from '@hooks/socket/useErrorSocket';
