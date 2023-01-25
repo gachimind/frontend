@@ -27,6 +27,7 @@ export interface Participant {
   audio?: boolean;
   video?: boolean;
   isHost?: boolean;
+  score?: number;
 }
 
 export interface ChatBaseType {

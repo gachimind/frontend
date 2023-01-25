@@ -49,6 +49,16 @@ const gameRoomSlice = createSlice({
     setIsGameOnState: (state, action: PayloadAction<boolean>) => {
       state.room = { ...(state.room as GameRoomDetail), isGameOn: action.payload };
     },
+    setScore: (state, action: PayloadAction<{ userId: number; score: number }>) => {
+      const { userId, score } = action.payload;
+      if (!state.room?.participants) {
+        return;
+      }
+      const participants = state.room.participants.map((participant) =>
+        participant.userId === userId ? { ...participant, score: (participant.score ?? 0) + score } : participant,
+      );
+      state.room = { ...state.room, participants };
+    },
   },
   extraReducers: {},
 });
@@ -61,6 +71,7 @@ export const {
   clearChatList,
   setLastEnteredRoom,
   setIsGameOnState,
+  setScore,
 } = gameRoomSlice.actions;
 
 export default gameRoomSlice;
