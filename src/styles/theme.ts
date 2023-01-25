@@ -107,6 +107,10 @@ export const borders = {
    */
   normalIvory: '4px solid #F0F0F0',
   /**
+   * normalWhite: 4px solid #FFFFFF
+   */
+  normalWhite: '4px solid #FFFFFF',
+  /**
    * thinGrey: 2px solid #444444
    */
   thinGrey: '2px solid #444444',
@@ -149,6 +153,19 @@ export const borders = {
   border-bottom: 4px solid #000000;
   border-left: 4px solid #d7d7d7;
   `,
+  /**
+   * roomCardBorder:
+    border-top: 4px solid #FFFFFF;
+    border-right: 4px solid #797979;
+    border-bottom: 4px solid #797979;
+    border-left: 4px solid #FFFFFF;
+   */
+  roomCardBorder: `
+    border-top: 4px solid #FFFFFF;
+    border-right: 4px solid #797979;
+    border-bottom: 4px solid #797979;
+    border-left: 4px solid #FFFFFF;
+    `,
 };
 
 export const font = {
