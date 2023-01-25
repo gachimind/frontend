@@ -37,5 +37,5 @@ export interface Chat extends ChatBaseType {
   userId: number;
   socketId: string;
   nickname: string;
-  type: 'chat' | 'notification' | 'answer';
+  type: 'chat' | 'notification' | 'answer' | 'warning';
 }
