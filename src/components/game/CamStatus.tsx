@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
 import { useAppSelector } from '@redux/hooks';
+
+import { Participant } from '@customTypes/gameRoomType';
 
 interface CamBorderProps {
   userId: number;
@@ -11,9 +13,20 @@ interface CamBorderProps {
 
 const CamStatus = ({ userId, isHost }: CamBorderProps) => {
   const { room } = useAppSelector((state) => state.gameRoom);
-  const currentPlayer = room?.participants.find((participant) => participant.userId === userId);
+  const [currentPlayer, setCurrentPlayer] = useState<Participant>();
+
+  useEffect(() => {
+    setCurrentPlayer(room?.participants.find((participant) => participant.userId === userId));
+  }, [room]);
+
   const isReady = !isHost && (currentPlayer?.isReady ?? false);
-  return <CamBorderLayout isReady={isReady}>{isReady && <ReadyText>ready</ReadyText>}</CamBorderLayout>;
+  return (
+    <>
+      {!room?.isGameOn && (
+        <CamBorderLayout isReady={isReady}>{isReady && <ReadyText>ready</ReadyText>}</CamBorderLayout>
+      )}
+    </>
+  );
 };
 
 const CamBorderLayout = styled.div<{ isReady: boolean }>`
