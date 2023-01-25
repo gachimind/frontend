@@ -54,6 +54,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
               type="text"
               value={roomTitle}
               onChange={(e) => setRoomTitle(e.target.value)}
+              maxLength={12}
             />
             <PasswordButton onClick={() => setShowPasswordInput((prev) => !prev)}>
               <img src={lockIcon} />
