@@ -19,7 +19,9 @@ const useGameTimeCountDown = () => {
     if (playState) {
       setCounter(playState.timer);
       setCounterDescription(CounterDescriptions[playState.event]);
+      return;
     }
+    setCounterDescription('');
   }, [playState]);
 
   useEffect(() => {
