@@ -11,12 +11,22 @@ interface ModalProps {
   title: string;
   width?: number;
   children: React.ReactNode;
+  isBackgroundClickEventDisabled?: boolean;
+  hasBackgroundShadow?: boolean;
   onClose: () => void;
 }
 
-const Modal = ({ visible, title, width, children, onClose }: ModalProps) => {
+const Modal = ({
+  visible,
+  title,
+  width,
+  children,
+  onClose,
+  isBackgroundClickEventDisabled = false,
+  hasBackgroundShadow = true,
+}: ModalProps) => {
   const ref = useRef(null);
-  useClickAway(ref, () => onClose && onClose());
+  useClickAway(ref, () => !isBackgroundClickEventDisabled && onClose && onClose());
   const portalDiv = document.querySelector('#modal-root');
 
   if (!portalDiv) {
@@ -26,22 +36,34 @@ const Modal = ({ visible, title, width, children, onClose }: ModalProps) => {
     <>
       {visible &&
         createPortal(
-          <ModalBackgroundLayout visible={visible}>
-            <ModalBox ref={ref} width={width}>
-              <ModalHeader>
-                {title}
-                <ModalCloseButton onClick={() => onClose && onClose()}>
-                  <img src={CloseModalIcon} />
-                </ModalCloseButton>
-              </ModalHeader>
-              {children}
-            </ModalBox>
-          </ModalBackgroundLayout>,
+          <ModalLayout hasBackgroundShadow={hasBackgroundShadow ?? false}>
+            <ModalBackgroundLayout visible={visible}>
+              <ModalBox ref={ref} width={width}>
+                <ModalHeader>
+                  {title}
+                  <ModalCloseButton onClick={() => onClose && onClose()}>
+                    <img src={CloseModalIcon} />
+                  </ModalCloseButton>
+                </ModalHeader>
+                {children}
+              </ModalBox>
+            </ModalBackgroundLayout>
+          </ModalLayout>,
           portalDiv,
         )}
     </>
   );
 };
+
+const ModalLayout = styled.div<{ hasBackgroundShadow: boolean }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  width: 100vw;
+  height: 100vh;
+  background: ${(props) => (props.hasBackgroundShadow ? 'rgba(0, 0, 0, 0.6)' : 'inherit')};
+`;
 
 const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
   display: ${({ visible }) => (visible ? 'block' : 'none')};
