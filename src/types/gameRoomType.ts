@@ -27,6 +27,7 @@ export interface Participant {
   audio?: boolean;
   video?: boolean;
   isHost?: boolean;
+  score?: number;
 }
 
 export interface ChatBaseType {
@@ -37,5 +38,5 @@ export interface Chat extends ChatBaseType {
   userId: number;
   socketId: string;
   nickname: string;
-  type: 'chat' | 'notification' | 'answer';
+  type: 'chat' | 'notification' | 'answer' | 'warning';
 }

@@ -1,18 +1,21 @@
 import { useState } from 'react';
 
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import medalIcon from '@assets/svg_medalIcon.svg';
 import trophyIcon from '@assets/svg_trophyIcon.svg';
 import { useAppSelector } from '@redux/hooks';
 
+import Button from '@components/common/Button';
 import EditProfileModal from '@components/mypage/EditProfileModal';
 
 import CreateGameModal from './CreateGameModal';
 import LoginModal from './LoginModal';
 
 const UserInfo = ({ mypage }: { mypage?: boolean }) => {
-  const { user, isLogined } = useAppSelector((state) => state.user);
+  const user = useAppSelector((state) => state.user.user);
+
+  const nickname = sessionStorage.getItem('nickname');
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [createGameModalVisible, setCreateGameModalVisible] = useState<boolean>(false);
@@ -23,13 +26,25 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
       <ProfileBox>
         <UserImageBox></UserImageBox>
         <UserStatusBox>
-          {!isLogined ? (
+          {!nickname ? (
             <span>로그인이 필요합니다.</span>
           ) : (
             <>
-              <span className="nickname">{user && user.nickname}</span>
-              <span>|</span>
-              <span>10TH</span>
+              <span className="user-status-box-nickname">
+                {user?.nickname === nickname ? (
+                  user.nickname.length > 4 ? (
+                    <div>{user.nickname}</div>
+                  ) : (
+                    user.nickname
+                  )
+                ) : nickname.length > 4 ? (
+                  <div>{nickname}</div>
+                ) : (
+                  nickname
+                )}
+              </span>
+              <span className="user-status-box-slash">|</span>
+              <span className="user-status-box-rank">10TH</span>
             </>
           )}
         </UserStatusBox>
@@ -40,36 +55,38 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
         <CreateGameModal visible={createGameModalVisible} onClose={() => setCreateGameModalVisible(false)} />
       )}
       {!mypage && (
-        <MakeRoomButton onClick={() => (!isLogined ? setLoginModalVisible(true) : setCreateGameModalVisible(true))}>
+        <OnClickHandleButton onClick={() => (!user ? setLoginModalVisible(true) : setCreateGameModalVisible(true))}>
           게임방 만들기
-        </MakeRoomButton>
+        </OnClickHandleButton>
       )}
 
       {EditProfileModalVisible && (
         <EditProfileModal visible={EditProfileModalVisible} onClose={() => setEditProfileModalVisible(false)} />
       )}
-      {mypage && <MakeRoomButton onClick={() => setEditProfileModalVisible(true)}>회원정보 수정</MakeRoomButton>}
+      {mypage && (
+        <OnClickHandleButton onClick={() => setEditProfileModalVisible(true)}>회원정보 수정</OnClickHandleButton>
+      )}
       <ScoreBox>
-        <img src={medalIcon} />
+        <div className="score-box-icon">
+          <img src={medalIcon} />
+        </div>
         <div>
-          <span className="title">오늘 획득한 점수</span>
-          <span className="score">
+          <span className="score-box-title">오늘 획득한 점수</span>
+          <span className="score-box-score">
             10000
-            <span className="title" id="fix">
-              점
-            </span>
+            <span>점</span>
           </span>
         </div>
       </ScoreBox>
       <ScoreBox>
-        <img src={trophyIcon} />
+        <div className="score-box-icon">
+          <img src={trophyIcon} />
+        </div>
         <div>
-          <span className="title">누적 점수</span>
-          <span className="score">
+          <span className="score-box-title">누적 점수</span>
+          <span className="score-box-score">
             10000
-            <span className="title" id="fix">
-              점
-            </span>
+            <span>점</span>
           </span>
         </div>
       </ScoreBox>
@@ -88,15 +105,24 @@ const UserInfoLayout = styled.div`
 const ProfileBox = styled.div`
   position: relative;
   margin-bottom: 18px;
-
-  border-top: ${(props) => props.theme.borders.normalblack};
-  border-right: ${(props) => props.theme.borders.normalwhite};
-  border-bottom: ${(props) => props.theme.borders.normalwhite};
-  border-left: ${(props) => props.theme.borders.normalblack};
+  ${(props) => props.theme.borders.bottomRightWhiteBorder}
 `;
 
 const UserImageBox = styled.div`
   background-color: white;
+`;
+
+const nicknameAnimation = keyframes`
+  from {
+    -moz-transform: translateX(50%);
+    -webkit-transform: translateX(50%);
+    transform: translateX(50%);
+  }
+  to {
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
 `;
 
 const UserStatusBox = styled.div`
@@ -109,33 +135,39 @@ const UserStatusBox = styled.div`
   gap: 52px;
   padding: 25px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  span {
-    font-family: ${(props) => props.theme.font.korean};
+  .user-status-box-nickname {
+    position: fixed;
+    width: 100px;
+    white-space: nowrap;
+    display: block;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+
+    div {
+      -moz-animation: ${nicknameAnimation} 7s linear infinite;
+      -webkit-animation: ${nicknameAnimation} 7s linear infinite;
+      animation: ${nicknameAnimation} 7s linear infinite;
+    }
   }
-  .nickname {
-    font-family: ${(props) => props.theme.font.korean};
+
+  .user-status-box-slash {
+    position: fixed;
+    margin-left: 127px;
+  }
+
+  .user-status-box-rank {
+    margin-left: 195px;
   }
 `;
 
-const MakeRoomButton = styled.button`
-  cursor: pointer;
-  font-family: ${(props) => props.theme.font.korean};
+const OnClickHandleButton = styled(Button)`
   font-size: 24px;
-  color: ${(props) => props.theme.colors.ivory2};
-  text-shadow: ${(props) => props.theme.textShadow.textShadow};
-  background-color: ${(props) => props.theme.colors.darkGrey2};
-
-  border-top: ${(props) => props.theme.borders.normalwhite};
-  border-right: ${(props) => props.theme.borders.normalblack};
-  border-bottom: ${(props) => props.theme.borders.normalblack};
-  border-left: ${(props) => props.theme.borders.normalwhite};
 `;
 
 const ScoreBox = styled.div`
   color: ${(props) => props.theme.colors.ivory2};
-  font-family: ${(props) => props.theme.font.korean};
   padding: 0px 40px;
   gap: 24px;
   display: grid;
@@ -143,34 +175,30 @@ const ScoreBox = styled.div`
   justify-content: center;
   align-items: center;
 
-  border-top: ${(props) => props.theme.borders.normalblack};
-  border-right: ${(props) => props.theme.borders.normalwhite};
-  border-bottom: ${(props) => props.theme.borders.normalwhite};
-  border-left: ${(props) => props.theme.borders.normalblack};
+  ${(props) => props.theme.borders.bottomRightWhiteBorder}
 
-  img {
-    background-color: ${(props) => props.theme.colors.darkGrey1};
-    width: 48px;
-    height: 48px;
+  .score-box-icon {
+    background-color: ${(props) => props.theme.colors.lightGrey6};
+    width: 40px;
+    height: 40px;
   }
 
   div {
     display: flex;
     flex-direction: column;
 
-    .title {
-      font-family: ${(props) => props.theme.font.korean};
+    .score-box-title {
       font-size: 12px;
     }
 
-    .score {
-      font-family: ${(props) => props.theme.font.korean};
-      text-shadow: ${(props) => props.theme.textShadow.textShadow};
+    .score-box-score {
+      text-shadow: ${(props) => props.theme.textShadow.textShadow1};
       font-size: 24px;
       gap: 4px;
       display: flex;
       align-items: center;
-      #fix {
+      span {
+        font-size: 12px;
         text-shadow: none;
       }
     }

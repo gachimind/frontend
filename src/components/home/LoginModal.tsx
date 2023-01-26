@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import Button from '@components/common/Button';
 import Modal from '@components/common/Modal';
 
 const LoginModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
@@ -30,7 +31,6 @@ const LoginModal = ({ visible, onClose }: { visible: boolean; onClose: () => voi
   );
 };
 
-// TODO: 임시 색상으로 추후 변경되어야 한다.
 const LoginModalLayout = styled.div`
   padding: 118px 70px;
   gap: 24px;
@@ -39,18 +39,9 @@ const LoginModalLayout = styled.div`
   justify-content: center;
 `;
 
-const LoginButton = styled.button`
-  cursor: pointer;
-  font-family: ${(props) => props.theme.font.korean};
+const LoginButton = styled(Button)`
   font-size: 24px;
-  color: ${(props) => props.theme.colors.ivory2};
-  background-color: ${(props) => props.theme.colors.darkGrey2};
   height: 72px;
-
-  border-top: ${(props) => props.theme.borders.normalwhite};
-  border-right: ${(props) => props.theme.borders.normalblack};
-  border-bottom: ${(props) => props.theme.borders.normalblack};
-  border-left: ${(props) => props.theme.borders.normalwhite};
 `;
 
 export default LoginModal;

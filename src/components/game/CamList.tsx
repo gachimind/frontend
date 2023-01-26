@@ -20,8 +20,8 @@ const CamList = () => {
     hasPrev: false,
     hasNext: true,
   });
-  const [emptyUserCount, setEmptyUserCount] = useState<number>(0);
   const { user } = useAppSelector((state) => state.user);
+  const { turn } = useAppSelector((state) => state.gamePlay);
   const dispatch = useAppDispatch();
   const { onUpdateUserStream, offUpdateUserStream } = useStreamUpdateSocket();
 
@@ -36,7 +36,6 @@ const CamList = () => {
   }, []);
 
   useEffect(() => {
-    setEmptyUserCount(playerList.length < 3 ? 3 - playerList.length : 0);
     onUpdateUserStream();
     return () => {
       offUpdateUserStream();
@@ -68,30 +67,42 @@ const CamList = () => {
 
   return (
     <CamListLayout {...settings}>
-      {playerList.map((player, index) => {
-        return (
-          <div key={player.userId}>
-            {player.userId === user?.userId ? (
-              <Cam userStream={userStream} nickname={user.nickname} audio={userMic} isMe={true} isHost={index === 0} />
-            ) : (
-              <Cam
-                key={player.userId}
-                userStream={playerStreamMap[player.socketId]}
-                nickname={player.nickname}
-                audio={player.audio}
-                isHost={index === 0}
-              />
-            )}
-          </div>
-        );
-      })}
-      {emptyUserCount !== 0 && [...Array(emptyUserCount)].map((v, i) => <Cam key={i} nickname={'EMPTY'} />)}
+      {playerList
+        .filter((player) => player.userId !== turn?.speechPlayer)
+        .map((player, index) => {
+          return (
+            <div key={player.userId}>
+              {player.userId === user?.userId ? (
+                <Cam
+                  userId={user.userId}
+                  userStream={userStream}
+                  nickname={user.nickname}
+                  audio={userMic}
+                  isMe={true}
+                  isHost={index === 0}
+                  size="sub"
+                />
+              ) : (
+                <Cam
+                  userId={player.userId}
+                  key={player.userId}
+                  userStream={playerStreamMap[player.socketId]}
+                  nickname={player.nickname}
+                  audio={player.audio}
+                  isHost={index === 0}
+                  size="sub"
+                />
+              )}
+            </div>
+          );
+        })}
     </CamListLayout>
   );
 };
 
 const CamListLayout = styled(Slider)`
   width: 500px;
+  margin-top: -6px;
 `;
 
 export default CamList;

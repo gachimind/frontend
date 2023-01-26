@@ -1,12 +1,20 @@
+import { useLayoutEffect } from 'react';
+
 import UserInfo from '@components/home/UserInfo';
 import ContentContainer from '@components/layout/ContentContainer';
 import MyPageTemplate from '@components/layout/MyPageTemplate';
 import Keyword from '@components/mypage/Keyword';
 
 const Mypage = () => {
-  const isLogined = sessionStorage.getItem('accessToken');
+  useLayoutEffect(() => {
+    const accessToken = sessionStorage.getItem('accessToken');
 
-  !isLogined && window.location.replace('/');
+    if (!accessToken) {
+      sessionStorage.clear();
+      window.location.replace('/');
+    }
+  }, []);
+
   return (
     <MyPageTemplate>
       <ContentContainer title="SCORE" lights={true}>

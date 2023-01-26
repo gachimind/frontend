@@ -11,12 +11,14 @@ interface ChatColorType {
   notification: string;
   answer: string;
   chat: string;
+  warning: string;
 }
 
 const ChatColor: ChatColorType = {
   notification: 'yellow',
   answer: 'green',
   chat: 'inherit',
+  warning: 'red',
 };
 
 const ChatLog = () => {
@@ -46,7 +48,7 @@ const ChatLog = () => {
       <ChatBox>
         {chatList.map((chat, index) => (
           <Chat chatColor={ChatColor[chat.type]} key={index}>
-            {chat.nickname}: {chat.message}
+            {chat.type === 'chat' ? chat.nickname + ': ' + chat.message : chat.message}
           </Chat>
         ))}
       </ChatBox>
@@ -76,7 +78,6 @@ const ChatBox = styled.div`
 `;
 
 const ChatInput = styled.input`
-  font-family: ${(props) => props.theme.font.korean};
   font-size: 24px;
   background-color: ${(props) => props.theme.colors.lightGrey1};
   width: 100%;
@@ -91,7 +92,6 @@ const ChatInput = styled.input`
 `;
 
 const Chat = styled.p<{ chatColor: string }>`
-  font-family: ${(props) => props.theme.font.korean};
   font-size: 18px;
   margin-top: 6px;
   color: ${(props) => props.chatColor};

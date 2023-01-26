@@ -27,11 +27,6 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    // FIXME: 인증 구현 후 지울 것
-    setUser: (state, action) => {
-      state.isLogined = false;
-      state.user = action.payload;
-    },
     logout: (state) => {
       state.isLogined = false;
       state.user = null;
@@ -42,6 +37,7 @@ const userSlice = createSlice({
     builder.addCase(__getUserInfo.fulfilled, (state, action) => {
       state.isLogined = true;
       state.user = action.payload;
+      sessionStorage.setItem('nickname', action.payload.nickname);
     });
     builder.addCase(__getUserInfo.rejected, (state) => {
       state.isLogined = false;
@@ -49,6 +45,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser, logout } = userSlice.actions;
+export const { logout } = userSlice.actions;
 
 export default userSlice;

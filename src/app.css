@@ -1,9 +1,19 @@
 @font-face {
-  font-family: 'joystick';
-  src: url('./assets/ttf_joystick.ttf');
+  font-family: 'IBMPlexMono';
+  src: url('./assets/fonts/ttf_IBMPlexMono.ttf');
 }
 
 @font-face {
-  font-family: 'neodgm';
-  src: url('./assets/ttf_neodgm.ttf');
+  font-family: 'Joystick';
+  src: url('./assets/fonts/ttf_Joystick.ttf');
+}
+
+@font-face {
+  font-family: 'NeoDunggeunmo';
+  src: url('./assets/fonts/ttf_NeoDunggeunmo.ttf');
+}
+
+@font-face {
+  font-family: 'NotoSansKR';
+  src: url('./assets/fonts/ttf_NotoSansKR.otf');
 }

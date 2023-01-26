@@ -3,7 +3,8 @@ import { useLocation, useNavigate } from 'react-router';
 
 import styled from 'styled-components';
 
-import roomCard from '@assets/svg_roomCard.svg';
+import roomListLeftIcon from '@assets/svg_roomListLeftIcon.svg';
+import roomListRightIcon from '@assets/svg_roomListRightIcon.svg';
 import { useAuthSocket } from '@hooks/socket/useAuthSocket';
 import useLocalStream from '@hooks/useLocalStream';
 import { useAppSelector } from '@redux/hooks';
@@ -14,6 +15,7 @@ import GlobalLoading from '@components/common/GlobalLoading';
 import { GameRoomBroadcastResponse } from '@customTypes/socketType';
 
 import EnterPrivateRoomModal from './EnterPrivateRoomModal';
+import RoomCard from './RoomCard';
 
 const RoomList = () => {
   const navigate = useNavigate();
@@ -25,6 +27,10 @@ const RoomList = () => {
   const { initLocalStream } = useLocalStream();
 
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState<boolean>(false);
+
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * 9;
+  const numPages = Math.ceil(broadcastedRooms.length / 9);
 
   useEffect(() => {
     if (location.search && getParam('roomId')) {
@@ -56,6 +62,14 @@ const RoomList = () => {
   return (
     <>
       <RoomListLayout>
+        <RoomPaginationBox>
+          <button onClick={() => setPage(page - 1)} disabled={page === 1}>
+            <img src={roomListLeftIcon} />
+          </button>
+          <button onClick={() => setPage(page + 1)} disabled={page === numPages}>
+            <img src={roomListRightIcon} />
+          </button>
+        </RoomPaginationBox>
         {isPasswordModalOpen && selectedRoom && (
           <EnterPrivateRoomModal
             roomId={selectedRoom.roomId}
@@ -68,16 +82,9 @@ const RoomList = () => {
         <GlobalLoading isLoading={isMediaLoading && !isMediaSuccess} />
         {broadcastedRooms
           .filter((room) => room.participants !== 0)
+          .slice(offset, offset + 9)
           .map((room) => (
-            <RoomCard key={room.roomId}>
-              <CardContentsBox>
-                <Title>{room.roomTitle}</Title>
-                <Participants>
-                  참여인원: {room.participants.toString()}/{room.maxCount}
-                </Participants>
-                <EnterButton onClick={() => handleJoinRoomClick(room.roomId)}>참가하기</EnterButton>
-              </CardContentsBox>
-            </RoomCard>
+            <RoomCard key={room.roomId} room={room} onJoinClick={() => handleJoinRoomClick(room.roomId)} />
           ))}
       </RoomListLayout>
     </>
@@ -85,56 +92,25 @@ const RoomList = () => {
 };
 
 const RoomListLayout = styled.div`
-  padding: 29px 46px;
-  column-gap: 32px;
-  row-gap: 16px;
+  position: relative;
+  padding: 29px 53px;
+  column-gap: 40px;
+  row-gap: 24px;
   display: flex;
   flex-wrap: wrap;
 `;
 
-const RoomCard = styled.div`
-  background-image: url(${roomCard});
-  font-family: ${(props) => props.theme.font.korean};
-  width: 272px;
-  height: 176px;
-`;
-
-const CardContentsBox = styled.div`
-  font-family: inherit;
-  margin-left: 32px;
-  margin-top: 48px;
+const RoomPaginationBox = styled.div`
+  position: absolute;
+  gap: 32px;
+  top: -35px;
+  right: 56px;
   display: flex;
-  flex-direction: column;
-`;
 
-const Title = styled.span`
-  color: ${(props) => props.theme.colors.ivory2};
-  font-family: inherit;
-  font-size: 20px;
-  line-height: 150%;
-`;
-
-const Participants = styled.span`
-  font-family: inherit;
-  font-size: 12px;
-  color: ${(props) => props.theme.colors.lightGrey5};
-`;
-
-const EnterButton = styled.button`
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 14px;
-  color: ${(props) => props.theme.colors.ivory2};
-  text-shadow: ${(props) => props.theme.textShadow.textShadow};
-  background-color: ${(props) => props.theme.colors.darkGrey2};
-  margin-top: 12px;
-  width: 96px;
-  height: 40px;
-
-  border-top: ${(props) => props.theme.borders.normalGrey};
-  border-right: ${(props) => props.theme.borders.normalblack};
-  border-bottom: ${(props) => props.theme.borders.normalblack};
-  border-left: ${(props) => props.theme.borders.normalGrey};
+  button {
+    cursor: pointer;
+    background: none;
+  }
 `;
 
 export default RoomList;

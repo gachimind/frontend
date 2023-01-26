@@ -45,18 +45,13 @@ const Selection = ({ width, options, setValue }: SelectionProps) => {
 const SelectBox = styled.div`
   cursor: pointer;
   position: relative;
-  font-family: ${(props) => props.theme.font.korean};
   background-color: ${(props) => props.theme.colors.darkGrey2};
   height: 56px;
   padding-left: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  border-top: ${(props) => props.theme.borders.normalblack};
-  border-right: ${(props) => props.theme.borders.normalwhite};
-  border-bottom: ${(props) => props.theme.borders.normalwhite};
-  border-left: ${(props) => props.theme.borders.normalblack};
+  ${(props) => props.theme.borders.bottomRightWhiteBorder}
 
   img {
     position: absolute;
@@ -81,11 +76,7 @@ const SelectOptions = styled.ul<{ show: boolean; width?: number }>`
   left: -4px;
   display: ${(props) => (props.show ? 'block' : 'none')};
   overflow: hidden;
-
-  border-top: ${(props) => props.theme.borders.normalblack};
-  border-right: ${(props) => props.theme.borders.normalwhite};
-  border-bottom: ${(props) => props.theme.borders.normalwhite};
-  border-left: ${(props) => props.theme.borders.normalblack};
+  ${(props) => props.theme.borders.bottomRightWhiteBorder}
 `;
 
 const Option = styled.li<{ width?: number }>`
@@ -93,7 +84,7 @@ const Option = styled.li<{ width?: number }>`
   font-family: inherit;
   font-size: 24px;
   border-bottom: 1px solid ${(props) => props.theme.colors.darkGrey3};
-  width: ${(props) => (props.width ? props.width - 14 : 406)}px;
+  width: ${(props) => (props.width ? props.width - 36 : 406)}px;
   height: 56px;
   display: flex;
   justify-content: center;

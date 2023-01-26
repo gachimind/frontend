@@ -6,10 +6,9 @@ export const PARTICIPANTS_OPTIONS = [
   { value: '6', label: '6' },
 ];
 
-export const ROUND_OPTIONS = [
-  { value: '1', label: '1' },
-  { value: '2', label: '2' },
-  { value: '3', label: '3' },
+export const COUNT_OPTIONS = [
+  { value: '30:30:60', label: '30:30:60' },
+  { value: '30:60:120', label: '30:60:120' },
 ];
 
-export const BUG_OPTIONS = [{ value: '버그', label: '버그' }];
+export const BUG_OPTIONS = [{ value: '내용 미정', label: '내용 미정' }];

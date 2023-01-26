@@ -39,6 +39,10 @@ export const colors = {
    */
   lightGrey5: '#d7d7d7',
   /**
+   * light grey6: #D9D9D9
+   */
+  lightGrey6: '#D9D9D9',
+  /**
    * dark grey1: #444444
    */
   darkGrey1: '#444444',
@@ -51,6 +55,10 @@ export const colors = {
    */
   darkGrey3: '#3A3A3A',
   /**
+   * dark grey4: #797979
+   */
+  darkGrey4: '#797979',
+  /**
    * black1: #272727
    */
   black1: '#272727',
@@ -62,6 +70,14 @@ export const colors = {
    * black3: #1C1C1C
    */
   black3: '#1C1C1C',
+  /**
+   * purple1: #402f5c
+   */
+  purple1: '#402f5c',
+  /**
+   * purple2: #9400b9
+   */
+  purple2: '#9400b9',
 };
 
 export const boxShadows = {
@@ -91,30 +107,82 @@ export const borders = {
    */
   normalIvory: '4px solid #F0F0F0',
   /**
+   * normalWhite: 4px solid #FFFFFF
+   */
+  normalWhite: '4px solid #FFFFFF',
+  /**
    * thinGrey: 2px solid #444444
    */
   thinGrey: '2px solid #444444',
   /**
-   * black: 4px solid black
+   * topLeftWhiteBorder:
+     border-top: 4px solid #FFFFFF;
+     border-right: 4px solid #000000;
+     border-bottom: 4px solid #000000;
+     border-left: 4px solid #FFFFFF;
    */
-  normalblack: '4px solid black',
+  topLeftWhiteBorder: `
+    border-top: 4px solid #FFFFFF;
+    border-right: 4px solid #000000;
+    border-bottom: 4px solid #000000;
+    border-left: 4px solid #FFFFFF;
+  `,
+  /** 
+   * bottomRightWhiteBorder:
+    border-top: 4px solid #000000;
+    border-right: 4px solid #FFFFFF;
+    border-bottom: 4px solid #FFFFFF;
+    border-left: 4px solid #000000;
+   */
+  bottomRightWhiteBorder: `
+  border-top: 4px solid #000000;
+  border-right: 4px solid #FFFFFF;
+  border-bottom: 4px solid #FFFFFF;
+  border-left: 4px solid #000000;
+  `,
   /**
-   * white: 4px solid white
+   * topLeftGreyBorder:
+    border-top: 4px solid #d7d7d7;
+    border-right: 4px solid #000000;
+    border-bottom: 4px solid #000000;
+    border-left: 4px solid #d7d7d7;
    */
-  normalwhite: '4px solid white',
+  topLeftGreyBorder: `
+  border-top: 4px solid #d7d7d7;
+  border-right: 4px solid #000000;
+  border-bottom: 4px solid #000000;
+  border-left: 4px solid #d7d7d7;
+  `,
   /**
-   * normalGrey: 4px solid #d7d7d7
+   * roomCardBorder:
+    border-top: 4px solid #FFFFFF;
+    border-right: 4px solid #797979;
+    border-bottom: 4px solid #797979;
+    border-left: 4px solid #FFFFFF;
    */
-  normalGrey: '4px solid #d7d7d7',
+  roomCardBorder: `
+    border-top: 4px solid #FFFFFF;
+    border-right: 4px solid #797979;
+    border-bottom: 4px solid #797979;
+    border-left: 4px solid #FFFFFF;
+    `,
 };
 
 export const font = {
-  korean: 'neodgm',
-  Mono: 'IBM Plex Mono',
+  ibmPlexMono: 'IBMPlexMono',
+  joystick: 'Joystick',
+  notoSansKR: 'NotoSansKR',
 };
 
 export const textShadow = {
-  textShadow: '-1px 0 #797979, 0 1px #797979, 1px 0 #797979, 0 -1px #797979',
+  /**
+   * textShadow1: '-1px 0 #797979, 0 1px #797979, 1px 0 #797979, 0 -1px #797979'
+   */
+  textShadow1: '-1px 0 #797979, 0 1px #797979, 1px 0 #797979, 0 -1px #797979',
+  /**
+   * textShadow2: '-1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000'
+   */
+  textShadow2: '-1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000',
 };
 
 export type ColorTypes = typeof colors;

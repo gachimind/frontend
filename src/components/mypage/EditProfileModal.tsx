@@ -1,44 +1,42 @@
+import { useState } from 'react';
+
 import styled from 'styled-components';
 
+import { useAppSelector } from '@redux/hooks';
+
+import Button from '@components/common/Button';
 import Input from '@components/common/Input';
 import InputContainer from '@components/common/InputContainer';
 import Modal from '@components/common/Modal';
 
 const EditProfileModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
+  const user = useAppSelector((state) => state.user.user);
+  const [nickname, setNickname] = useState<string | undefined>(user?.nickname);
+
   return (
     <Modal visible={visible} onClose={onClose} title="EDIT NICKNAME">
       <EditProfileModalLayout>
         <InputContainer label="닉네임 변경">
-          <Input type="text" />
+          <Input type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} maxLength={13} />
         </InputContainer>
-        <EditProfileButton>제보하기..?</EditProfileButton>
+        <EditProfileButton>완료하기</EditProfileButton>
       </EditProfileModalLayout>
     </Modal>
   );
 };
 
-// TODO: 임시 색상으로 추후 변경되어야 한다.
 const EditProfileModalLayout = styled.div`
-  font-family: ${(props) => props.theme.font.korean};
-  padding: 120px 70px;
-  gap: 68px;
+  padding: 120px 80px;
+  gap: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 `;
 
-const EditProfileButton = styled.button`
-  cursor: pointer;
-  font-family: inherit;
+const EditProfileButton = styled(Button)`
   font-size: 24px;
-  color: ${(props) => props.theme.colors.ivory1};
-  background-color: ${(props) => props.theme.colors.darkGrey2};
-  height: 56px;
-
-  border-top: ${(props) => props.theme.borders.normalwhite};
-  border-right: ${(props) => props.theme.borders.normalblack};
-  border-bottom: ${(props) => props.theme.borders.normalblack};
-  border-left: ${(props) => props.theme.borders.normalwhite};
+  background-color: ${(props) => props.theme.colors.purple1};
+  height: 72px;
 `;
 
 export default EditProfileModal;
