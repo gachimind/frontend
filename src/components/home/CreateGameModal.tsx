@@ -28,6 +28,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
     if (!roomTitle || maxCount < 2 || maxCount > 6 || (isSecretRoom && String(roomPassword)?.length !== 4)) {
       return;
     }
+    const password = isSecretRoom ? Number(roomPassword) : undefined;
     const createRoom: CreateRoomRequest = {
       roomTitle,
       maxCount,
@@ -35,12 +36,12 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
       speechTime: Number(time.split(':')[1]) * 1000,
       discussionTime: Number(time.split(':')[2]) * 1000,
       round: 1,
-      roomPassword: Number(roomPassword),
+      roomPassword: password,
       isSecretRoom,
     };
     emitCreateRoom(createRoom);
     onClose();
-    onShowCreatedRoomId(navigate, '/?roomId=', Number(roomPassword));
+    onShowCreatedRoomId(navigate, '/?roomId=', password);
   };
   return (
     <Modal visible={visible} onClose={onClose} title="MAKE A ROOM">

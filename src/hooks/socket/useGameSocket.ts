@@ -9,7 +9,7 @@ import { CreateRoomRequest, EnterRoomRequest } from '@customTypes/socketType';
 import socketInstance from './socketInstance';
 
 interface UseGameSocketType {
-  onShowCreatedRoomId: (navigate: NavigateFunction, path: string, password: number) => void;
+  onShowCreatedRoomId: (navigate: NavigateFunction, path: string, password?: number) => void;
   onJoinRoom: () => void;
   onValidRoomPassword: (callback: () => void) => void;
   emitUserLeaveRoom: () => void;
