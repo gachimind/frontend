@@ -159,7 +159,7 @@ const Title = styled.span`
     -moz-animation: ${titleAnimation} 7s linear infinite;
     -webkit-animation: ${titleAnimation} 7s linear infinite;
     animation: ${titleAnimation} 7s linear infinite;
-    text {
+    span {
       background-image: linear-gradient(
         0deg,
         rgba(121, 121, 121, 0.5) 50%,
