@@ -4,18 +4,19 @@ import Button from '@components/common/Button';
 import Modal from '@components/common/Modal';
 
 const GameResultModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
+  const participants = 3;
   return (
     <Modal visible={visible} onClose={onClose} title="SCORE" width={640}>
       <GameResultModalLayout>
         <span>YOUR SCORE</span>
         <ResultBox>
           <ul>
-            <li style={{ height: '100px' }}></li>
-            <li style={{ height: '180px' }}></li>
+            <li style={{ height: participants < 5 ? '20px' : '100px' }}></li>
+            <li style={{ height: participants < 3 ? '20px' : '180px' }}></li>
             <li style={{ height: '281px' }}></li>
             <li style={{ height: '220px' }}></li>
-            <li style={{ height: '161px' }}></li>
-            <li style={{ height: '81px' }}></li>
+            <li style={{ height: participants < 4 ? '20px' : '161px' }}></li>
+            <li style={{ height: participants < 6 ? '20px' : '81px' }}></li>
           </ul>
         </ResultBox>
         <ButtonBox>
