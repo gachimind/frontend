@@ -27,7 +27,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
         <UserImageBox></UserImageBox>
         <UserStatusBox>
           {!nickname ? (
-            <span>로그인이 필요합니다.</span>
+            <span className="user-status-box-login">로그인이 필요합니다.</span>
           ) : (
             <>
               <span className="user-status-box-nickname">
@@ -136,6 +136,11 @@ const UserStatusBox = styled.div`
   padding: 25px;
   display: flex;
   align-items: center;
+
+  .user-status-box-login {
+    margin-left: 40px;
+  }
+
   .user-status-box-nickname {
     position: fixed;
     width: 100px;
