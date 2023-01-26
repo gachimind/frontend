@@ -19,7 +19,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
   const [roomTitle, setRoomTitle] = useState<string>('가치마인드 한 판 해요');
   const [maxCount, setMaxCount] = useState<number>(2);
   const [time, setTime] = useState<string>('30:30:60');
-  const [roomPassword, setRoomPassword] = useState<string | undefined>();
+  const [roomPassword, setRoomPassword] = useState<string>('');
   const [isSecretRoom, setIsSecretRoom] = useState<boolean>(false);
   const { onShowCreatedRoomId, emitCreateRoom } = useGameSocket();
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
       speechTime: Number(time.split(':')[1]) * 1000,
       discussionTime: Number(time.split(':')[2]) * 1000,
       round: 1,
-      roomPassword: Number(roomPassword),
+      roomPassword: isSecretRoom ? Number(roomPassword) : 1111,
       isSecretRoom,
     };
     emitCreateRoom(createRoom);

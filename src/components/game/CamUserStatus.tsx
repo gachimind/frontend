@@ -35,7 +35,7 @@ const CamUserStatus = ({ nickname, isMicOn, size = 'sub' }: CamUserStatusProps) 
     <CamUserStatusLayout customStyles={CamStatusStyles[size]}>
       <div>
         <PlayerImageHolder size={size}></PlayerImageHolder>
-        <NicknameText>{nickname.length > 7 ? <div>nickname</div> : nickname}</NicknameText>
+        <NicknameText>{nickname.length > 7 ? <div>{nickname}</div> : nickname}</NicknameText>
       </div>
       <div>
         <img

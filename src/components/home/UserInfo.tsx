@@ -33,12 +33,12 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
               <span className="user-status-box-nickname">
                 {user?.nickname === nickname ? (
                   user.nickname.length > 4 ? (
-                    <div>user.nickname</div>
+                    <div>{user.nickname}</div>
                   ) : (
                     user.nickname
                   )
                 ) : nickname.length > 4 ? (
-                  <div>nickname</div>
+                  <div>{nickname}</div>
                 ) : (
                   nickname
                 )}
