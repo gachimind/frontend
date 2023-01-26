@@ -84,7 +84,7 @@ const Option = styled.li<{ width?: number }>`
   font-family: inherit;
   font-size: 24px;
   border-bottom: 1px solid ${(props) => props.theme.colors.darkGrey3};
-  width: ${(props) => (props.width ? props.width - 14 : 406)}px;
+  width: ${(props) => (props.width ? props.width - 36 : 406)}px;
   height: 56px;
   display: flex;
   justify-content: center;
