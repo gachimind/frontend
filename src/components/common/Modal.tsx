@@ -36,24 +36,36 @@ const Modal = ({
     <>
       {visible &&
         createPortal(
-          <ModalBackgroundLayout visible={visible} hasBackgroundShadow={hasBackgroundShadow ?? false}>
-            <ModalBox ref={ref} width={width}>
-              <ModalHeader>
-                {title}
-                <ModalCloseButton onClick={() => onClose && onClose()}>
-                  <img src={CloseModalIcon} />
-                </ModalCloseButton>
-              </ModalHeader>
-              {children}
-            </ModalBox>
-          </ModalBackgroundLayout>,
+          <ModalLayout hasBackgroundShadow={hasBackgroundShadow ?? false}>
+            <ModalBackgroundLayout visible={visible}>
+              <ModalBox ref={ref} width={width}>
+                <ModalHeader>
+                  {title}
+                  <ModalCloseButton onClick={() => onClose && onClose()}>
+                    <img src={CloseModalIcon} />
+                  </ModalCloseButton>
+                </ModalHeader>
+                {children}
+              </ModalBox>
+            </ModalBackgroundLayout>
+          </ModalLayout>,
           portalDiv,
         )}
     </>
   );
 };
 
-const ModalBackgroundLayout = styled.div<{ visible: boolean; hasBackgroundShadow: boolean }>`
+const ModalLayout = styled.div<{ hasBackgroundShadow: boolean }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  width: 100vw;
+  height: 100vh;
+  background: ${(props) => (props.hasBackgroundShadow ? 'rgba(0, 0, 0, 0.6)' : 'inherit')};
+`;
+
+const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
   display: ${({ visible }) => (visible ? 'block' : 'none')};
   position: fixed;
   transform: scale(${(props) => props.theme.layout.scale});
@@ -63,7 +75,6 @@ const ModalBackgroundLayout = styled.div<{ visible: boolean; hasBackgroundShadow
   bottom: 0;
   z-index: 999;
   min-height: 100vh;
-  background: ${(props) => (props.hasBackgroundShadow ? ' rgba(0, 0, 0, 0.6)' : 'inherit')};
   padding-right: 15vw;
   padding-left: 15vw;
   display: flex;
