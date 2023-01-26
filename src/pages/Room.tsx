@@ -9,7 +9,8 @@ import useGamePlaySocket from '@hooks/socket/useGamePlaySocket';
 import useGameSocket from '@hooks/socket/useGameSocket';
 import useGameUpdateSocket from '@hooks/socket/useGameUpdateSocket';
 import useLocalStream from '@hooks/useLocalStream';
-import { useAppSelector } from '@redux/hooks';
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { addChat } from '@redux/modules/gameRoomSlice';
 import { alertToast } from '@utils/toast';
 
 import CamList from '@components/game/CamList';
@@ -24,6 +25,7 @@ import RoomTemplate from '@components/layout/RoomTemplate';
 const Room = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { authorized } = useAuthSocket();
   const { userStreamRef, isMediaSuccess } = useAppSelector((state) => state.userMedia);
   const { lastEnteredRoom, broadcastedRooms } = useAppSelector((state) => state.gameRoom);
@@ -66,6 +68,8 @@ const Room = () => {
       }
       if (broadcastedRooms.find((room) => room.roomId === parsedId)?.isSecretRoom) {
         setPasswordModalVisible(true);
+      } else {
+        setIsConfirmedUser(true);
       }
     }
   }, [userStreamRef]);
@@ -75,7 +79,16 @@ const Room = () => {
       const intId = parseInt(id, 10);
       !Number.isNaN(intId) && emitJoinRoom({ roomId: intId, roomPassword: lastEnteredRoom?.password });
       onJoinRoom();
-      onError([{ target: 'event', value: 'enter-room', callback: () => navigate('/', { replace: true }) }]);
+      onError([
+        { target: 'event', value: 'enter-room', callback: () => navigate('/', { replace: true }) },
+        {
+          target: 'event',
+          value: 'send-chat',
+          callback: (msg: string | undefined) =>
+            dispatch(addChat({ message: msg as string, nickname: '', type: 'warning', socketId: '', userId: 0 })),
+          skipAlert: true,
+        },
+      ]);
     }
   }, [id, authorized, isConfirmedUser]);
 

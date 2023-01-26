@@ -11,12 +11,14 @@ interface ChatColorType {
   notification: string;
   answer: string;
   chat: string;
+  warning: string;
 }
 
 const ChatColor: ChatColorType = {
   notification: 'yellow',
   answer: 'green',
   chat: 'inherit',
+  warning: 'red',
 };
 
 const ChatLog = () => {
@@ -46,7 +48,7 @@ const ChatLog = () => {
       <ChatBox>
         {chatList.map((chat, index) => (
           <Chat chatColor={ChatColor[chat.type]} key={index}>
-            {chat.nickname}: {chat.message}
+            {chat.type === 'chat' ? chat.nickname + ': ' + chat.message : chat.message}
           </Chat>
         ))}
       </ChatBox>

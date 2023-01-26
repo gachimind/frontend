@@ -13,9 +13,12 @@ const useChatSocket = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    on(SUBSCRIBE.receiveChat, ({ data }: { data: { message: string; eventUserInfo: EventUserInfo } }) => {
-      dispatch(addChat({ ...data.eventUserInfo, message: data.message, type: 'chat' }));
-    });
+    on(
+      SUBSCRIBE.receiveChat,
+      ({ data }: { data: { message: string; eventUserInfo: EventUserInfo; type: 'chat' | 'answer' } }) => {
+        dispatch(addChat({ ...data.eventUserInfo, message: data.message, type: data.type }));
+      },
+    );
     return () => {
       off(SUBSCRIBE.receiveChat);
     };

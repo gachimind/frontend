@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import { useAppSelector } from '@redux/hooks';
+import { filterKeyword } from '@utils/common';
 
 import GameReady from './GameReady';
 import GameResultModal from './GameResultModal';
@@ -37,9 +38,11 @@ const Presenter = () => {
           event={playState.event}
         />
       )}
-      {isMe && playState?.event === 'speechTimer' && (
+      {playState?.event === 'speechTimer' && turn && (
         <PresenterKeywordBox>
-          제시어:&nbsp;<span>{turn?.keyword}</span>
+          <p>
+            제시어:&nbsp;<span>{isMe ? turn.keyword : filterKeyword(turn.keyword)}</span>
+          </p>
         </PresenterKeywordBox>
       )}
       {room?.isGameOn && turn && <PresenterCam nickname={presenterNickname} isMe={isMe} userId={turn.speechPlayer} />}
@@ -96,7 +99,7 @@ const PresenterKeywordBox = styled.div`
   height: 42px;
   animation: ${KeywordSlide} 0.75s 0s;
   font-size: 14px;
-  & > span {
+  & > p > span {
     font-size: 20px;
     font-weight: 500;
   }
