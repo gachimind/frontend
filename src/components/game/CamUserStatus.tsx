@@ -16,11 +16,13 @@ const CamStatusStyles = {
     fontSize: '12px',
     gap: '6px',
     padding: '8px 8px',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   main: {
     fontSize: '18px',
     gap: '16px',
     padding: '12px 24px',
+    backgroundColor: 'rgba(0, 0, 0, 0.9)',
   },
 };
 
@@ -28,6 +30,7 @@ interface CamStatusStylesProps {
   fontSize: string;
   gap: string;
   padding: string;
+  backgroundColor: string;
 }
 
 const CamUserStatus = ({ nickname, isMicOn, size = 'sub' }: CamUserStatusProps) => {
@@ -55,7 +58,7 @@ const CamUserStatusLayout = styled.div<{ customStyles: CamStatusStylesProps }>`
   padding: ${(props) => props.customStyles.padding};
   align-items: center;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.customStyles.backgroundColor};
 
   div {
     gap: ${(props) => props.customStyles.gap};
