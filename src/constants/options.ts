@@ -11,4 +11,4 @@ export const COUNT_OPTIONS = [
   { value: '30:60:120', label: '30:60:120' },
 ];
 
-export const BUG_OPTIONS = [{ value: '버그', label: '버그' }];
+export const BUG_OPTIONS = [{ value: '내용 미정', label: '내용 미정' }];
