@@ -1,25 +1,44 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styled, { keyframes } from 'styled-components';
 
+import { useAppDispatch } from '@redux/hooks';
+import { clearScore } from '@redux/modules/gameRoomSlice';
+
 import Button from '@components/common/Button';
 import Modal from '@components/common/Modal';
 
-const GameResultModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
-  const participants = 3;
+import { Participant } from '@customTypes/gameRoomType';
+
+interface GameResultModalProps {
+  visible: boolean;
+  onClose: () => void;
+  participants: Participant[];
+}
+
+const GameResultModal = ({ visible, onClose, participants }: GameResultModalProps) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const sortedScore = participants.map((participant) => participant.score ?? 0).sort((o1, o2) => o2 - o1);
+  const maxScore = sortedScore[0];
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearScore());
+    };
+  }, []);
+
   return (
     <Modal visible={visible} onClose={onClose} title="SCORE" width={640}>
       <GameResultModalLayout>
-        <span>YOUR SCORE</span>
+        <span>SCORE RESULT</span>
         <ResultBox>
           <ul>
-            <li style={{ height: participants < 5 ? '20px' : '100px' }}></li>
-            <li style={{ height: participants < 3 ? '20px' : '180px' }}></li>
-            <li style={{ height: '281px' }}></li>
-            <li style={{ height: '220px' }}></li>
-            <li style={{ height: participants < 4 ? '20px' : '161px' }}></li>
-            <li style={{ height: participants < 6 ? '20px' : '81px' }}></li>
+            {[...Array(6)].map((_, index) => {
+              const height = sortedScore[index] === 0 ? 10 : sortedScore[index] ?? 2;
+              return <li key={index} style={{ height: ((height / maxScore) * 80).toString() + '%' }} />;
+            })}
           </ul>
         </ResultBox>
         <ButtonBox>
@@ -74,6 +93,7 @@ const ResultBox = styled.div`
     flex-direction: row;
     align-items: flex-end;
     overflow: hidden;
+    height: 100%;
   }
 
   li {

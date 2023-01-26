@@ -52,8 +52,12 @@ const Presenter = () => {
           {currentUser?.isHost === false && <GameReady />}
         </GameReadyBox>
       )}
-      {resultModalVisible && (
-        <GameResultModal visible={resultModalVisible} onClose={() => setResultModalVisible(false)} />
+      {resultModalVisible && room && (
+        <GameResultModal
+          visible={resultModalVisible}
+          onClose={() => setResultModalVisible(false)}
+          participants={room.participants}
+        />
       )}
     </PresenterLayout>
   );
