@@ -12,7 +12,7 @@ import Modal from '@components/common/Modal';
 
 import { Participant } from '@customTypes/gameRoomType';
 
-interface GameResultModalProps {
+export interface GameResultModalProps {
   visible: boolean;
   onClose: () => void;
   participants: Participant[];
@@ -49,7 +49,7 @@ const GameResultModal = ({ visible, onClose, participants, userId }: GameResultM
                     style={{ height: ((height / maxScore) * 80).toString() + '%' }}
                   />
                   {sortedScore[index] !== undefined && (
-                    <ReactTooltip anchorId={'id-chart-' + index} place="left">
+                    <ReactTooltip anchorId={'id-chart-' + index} place={index === 0 ? 'right' : 'top'}>
                       <p style={{ fontSize: '18px', marginBottom: '10px' }}>
                         &nbsp;{sortedParticipants[index].nickname}
                         {userId === sortedParticipants[index].userId && '(ME)'}
