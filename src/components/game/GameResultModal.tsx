@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { Tooltip as ReactTooltip } from 'react-tooltip';
 import styled, { keyframes } from 'styled-components';
 
 import { useAppDispatch } from '@redux/hooks';
@@ -15,12 +16,14 @@ interface GameResultModalProps {
   visible: boolean;
   onClose: () => void;
   participants: Participant[];
+  userId: number;
 }
 
-const GameResultModal = ({ visible, onClose, participants }: GameResultModalProps) => {
+const GameResultModal = ({ visible, onClose, participants, userId }: GameResultModalProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const sortedScore = participants.map((participant) => participant.score ?? 0).sort((o1, o2) => o2 - o1);
+  const sortedParticipants = [...participants].sort((o1, o2) => o2.score - o1.score);
+  const sortedScore = sortedParticipants.map((participant) => participant.score);
   const maxScore = sortedScore[0];
 
   useEffect(() => {
@@ -37,7 +40,25 @@ const GameResultModal = ({ visible, onClose, participants }: GameResultModalProp
           <ul>
             {[...Array(6)].map((_, index) => {
               const height = sortedScore[index] === 0 ? 10 : sortedScore[index] ?? 2;
-              return <li key={index} style={{ height: ((height / maxScore) * 80).toString() + '%' }} />;
+              console.log(height);
+              return (
+                <>
+                  <li
+                    id={'id-chart-' + index}
+                    key={index}
+                    style={{ height: ((height / maxScore) * 80).toString() + '%' }}
+                  />
+                  {sortedScore[index] !== undefined && (
+                    <ReactTooltip anchorId={'id-chart-' + index} place="left">
+                      <p style={{ fontSize: '18px', marginBottom: '10px' }}>
+                        &nbsp;{sortedParticipants[index].nickname}
+                        {userId === sortedParticipants[index].userId && '(ME)'}
+                      </p>
+                      <p style={{ fontSize: '16px' }}>&nbsp;{sortedParticipants[index].score + '점'}</p>
+                    </ReactTooltip>
+                  )}
+                </>
+              );
             })}
           </ul>
         </ResultBox>

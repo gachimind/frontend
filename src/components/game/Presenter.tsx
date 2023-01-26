@@ -57,6 +57,7 @@ const Presenter = () => {
           visible={resultModalVisible}
           onClose={() => setResultModalVisible(false)}
           participants={room.participants}
+          userId={user?.userId as number}
         />
       )}
     </PresenterLayout>

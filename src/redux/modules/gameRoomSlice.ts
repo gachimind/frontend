@@ -64,7 +64,7 @@ const gameRoomSlice = createSlice({
         return;
       }
       const participants = state.room.participants.map((participant) => {
-        return { ...participant, score: undefined };
+        return { ...participant, score: 0 };
       });
       state.room = { ...state.room, participants };
     },
