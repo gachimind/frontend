@@ -1,16 +1,52 @@
+import { useEffect, useState } from 'react';
+
 import styled, { keyframes } from 'styled-components';
 
 import enterRoomIcon from '@assets/svg_enterRoomIcon.svg';
 import privateRoomIcon from '@assets/svg_privateRoomIcon.svg';
+import { useAppSelector } from '@redux/hooks';
 
 import { GameRoomBroadcastResponse } from '@customTypes/socketType';
+
+import LoginModal from './LoginModal';
 
 interface RoomCardProps {
   room: GameRoomBroadcastResponse;
   onJoinClick: () => void;
 }
 
+interface RoomJoinableInfoType {
+  message: string;
+  isJoinable: boolean;
+}
+
 const RoomCard = ({ room, onJoinClick }: RoomCardProps) => {
+  const { isLogined } = useAppSelector((state) => state.user);
+  const [isLoginModalVisible, setIsLoginModalVisible] = useState<boolean>(false);
+  const [joinInfo, setJoinInfo] = useState<RoomJoinableInfoType>({ message: '참가하기', isJoinable: true });
+
+  useEffect(() => {
+    setJoinInfo(getRoomJoinableInfo());
+  }, [room]);
+
+  const getRoomJoinableInfo = (): RoomJoinableInfoType => {
+    if (room.isGameOn) {
+      return { message: '게임중..', isJoinable: false };
+    }
+    if (room.participants === room.maxCount) {
+      return { message: 'FULL!!', isJoinable: false };
+    }
+    return { message: '참가하기', isJoinable: true };
+  };
+
+  const handleJoinButtonClick = () => {
+    if (!isLogined) {
+      setIsLoginModalVisible(true);
+      return;
+    }
+    onJoinClick();
+  };
+
   return (
     <div>
       <GreyBox />
@@ -29,12 +65,15 @@ const RoomCard = ({ room, onJoinClick }: RoomCardProps) => {
           <Participants>
             참여인원: {room.participants.toString()}/{room.maxCount}
           </Participants>
-          <EnterButton onClick={onJoinClick}>
-            참가하기
+          <EnterButton onClick={handleJoinButtonClick} disabled={!joinInfo.isJoinable} isJoinable={joinInfo.isJoinable}>
+            {joinInfo.message}
             <img src={enterRoomIcon} />
           </EnterButton>
         </CardContentsBox>
         {room.isSecretRoom && <img className="secret-room-icon" src={privateRoomIcon} />}
+        {isLoginModalVisible && !isLogined && (
+          <LoginModal visible={isLoginModalVisible} onClose={() => setIsLoginModalVisible(false)} />
+        )}
       </RoomCardMainBox>
     </div>
   );
@@ -141,8 +180,9 @@ const Participants = styled.span`
   opacity: 0.5;
 `;
 
-const EnterButton = styled.button`
-  cursor: pointer;
+const EnterButton = styled.button<{ isJoinable: boolean }>`
+  cursor: ${(props) => (props.isJoinable ? 'pointer' : 'default')};
+  opacity: ${(props) => (props.isJoinable ? 1 : 0.7)};
   font-family: inherit;
   font-size: 14px;
   color: ${(props) => props.theme.colors.ivory2};
