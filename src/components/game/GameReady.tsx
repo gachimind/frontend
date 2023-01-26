@@ -17,6 +17,7 @@ const GameReady = () => {
   useEffect(() => {
     if (isRenderedFirstTime) {
       setIsRenderedFirstTime(false);
+      return;
     }
     emitGameReady();
   }, [debouncedReadyState]);
