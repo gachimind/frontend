@@ -88,10 +88,12 @@ const EnterPrivateRoomModal = ({ visible, onClose, roomId, roomTitle, successHan
     <Modal visible={visible} onClose={onClose} title="ENTER THE ROOM">
       <EnterPrivateRoomModalLayout>
         <InputContainer label="방제">
-          <RoomTitle>
-            {roomTitle}
-            <img src={lockIcon} />
-          </RoomTitle>
+          <RoomTitleBox>
+            <div>{roomTitle}</div>
+            <PasswordIconBox>
+              <img src={lockIcon} />
+            </PasswordIconBox>
+          </RoomTitleBox>
         </InputContainer>
         <InputContainer label="비밀번호">
           <Input
@@ -117,21 +119,30 @@ const EnterPrivateRoomModalLayout = styled.div`
   justify-content: center;
 `;
 
-const RoomTitle = styled.div`
-  font-family: inherit;
-  font-size: 24px;
-  color: ${(props) => props.theme.colors.ivory2};
-  background-color: ${(props) => props.theme.colors.darkGrey2};
-  width: 328px;
-  height: 56px;
+const RoomTitleBox = styled.div`
   display: flex;
-  ${(props) => props.theme.borders.bottomRightWhiteBorder}
+  justify-content: space-between;
 
-  img {
-    position: absolute;
-    right: 78px;
-    margin-top: -2px;
+  div {
+    font-family: inherit;
+    font-size: 24px;
+    color: ${(props) => props.theme.colors.ivory2};
+    background-color: ${(props) => props.theme.colors.darkGrey2};
+    width: 318px;
+    height: 56px;
+    ${(props) => props.theme.borders.bottomRightWhiteBorder}
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+`;
+
+const PasswordIconBox = styled(Button)`
+  cursor: auto;
+  width: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const EnterRoomButton = styled(Button)<{ isDisabled: boolean }>`
