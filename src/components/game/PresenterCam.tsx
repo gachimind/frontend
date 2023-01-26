@@ -15,14 +15,8 @@ interface PresenterCamProps {
 
 const PresenterCam = ({ nickname, isMe, userId }: PresenterCamProps) => {
   const { playerStreamMap, playerList } = useAppSelector((state) => state.playerMedia);
-  const [currentPlayer, setCurrentPlayer] = useState<WebRTCUser>();
   const { userStream, userMic } = useAppSelector((state) => state.userMedia);
-
-  useEffect(() => {
-    if (!isMe) {
-      setCurrentPlayer(playerList.find((player) => player.userId === userId));
-    }
-  }, [userId]);
+  const currentPlayer = playerList.find((player) => player.userId === userId);
 
   return (
     <PresenterCamLayout>
