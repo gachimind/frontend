@@ -11,12 +11,22 @@ interface ModalProps {
   title: string;
   width?: number;
   children: React.ReactNode;
+  isBackgroundClickEventDisabled?: boolean;
+  hasBackgroundShadow?: boolean;
   onClose: () => void;
 }
 
-const Modal = ({ visible, title, width, children, onClose }: ModalProps) => {
+const Modal = ({
+  visible,
+  title,
+  width,
+  children,
+  onClose,
+  isBackgroundClickEventDisabled = false,
+  hasBackgroundShadow = true,
+}: ModalProps) => {
   const ref = useRef(null);
-  useClickAway(ref, () => onClose && onClose());
+  useClickAway(ref, () => !isBackgroundClickEventDisabled && onClose && onClose());
   const portalDiv = document.querySelector('#modal-root');
 
   if (!portalDiv) {
@@ -26,7 +36,7 @@ const Modal = ({ visible, title, width, children, onClose }: ModalProps) => {
     <>
       {visible &&
         createPortal(
-          <ModalBackgroundLayout visible={visible}>
+          <ModalBackgroundLayout visible={visible} hasBackgroundShadow={hasBackgroundShadow ?? false}>
             <ModalBox ref={ref} width={width}>
               <ModalHeader>
                 {title}
@@ -43,7 +53,7 @@ const Modal = ({ visible, title, width, children, onClose }: ModalProps) => {
   );
 };
 
-const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
+const ModalBackgroundLayout = styled.div<{ visible: boolean; hasBackgroundShadow: boolean }>`
   display: ${({ visible }) => (visible ? 'block' : 'none')};
   position: fixed;
   transform: scale(${(props) => props.theme.layout.scale});
@@ -53,6 +63,7 @@ const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
   bottom: 0;
   z-index: 999;
   min-height: 100vh;
+  background: ${(props) => (props.hasBackgroundShadow ? ' rgba(0, 0, 0, 0.6)' : 'inherit')};
   padding-right: 15vw;
   padding-left: 15vw;
   display: flex;
