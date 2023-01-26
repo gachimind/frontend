@@ -6,12 +6,11 @@ import SelectIcon from '@assets/svg_selectIcon.svg';
 import useClickAway from '@hooks/useClickAway';
 
 interface SelectionProps {
-  width?: number;
   options: Array<{ value: string; label: string }>;
   setValue: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const Selection = ({ width, options, setValue }: SelectionProps) => {
+const Selection = ({ options, setValue }: SelectionProps) => {
   const ref = useRef(null);
   useClickAway(ref, () => setShowOptions(false));
 
@@ -22,7 +21,7 @@ const Selection = ({ width, options, setValue }: SelectionProps) => {
     <SelectBox ref={ref} onClick={() => setShowOptions((prev) => !prev)}>
       <img src={SelectIcon}></img>
       <label>{currentValue}</label>
-      <SelectOptions show={showOptions} width={width}>
+      <SelectOptions show={showOptions}>
         {options?.map((option) => (
           <Option
             key={option.label}
@@ -32,7 +31,6 @@ const Selection = ({ width, options, setValue }: SelectionProps) => {
               setCurrentValue(value);
               setValue(value);
             }}
-            width={width}
           >
             {option.label}
           </Option>
@@ -66,12 +64,13 @@ const SelectBox = styled.div`
   }
 `;
 
-const SelectOptions = styled.ul<{ show: boolean; width?: number }>`
+const SelectOptions = styled.ul<{ show: boolean }>`
   position: absolute;
   z-index: 998;
   font-family: inherit;
   color: ${(props) => props.theme.colors.ivory2};
   background-color: ${(props) => props.theme.colors.darkGrey2};
+  width: 102%;
   top: -4px;
   left: -4px;
   display: ${(props) => (props.show ? 'block' : 'none')};
@@ -79,12 +78,11 @@ const SelectOptions = styled.ul<{ show: boolean; width?: number }>`
   ${(props) => props.theme.borders.bottomRightWhiteBorder}
 `;
 
-const Option = styled.li<{ width?: number }>`
+const Option = styled.li`
   z-index: 999;
   font-family: inherit;
   font-size: 24px;
   border-bottom: 1px solid ${(props) => props.theme.colors.darkGrey3};
-  width: ${(props) => (props.width ? props.width - 36 : 406)}px;
   height: 56px;
   display: flex;
   justify-content: center;

@@ -129,15 +129,15 @@ const CardContentsBox = styled.div`
 `;
 
 const titleAnimation = keyframes`
-  from {
-    -moz-transform: translateX(5%);
-    -webkit-transform: translateX(5%);
-    transform: translateX(5%);
+  0%,
+  20% {
+    transform: translateX(0%);
+    left: 0%;
   }
-  to {
-    -moz-transform: translateX(-105%);
-    -webkit-transform: translateX(-105%);
-    transform: translateX(-105%);
+  80%,
+  100% {
+    transform: translateX(-100%);
+    left: 100%;
   }
 `;
 
@@ -156,9 +156,9 @@ const Title = styled.span`
   overflow: hidden;
 
   div {
-    -moz-animation: ${titleAnimation} 7s linear infinite;
-    -webkit-animation: ${titleAnimation} 7s linear infinite;
-    animation: ${titleAnimation} 7s linear infinite;
+    -moz-animation: ${titleAnimation} 3s infinite alternate ease-in-out;
+    -webkit-animation: ${titleAnimation} 3s infinite alternate ease-in-out;
+    animation: ${titleAnimation} 3s infinite alternate ease-in-out;
     span {
       background-image: linear-gradient(
         0deg,

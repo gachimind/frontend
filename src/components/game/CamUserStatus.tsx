@@ -35,7 +35,7 @@ const CamUserStatus = ({ nickname, isMicOn, size = 'sub' }: CamUserStatusProps) 
     <CamUserStatusLayout customStyles={CamStatusStyles[size]}>
       <div>
         <PlayerImageHolder size={size}></PlayerImageHolder>
-        <NicknameText>{nickname.length > 7 ? <div>{nickname}</div> : nickname}</NicknameText>
+        <NicknameText>{size === 'sub' && nickname.length > 7 ? <div>{nickname}</div> : nickname}</NicknameText>
       </div>
       <div>
         <img
@@ -70,15 +70,15 @@ const CamUserStatusLayout = styled.div<{ customStyles: CamStatusStylesProps }>`
 `;
 
 const nicknameAnimation = keyframes`
-  from {
-    -moz-transform: translateX(10%);
-    -webkit-transform: translateX(10%);
-    transform: translateX(10%);
+  0%,
+  20% {
+    transform: translateX(0%);
+    left: 0%;
   }
-  to {
-    -moz-transform: translateX(-200%);
-    -webkit-transform: translateX(-200%);
-    transform: translateX(-200%);
+  80%,
+  100% {
+    transform: translateX(-210%);
+    left: 210%;
   }
 `;
 
@@ -91,9 +91,9 @@ const NicknameText = styled.span`
   overflow: hidden;
 
   div {
-    -moz-animation: ${nicknameAnimation} 7s linear infinite;
-    -webkit-animation: ${nicknameAnimation} 7s linear infinite;
-    animation: ${nicknameAnimation} 7s linear infinite;
+    -moz-animation: ${nicknameAnimation} 3s infinite alternate ease-in-out;
+    -webkit-animation: ${nicknameAnimation} 3s infinite alternate ease-in-out;
+    animation: ${nicknameAnimation} 3s infinite alternate ease-in-out;
   }
 `;
 

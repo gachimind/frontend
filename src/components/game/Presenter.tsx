@@ -11,7 +11,6 @@ import GameStart from './GameStart';
 import PresentationInfo from './PresentationInfo';
 import PresenterCam from './PresenterCam';
 
-// TODO: 마이크 꺼졌을때 아이콘 추가하기
 const Presenter = () => {
   const { user } = useAppSelector((state) => state.user);
   const { room } = useAppSelector((state) => state.gameRoom);
