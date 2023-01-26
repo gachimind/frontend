@@ -39,7 +39,7 @@ const GameResultModal = ({ visible, onClose, participants, userId }: GameResultM
         <ResultBox>
           <ul>
             {[...Array(6)].map((_, index) => {
-              const height = sortedScore[index] === 0 ? 10 : sortedScore[index] ?? 2;
+              const height = sortedScore[index] === 0 ? 15 : sortedScore[index] ?? 10;
               console.log(height);
               return (
                 <>
