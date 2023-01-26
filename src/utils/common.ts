@@ -8,7 +8,6 @@ export const convertLeaveCounterFormat = (counter: number, hasMinute?: boolean) 
   return hasMinute ? `0${Math.floor(counter / 60000)}:` + second : second;
 };
 
-// XXX: 각 단어 하나하나가 영문/한글/숫자 여부도 알려줘야할까?
 export const filterKeyword = (keyword: string) => {
-  return keyword.replace(/[가-힣a-zA-Z]/gi, 'O');
+  return keyword.replace(/[가-힣a-zA-Z]/gi, '_');
 };
