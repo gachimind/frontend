@@ -1,4 +1,5 @@
 import './app.css';
+import 'react-tooltip/dist/react-tooltip.css';
 
 import { Provider } from 'react-redux';
 import { SingletonHooksContainer } from 'react-singleton-hook';

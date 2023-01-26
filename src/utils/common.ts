@@ -9,5 +9,5 @@ export const convertLeaveCounterFormat = (counter: number, hasMinute?: boolean) 
 };
 
 export const filterKeyword = (keyword: string) => {
-  return keyword.replace(/[가-힣a-zA-Z]/gi, '_');
+  return keyword.replace(/[가-힣a-zA-Z]/gi, '🐟');
 };

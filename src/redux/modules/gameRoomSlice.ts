@@ -59,6 +59,15 @@ const gameRoomSlice = createSlice({
       );
       state.room = { ...state.room, participants };
     },
+    clearScore: (state) => {
+      if (!state.room?.participants) {
+        return;
+      }
+      const participants = state.room.participants.map((participant) => {
+        return { ...participant, score: 0 };
+      });
+      state.room = { ...state.room, participants };
+    },
   },
   extraReducers: {},
 });
@@ -72,6 +81,7 @@ export const {
   setLastEnteredRoom,
   setIsGameOnState,
   setScore,
+  clearScore,
 } = gameRoomSlice.actions;
 
 export default gameRoomSlice;
