@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import styled, { keyframes } from 'styled-components';
 
 import Button from '@components/common/Button';
@@ -5,6 +7,7 @@ import Modal from '@components/common/Modal';
 
 const GameResultModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
   const participants = 3;
+  const navigate = useNavigate();
   return (
     <Modal visible={visible} onClose={onClose} title="SCORE" width={640}>
       <GameResultModalLayout>
@@ -20,8 +23,8 @@ const GameResultModal = ({ visible, onClose }: { visible: boolean; onClose: () =
           </ul>
         </ResultBox>
         <ButtonBox>
-          <LeaveRoomButton>나가기</LeaveRoomButton>
-          <ContinueGameButton>계속하기</ContinueGameButton>
+          <LeaveRoomButton onClick={() => navigate('/', { replace: true })}>나가기</LeaveRoomButton>
+          <ContinueGameButton onClick={onClose}>계속하기</ContinueGameButton>
         </ButtonBox>
       </GameResultModalLayout>
     </Modal>

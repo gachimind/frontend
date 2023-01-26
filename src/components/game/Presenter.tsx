@@ -1,8 +1,11 @@
+import { useEffect, useState } from 'react';
+
 import styled, { keyframes } from 'styled-components';
 
 import { useAppSelector } from '@redux/hooks';
 
 import GameReady from './GameReady';
+import GameResultModal from './GameResultModal';
 import GameStart from './GameStart';
 import PresentationInfo from './PresentationInfo';
 import PresenterCam from './PresenterCam';
@@ -12,10 +15,17 @@ const Presenter = () => {
   const { user } = useAppSelector((state) => state.user);
   const { room } = useAppSelector((state) => state.gameRoom);
   const { turn, playState } = useAppSelector((state) => state.gamePlay);
+  const [resultModalVisible, setResultModalVisible] = useState<boolean>(false);
   const currentUser = room?.participants.find((participant) => participant.userId === user?.userId);
   const presenterNickname =
     room?.participants.find((participant) => participant.userId === turn?.speechPlayer)?.nickname ?? '';
   const isMe = user?.userId === turn?.speechPlayer;
+
+  useEffect(() => {
+    if (playState?.event === 'gameEnd') {
+      setResultModalVisible(true);
+    }
+  }, [playState]);
 
   return (
     <PresenterLayout>
@@ -33,7 +43,15 @@ const Presenter = () => {
         </PresenterKeywordBox>
       )}
       {room?.isGameOn && turn && <PresenterCam nickname={presenterNickname} isMe={isMe} userId={turn.speechPlayer} />}
-      {!room?.isGameOn && <GameReadyBox>{currentUser?.isHost ? <GameStart /> : <GameReady />}</GameReadyBox>}
+      {!room?.isGameOn && (
+        <GameReadyBox>
+          {currentUser?.isHost && <GameStart />}
+          {currentUser?.isHost === false && <GameReady />}
+        </GameReadyBox>
+      )}
+      {resultModalVisible && (
+        <GameResultModal visible={resultModalVisible} onClose={() => setResultModalVisible(false)} />
+      )}
     </PresenterLayout>
   );
 };
