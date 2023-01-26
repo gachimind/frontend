@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import enterRoomIcon from '@assets/svg_enterRoomIcon.svg';
 import privateRoomIcon from '@assets/svg_privateRoomIcon.svg';
@@ -88,7 +88,15 @@ const RoomList = () => {
           .map((room) => (
             <RoomCard key={room.roomId}>
               <CardContentsBox>
-                <Title>{room.roomTitle}</Title>
+                <Title>
+                  {room.roomTitle.length > 6 ? (
+                    <div>
+                      <text>{room.roomTitle}</text>
+                    </div>
+                  ) : (
+                    room.roomTitle
+                  )}
+                </Title>
                 <Participants>
                   참여인원: {room.participants.toString()}/{room.maxCount}
                 </Participants>
@@ -135,9 +143,21 @@ const CardContentsBox = styled.div`
   flex-direction: column;
 `;
 
+const titleAnimation = keyframes`
+  from {
+    -moz-transform: translateX(5%);
+    -webkit-transform: translateX(5%);
+    transform: translateX(5%);
+  }
+  to {
+    -moz-transform: translateX(-105%);
+    -webkit-transform: translateX(-105%);
+    transform: translateX(-105%);
+  }
+`;
+
 const Title = styled.span`
   background-image: linear-gradient(0deg, rgba(121, 121, 121, 0.5) 50%, ${(props) => props.theme.colors.ivory2} 50%);
-  background-size: 100%;
   background-clip: text;
   -webkit-text-stroke: 1px ${(props) => props.theme.colors.darkGrey4};
   -webkit-background-clip: text;
@@ -145,6 +165,27 @@ const Title = styled.span`
   font-family: inherit;
   font-size: 20px;
   line-height: 150%;
+  width: 130px;
+  white-space: nowrap;
+  display: block;
+  overflow: hidden;
+
+  div {
+    -moz-animation: ${titleAnimation} 7s linear infinite;
+    -webkit-animation: ${titleAnimation} 7s linear infinite;
+    animation: ${titleAnimation} 7s linear infinite;
+    text {
+      background-image: linear-gradient(
+        0deg,
+        rgba(121, 121, 121, 0.5) 50%,
+        ${(props) => props.theme.colors.ivory2} 50%
+      );
+      background-clip: text;
+      -webkit-text-stroke: 1px ${(props) => props.theme.colors.darkGrey4};
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
 `;
 
 const Participants = styled.span`

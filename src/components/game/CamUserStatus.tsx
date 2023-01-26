@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import smallMicOffIcon from '@assets/svg_smallMicOffIcon.svg';
 import smallMicOnIcon from '@assets/svg_smallMicOnIcon.svg';
@@ -35,7 +35,7 @@ const CamUserStatus = ({ nickname, isMicOn, size = 'sub' }: CamUserStatusProps) 
     <CamUserStatusLayout customStyles={CamStatusStyles[size]}>
       <div>
         <PlayerImageHolder size={size}></PlayerImageHolder>
-        <NicknameText>{nickname}</NicknameText>
+        <NicknameText>{nickname.length > 7 ? <div>{nickname}</div> : nickname}</NicknameText>
       </div>
       <div>
         <img
@@ -69,9 +69,32 @@ const CamUserStatusLayout = styled.div<{ customStyles: CamStatusStylesProps }>`
   }
 `;
 
+const nicknameAnimation = keyframes`
+  from {
+    -moz-transform: translateX(10%);
+    -webkit-transform: translateX(10%);
+    transform: translateX(10%);
+  }
+  to {
+    -moz-transform: translateX(-200%);
+    -webkit-transform: translateX(-200%);
+    transform: translateX(-200%);
+  }
+`;
+
 const NicknameText = styled.span`
   font-size: 12px;
   color: ${(props) => props.theme.colors.lightGrey3};
+  width: 80px;
+  white-space: nowrap;
+  display: block;
+  overflow: hidden;
+
+  div {
+    -moz-animation: ${nicknameAnimation} 7s linear infinite;
+    -webkit-animation: ${nicknameAnimation} 7s linear infinite;
+    animation: ${nicknameAnimation} 7s linear infinite;
+  }
 `;
 
 export default CamUserStatus;

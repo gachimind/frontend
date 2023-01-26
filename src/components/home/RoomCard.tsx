@@ -47,7 +47,7 @@ const RoomCardMainBox = styled.div`
     width: 86px;
     height: 86px;
     margin-top: 25px;
-    margin-left: 25px;
+    margin-left: -10px;
   }
 `;
 
