@@ -1,9 +1,6 @@
-import { useEffect, useState } from 'react';
-
 import styled from 'styled-components';
 
 import { useAppSelector } from '@redux/hooks';
-import { WebRTCUser } from '@redux/modules/playerMediaSlice';
 
 import Cam from './Cam';
 
