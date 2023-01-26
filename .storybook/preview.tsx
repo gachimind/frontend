@@ -8,7 +8,7 @@ import 'react-tooltip/dist/react-tooltip.css';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '../src/redux/store';
-
+import { ContainerLayout } from '../src/components/layout/PageContainer';
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   viewport: {
@@ -16,8 +16,8 @@ export const parameters = {
       pc: {
         name: 'Desktop',
         styles: {
-          width: '1440px',
-          height: '100%',
+          width: window.innerWidth - 200 + 'px',
+          height: window.innerHeight - 70 + 'px',
         },
       },
     },
@@ -48,7 +48,9 @@ const withTheme: DecoratorFn = (StoryFn, context) => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <StoryFn />
+      <ContainerLayout>
+        <StoryFn />
+      </ContainerLayout>
       <div id="modal-root"></div>
       <div id="loading-root"></div>
     </ThemeProvider>
