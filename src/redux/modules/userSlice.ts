@@ -13,11 +13,10 @@ const initialState: InitialUserStateType = {
   isLogined: false,
 };
 
-// FIXME: 실제 서버 연결 시 response 구조분해할당 하지 않기
 export const __getUserInfo = createAsyncThunk('getUserInfo', async (_, thunkAPI) => {
   try {
-    const { OAuth, nickname, profileImg, userId } = await userApi.getUserInfo();
-    return thunkAPI.fulfillWithValue({ OAuth, nickname, profileImg, userId });
+    const userInfo = await userApi.getUserInfo();
+    return thunkAPI.fulfillWithValue(userInfo);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
   }
