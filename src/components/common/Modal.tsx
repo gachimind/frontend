@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import CloseModalIcon from '@assets/svg_closeModalIcon.svg';
 import useClickAway from '@hooks/useClickAway';
 
-interface ModalProps {
+export interface ModalProps {
   visible: boolean;
   title: string;
   width?: number;
