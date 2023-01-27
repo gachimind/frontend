@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -9,6 +8,7 @@ import leaveRoomIcon from '@assets/svg_leaveRoomIcon.svg';
 import Button from '@components/common/Button';
 import CamButton from '@components/game/CamButton';
 import GameRuleToolTip from '@components/game/GameRuleToolTip';
+import LeaveRoomModal from '@components/game/LeaveRoomModal';
 import MicButton from '@components/game/MicButton';
 
 import Footer from './Footer';
@@ -16,9 +16,9 @@ import Header from './Header';
 import PageContainer from './PageContainer';
 
 const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
-  const navigate = useNavigate();
-
   const [GameRuleModalVisible, setGameRuleModalVisible] = useState<boolean>(false);
+  const [LeaveRoomModalVisible, setLeaveRoomModalVisible] = useState<boolean>(false);
+
   return (
     <PageContainer>
       <Header page="ROOM"></Header>
@@ -35,7 +35,10 @@ const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
             <CamButton />
             <MicButton />
           </MediaControlBox>
-          <LeaveButton onClick={() => navigate('/')}>
+          {LeaveRoomModalVisible && (
+            <LeaveRoomModal visible={LeaveRoomModalVisible} onClose={() => setLeaveRoomModalVisible(false)} />
+          )}
+          <LeaveButton onClick={() => setLeaveRoomModalVisible(true)}>
             게임방 나가기
             <img src={leaveRoomIcon} />
           </LeaveButton>
