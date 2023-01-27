@@ -85,7 +85,7 @@ const EnterPrivateRoomModal = ({ visible, onClose, roomId, roomTitle, successHan
   };
 
   return (
-    <Modal visible={visible} onClose={onClose} title="ENTER THE ROOM">
+    <Modal visible={visible} onClose={onClose} title="ENTER THE ROOM" isBackgroundClickEventDisabled={true}>
       <EnterPrivateRoomModalLayout>
         <InputContainer label="방제">
           <RoomTitleBox>

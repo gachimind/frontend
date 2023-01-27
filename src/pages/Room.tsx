@@ -94,8 +94,6 @@ const Room = () => {
 
   const handlePasswordModalClose = () => {
     setPasswordModalVisible(false);
-    // TODO: beforeunload 이벤트 활용 또는 확인창 컴포넌트 구현해 적용
-    // TODO: 바깥을 클릭해도 안닫히게, 모달 주위를 어둡게
     navigate('/');
   };
 
