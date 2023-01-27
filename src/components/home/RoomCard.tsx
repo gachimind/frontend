@@ -12,7 +12,7 @@ import { GameRoomBroadcastResponse } from '@customTypes/socketType';
 
 import LoginModal from './LoginModal';
 
-interface RoomCardProps {
+export interface RoomCardProps {
   room: GameRoomBroadcastResponse;
   onJoinClick: () => void;
 }
