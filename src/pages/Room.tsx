@@ -8,7 +8,9 @@ import useErrorSocket from '@hooks/socket/useErrorSocket';
 import useGamePlaySocket from '@hooks/socket/useGamePlaySocket';
 import useGameSocket from '@hooks/socket/useGameSocket';
 import useGameUpdateSocket from '@hooks/socket/useGameUpdateSocket';
+import useBeforeUnload from '@hooks/useBeforeUnload';
 import useLocalStream from '@hooks/useLocalStream';
+import usePopState from '@hooks/usePopState';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { addChat } from '@redux/modules/gameRoomSlice';
 import { alertToast } from '@utils/toast';
@@ -22,6 +24,7 @@ import EnterPrivateRoomModal from '@components/home/EnterPrivateRoomModal';
 import ContentContainer from '@components/layout/ContentContainer';
 import RoomTemplate from '@components/layout/RoomTemplate';
 
+// TODO: 컴포넌트 복잡도를 개선한다.
 const Room = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -34,6 +37,8 @@ const Room = () => {
   const { emitUserLeaveRoom, emitJoinRoom, onJoinRoom } = useGameSocket();
   const { onError, offError } = useErrorSocket();
   useGamePlaySocket();
+  usePopState();
+  useBeforeUnload();
 
   const [isConfirmedUser, setIsConfirmedUser] = useState<boolean>(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState<boolean>(false);
