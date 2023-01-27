@@ -25,8 +25,6 @@ const PresenterCam = ({ nickname, isMe, userId }: PresenterCamProps) => {
           isMe={isMe}
           audio={userMic}
           size="main"
-          width={551}
-          height={448}
         />
       ) : (
         <Cam
@@ -35,8 +33,6 @@ const PresenterCam = ({ nickname, isMe, userId }: PresenterCamProps) => {
           nickname={nickname}
           audio={currentPlayer?.audio}
           size="main"
-          width={551}
-          height={448}
         />
       )}
     </PresenterCamLayout>

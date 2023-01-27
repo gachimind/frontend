@@ -5,20 +5,29 @@ import styled from 'styled-components';
 import CamStatus from './CamStatus';
 import CamUserStatus from './CamUserStatus';
 
-interface CamProps {
+export interface CamProps {
   userId: number;
   userStream?: MediaStream;
   nickname: string;
   audio?: boolean;
   isMe?: boolean;
   isHost?: boolean;
-  width?: number;
-  height?: number;
   size: 'main' | 'sub';
 }
 
+const SizeTypes = {
+  main: {
+    width: 551,
+    height: 448,
+  },
+  sub: {
+    width: 150,
+    height: 130,
+  },
+};
+
 // TODO: 게임 레디 전/레디 후/캠 키기 전 디자인을 추가해야한다.
-const Cam = ({ userId, userStream, nickname, audio, isMe, isHost, width = 150, height = 130, size }: CamProps) => {
+const Cam = ({ userId, userStream, nickname, audio, isMe, isHost, size }: CamProps) => {
   const videoRef: React.RefObject<HTMLVideoElement> | null = useRef(null);
 
   // FIXME: 적용하고 지울 것
@@ -31,11 +40,11 @@ const Cam = ({ userId, userStream, nickname, audio, isMe, isHost, width = 150, h
   }, [userStream]);
 
   return (
-    <CamLayout width={width} height={height}>
+    <CamLayout size={size}>
       {userStream ? (
         <VideoBox>
           {size === 'sub' && <CamStatus userId={userId} isHost={isHost} />}
-          <Video ref={videoRef} autoPlay playsInline muted={isMe} width={width} height={height} />
+          <Video ref={videoRef} autoPlay playsInline muted={isMe} size={size} />
           <CamUserStatus isMicOn={audio} nickname={nickname} size={size} />
         </VideoBox>
       ) : (
@@ -47,9 +56,9 @@ const Cam = ({ userId, userStream, nickname, audio, isMe, isHost, width = 150, h
   );
 };
 
-const CamLayout = styled.div<{ width: number; height: number }>`
-  width: ${(props) => props.width + 'px'};
-  height: ${(props) => props.height + 'px'};
+const CamLayout = styled.div<{ size: 'main' | 'sub' }>`
+  width: ${(props) => SizeTypes[props.size].width + 'px'};
+  height: ${(props) => SizeTypes[props.size].height + 'px'};
 `;
 
 const VideoBox = styled.div`
@@ -57,10 +66,10 @@ const VideoBox = styled.div`
   height: 100%;
 `;
 
-const Video = styled.video<{ width: number; height: number }>`
+const Video = styled.video<{ size: 'main' | 'sub' }>`
   position: absolute;
-  width: ${(props) => props.width + 'px'};
-  height: ${(props) => props.height + 12 + 'px'};
+  width: ${(props) => SizeTypes[props.size].width + 'px'};
+  height: ${(props) => SizeTypes[props.size].height + 12 + 'px'};
 `;
 
 const EmptyVideo = styled.div`
