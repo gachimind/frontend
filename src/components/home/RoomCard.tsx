@@ -6,6 +6,8 @@ import enterRoomIcon from '@assets/svg_enterRoomIcon.svg';
 import privateRoomIcon from '@assets/svg_privateRoomIcon.svg';
 import { useAppSelector } from '@redux/hooks';
 
+import AxisXOverflowedText from '@components/common/AxisXOverflowedText';
+
 import { GameRoomBroadcastResponse } from '@customTypes/socketType';
 
 import LoginModal from './LoginModal';
@@ -53,15 +55,9 @@ const RoomCard = ({ room, onJoinClick }: RoomCardProps) => {
       <RoomCardTopBox />
       <RoomCardMainBox>
         <CardContentsBox>
-          <Title>
-            {room.roomTitle.length > 6 ? (
-              <div>
-                <span>{room.roomTitle}</span>
-              </div>
-            ) : (
-              room.roomTitle
-            )}
-          </Title>
+          <AxisXOverflowedText animationSecond={3} maxLength={6} width={130} innerText={room.roomTitle}>
+            <RoomTitleText>{room.roomTitle}</RoomTitleText>
+          </AxisXOverflowedText>
           <Participants>
             참여인원: {room.participants.toString()}/{room.maxCount}
           </Participants>
@@ -128,49 +124,15 @@ const CardContentsBox = styled.div`
   flex-direction: column;
 `;
 
-const titleAnimation = keyframes`
-  0%,
-  20% {
-    transform: translateX(0%);
-    left: 0%;
-  }
-  80%,
-  100% {
-    transform: translateX(-100%);
-    left: 100%;
-  }
-`;
-
-const Title = styled.span`
+const RoomTitleText = styled.span`
   background-image: linear-gradient(0deg, rgba(121, 121, 121, 0.5) 50%, ${(props) => props.theme.colors.ivory2} 50%);
   background-clip: text;
   -webkit-text-stroke: 1px ${(props) => props.theme.colors.darkGrey4};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-family: inherit;
   font-size: 20px;
   line-height: 150%;
-  width: 130px;
-  white-space: nowrap;
-  display: block;
-  overflow: hidden;
-
-  div {
-    -moz-animation: ${titleAnimation} 3s infinite alternate ease-in-out;
-    -webkit-animation: ${titleAnimation} 3s infinite alternate ease-in-out;
-    animation: ${titleAnimation} 3s infinite alternate ease-in-out;
-    span {
-      background-image: linear-gradient(
-        0deg,
-        rgba(121, 121, 121, 0.5) 50%,
-        ${(props) => props.theme.colors.ivory2} 50%
-      );
-      background-clip: text;
-      -webkit-text-stroke: 1px ${(props) => props.theme.colors.darkGrey4};
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-  }
+  font-family: inherit;
 `;
 
 const Participants = styled.span`
