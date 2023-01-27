@@ -10,6 +10,7 @@ server.use(middlewares);
 server.use(
   jsonServer.rewriter({
     '/api/users/me': '/me',
+    '/api/users/me/keyword': '/me/keyword',
   }),
 );
 
@@ -34,6 +35,16 @@ server.get('/me', (req, res) => {
   const result = {
     data: router.db.__wrapped__.me.find((user) => user.userId == authenticatedUserId),
   };
+  return res.jsonp(result);
+});
+
+// 회원 키워드 조회
+server.get('/me/keyword', (req, res) => {
+  const authenticatedUserId = validAuthentication(req, res);
+  const result = {
+    data: router.db.__wrapped__.keyword.find((user) => user.userId == authenticatedUserId),
+  };
+  console.log(result);
   return res.jsonp(result);
 });
 
