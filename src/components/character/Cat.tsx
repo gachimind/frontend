@@ -184,17 +184,36 @@ const Cat = ({
             {/* 오른쪽 윗머리 */}
             <rect x="56" y="12" width="8" height="8" className="cat body right-head" />
             <rect x="64" y="16" width="12" height="8" className="cat body right-head" />
+
             {/* 얼굴 중앙 */}
             <rect x="48" y="12" width="8" height="4" className="cat body head" />
-            <rect x="32" y="24" width="40" height="12" className="cat face" />
-            <rect x="36" y="20" width="32" height="20" className="cat face" />
-            <rect x="40" y="16" width="24" height="28" className="cat face" />
+            <rect x="32" y="24" width="40" height="12" className="cat body face" />
+            <rect x="36" y="20" width="32" height="20" className="cat body face" />
+            <rect x="40" y="16" width="24" height="28" className="cat body face" />
+            {CatColor[catTheme].leftHead && (
+              <>
+                {/* 왼쪽 윗머리 */}
+                <rect x="28" y="16" width="12" height="8" className="cat body left-head" />
+                <rect x="40" y="12" width="8" height="8" className="cat body left-head" />
+              </>
+            )}
+            {CatColor[catTheme].rightHead && (
+              <>
+                {/* 오른쪽 윗머리 */}
+                <rect x="56" y="12" width="8" height="8" className="cat body right-head" />
+                <rect x="64" y="16" width="12" height="8" className="cat body right-head" />
+              </>
+            )}
             {/* 정수리 */}
             {CatColor[catTheme].middleHead && <rect x="48" y="16" width="8" height="4" className="cat body head" />}
-            {/* 얼굴 중앙 입부분 */}
-            <rect x="48" y="28" width="8" height="4" className="cat body mouse" />
-            <rect x="44" y="32" width="16" height="4" className="cat body mouse" />
-            <rect x="40" y="36" width="24" height="4" className="cat body mouse" />
+            {CatColor[catTheme].mouse && (
+              <>
+                {/* 얼굴 중앙 입부분 */}
+                <rect x="48" y="28" width="8" height="4" className="cat body mouse" />
+                <rect x="44" y="32" width="16" height="4" className="cat body mouse" />
+                <rect x="40" y="36" width="24" height="4" className="cat body mouse" />
+              </>
+            )}
             {type !== 'face' && (
               <>
                 {/* 몸통 - 일반 */}
