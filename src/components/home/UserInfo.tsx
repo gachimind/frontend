@@ -23,9 +23,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
   return (
     <UserInfoLayout>
       <ProfileBox>
-        <UserImageBox>
-          <img src={user?.profileImg} />
-        </UserImageBox>
+        <UserImageBox></UserImageBox>
         <UserStatusBox>
           {!nickname ? (
             <span className="user-status-box-login">로그인이 필요합니다.</span>
@@ -45,12 +43,12 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
                 )}
               </span>
               <span className="user-status-box-slash">|</span>
-              {user?.total.totalRank !== undefined && (
+              {user?.today.todayRank !== undefined && (
                 <span className="user-status-box-rank">
-                  {user?.total.totalRank === 1 && '1ST'}
-                  {user?.total.totalRank === 2 && '2ND'}
-                  {user?.total.totalRank === 3 && '3RD'}
-                  {user?.total.totalRank > 3 && user?.total.totalRank + 'TH'}
+                  {user?.today.todayRank === 1 && '1ST'}
+                  {user?.today.todayRank === 2 && '2ND'}
+                  {user?.today.todayRank === 3 && '3RD'}
+                  {user?.today.todayRank > 3 && user?.today.todayRank + 'TH'}
                 </span>
               )}
             </>
@@ -116,12 +114,7 @@ const ProfileBox = styled.div`
   ${(props) => props.theme.borders.bottomRightWhiteBorder}
 `;
 
-const UserImageBox = styled.div`
-  img {
-    width: 100%;
-    height: 100%;
-  }
-`;
+const UserImageBox = styled.div``;
 
 const nicknameAnimation = keyframes`
   from {
