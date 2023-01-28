@@ -5,6 +5,7 @@ import styled, { keyframes } from 'styled-components';
 import medalIcon from '@assets/svg_medalIcon.svg';
 import trophyIcon from '@assets/svg_trophyIcon.svg';
 import { useAppSelector } from '@redux/hooks';
+import { useGetUserInfoQuery } from '@redux/query/user';
 
 import Button from '@components/common/Button';
 import EditProfileModal from '@components/mypage/EditProfileModal';
@@ -14,8 +15,10 @@ import LoginModal from './LoginModal';
 
 const UserInfo = ({ mypage }: { mypage?: boolean }) => {
   const user = useAppSelector((state) => state.user.user);
+  const { data } = useGetUserInfoQuery();
+  console.log(data?.nickname);
 
-  const nickname = sessionStorage.getItem('nickname');
+  const token = sessionStorage.getItem('accessToken');
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [createGameModalVisible, setCreateGameModalVisible] = useState<boolean>(false);
@@ -26,26 +29,14 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
       <ProfileBox>
         <UserImageBox></UserImageBox>
         <UserStatusBox>
-          {!nickname ? (
-            <span className="user-status-box-login">로그인이 필요합니다.</span>
-          ) : (
+          {token ? (
             <>
-              <span className="user-status-box-nickname">
-                {user?.nickname === nickname ? (
-                  user.nickname.length > 4 ? (
-                    <div>{user.nickname}</div>
-                  ) : (
-                    user.nickname
-                  )
-                ) : nickname.length > 4 ? (
-                  <div>{nickname}</div>
-                ) : (
-                  nickname
-                )}
-              </span>
+              <span className="user-status-box-nickname">{data?.nickname}</span>
               <span className="user-status-box-slash">|</span>
               <span className="user-status-box-rank">10TH</span>
             </>
+          ) : (
+            <span className="user-status-box-login">로그인이 필요합니다.</span>
           )}
         </UserStatusBox>
       </ProfileBox>
