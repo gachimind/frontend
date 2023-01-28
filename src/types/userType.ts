@@ -7,7 +7,6 @@ export interface MyProfileResponse {
     todayScore: number;
   };
   total: {
-    totalRank: number;
     totalScore: number;
   };
 }
