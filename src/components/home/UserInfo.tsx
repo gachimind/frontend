@@ -81,7 +81,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
         <div>
           <span className="score-box-title">오늘 획득한 점수</span>
           <span className="score-box-score">
-            {user?.today.todayScore}
+            {user ? user.today.todayScore : 0}
             <span>점</span>
           </span>
         </div>
@@ -93,7 +93,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
         <div>
           <span className="score-box-title">누적 점수</span>
           <span className="score-box-score">
-            {user?.total.totalScore}
+            {user ? user.total.totalScore : 0}
             <span>점</span>
           </span>
         </div>
