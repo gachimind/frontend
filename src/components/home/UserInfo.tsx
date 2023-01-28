@@ -49,7 +49,8 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
                 <span className="user-status-box-rank">
                   {user?.total.totalRank === 1 && '1ST'}
                   {user?.total.totalRank === 2 && '2ND'}
-                  {user?.total.totalRank > 2 && user?.total.totalRank + 'TH'}
+                  {user?.total.totalRank === 3 && '3RD'}
+                  {user?.total.totalRank > 3 && user?.total.totalRank + 'TH'}
                 </span>
               )}
             </>
