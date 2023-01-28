@@ -38,7 +38,11 @@ const CamUserStatus = ({ nickname, isMicOn, size = 'sub' }: CamUserStatusProps) 
     <CamUserStatusLayout customStyles={CamStatusStyles[size]}>
       <div>
         <PlayerImageHolder size={size}></PlayerImageHolder>
-        <NicknameText>{nickname}</NicknameText>
+        {size === 'sub' ? (
+          <NicknameEllipsisedText>{nickname}</NicknameEllipsisedText>
+        ) : (
+          <NicknameText>{nickname}</NicknameText>
+        )}
       </div>
       <div>
         <img
@@ -75,8 +79,11 @@ const CamUserStatusLayout = styled.div<{ customStyles: CamStatusStylesProps }>`
 const NicknameText = styled.span`
   font-size: 12px;
   color: ${(props) => props.theme.colors.lightGrey3};
-  width: 80px;
   display: inline-block;
+`;
+
+const NicknameEllipsisedText = styled(NicknameText)`
+  width: 80px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
