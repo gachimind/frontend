@@ -19,7 +19,9 @@ const useWebRTC = () => {
         const peerConnection = new RTCPeerConnection({
           iceServers: [
             {
-              urls: 'stun:stun.l.google.com:19302',
+              urls: 'turn:linkyway.org',
+              username: 'pds',
+              credential: '1234',
             },
           ],
         });
