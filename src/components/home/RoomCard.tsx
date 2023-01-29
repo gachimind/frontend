@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 import enterRoomIcon from '@assets/svg_enterRoomIcon.svg';
 import privateRoomIcon from '@assets/svg_privateRoomIcon.svg';
