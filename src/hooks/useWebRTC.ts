@@ -27,12 +27,14 @@ const useWebRTC = () => {
         });
         peerConnection.onicecandidate = (e) => {
           if (e.candidate) {
-            emit(SUBSCRIBE.webRTCIce, {
-              data: {
-                ice: e.candidate,
-                candidateReceiveSocketId: peerSocketId,
-              },
-            });
+            setTimeout(() => {
+              emit(SUBSCRIBE.webRTCIce, {
+                data: {
+                  ice: e.candidate,
+                  candidateReceiveSocketId: peerSocketId,
+                },
+              });
+            }, 100);
           }
         };
         if (!userStreamRef?.current) {
