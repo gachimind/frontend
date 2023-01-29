@@ -68,6 +68,15 @@ const gameRoomSlice = createSlice({
       });
       state.room = { ...state.room, participants };
     },
+    updateEndedRoom: (state) => {
+      if (!state.room) {
+        return;
+      }
+      const participants = state.room.participants.map((participant) => {
+        return { ...participant, isReady: false };
+      });
+      state.room = { ...state.room, isGameOn: false, isGameReadyToStart: false, participants };
+    },
   },
   extraReducers: {},
 });
@@ -82,6 +91,7 @@ export const {
   setIsGameOnState,
   setScore,
   clearScore,
+  updateEndedRoom,
 } = gameRoomSlice.actions;
 
 export default gameRoomSlice;

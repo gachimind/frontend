@@ -48,7 +48,7 @@ const Presenter = () => {
       {!room?.isGameOn && (
         <GameReadyBox>
           {currentUser?.isHost && <GameStart />}
-          {currentUser?.isHost === false && <GameReady />}
+          {currentUser?.isHost === false && <GameReady readyState={currentUser.isReady} />}
         </GameReadyBox>
       )}
       {resultModalVisible && room && (

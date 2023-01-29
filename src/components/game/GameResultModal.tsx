@@ -40,14 +40,12 @@ const GameResultModal = ({ visible, onClose, participants, userId }: GameResultM
           <ul>
             {[...Array(6)].map((_, index) => {
               const height = sortedScore[index] === 0 ? 15 : sortedScore[index] ?? 10;
-              console.log(height);
               return (
-                <>
-                  <li
-                    id={'id-chart-' + index}
-                    key={index}
-                    style={{ height: ((height / maxScore) * 80).toString() + '%' }}
-                  />
+                <li
+                  id={'id-chart-' + index}
+                  key={index}
+                  style={{ height: ((height / maxScore) * 80).toString() + '%' }}
+                >
                   {sortedScore[index] !== undefined && (
                     <ReactTooltip anchorId={'id-chart-' + index} place={index === 0 ? 'right' : 'top'}>
                       <p style={{ fontSize: '18px', marginBottom: '10px' }}>
@@ -57,7 +55,7 @@ const GameResultModal = ({ visible, onClose, participants, userId }: GameResultM
                       <p style={{ fontSize: '16px' }}>&nbsp;{sortedParticipants[index].score + '점'}</p>
                     </ReactTooltip>
                   )}
-                </>
+                </li>
               );
             })}
           </ul>

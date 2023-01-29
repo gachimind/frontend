@@ -12,7 +12,7 @@ import useBeforeUnload from '@hooks/useBeforeUnload';
 import useLocalStream from '@hooks/useLocalStream';
 import usePopState from '@hooks/usePopState';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
-import { addChat } from '@redux/modules/gameRoomSlice';
+import { addChat, updateRoom } from '@redux/modules/gameRoomSlice';
 import { alertToast } from '@utils/toast';
 
 import CamList from '@components/game/CamList';
@@ -54,6 +54,7 @@ const Room = () => {
       emitUserLeaveRoom();
       offError();
       userStreamRef && destroyLocalStream(userStreamRef);
+      dispatch(updateRoom(null));
       console.log('[destroy] local stream');
     };
   }, []);
