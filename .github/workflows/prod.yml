@@ -9,19 +9,19 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
-
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Create env file
-        run: |
-          touch .env
-          echo REACT_APP_API_ENDPOINT=${{ secrets.REACT_APP_API_ENDPOINT }} >> .env
-          echo REACT_APP_API_ENDPOINT=${{ secrets.REACT_APP_API_SOCKET }} >> .env
-          cat .env
+      - name: Env
+        env:
+          REACT_APP_API_ENDPOINT: ${{ secrets.REACT_APP_API_ENDPOINT }}
+          REACT_APP_API_SOCKET: ${{ secrets.REACT_APP_API_SOCKET }}
+          REACT_APP_API_TURN_SERVER_DOMAIN: ${{ secrets.REACT_APP_API_TURN_SERVER_DOMAIN }}
+          REACT_APP_API_TURN_SERVER_USER: ${{ secrets.REACT_APP_API_TURN_SERVER_USER }}
+          REACT_APP_API_TURN_SERVER_CREDENTIAL: ${{ secrets.REACT_APP_API_TURN_SERVER_CREDENTIAL }}
       - name: Npm Install
         run: |
           npm install
