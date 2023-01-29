@@ -1,5 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 
+import { findKoreanLength } from '@utils/common';
+
 export interface AxisXOverflowedTextStyles extends React.HTMLAttributes<HTMLDivElement> {
   width: number;
   animationSecond: number;
@@ -14,7 +16,7 @@ export interface AxisXOverflowedTextProps extends AxisXOverflowedTextStyles {
 const AxisXOverflowedText = ({ children, width, innerText, maxLength, animationSecond }: AxisXOverflowedTextProps) => {
   return (
     <div>
-      {innerText.length > maxLength ? (
+      {innerText.length > maxLength - findKoreanLength(innerText) ? (
         <AxisXOverflowedTextLayout width={width} animationSecond={animationSecond}>
           <div>{children}</div>
         </AxisXOverflowedTextLayout>
