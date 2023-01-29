@@ -1,25 +1,63 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { Tooltip as ReactTooltip } from 'react-tooltip';
 import styled, { keyframes } from 'styled-components';
+
+import { useAppDispatch } from '@redux/hooks';
+import { clearScore } from '@redux/modules/gameRoomSlice';
 
 import Button from '@components/common/Button';
 import Modal from '@components/common/Modal';
 
-const GameResultModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
-  const participants = 3;
+import { Participant } from '@customTypes/gameRoomType';
+
+export interface GameResultModalProps {
+  visible: boolean;
+  onClose: () => void;
+  participants: Participant[];
+  userId: number;
+}
+
+const GameResultModal = ({ visible, onClose, participants, userId }: GameResultModalProps) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const sortedParticipants = [...participants].sort((o1, o2) => o2.score - o1.score);
+  const sortedScore = sortedParticipants.map((participant) => participant.score);
+  const maxScore = sortedScore[0];
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearScore());
+    };
+  }, []);
+
   return (
     <Modal visible={visible} onClose={onClose} title="SCORE" width={640}>
       <GameResultModalLayout>
-        <span>YOUR SCORE</span>
+        <span>SCORE RESULT</span>
         <ResultBox>
           <ul>
-            <li style={{ height: participants < 5 ? '20px' : '100px' }}></li>
-            <li style={{ height: participants < 3 ? '20px' : '180px' }}></li>
-            <li style={{ height: '281px' }}></li>
-            <li style={{ height: '220px' }}></li>
-            <li style={{ height: participants < 4 ? '20px' : '161px' }}></li>
-            <li style={{ height: participants < 6 ? '20px' : '81px' }}></li>
+            {[...Array(6)].map((_, index) => {
+              const height = sortedScore[index] === 0 ? 15 : sortedScore[index] ?? 10;
+              return (
+                <li
+                  id={'id-chart-' + index}
+                  key={index}
+                  style={{ height: ((height / maxScore) * 80).toString() + '%' }}
+                >
+                  {sortedScore[index] !== undefined && (
+                    <ReactTooltip anchorId={'id-chart-' + index} place={index === 0 ? 'right' : 'top'}>
+                      <p style={{ fontSize: '18px', marginBottom: '10px' }}>
+                        &nbsp;{sortedParticipants[index].nickname}
+                        {userId === sortedParticipants[index].userId && '(ME)'}
+                      </p>
+                      <p style={{ fontSize: '16px' }}>&nbsp;{sortedParticipants[index].score + '점'}</p>
+                    </ReactTooltip>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </ResultBox>
         <ButtonBox>
@@ -74,6 +112,7 @@ const ResultBox = styled.div`
     flex-direction: row;
     align-items: flex-end;
     overflow: hidden;
+    height: 100%;
   }
 
   li {

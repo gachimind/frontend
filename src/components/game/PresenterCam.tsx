@@ -1,9 +1,6 @@
-import { useEffect, useState } from 'react';
-
 import styled from 'styled-components';
 
 import { useAppSelector } from '@redux/hooks';
-import { WebRTCUser } from '@redux/modules/playerMediaSlice';
 
 import Cam from './Cam';
 
@@ -15,14 +12,8 @@ interface PresenterCamProps {
 
 const PresenterCam = ({ nickname, isMe, userId }: PresenterCamProps) => {
   const { playerStreamMap, playerList } = useAppSelector((state) => state.playerMedia);
-  const [currentPlayer, setCurrentPlayer] = useState<WebRTCUser>();
   const { userStream, userMic } = useAppSelector((state) => state.userMedia);
-
-  useEffect(() => {
-    if (!isMe) {
-      setCurrentPlayer(playerList.find((player) => player.userId === userId));
-    }
-  }, [userId]);
+  const currentPlayer = playerList.find((player) => player.userId === userId);
 
   return (
     <PresenterCamLayout>
@@ -34,8 +25,6 @@ const PresenterCam = ({ nickname, isMe, userId }: PresenterCamProps) => {
           isMe={isMe}
           audio={userMic}
           size="main"
-          width={551}
-          height={448}
         />
       ) : (
         <Cam
@@ -44,8 +33,6 @@ const PresenterCam = ({ nickname, isMe, userId }: PresenterCamProps) => {
           nickname={nickname}
           audio={currentPlayer?.audio}
           size="main"
-          width={551}
-          height={448}
         />
       )}
     </PresenterCamLayout>

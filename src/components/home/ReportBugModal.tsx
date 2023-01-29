@@ -18,7 +18,7 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
     <Modal visible={visible} onClose={onClose} title="REPORT" width={700}>
       <ReportBugModalLayout>
         <InputContainer label="카테고리">
-          <Selection options={BUG_OPTIONS} width={560} setValue={setCategory} />
+          <Selection options={BUG_OPTIONS} setValue={setCategory} />
         </InputContainer>
         <InputContainer label="내용">
           <ReportTextarea

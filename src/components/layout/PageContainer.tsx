@@ -10,7 +10,7 @@ const PageContainer = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const ContainerLayout = styled.div`
+export const ContainerLayout = styled.div`
   background-color: ${(props) => props.theme.colors.darkGrey2};
   width: ${(props) => props.theme.layout.maxWidth};
   height: ${(props) => props.theme.layout.maxHeight};

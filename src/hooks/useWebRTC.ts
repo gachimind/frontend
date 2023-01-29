@@ -21,6 +21,11 @@ const useWebRTC = () => {
             {
               urls: 'stun:stun.l.google.com:19302',
             },
+            {
+              urls: process.env.REACT_APP_API_TURN_SERVER_DOMAIN ?? 'stun:stun.l.google.com:19302',
+              username: process.env.REACT_APP_API_TURN_SERVER_USER ?? '',
+              credential: process.env.REACT_APP_API_TURN_SERVER_CREDENTIAL ?? '',
+            },
           ],
         });
         peerConnection.onicecandidate = (e) => {

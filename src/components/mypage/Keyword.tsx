@@ -1,13 +1,31 @@
+import { useEffect } from 'react';
+
 import styled from 'styled-components';
 
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { __getUserKeyword } from '@redux/modules/userSlice';
+
 const Keyword = () => {
+  const dispatch = useAppDispatch();
+  const keywords = useAppSelector((state) => state.user.keywords);
+
+  useEffect(() => {
+    dispatch(__getUserKeyword());
+  }, []);
+
   return (
     <KeywordLayout>
       <KeywordBox>
         <div className="keyword-box-header">SOLVED KEYWORDS</div>
+        {keywords?.totalQuizKeyword.map((keyword, idx) => (
+          <div key={idx}>{keyword}</div>
+        ))}
       </KeywordBox>
       <KeywordBox>
         <div className="keyword-box-header">PUBLISHED KEYWORDS</div>
+        {keywords?.totalSpeechKeyword.map((keyword, idx) => (
+          <div key={idx}>{keyword}</div>
+        ))}
       </KeywordBox>
     </KeywordLayout>
   );

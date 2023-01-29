@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { PUBLISH, SUBSCRIBE } from '@constants/socket';
+import { SUBSCRIBE } from '@constants/socket';
 import { useAppDispatch } from '@redux/hooks';
 import { clearAllGamePlayState, setPlayState, setTurn } from '@redux/modules/gamePlaySlice';
 import { setIsGameOnState, setScore } from '@redux/modules/gameRoomSlice';
@@ -11,7 +11,7 @@ import { GameEndResponse, GameStartResponse, GameTurnInfoResponse } from '@custo
 import socketInstance from './socketInstance';
 
 const useGamePlaySocket = () => {
-  const { on, off, emit } = socketInstance;
+  const { on, off } = socketInstance;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -40,8 +40,6 @@ const useGamePlaySocket = () => {
         setTimeout(() => {
           dispatch(clearAllGamePlayState());
         }, 1500);
-        // FIXME: 서버에서 레디상태 초기화 해줄 경우 삭제할 것
-        emit(PUBLISH.readyGame);
       }
     });
 

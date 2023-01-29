@@ -28,7 +28,11 @@ const useChatSocket = () => {
     emit(PUBLISH.sendChat, { data: { message } });
   };
 
-  return { emitSendChat };
+  const emitTurnEvaluation = (score: number, turn: number) => {
+    emit(PUBLISH.sendTurnEvaluation, { data: { score, turn } });
+  };
+
+  return { emitSendChat, emitTurnEvaluation };
 };
 
 export default useChatSocket;

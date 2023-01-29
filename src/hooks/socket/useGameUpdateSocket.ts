@@ -33,11 +33,14 @@ const useGameUpdateSocket = () => {
         data: {
           room: GameRoomDetail;
           eventUserInfo: EventUserInfo;
-          event: 'enter' | 'leave' | 'leave-force' | 'ready' | 'start';
+          event: 'enter' | 'leave' | 'leave-force' | 'ready' | 'start' | 'game-end';
         };
       }) => {
         console.log('[on] update-room');
-        console.log(data);
+        if (data.event === 'game-end') {
+          dispatch(updateRoom(data.room));
+          return;
+        }
         const { nickname, socketId, userId } = data.eventUserInfo;
         dispatch(updateRoom(data.room));
         dispatch(setPlayerList(data.room.participants));

@@ -14,7 +14,6 @@ import LoginModal from './LoginModal';
 
 const UserInfo = ({ mypage }: { mypage?: boolean }) => {
   const user = useAppSelector((state) => state.user.user);
-
   const nickname = sessionStorage.getItem('nickname');
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
@@ -27,7 +26,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
         <UserImageBox></UserImageBox>
         <UserStatusBox>
           {!nickname ? (
-            <span>로그인이 필요합니다.</span>
+            <span className="user-status-box-login">로그인이 필요합니다.</span>
           ) : (
             <>
               <span className="user-status-box-nickname">
@@ -44,7 +43,14 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
                 )}
               </span>
               <span className="user-status-box-slash">|</span>
-              <span className="user-status-box-rank">10TH</span>
+              {user?.today.todayRank !== undefined && (
+                <span className="user-status-box-rank">
+                  {user?.today.todayRank === 1 && '1ST'}
+                  {user?.today.todayRank === 2 && '2ND'}
+                  {user?.today.todayRank === 3 && '3RD'}
+                  {user?.today.todayRank > 3 && user?.today.todayRank + 'TH'}
+                </span>
+              )}
             </>
           )}
         </UserStatusBox>
@@ -73,7 +79,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
         <div>
           <span className="score-box-title">오늘 획득한 점수</span>
           <span className="score-box-score">
-            10000
+            {user ? user.today.todayScore : 0}
             <span>점</span>
           </span>
         </div>
@@ -85,7 +91,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
         <div>
           <span className="score-box-title">누적 점수</span>
           <span className="score-box-score">
-            10000
+            {user ? user.total.totalScore : 0}
             <span>점</span>
           </span>
         </div>
@@ -108,9 +114,7 @@ const ProfileBox = styled.div`
   ${(props) => props.theme.borders.bottomRightWhiteBorder}
 `;
 
-const UserImageBox = styled.div`
-  background-color: white;
-`;
+const UserImageBox = styled.div``;
 
 const nicknameAnimation = keyframes`
   from {
@@ -129,13 +133,18 @@ const UserStatusBox = styled.div`
   position: absolute;
   font-size: 20px;
   color: ${(props) => props.theme.colors.ivory2};
-  background: rgba(0, 0, 0, 0.7);
+  background: black;
   width: 100%;
   bottom: 0;
   gap: 52px;
   padding: 25px;
   display: flex;
   align-items: center;
+
+  .user-status-box-login {
+    margin-left: 40px;
+  }
+
   .user-status-box-nickname {
     position: fixed;
     width: 100px;
