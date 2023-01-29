@@ -5,6 +5,7 @@ import { findKoreanLength } from '@utils/common';
 export interface AxisXOverflowedTextStyles extends React.HTMLAttributes<HTMLDivElement> {
   width: number;
   animationSecond: number;
+  fontSize?: number;
 }
 
 export interface AxisXOverflowedTextProps extends AxisXOverflowedTextStyles {
@@ -13,11 +14,24 @@ export interface AxisXOverflowedTextProps extends AxisXOverflowedTextStyles {
   children: React.ReactNode;
 }
 
-const AxisXOverflowedText = ({ children, width, innerText, maxLength, animationSecond }: AxisXOverflowedTextProps) => {
+const AxisXOverflowedText = ({
+  children,
+  width,
+  innerText,
+  maxLength,
+  animationSecond,
+  fontSize = 20,
+}: AxisXOverflowedTextProps) => {
+  const adjustedMaxLength = maxLength - findKoreanLength(innerText);
   return (
     <div>
-      {innerText.length > maxLength - findKoreanLength(innerText) ? (
-        <AxisXOverflowedTextLayout width={width} animationSecond={animationSecond}>
+      {innerText.length > adjustedMaxLength ? (
+        <AxisXOverflowedTextLayout
+          width={width}
+          animationSecond={animationSecond}
+          overflowLength={innerText.length - adjustedMaxLength}
+          fontSize={fontSize}
+        >
           <div>{children}</div>
         </AxisXOverflowedTextLayout>
       ) : (
@@ -31,21 +45,25 @@ const AxisXOverflowedTextAnimation = keyframes`
   0%,
   20% {
     transform: translateX(0%);
-    left: 0%;
   }
   80%,
   100% {
     transform: translateX(-100%);
-    left: 100%;
   }
 `;
 
-const AxisXOverflowedTextLayout = styled.div<AxisXOverflowedTextStyles>`
+const AxisXOverflowedTextLayout = styled.div<{
+  animationSecond: number;
+  width: number;
+  overflowLength: number;
+  fontSize: number;
+}>`
   white-space: nowrap;
   display: block;
   overflow: hidden;
   width: ${(props) => props.width + 'px'};
   div {
+    width: ${(props) => props.overflowLength * props.fontSize * 0.6 + 6 + 'px'};
     -moz-animation: ${AxisXOverflowedTextAnimation} ${(props) => props.animationSecond}s infinite alternate ease-in-out;
     -webkit-animation: ${AxisXOverflowedTextAnimation} ${(props) => props.animationSecond}s infinite alternate
       ease-in-out;
