@@ -2,13 +2,18 @@ import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
+import logoIcon from '@assets/svg_logoIcon.svg';
+
 const Header = ({ page, children }: { page?: string; children?: React.ReactNode }) => {
   const navigate = useNavigate();
 
   return (
     <HeaderLayout>
       <HeaderContents>
-        <LogoBox onClick={() => page !== 'ROOM' && navigate('/')}>LOG0</LogoBox>
+        <LogoBox id="service-name" onClick={() => page !== 'ROOM' && navigate('/')}>
+          <img src={logoIcon} />
+          <span>GACHIMIND</span>
+        </LogoBox>
         <ServiceDescription>CODING INTERVIEW GAME *** 2023 ***</ServiceDescription>
       </HeaderContents>
       {children}
@@ -33,24 +38,42 @@ const HeaderContents = styled.div`
 
 const LogoBox = styled.div`
   cursor: pointer;
-  position: relative;
-  color: ${(props) => props.theme.colors.ivory2};
-  font-family: ${(props) => props.theme.font.ibmPlexMono};
-  font-size: 24px;
-  background-color: ${(props) => props.theme.colors.lightGrey2};
   width: 250px;
   height: 100%;
-  margin-left: 56px;
+  margin-left: 88px;
+  margin-bottom: 8px;
+  gap: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  img {
+    filter: drop-shadow(-1.5px 0px 0px ${(props) => props.theme.colors.darkGrey5});
+    -webkit-filter: drop-shadow(-1.5px 0px 0px ${(props) => props.theme.colors.darkGrey5});
+  }
+
+  span {
+    font-family: ${(props) => props.theme.font.joystick};
+    font-size: 24px;
+    background-image: linear-gradient(
+      0deg,
+      ${(props) => props.theme.colors.lightGrey5} 50%,
+      ${(props) => props.theme.colors.ivory2} 50%
+    );
+    background-clip: text;
+    -webkit-text-stroke: 1px black;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(-1.5px 0px 0px ${(props) => props.theme.colors.darkGrey5})
+      drop-shadow(0px 2px 0px ${(props) => props.theme.colors.black4});
+    -webkit-filter: drop-shadow(-1.5px 0px 0px ${(props) => props.theme.colors.darkGrey5})
+      drop-shadow(0px 2px 0px ${(props) => props.theme.colors.black4});
+  }
 `;
 
 const ServiceDescription = styled.span`
   color: ${(props) => props.theme.colors.black3};
   font-size: 24px;
-  font-family: ${(props) => props.theme.font.ibmPlexMono};
-  font-weight: 500;
 `;
 
 export default Header;

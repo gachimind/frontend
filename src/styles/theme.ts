@@ -59,6 +59,10 @@ export const colors = {
    */
   darkGrey4: '#797979',
   /**
+   * dark grey5: #535353
+   */
+  darkGrey5: '#535353',
+  /**
    * black1: #272727
    */
   black1: '#272727',
@@ -70,6 +74,10 @@ export const colors = {
    * black3: #1C1C1C
    */
   black3: '#1C1C1C',
+  /**
+   * black4: #212122
+   */
+  black4: '#212122',
   /**
    * purple1: #402f5c
    */
