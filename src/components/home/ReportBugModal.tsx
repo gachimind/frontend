@@ -2,23 +2,20 @@ import { useState } from 'react';
 
 import styled from 'styled-components';
 
-import { BUG_OPTIONS } from '@constants/options';
-
 import Button from '@components/common/Button';
+import Input from '@components/common/Input';
 import InputContainer from '@components/common/InputContainer';
 import Modal from '@components/common/Modal';
-import Selection from '@components/common/Selection';
 
 const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [category, setCategory] = useState<string>('');
   const [reportContent, setReportContent] = useState<string>('');
 
   return (
     <Modal visible={visible} onClose={onClose} title="REPORT A BUG" width={700}>
       <ReportBugModalLayout>
-        <InputContainer label="카테고리">
-          <Selection options={BUG_OPTIONS} setValue={setCategory} selectionType="bug" />
+        <InputContainer label="제목">
+          <Input type="text" maxLength={18} style={{ textAlign: 'initial', paddingLeft: '20px' }} />
         </InputContainer>
         <InputContainer label="내용">
           <ReportTextarea

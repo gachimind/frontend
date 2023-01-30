@@ -8,10 +8,9 @@ import useClickAway from '@hooks/useClickAway';
 interface SelectionProps {
   options: Array<{ value: string; label: string }>;
   setValue: React.Dispatch<React.SetStateAction<any>>;
-  selectionType?: 'bug' | null;
 }
 
-const Selection = ({ options, setValue, selectionType }: SelectionProps) => {
+const Selection = ({ options, setValue }: SelectionProps) => {
   const ref = useRef(null);
   useClickAway(ref, () => setShowOptions(false));
 
@@ -22,7 +21,7 @@ const Selection = ({ options, setValue, selectionType }: SelectionProps) => {
     <SelectBox ref={ref} onClick={() => setShowOptions((prev) => !prev)}>
       <img src={SelectIcon}></img>
       <label>{currentValue}</label>
-      <SelectOptions show={showOptions} selectionType={selectionType}>
+      <SelectOptions show={showOptions}>
         {options?.map((option) => (
           <Option
             key={option.label}
@@ -65,13 +64,13 @@ const SelectBox = styled.div`
   }
 `;
 
-const SelectOptions = styled.ul<{ show: boolean; selectionType?: 'bug' | null }>`
+const SelectOptions = styled.ul<{ show: boolean }>`
   position: absolute;
   z-index: 998;
   font-family: inherit;
   color: ${(props) => props.theme.colors.ivory2};
   background-color: ${(props) => props.theme.colors.darkGrey2};
-  width: ${(props) => (props.selectionType ? 101.6 : 102)}%;
+  width: 102%;
   top: -4px;
   left: -4px;
   display: ${(props) => (props.show ? 'block' : 'none')};
