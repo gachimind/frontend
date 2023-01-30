@@ -8,10 +8,10 @@ import { useAppSelector } from '@redux/hooks';
 
 import Cat from '@components/character/Cat';
 import Button from '@components/common/Button';
-import EditProfileModal from '@components/mypage/EditProfileModal';
 
 import CreateGameModal from './CreateGameModal';
 import LoginModal from './LoginModal';
+import SetUpInfoModal from './SetUpInfoModal';
 
 const UserInfo = ({ mypage }: { mypage?: boolean }) => {
   const user = useAppSelector((state) => state.user.user);
@@ -22,7 +22,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [createGameModalVisible, setCreateGameModalVisible] = useState<boolean>(false);
-  const [EditProfileModalVisible, setEditProfileModalVisible] = useState<boolean>(false);
+  const [SetUpInfoModalVisible, setSetUpInfoModalVisible] = useState<boolean>(false);
 
   return (
     <UserInfoLayout>
@@ -62,11 +62,11 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
         </OnClickHandleButton>
       )}
 
-      {EditProfileModalVisible && (
-        <EditProfileModal visible={EditProfileModalVisible} onClose={() => setEditProfileModalVisible(false)} />
+      {SetUpInfoModalVisible && (
+        <SetUpInfoModal visible={SetUpInfoModalVisible} onClose={() => setSetUpInfoModalVisible(false)} />
       )}
       {mypage && (
-        <OnClickHandleButton onClick={() => setEditProfileModalVisible(true)}>회원정보 수정</OnClickHandleButton>
+        <OnClickHandleButton onClick={() => setSetUpInfoModalVisible(true)}>내 정보 수정하기</OnClickHandleButton>
       )}
       <ScoreBox>
         <div className="score-box-icon">
