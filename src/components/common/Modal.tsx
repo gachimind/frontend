@@ -62,7 +62,7 @@ const ModalLayout = styled.div<{ hasBackgroundShadow: boolean }>`
   z-index: 998;
   width: 100vw;
   height: 100vh;
-  background: ${(props) => (props.hasBackgroundShadow ? 'rgba(0, 0, 0, 0.6)' : 'inherit')};
+  background: ${(props) => (props.hasBackgroundShadow ? 'rgba(0, 0, 0, 0.58)' : 'inherit')};
 `;
 
 const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
@@ -112,7 +112,7 @@ const ModalCloseButton = styled.button`
   font-size: inherit;
   color: inherit;
   background-color: transparent;
-  right: 27px;
+  right: 24px;
   display: flex;
   justify-content: center;
   align-items: center;

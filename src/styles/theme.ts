@@ -86,9 +86,9 @@ export const boxShadows = {
    */
   boxShadow1: '14px 8px 0px #000000',
   /**
-   * boxShadow2: 16px 12px 0px #797979
+   * boxShadow2: 16px 12px 0px #000000
    */
-  boxShadow2: '16px 12px 0px #797979',
+  boxShadow2: '16px 12px 0px #000000',
 };
 
 export const layout = {
