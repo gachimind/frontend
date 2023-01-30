@@ -3,15 +3,14 @@ import styled from 'styled-components';
 import ThreeLightsIcon from '@assets/svg_threeLightsIcon.svg';
 
 interface ContentContainerProps {
-  lights?: boolean;
   title: string;
   children?: React.ReactNode;
 }
 
-const ContentContainer = ({ lights, title, children }: ContentContainerProps) => {
+const ContentContainer = ({ title, children }: ContentContainerProps) => {
   return (
     <ContentContainerLayout>
-      {lights && <HeaderIcon src={ThreeLightsIcon} />}
+      <HeaderIcon src={ThreeLightsIcon} />
       <TitleBox>{title}</TitleBox>
       {children}
     </ContentContainerLayout>

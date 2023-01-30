@@ -23,10 +23,10 @@ const Main = () => {
 
   return (
     <MainTemplate>
-      <ContentContainer title="PROFILE" lights={true}>
+      <ContentContainer title="PROFILE">
         <UserInfo />
       </ContentContainer>
-      <ContentContainer title="ROOM SELECTION" lights={true}>
+      <ContentContainer title="ROOM SELECTION">
         <RoomList />
       </ContentContainer>
     </MainTemplate>
