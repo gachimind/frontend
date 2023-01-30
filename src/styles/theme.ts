@@ -187,6 +187,10 @@ export const textShadow = {
    * textShadow2: '-1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000'
    */
   textShadow2: '-1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000',
+  /**
+   * textShadow3: '-2px 0 #FFFFFF, 0 2px #FFFFFF, 2px 0 #FFFFFF, 0 -2px #FFFFFF'
+   */
+  textShadow3: '-2px 0 #FFFFFF, 0 2px #FFFFFF, 2px 0 #FFFFFF, 0 -2px #FFFFFF',
 };
 
 export type ColorTypes = typeof colors;

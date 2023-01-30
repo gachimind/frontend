@@ -28,6 +28,7 @@ const TitleBox = styled.div`
   color: ${(props) => props.theme.colors.darkGrey2};
   font-family: ${(props) => props.theme.font.joystick};
   font-size: 20px;
+  text-shadow: ${(props) => props.theme.textShadow.textShadow3};
   background-color: ${(props) => props.theme.colors.ivory1};
   box-shadow: 2px 0px ${(props) => props.theme.colors.ivory1}, -2px -2px ${(props) => props.theme.colors.ivory1};
   height: 39px;
