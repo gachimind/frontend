@@ -44,7 +44,6 @@ server.get('/me/keyword', (req, res) => {
   const result = {
     data: router.db.__wrapped__.keyword.find((user) => user.userId == authenticatedUserId),
   };
-  console.log(result);
   return res.jsonp(result);
 });
 
