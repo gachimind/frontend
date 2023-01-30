@@ -33,7 +33,7 @@ const Selection = ({ options, setValue, selectionType }: SelectionProps) => {
               setValue(value);
             }}
           >
-            {option.label}
+            <span className="option-label">{option.label}</span>
           </Option>
         ))}
       </SelectOptions>
@@ -80,6 +80,7 @@ const SelectOptions = styled.ul<{ show: boolean; selectionType?: 'bug' | null }>
 `;
 
 const Option = styled.li`
+  position: relative;
   z-index: 999;
   font-family: inherit;
   font-size: 24px;
@@ -88,9 +89,20 @@ const Option = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.2s ease-in;
 
-  &:hover {
+  .option-label {
+    display: none;
+    position: absolute;
+    color: ${(props) => props.theme.colors.ivory2};
+    width: 97%;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease-in;
+  }
+
+  .option-label:hover {
     background-color: ${(props) => props.theme.colors.black2};
   }
 `;
