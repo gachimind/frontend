@@ -66,6 +66,7 @@ const RoomList = () => {
           <button onClick={() => setPage(page - 1)} disabled={page === 1}>
             <img src={roomListLeftIcon} />
           </button>
+          <span>0{page}</span>
           <button onClick={() => setPage(page + 1)} disabled={page === numPages}>
             <img src={roomListRightIcon} />
           </button>
@@ -102,14 +103,20 @@ const RoomListLayout = styled.div`
 
 const RoomPaginationBox = styled.div`
   position: absolute;
-  gap: 32px;
+  gap: 23px;
   top: -35px;
   right: 56px;
   display: flex;
+  align-items: center;
 
   button {
     cursor: pointer;
     background: none;
+  }
+
+  span {
+    font-size: 20px;
+    color: ${(props) => props.theme.colors.darkGrey4};
   }
 `;
 

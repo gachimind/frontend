@@ -61,12 +61,16 @@ const RoomCard = ({ room, onJoinClick }: RoomCardProps) => {
           <Participants>
             참여인원: {room.participants.toString()}/{room.maxCount}
           </Participants>
-          <EnterButton onClick={handleJoinButtonClick} disabled={!joinInfo.isJoinable} isJoinable={joinInfo.isJoinable}>
-            {joinInfo.message}
-            <img src={enterRoomIcon} />
-          </EnterButton>
         </CardContentsBox>
-        {room.isSecretRoom && <img className="secret-room-icon" src={privateRoomIcon} />}
+        {room.isSecretRoom && (
+          <span className="room-card-private-room-icon">
+            <img src={privateRoomIcon} />
+          </span>
+        )}
+        <EnterButton onClick={handleJoinButtonClick} disabled={!joinInfo.isJoinable} isJoinable={joinInfo.isJoinable}>
+          {joinInfo.message}
+          <img src={enterRoomIcon} />
+        </EnterButton>
         {isLoginModalVisible && !isLogined && (
           <LoginModal visible={isLoginModalVisible} onClose={() => setIsLoginModalVisible(false)} />
         )}
@@ -108,11 +112,16 @@ const RoomCardMainBox = styled.div`
   border-collapse: collapse;
   overflow: hidden;
   display: flex;
-  .secret-room-icon {
-    width: 86px;
-    height: 86px;
-    margin-top: 25px;
-    margin-left: -10px;
+  .room-card-private-room-icon {
+    position: absolute;
+    top: 21px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    ${(props) => props.theme.borders.bottomRightThinWhiteBorder};
   }
 `;
 
@@ -143,6 +152,7 @@ const Participants = styled.span`
 `;
 
 const EnterButton = styled.button<{ isJoinable: boolean }>`
+  position: absolute;
   cursor: ${(props) => (props.isJoinable ? 'pointer' : 'default')};
   opacity: ${(props) => (props.isJoinable ? 1 : 0.7)};
   font-family: inherit;
@@ -150,7 +160,8 @@ const EnterButton = styled.button<{ isJoinable: boolean }>`
   color: ${(props) => props.theme.colors.ivory2};
   text-shadow: ${(props) => props.theme.textShadow.textShadow1};
   background-color: ${(props) => props.theme.colors.darkGrey2};
-  margin-top: 12px;
+  right: 24px;
+  bottom: 16px;
   width: 96px;
   height: 40px;
   gap: 8px;
