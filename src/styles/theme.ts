@@ -4,7 +4,6 @@ const SCALE =
   window.innerWidth / window.innerHeight < 1.83
     ? Number((window.innerWidth / 1960).toFixed(2))
     : Number((window.innerHeight * 1.95) / 1960).toFixed(2);
-
 export const colors = {
   /**
    * white: #F4F4F4
@@ -18,6 +17,10 @@ export const colors = {
    * ivory2: #FFFFFF
    */
   ivory2: '#FFFFFF',
+  /**
+   * ivory3: #EEEEEE
+   */
+  ivory3: '#EEEEEE',
   /**
    * light grey1: #757575
    */
@@ -42,6 +45,10 @@ export const colors = {
    * light grey6: #D9D9D9
    */
   lightGrey6: '#D9D9D9',
+  /**
+   * light grey7: #3F3F3F
+   */
+  lightGrey7: '#3F3F3F',
   /**
    * dark grey1: #444444
    */
@@ -170,6 +177,19 @@ export const borders = {
     border-bottom: 4px solid #797979;
     border-left: 4px solid #FFFFFF;
     `,
+  /** 
+   * bottomRightThinWhiteBorder:
+    border-top: 2px solid #000000;
+    border-right: 2px solid #FFFFFF;
+    border-bottom: 2px solid #FFFFFF;
+    border-left: 2px solid #000000;
+   */
+  bottomRightThinWhiteBorder: `
+  border-top: 2px solid #000000;
+  border-right: 2px solid #FFFFFF;
+  border-bottom: 2px solid #FFFFFF;
+  border-left: 2px solid #000000;
+  `,
 };
 
 export const font = {

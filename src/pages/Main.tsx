@@ -23,7 +23,7 @@ const Main = () => {
 
   return (
     <MainTemplate>
-      <ContentContainer title="SCORE" lights={true}>
+      <ContentContainer title="PROFILE" lights={true}>
         <UserInfo />
       </ContentContainer>
       <ContentContainer title="ROOM SELECTION" lights={true}>
