@@ -39,8 +39,8 @@ export default Keyword;
 
 const KeywordLayout = styled.div`
   height: 94.3%;
-  padding: 45px 40px;
-  gap: 32px;
+  padding: 32px 30px;
+  gap: 30px;
   display: grid;
   grid-template-rows: 1fr 1fr;
 `;
@@ -61,7 +61,7 @@ const KeywordBox = styled.div`
   ul {
     padding: 22px 28px;
     overflow-y: scroll;
-    height: 195px;
+    height: 200px;
   }
 
   ul::-webkit-scrollbar {
