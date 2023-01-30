@@ -23,8 +23,8 @@ const Header = ({ page, children }: { page?: string; children?: React.ReactNode 
 
 const HeaderLayout = styled.div`
   position: relative;
-  background-color: ${(props) => props.theme.colors.ivory1};
-  box-shadow: 2px 0px ${(props) => props.theme.colors.ivory1}, -2px -2px ${(props) => props.theme.colors.ivory1};
+  background-color: ${(props) => props.theme.colors.lightGrey6};
+  box-shadow: 2px 0px ${(props) => props.theme.colors.lightGrey6}, -2px -2px ${(props) => props.theme.colors.lightGrey6};
   height: 56px;
   display: flex;
   justify-content: space-between;
