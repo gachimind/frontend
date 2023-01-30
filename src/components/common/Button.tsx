@@ -10,6 +10,9 @@ const ButtonLayout = styled.button`
   text-shadow: ${(props) => props.theme.textShadow.textShadow1};
   background-color: ${(props) => props.theme.colors.darkGrey2};
   ${(props) => props.theme.borders.topLeftWhiteBorder}
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default Button;
