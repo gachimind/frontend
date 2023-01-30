@@ -15,7 +15,7 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
   const [reportContent, setReportContent] = useState<string>('');
 
   return (
-    <Modal visible={visible} onClose={onClose} title="REPORT" width={700}>
+    <Modal visible={visible} onClose={onClose} title="REPORT A BUG" width={700}>
       <ReportBugModalLayout>
         <InputContainer label="카테고리">
           <Selection options={BUG_OPTIONS} setValue={setCategory} selectionType="bug" />
@@ -34,7 +34,7 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
 };
 
 const ReportBugModalLayout = styled.div`
-  padding: 48px 80px;
+  padding: 56px 80px 64px 80px;
   gap: 24px;
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@ const ReportBugButton = styled(Button)`
   font-family: inherit;
   font-size: 24px;
   height: 72px;
-  margin-top: 17px;
+  margin-top: 24px;
   background-color: ${(props) => props.theme.colors.purple1};
 `;
 
