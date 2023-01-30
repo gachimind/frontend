@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import logoIcon from '@assets/svg_logoIcon.svg';
+import logoIcon from '@assets/png_logoIcon.png';
 
 const Header = ({ page, children }: { page?: string; children?: React.ReactNode }) => {
   const navigate = useNavigate();
