@@ -85,7 +85,7 @@ const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
 const ModalBox = styled.div<{ width?: number }>`
   position: relative;
   background-color: ${(props) => props.theme.colors.darkGrey2};
-  box-shadow: ${(props) => props.theme.boxShadows.boxShadow2};
+  box-shadow: ${(props) => props.theme.boxShadows.boxShadow1};
   border: ${(props) => props.theme.borders.normalIvory};
   width: ${(props) => (props.width ? props.width : 560)}px;
   height: fit-content;
