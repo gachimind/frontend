@@ -61,7 +61,6 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
           게임방 만들기
         </OnClickHandleButton>
       )}
-
       {SetUpInfoModalVisible && (
         <SetUpInfoModal
           visible={SetUpInfoModalVisible}
