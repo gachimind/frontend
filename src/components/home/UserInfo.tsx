@@ -63,7 +63,11 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
       )}
 
       {SetUpInfoModalVisible && (
-        <SetUpInfoModal visible={SetUpInfoModalVisible} onClose={() => setSetUpInfoModalVisible(false)} />
+        <SetUpInfoModal
+          visible={SetUpInfoModalVisible}
+          onClose={() => setSetUpInfoModalVisible(false)}
+          mypage={mypage}
+        />
       )}
       {mypage && (
         <OnClickHandleButton onClick={() => setSetUpInfoModalVisible(true)}>내 정보 수정하기</OnClickHandleButton>
