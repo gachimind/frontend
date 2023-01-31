@@ -1,3 +1,6 @@
+import { useState } from 'react';
+
+import axios from 'axios';
 import styled from 'styled-components';
 
 import blackCatFaceImage from '@assets/png_blackCatFaceImage.png';
@@ -16,16 +19,38 @@ import Modal from '@components/common/Modal';
 
 const SetUpInfoModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [newNickname, setNewNickname] = useState<string>('');
+  const [duplicateAlert, setDuplicateAlert] = useState<{ duplicate: boolean; message: string }>({
+    duplicate: false,
+    message: '',
+  });
+
+  const handleDuplicateCheckButtonClick = async () => {
+    if (newNickname) {
+      await axios
+        .get(`http://localhost:3001/api/users/nickname?nickname=${newNickname}`)
+        .then(
+          (res) => res.status === 200 && setDuplicateAlert({ duplicate: false, message: '*사용가능한 닉네임입니다' }),
+        )
+        .catch(
+          (e) => e.response.status === 400 && setDuplicateAlert({ duplicate: true, message: '*중복되는 닉네임입니다' }),
+        );
+      return;
+    }
+  };
 
   return (
     <Modal visible={visible} onClose={onClose} title="SET UP" width={1020}>
       <SetUpInfoModalLayout>
         <LeftSectionBox>
           <InputContainer label="닉네임">
-            <NicknameInputBox>
-              <input />
-              <button>중복확인</button>
+            <NicknameInputBox duplicate={duplicateAlert.duplicate}>
+              <input type="text" maxLength={10} value={newNickname} onChange={(e) => setNewNickname(e.target.value)} />
+              <button onClick={handleDuplicateCheckButtonClick}>중복확인</button>
             </NicknameInputBox>
+            <NicknameDuplicateAlert duplicate={duplicateAlert.duplicate}>
+              {duplicateAlert.message}
+            </NicknameDuplicateAlert>
           </InputContainer>
           <InputContainer label="적용 캐릭터">
             <SelectedCharacterBox />
@@ -84,17 +109,18 @@ const SetUpInfoModalLayout = styled.div`
 
 const LeftSectionBox = styled.div`
   width: 464px;
-  gap: 70px;
+  gap: 38px;
   display: flex;
   flex-direction: column;
 `;
 
-const NicknameInputBox = styled.div`
+const NicknameInputBox = styled.div<{ duplicate: boolean }>`
   height: 56px;
   ${(props) => props.theme.borders.bottomRightWhiteBorder};
   display: flex;
   justify-content: space-between;
   align-items: center;
+  outline: ${(props) => (props.duplicate ? `2px solid ${props.theme.colors.red2}` : 'none')};
 
   input {
     font-size: 16px;
@@ -119,6 +145,15 @@ const NicknameInputBox = styled.div`
     height: 28px;
     margin-right: 20px;
   }
+`;
+
+const NicknameDuplicateAlert = styled.span<{ duplicate: boolean }>`
+  color: ${(props) => (props.duplicate ? props.theme.colors.red2 : props.theme.colors.lightGrey8)};
+  font-size: 16px;
+  font-family: ${(props) => props.theme.font.ibmPlexMono};
+  font-weight: 400;
+  height: 24px;
+  margin-top: 8px;
 `;
 
 const SelectedCharacterBox = styled.div`
