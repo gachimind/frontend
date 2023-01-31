@@ -26,8 +26,13 @@ export interface RocketStyles {
   core: string;
 }
 
-export type CatTheme = 'white' | 'brown' | 'orange' | 'mix' | 'black' | 'gray';
-export type RocketTheme = 'red' | 'blue' | 'yellow';
+export const BACKGROUND_WIDTH = 395;
+export const BACKGROUND_HEIGHT = 618;
+
+export const CATS = ['white', 'brown', 'orange', 'mix', 'black', 'gray'] as const;
+export const ROCKETS = ['red', 'blue', 'yellow'] as const;
+export type CatTheme = typeof CATS[number];
+export type RocketTheme = typeof ROCKETS[number];
 
 export const CatColor = {
   white: {

@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import Cat, { CatProps } from '@components/character/Cat';
 
 export default {
-  title: 'common/Cat',
+  title: 'character/Cat',
   component: Cat,
 } as ComponentMeta<typeof Cat>;
 
