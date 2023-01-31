@@ -29,7 +29,7 @@ const CatScore = ({ scoreInfo, size = 'small' }: CatScoreProps) => {
     const timeoutId = setTimeout(() => {
       setTotalScore((prev) => prev + 1);
       setRestScore((prev) => prev - 1);
-    }, 1800 / scoreInfo?.score);
+    }, 1000 / scoreInfo?.score);
     return () => {
       clearTimeout(timeoutId);
     };

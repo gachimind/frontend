@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import styled from 'styled-components';
 
 import { CatTheme, RocketTheme } from '@constants/characters';
@@ -32,18 +34,29 @@ const CatOnGame = ({
   hasIdlePopupAnimation = true,
   catMarginTop = -17,
 }: CatOnGameProps) => {
+  const [prevScore, setPrevScore] = useState<{ score: number }>({ score: 0 });
+  const [prevCatMoved, setPrevCatMoved] = useState<{ millSecond: number }>({ millSecond: 0 });
+
+  useEffect(() => {
+    if (!scoreInfo.score || scoreInfo === prevScore) {
+      return;
+    }
+    setPrevScore(scoreInfo);
+    setPrevCatMoved({ millSecond: scoreInfo.score * 0.8 * 10 });
+  }, [scoreInfo]);
+
   return (
     <CatOnGameLayout>
       <AxisXOverflowedText
-        width={size === 'large' ? 80 : 73}
-        animationSecond={3}
+        width={size === 'large' ? 80 : 61}
+        animationSecond={6}
         innerText={nickname}
         maxLength={12}
-        fontSize={14}
+        fontSize={size === 'large' ? 14 : 12}
       >
         <NicknameText size={size}>{nickname}</NicknameText>
       </AxisXOverflowedText>
-      <CatScore size={size} scoreInfo={scoreInfo} />
+      <CatScore size={size} scoreInfo={prevScore} />
       <CatContainerBox catMarginTop={catMarginTop}>
         <Cat
           catTheme={catTheme}
@@ -51,7 +64,7 @@ const CatOnGame = ({
           type={catType}
           hasIdlePopupAnimation={hasIdlePopupAnimation}
           scale={scale}
-          letsMove={{ millSecond: scoreInfo.score * 10 }}
+          letsMove={prevCatMoved}
         />
       </CatContainerBox>
     </CatOnGameLayout>
@@ -67,7 +80,7 @@ const CatOnGameLayout = styled.div`
 `;
 
 const NicknameText = styled.span<{ size: 'small' | 'large' }>`
-  font-size: ${(props) => (props.size === 'small' ? '14px' : '15px')};
+  font-size: ${(props) => (props.size === 'small' ? '12px' : '15px')};
   color: ${(props) => props.theme.colors.white};
 `;
 
