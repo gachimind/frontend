@@ -29,7 +29,7 @@ const SetUpInfoModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
   const handleDuplicateCheckButtonClick = async () => {
     if (newNickname) {
       await userApi
-        .logout(newNickname)
+        .duplicateCheck(newNickname)
         .then(
           (res) => res.status === 200 && setDuplicateAlert({ duplicate: false, message: '*사용가능한 닉네임입니다' }),
         )

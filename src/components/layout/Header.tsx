@@ -1,13 +1,23 @@
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
 import logoIcon from '@assets/png_logoIcon.png';
 import cursorIcon from '@assets/svg_cursorIcon.svg';
+import worldIcon from '@assets/svg_worldIcon.svg';
+import { useAppSelector } from '@redux/hooks';
 
-const Header = ({ page, children }: { page?: string; children?: React.ReactNode }) => {
+import LoginModal from '@components/home/LoginModal';
+import LogoutModal from '@components/home/LogoutModal';
+
+const Header = ({ page }: { page?: string }) => {
   const navigate = useNavigate();
+  const user = useAppSelector((state) => state.user.user);
+  const accessToken = sessionStorage.getItem('accessToken');
 
+  const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
+  const [logoutModalVisible, setLogoutModalVisible] = useState<boolean>(false);
   return (
     <HeaderLayout>
       <HeaderContents>
@@ -17,7 +27,18 @@ const Header = ({ page, children }: { page?: string; children?: React.ReactNode 
         </LogoBox>
         <ServiceDescription>CODING INTERVIEW GAME *** 2023 ***</ServiceDescription>
       </HeaderContents>
-      {children}
+      {loginModalVisible && <LoginModal visible={loginModalVisible} onClose={() => setLoginModalVisible(false)} />}
+      {logoutModalVisible && <LogoutModal visible={logoutModalVisible} onClose={() => setLogoutModalVisible(false)} />}
+      {!accessToken ? (
+        <button className="login-button" onClick={() => setLoginModalVisible(true)}>
+          <img src={worldIcon} />
+          LOGIN
+        </button>
+      ) : (
+        <button className="nickname-button" onClick={() => setLogoutModalVisible(true)}>
+          {user?.nickname}
+        </button>
+      )}
     </HeaderLayout>
   );
 };
@@ -29,6 +50,25 @@ const HeaderLayout = styled.div`
   height: 56px;
   display: flex;
   justify-content: space-between;
+
+  button {
+    cursor: url(${cursorIcon}), pointer;
+    color: ${(props) => props.theme.colors.darkGrey2};
+    font-size: 20px;
+    background-color: transparent;
+    gap: 16px;
+    display: flex;
+    align-items: center;
+  }
+
+  .login-button {
+    font-family: ${(props) => props.theme.font.joystick};
+    margin-right: 150px;
+  }
+
+  .nickname-button {
+    margin-right: 112px;
+  }
 `;
 
 const HeaderContents = styled.div`

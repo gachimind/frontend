@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
 import bugIcon from '@assets/svg_bugIcon.svg';
-import cursorIcon from '@assets/svg_cursorIcon.svg';
-import worldIcon from '@assets/svg_worldIcon.svg';
 
 import Button from '@components/common/Button';
-import LoginModal from '@components/home/LoginModal';
 import ReportBugModal from '@components/home/ReportBugModal';
 
 import Footer from './Footer';
@@ -16,25 +12,10 @@ import Header from './Header';
 import PageContainer from './PageContainer';
 
 const MainTemplate = ({ children }: { children: React.ReactNode }) => {
-  const navigate = useNavigate();
-
-  const accessToken = sessionStorage.getItem('accessToken');
-
-  const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [reportBugModalVisible, setReportBugModalVisible] = useState<boolean>(false);
   return (
     <PageContainer>
-      <Header>
-        {loginModalVisible && <LoginModal visible={loginModalVisible} onClose={() => setLoginModalVisible(false)} />}
-        {!accessToken ? (
-          <LoginButton onClick={() => setLoginModalVisible(true)}>
-            <img src={worldIcon} />
-            LOGIN
-          </LoginButton>
-        ) : (
-          <LoginButton onClick={() => navigate('/mypage')}>MYPAGE</LoginButton>
-        )}
-      </Header>
+      <Header />
       <MainContentsBox>{children}</MainContentsBox>
       <Footer>
         <FooterBox>
@@ -50,18 +31,6 @@ const MainTemplate = ({ children }: { children: React.ReactNode }) => {
     </PageContainer>
   );
 };
-
-const LoginButton = styled.button`
-  cursor: url(${cursorIcon}), pointer;
-  color: ${(props) => props.theme.colors.darkGrey2};
-  font-family: ${(props) => props.theme.font.joystick};
-  font-size: 20px;
-  margin-right: 150px;
-  background-color: transparent;
-  gap: 16px;
-  display: flex;
-  align-items: center;
-`;
 
 const MainContentsBox = styled.div`
   height: 664px;

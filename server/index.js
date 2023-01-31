@@ -12,6 +12,7 @@ server.use(
   jsonServer.rewriter({
     '/api/users/me': '/me',
     '/api/users/me/keyword': '/me/keyword',
+    '/api/users/logout': '/logout',
   }),
 );
 
@@ -54,7 +55,7 @@ server.get('/me/keyword', (req, res) => {
 });
 
 // 로그아웃
-server.get('/api/users/logout', (req, res) => {
+server.get('/logout', (req, res) => {
   return res.status(200).send({ result: true, message: '로그아웃 되었습니다.' });
 });
 
