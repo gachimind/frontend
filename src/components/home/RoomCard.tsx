@@ -56,7 +56,7 @@ const RoomCard = ({ room, onJoinClick }: RoomCardProps) => {
       <RoomCardTopBox />
       <RoomCardMainBox>
         <CardContentsBox>
-          <AxisXOverflowedText animationSecond={3} maxLength={6} width={130} innerText={room.roomTitle}>
+          <AxisXOverflowedText animationSecond={3} maxLength={12} width={130} innerText={room.roomTitle}>
             <RoomTitleText>{room.roomTitle}</RoomTitleText>
           </AxisXOverflowedText>
           <Participants>

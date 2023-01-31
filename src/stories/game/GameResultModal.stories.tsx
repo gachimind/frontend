@@ -27,11 +27,12 @@ const Template: ComponentStory<typeof GameResultModal> = (args: GameResultModalP
 export const Default = Template.bind({});
 Default.args = {
   participants: [
-    { nickname: '최혜연', isReady: true, userId: 1, socketId: '', profileImg: '', score: 150 },
-    { nickname: '박동석', isReady: true, userId: 2, socketId: '', profileImg: '', score: 60 },
-    { nickname: '최예나', isReady: true, userId: 3, socketId: '', profileImg: '', score: 240 },
-    { nickname: '편도영', isReady: true, userId: 4, socketId: '', profileImg: '', score: 420 },
-    { nickname: '백세현', isReady: true, userId: 5, socketId: '', profileImg: '', score: 0 },
+    { nickname: '한글은여섯개', isReady: true, userId: 1, socketId: '', profileImg: '', score: 150 },
+    { nickname: '여섯글자가넘으면어떡해', isReady: true, userId: 2, socketId: '', profileImg: 'brown-red', score: 60 },
+    { nickname: 'Helloworld', isReady: true, userId: 3, socketId: '', profileImg: 'black-blue', score: 240 },
+    { nickname: 'ehd0309박동석123', isReady: true, userId: 4, socketId: '', profileImg: 'gray-red', score: 420 },
+    { nickname: '컴퓨터텔레비죤', isReady: true, userId: 5, socketId: '', profileImg: 'mix-yellow', score: 680 },
+    { nickname: '콜라', isReady: true, userId: 6, socketId: '', profileImg: 'orange-red', score: 20 },
   ],
   userId: 1,
 };

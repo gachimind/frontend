@@ -11,3 +11,14 @@ export const convertLeaveCounterFormat = (counter: number, hasMinute?: boolean) 
 export const filterKeyword = (keyword: string) => {
   return keyword.replace(/[가-힣a-zA-Z]/gi, '🐟');
 };
+
+export const findKoreanLength = (text: string) => {
+  if (!text || text.length === 0) {
+    return 0;
+  }
+  return text.length - text.replace(/[가-힣]/gi, '').length;
+};
+
+export const getRandomInt = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};

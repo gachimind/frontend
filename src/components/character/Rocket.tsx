@@ -84,7 +84,7 @@ const RocketIdleAnimation = keyframes`
         transform: scaleY(1.0);
     }
     50% {
-        transform: scaleY(1.005);
+        transform: scaleY(1.015);
     }
     100% {
         transform: scaleY(1.0);
@@ -96,7 +96,7 @@ const RocketFireAnimation = keyframes`
         transform: scaleY(1.0);
     }
     50% {
-        transform: scaleY(1.025);
+        transform: scaleY(1.055);
     }
     100% {
         transform: scaleY(1.0);

@@ -33,7 +33,7 @@ const Cat = ({
   const [startMove, setStartMove] = useState<boolean>(false);
 
   useEffect(() => {
-    if (letsMove.millSecond === 0) {
+    if (!letsMove.millSecond) {
       return;
     }
     if (!catRef) {
