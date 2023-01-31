@@ -16,7 +16,7 @@ const Star = ({ left, size }: StarProps) => {
       left={left}
       size={size}
       colorRatio={getRandomInt(75, 95)}
-      fadeRatio={getRandomInt(10, 40)}
+      fadeRatio={getRandomInt(30, 50)}
       scaleRatio={getRandomInt(2, 20)}
     >
       <div>
