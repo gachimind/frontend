@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import googleLoginButtonImage from '@assets/png_googleLoginButtonImage.png';
 import kakaoIcon from '@assets/png_kakaoIcon.png';
+import cursorIcon from '@assets/svg_cursorIcon.svg';
 
 import Modal from '@components/common/Modal';
 
@@ -38,7 +39,7 @@ const LoginModalLayout = styled.div`
   justify-content: center;
 
   button {
-    cursor: pointer;
+    cursor: url(${cursorIcon}), pointer;
     height: 90px;
     border-radius: 12px;
   }

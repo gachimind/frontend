@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router';
 
 import styled from 'styled-components';
 
+import cursorIcon from '@assets/svg_cursorIcon.svg';
 import roomListLeftIcon from '@assets/svg_roomListLeftIcon.svg';
 import roomListRightIcon from '@assets/svg_roomListRightIcon.svg';
 import { useAuthSocket } from '@hooks/socket/useAuthSocket';
@@ -110,7 +111,7 @@ const RoomPaginationBox = styled.div`
   align-items: center;
 
   button {
-    cursor: pointer;
+    cursor: url(${cursorIcon}), pointer;
     background: none;
   }
 

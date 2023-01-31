@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import styled from 'styled-components';
 
+import cursorIcon from '@assets/svg_cursorIcon.svg';
 import medalIcon from '@assets/svg_medalIcon.svg';
 import trophyIcon from '@assets/svg_trophyIcon.svg';
 import { useAppSelector } from '@redux/hooks';
@@ -160,7 +161,7 @@ const UserStatusBox = styled.div`
   }
 
   .user-status-box-login {
-    cursor: pointer;
+    cursor: url(${cursorIcon}), pointer;
   }
 `;
 

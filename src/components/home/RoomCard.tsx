@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
+import cursorIcon from '@assets/svg_cursorIcon.svg';
 import enterRoomIcon from '@assets/svg_enterRoomIcon.svg';
 import privateRoomIcon from '@assets/svg_privateRoomIcon.svg';
 import { useAppSelector } from '@redux/hooks';
@@ -153,7 +154,7 @@ const Participants = styled.span`
 
 const EnterButton = styled.button<{ isJoinable: boolean }>`
   position: absolute;
-  cursor: ${(props) => (props.isJoinable ? 'pointer' : 'default')};
+  cursor: ${(props) => (props.isJoinable ? `url(${cursorIcon}), pointer` : 'default')};
   opacity: ${(props) => (props.isJoinable ? 1 : 0.7)};
   font-family: inherit;
   font-size: 14px;

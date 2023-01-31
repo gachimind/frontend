@@ -12,6 +12,7 @@ import orangeCatFaceImage from '@assets/png_orangeCatFaceImage.png';
 import redRocketImage from '@assets/png_redRocketImage.png';
 import whiteCatFaceImage from '@assets/png_whiteCatFaceImage.png';
 import yellowRocketImage from '@assets/png_yellowRocketImage.png';
+import cursorIcon from '@assets/svg_cursorIcon.svg';
 
 import Button from '@components/common/Button';
 import InputContainer from '@components/common/InputContainer';
@@ -134,7 +135,7 @@ const NicknameInputBox = styled.div<{ duplicate: boolean }>`
   }
 
   button {
-    cursor: pointer;
+    cursor: url(${cursorIcon}), pointer;
     background-color: transparent;
     font-size: 16px;
     color: ${(props) => props.theme.colors.ivory2};

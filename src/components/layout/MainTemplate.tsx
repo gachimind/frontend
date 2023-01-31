@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import bugIcon from '@assets/svg_bugIcon.svg';
+import cursorIcon from '@assets/svg_cursorIcon.svg';
 import worldIcon from '@assets/svg_worldIcon.svg';
 
 import Button from '@components/common/Button';
@@ -51,7 +52,7 @@ const MainTemplate = ({ children }: { children: React.ReactNode }) => {
 };
 
 const LoginButton = styled.button`
-  cursor: pointer;
+  cursor: url(${cursorIcon}), pointer;
   color: ${(props) => props.theme.colors.darkGrey2};
   font-family: ${(props) => props.theme.font.joystick};
   font-size: 20px;

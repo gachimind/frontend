@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 
 import styled from 'styled-components';
 
+import cursorIcon from '@assets/svg_cursorIcon.svg';
 import SelectIcon from '@assets/svg_selectIcon.svg';
 import useClickAway from '@hooks/useClickAway';
 
@@ -41,7 +42,7 @@ const Selection = ({ options, setValue }: SelectionProps) => {
 };
 
 const SelectBox = styled.div`
-  cursor: pointer;
+  cursor: url(${cursorIcon}), pointer;
   position: relative;
   background-color: ${(props) => props.theme.colors.darkGrey2};
   height: 56px;

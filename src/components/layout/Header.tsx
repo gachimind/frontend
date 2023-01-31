@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import logoIcon from '@assets/png_logoIcon.png';
+import cursorIcon from '@assets/svg_cursorIcon.svg';
 
 const Header = ({ page, children }: { page?: string; children?: React.ReactNode }) => {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const HeaderContents = styled.div`
 `;
 
 const LogoBox = styled.div`
-  cursor: pointer;
+  cursor: url(${cursorIcon}), pointer;
   width: 250px;
   height: 100%;
   margin-left: 88px;

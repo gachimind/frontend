@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import styled from 'styled-components';
 
 import CloseModalIcon from '@assets/svg_closeModalIcon.svg';
+import cursorIcon from '@assets/svg_cursorIcon.svg';
 import useClickAway from '@hooks/useClickAway';
 
 const GameRuleToolTip = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
@@ -70,7 +71,7 @@ const ModalHeader = styled.div`
 `;
 
 const ModalCloseButton = styled.button`
-  cursor: pointer;
+  cursor: url(${cursorIcon}), pointer;
   position: absolute;
   font-size: inherit;
   color: inherit;
