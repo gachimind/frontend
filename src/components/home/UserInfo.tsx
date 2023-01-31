@@ -6,6 +6,7 @@ import cursorIcon from '@assets/svg_cursorIcon.svg';
 import medalIcon from '@assets/svg_medalIcon.svg';
 import trophyIcon from '@assets/svg_trophyIcon.svg';
 import { useAppSelector } from '@redux/hooks';
+import { getCatInfoByQuery } from '@utils/character';
 
 import Cat from '@components/character/Cat';
 import Button from '@components/common/Button';
@@ -16,10 +17,8 @@ import SetUpInfoModal from './SetUpInfoModal';
 
 const UserInfo = ({ mypage }: { mypage?: boolean }) => {
   const user = useAppSelector((state) => state.user.user);
+  const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
   const nickname = sessionStorage.getItem('nickname');
-
-  const catTheme = user?.profileImg.split('-')[0];
-  const rocketTheme = user?.profileImg.split('-')[1];
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [createGameModalVisible, setCreateGameModalVisible] = useState<boolean>(false);
@@ -30,7 +29,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
       <ProfileBox>
         {user ? (
           <>
-            <Cat type="rocket" catTheme="white" rocketTheme="red" scale={2} />
+            <Cat type="rocket" catTheme={cat} rocketTheme={rocket} scale={2} />
             <RankBox>
               <span className="rank-box-title">오늘의 랭킹</span>
               <div>
@@ -40,7 +39,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
             </RankBox>
           </>
         ) : (
-          <Cat type="body" catTheme="white" rocketTheme="red" scale={1.7} />
+          <Cat type="body" catTheme={cat} rocketTheme={rocket} scale={2} />
         )}
         <UserStatusBox>
           {!nickname ? (
