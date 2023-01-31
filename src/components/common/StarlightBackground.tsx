@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import { BACKGROUND_HEIGHT, BACKGROUND_WIDTH } from '@constants/characters';
 import { getRandomInt } from '@utils/common';
 
-import ShootingStars from './ShootingStars';
-import Star from './Star';
-import StaticStar from './StaticStar';
+import ShootingStars from '@components/character/ShootingStars';
+import Star from '@components/character/Star';
+import StaticStar from '@components/character/StaticStar';
 
 const StarlightBackground = () => {
   const width = BACKGROUND_WIDTH;
