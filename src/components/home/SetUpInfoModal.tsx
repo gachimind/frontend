@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import axios from 'axios';
 import styled from 'styled-components';
 
+import userApi from '@apis/userApi';
 import blackCatFaceImage from '@assets/png_blackCatFaceImage.png';
 import blueRocketImage from '@assets/png_blueRocketImage.png';
 import brownCatFaceImage from '@assets/png_brownCatFaceImage.png';
@@ -27,14 +27,12 @@ const SetUpInfoModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
 
   const handleDuplicateCheckButtonClick = async () => {
     if (newNickname) {
-      await axios
-        .get(`http://localhost:3001/api/users/nickname?nickname=${newNickname}`)
+      await userApi
+        .logout(newNickname)
         .then(
           (res) => res.status === 200 && setDuplicateAlert({ duplicate: false, message: '*사용가능한 닉네임입니다' }),
         )
-        .catch(
-          (e) => e.response.status === 400 && setDuplicateAlert({ duplicate: true, message: '*중복되는 닉네임입니다' }),
-        );
+        .catch((e) => e.status === 400 && setDuplicateAlert({ duplicate: true, message: '*중복되는 닉네임입니다' }));
       return;
     }
   };
