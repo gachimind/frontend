@@ -8,8 +8,7 @@ import StarlightBackground from '@components/common/StarlightBackground';
 import PlayerCat from './PlayerCat';
 
 const ScoreBoard = () => {
-  const { room } = useAppSelector((state) => state.gameRoom);
-
+  const { room, scoreMap } = useAppSelector((state) => state.gameRoom);
   if (!room) {
     return <ScoreBoardLayout></ScoreBoardLayout>;
   }
@@ -18,7 +17,7 @@ const ScoreBoard = () => {
       <StarlightBackground />
       <PlayerCatBox>
         {room.participants.map((participant) => (
-          <PlayerCat key={participant.socketId} participant={participant} />
+          <PlayerCat key={participant.socketId} participant={participant} playerScore={scoreMap[participant.userId]} />
         ))}
       </PlayerCatBox>
     </ScoreBoardLayout>

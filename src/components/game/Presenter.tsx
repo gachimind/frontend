@@ -13,7 +13,7 @@ import PresenterCam from './PresenterCam';
 
 const Presenter = () => {
   const { user } = useAppSelector((state) => state.user);
-  const { room } = useAppSelector((state) => state.gameRoom);
+  const { room, scoreMap } = useAppSelector((state) => state.gameRoom);
   const { turn, playState } = useAppSelector((state) => state.gamePlay);
   const [resultModalVisible, setResultModalVisible] = useState<boolean>(false);
   const currentUser = room?.participants.find((participant) => participant.userId === user?.userId);
@@ -48,7 +48,7 @@ const Presenter = () => {
       {!room?.isGameOn && (
         <GameReadyBox>
           {currentUser?.isHost && <GameStart />}
-          {currentUser?.isHost === false && <GameReady readyState={currentUser.isReady} />}
+          {currentUser?.isHost === false && <GameReady />}
         </GameReadyBox>
       )}
       {resultModalVisible && room && (
@@ -56,6 +56,7 @@ const Presenter = () => {
           visible={resultModalVisible}
           onClose={() => setResultModalVisible(false)}
           participants={room.participants}
+          scoreMap={scoreMap}
           userId={user?.userId as number}
         />
       )}

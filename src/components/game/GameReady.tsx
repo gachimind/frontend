@@ -8,7 +8,7 @@ import useDebounce from '@hooks/useDebounce';
 import GameButton from '@components/common/GameButton';
 
 // TODO: 디자인을 반영해야 한다.
-const GameReady = ({ readyState }: { readyState: boolean }) => {
+const GameReady = () => {
   const [isReady, setIsReady] = useState<boolean>(false);
   const [isRenderedFirstTime, setIsRenderedFirstTime] = useState<boolean>(true);
   const debouncedReadyState = useDebounce(isReady, 200);
@@ -21,10 +21,6 @@ const GameReady = ({ readyState }: { readyState: boolean }) => {
     }
     emitGameReady();
   }, [debouncedReadyState]);
-
-  useEffect(() => {
-    setIsReady(readyState);
-  }, [readyState]);
 
   return (
     <GameReadyLayout>

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import ScoreLarge from '@assets/img_scoreLarge.png';
 import ScoreSmall from '@assets/img_scoreSmall.png';
+import { useAppSelector } from '@redux/hooks';
 
 export interface CatScoreProps {
   scoreInfo?: {
@@ -15,6 +16,8 @@ export interface CatScoreProps {
 const CatScore = ({ scoreInfo, size = 'small' }: CatScoreProps) => {
   const [totalScore, setTotalScore] = useState<number>(0);
   const [restScore, setRestScore] = useState<number>(0);
+  const { scoreMap } = useAppSelector((state) => state.gameRoom);
+
   useEffect(() => {
     if (!scoreInfo?.score) {
       return;
@@ -34,6 +37,13 @@ const CatScore = ({ scoreInfo, size = 'small' }: CatScoreProps) => {
       clearTimeout(timeoutId);
     };
   }, [restScore]);
+
+  useEffect(() => {
+    if (Object.keys(scoreMap).length === 0) {
+      setTotalScore(0);
+      setRestScore(0);
+    }
+  }, [scoreMap]);
 
   return (
     <CatScoreLayout size={size}>
