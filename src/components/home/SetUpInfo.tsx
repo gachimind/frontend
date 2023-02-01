@@ -23,8 +23,7 @@ import InputContainer from '@components/common/InputContainer';
 const SetUpInfo = ({ mypage }: { mypage?: boolean }) => {
   const user = useAppSelector((state) => state.user.user);
   const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [newNickname, setNewNickname] = useState<string | undefined>(user?.nickname);
+  const [newNickname, setNewNickname] = useState<string>(user?.nickname ?? '');
   const [duplicateAlert, setDuplicateAlert] = useState<{ duplicate: boolean; message: string }>({
     duplicate: false,
     message: '',
