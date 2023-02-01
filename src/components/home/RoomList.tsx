@@ -67,7 +67,7 @@ const RoomList = () => {
           <button onClick={() => setPage(page - 1)} disabled={page === 1}>
             <img src={roomListLeftIcon} />
           </button>
-          <span>0{page}</span>
+          <span>0{broadcastedRooms.filter((room) => room.participants !== 0).length === 0 ? 0 : page}</span>
           <button onClick={() => setPage(page + 1)} disabled={page === numPages}>
             <img src={roomListRightIcon} />
           </button>
