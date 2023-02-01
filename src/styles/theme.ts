@@ -6,17 +6,17 @@ const SCALE =
     : Number((window.innerHeight * 1.95) / 1960).toFixed(2);
 export const colors = {
   /**
-   * white: #F4F4F4
+   * white1: #FFFFFF
    */
-  white: '#F4F4F4',
+  white1: '#FFFFFF',
   /**
    * ivory1: #F0F0F0
    */
   ivory1: '#F0F0F0',
   /**
-   * ivory2: #FFFFFF
+   * ivory2: #F4F4F4
    */
-  ivory2: '#FFFFFF',
+  ivory2: '#F4F4F4',
   /**
    * ivory3: #EEEEEE
    */

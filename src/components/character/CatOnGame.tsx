@@ -81,7 +81,7 @@ const CatOnGameLayout = styled.div`
 
 const NicknameText = styled.span<{ size: 'small' | 'large' }>`
   font-size: ${(props) => (props.size === 'small' ? '12px' : '15px')};
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.ivory2};
 `;
 
 const CatContainerBox = styled.div<{ catMarginTop: number }>`

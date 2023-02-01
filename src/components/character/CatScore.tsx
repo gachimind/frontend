@@ -60,7 +60,7 @@ const Score = styled.span<{ size: 'small' | 'large' }>`
   position: absolute;
   right: ${(props) => (props.size === 'small' ? '4px' : '8px')};
   top: ${(props) => (props.size === 'small' ? '3px' : '6px')};
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.ivory2};
   font-size: ${(props) => (props.size === 'small' ? '14px' : '20px')};
 `;
 

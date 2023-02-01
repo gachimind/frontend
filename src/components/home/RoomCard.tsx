@@ -134,7 +134,7 @@ const CardContentsBox = styled.div`
 `;
 
 const RoomTitleText = styled.span`
-  background-image: linear-gradient(0deg, rgba(121, 121, 121, 0.5) 50%, ${(props) => props.theme.colors.ivory2} 50%);
+  background-image: linear-gradient(0deg, rgba(121, 121, 121, 0.5) 50%, ${(props) => props.theme.colors.white1} 50%);
   background-clip: text;
   -webkit-text-stroke: 1px ${(props) => props.theme.colors.darkGrey4};
   -webkit-background-clip: text;
@@ -157,7 +157,7 @@ const EnterButton = styled.button<{ isJoinable: boolean }>`
   opacity: ${(props) => (props.isJoinable ? 1 : 0.7)};
   font-family: inherit;
   font-size: 14px;
-  color: ${(props) => props.theme.colors.ivory2};
+  color: ${(props) => props.theme.colors.white1};
   text-shadow: ${(props) => props.theme.textShadow.textShadow1};
   background-color: ${(props) => props.theme.colors.darkGrey2};
   right: 24px;

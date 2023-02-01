@@ -7,7 +7,7 @@ const Input = ({ ...props }: React.InputHTMLAttributes<HTMLInputElement>) => {
 const InputLayout = styled.input`
   font-family: inherit;
   font-size: 24px;
-  color: ${(props) => props.theme.colors.ivory2};
+  color: ${(props) => props.theme.colors.white1};
   background-color: ${(props) => props.theme.colors.darkGrey2};
   height: 56px;
   text-align: center;

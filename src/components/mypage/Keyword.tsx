@@ -50,7 +50,7 @@ const KeywordBox = styled.div`
 
   div {
     font-size: 16px;
-    color: ${(props) => props.theme.colors.ivory2};
+    color: ${(props) => props.theme.colors.white1};
     background-color: rgba(0, 0, 0, 0.7);
     height: 44px;
     padding-left: 24px;
@@ -73,7 +73,7 @@ const KeywordBox = styled.div`
   }
 
   li {
-    color: ${(props) => props.theme.colors.ivory2};
+    color: ${(props) => props.theme.colors.white1};
     font-size: 16px;
     list-style: none;
     margin-bottom: 4px;

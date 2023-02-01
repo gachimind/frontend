@@ -130,7 +130,7 @@ const NicknameInputBox = styled.div<{ duplicate: boolean }>`
 
   input {
     font-size: 16px;
-    color: ${(props) => props.theme.colors.ivory2};
+    color: ${(props) => props.theme.colors.white1};
     background-color: transparent;
     width: 70%;
     height: 100%;
@@ -144,8 +144,8 @@ const NicknameInputBox = styled.div<{ duplicate: boolean }>`
   button {
     background-color: transparent;
     font-size: 16px;
-    color: ${(props) => props.theme.colors.ivory2};
-    border: 1px solid ${(props) => props.theme.colors.ivory2};
+    color: ${(props) => props.theme.colors.white1};
+    border: 1px solid ${(props) => props.theme.colors.white1};
     width: 80px;
     height: 28px;
     margin-right: 20px;
@@ -176,7 +176,7 @@ const NicknameText = styled.span`
   top: 45px;
   left: 0;
   font-size: 20px;
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.ivory2};
   display: flex;
   justify-content: center;
 `;

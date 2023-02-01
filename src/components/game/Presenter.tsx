@@ -99,7 +99,7 @@ const PresenterKeywordBox = styled.div`
   background-color: rgba(28, 28, 28, 0.7);
   z-index: 3;
   padding: 10px 0;
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.ivory2};
   height: 42px;
   animation: ${KeywordSlide} 0.75s 0s;
   font-size: 14px;

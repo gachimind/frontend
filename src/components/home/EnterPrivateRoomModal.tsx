@@ -126,7 +126,7 @@ const RoomTitleBox = styled.div`
   div {
     font-family: inherit;
     font-size: 24px;
-    color: ${(props) => props.theme.colors.ivory2};
+    color: ${(props) => props.theme.colors.white1};
     background-color: ${(props) => props.theme.colors.darkGrey2};
     width: 318px;
     height: 56px;

@@ -86,7 +86,7 @@ const NicknameText = styled.span`
   top: 45px;
   left: 0;
   font-size: 20px;
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.ivory2};
   display: flex;
   justify-content: center;
 `;

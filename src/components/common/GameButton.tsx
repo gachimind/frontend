@@ -24,7 +24,7 @@ const GameButtonLayout = styled(Button)<{ visible: boolean }>`
   background-image: linear-gradient(
     0deg,
     ${(props) => props.theme.colors.purple2} 50%,
-    ${(props) => props.theme.colors.ivory2} 50%
+    ${(props) => props.theme.colors.white1} 50%
   );
   background-size: 100%;
   background-clip: text;

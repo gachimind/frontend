@@ -83,7 +83,7 @@ const ModalBox = styled.div`
 
 const ModalContents = styled.div`
   font-size: 26px;
-  color: ${(props) => props.theme.colors.ivory2};
+  color: ${(props) => props.theme.colors.white1};
   padding: 40px 50px;
   gap: 32px;
   display: flex;

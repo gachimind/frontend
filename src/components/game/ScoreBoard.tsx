@@ -26,7 +26,7 @@ const ScoreBoard = () => {
 };
 
 const ScoreBoardLayout = styled.div`
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.ivory2};
   position: relative;
   overflow: hidden;
   width: ${BACKGROUND_WIDTH + 'px'};

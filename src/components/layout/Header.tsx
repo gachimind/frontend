@@ -98,7 +98,7 @@ const LogoBox = styled.div`
     background-image: linear-gradient(
       0deg,
       ${(props) => props.theme.colors.lightGrey5} 50%,
-      ${(props) => props.theme.colors.ivory2} 50%
+      ${(props) => props.theme.colors.white1} 50%
     );
     background-clip: text;
     -webkit-text-stroke: 1px black;

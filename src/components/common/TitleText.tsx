@@ -24,7 +24,7 @@ const TitleTextLayout = styled.p`
   background-image: linear-gradient(
     0deg,
     ${(props) => props.theme.colors.darkGrey4} 20%,
-    ${(props) => props.theme.colors.white} 50%
+    ${(props) => props.theme.colors.ivory2} 50%
   );
   background-size: 100%;
   background-clip: text;
