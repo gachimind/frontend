@@ -21,12 +21,13 @@ export interface GameResultModalProps {
   userId: number;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const GameResultModal = ({ visible, onClose, participants, scoreMap, userId }: GameResultModalProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [sortedParticipants, setSortedParticipants] = useState<Participant[]>([]);
   const [sortedScore, setSortedScore] = useState<number[]>([]);
-  userId;
+
   useEffect(() => {
     const sorted = [...participants].sort((o1, o2) => scoreMap[o2.userId] - scoreMap[o1.userId]);
     setSortedParticipants(sorted);
