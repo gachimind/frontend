@@ -121,7 +121,7 @@ const RoomCardMainBox = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    ${(props) => props.theme.borders.bottomRightThinWhiteBorder};
+    ${(props) => props.theme.borders.bottomRightThin1};
   }
 `;
 
@@ -169,7 +169,7 @@ const EnterButton = styled.button<{ isJoinable: boolean }>`
   justify-content: center;
   align-items: center;
 
-  ${(props) => props.theme.borders.topLeftGreyBorder}
+  ${(props) => props.theme.borders.topLeftNormal2}
 `;
 
 export default RoomCard;

@@ -74,7 +74,7 @@ const SetUpInfoSuccessLayout = styled.div`
 const CharacterBox = styled.div`
   position: relative;
   height: 350px;
-  ${(prosp) => prosp.theme.borders.bottomRightWhiteBorder};
+  ${(prosp) => prosp.theme.borders.bottomRightNormal1};
   display: flex;
   justify-content: center;
   align-items: center;

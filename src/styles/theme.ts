@@ -130,59 +130,73 @@ export const layout = {
 
 export const borders = {
   /**
-   * thickIvory: 8px solid #D9D9D9
+   * thin1: 2px solid #444444
    */
-  thickIvory: '8px solid #D9D9D9',
+  thin1: '2px solid #444444',
   /**
-   * normalIvory: 4px solid #D9D9D9
+   * normal1: 4px solid #D9D9D9
    */
-  normalIvory: '4px solid #D9D9D9',
+  normal1: '4px solid #D9D9D9',
   /**
-   * normalWhite: 4px solid #FFFFFF
+   * normal2: 4px solid #FFFFFF
    */
-  normalWhite: '4px solid #FFFFFF',
+  normal2: '4px solid #FFFFFF',
+
   /**
-   * thinGrey: 2px solid #444444
+   * thick1: 8px solid #D9D9D9
    */
-  thinGrey: '2px solid #444444',
+  thick1: '8px solid #D9D9D9',
   /**
-   * topLeftWhiteBorder:
+   * topLeftNormal1:
      border-top: 4px solid #BBBBBB;
      border-right: 4px solid #000000;
      border-bottom: 4px solid #000000;
      border-left: 4px solid #BBBBBB;
    */
-  topLeftWhiteBorder: `
+  topLeftNormal1: `
     border-top: 4px solid #BBBBBB;
     border-right: 4px solid #1D1D1D;
     border-bottom: 4px solid #1D1D1D;
     border-left: 4px solid #BBBBBB;
   `,
-  /** 
-   * bottomRightWhiteBorder:
-    border-top: 4px solid #1D1D1D;
-    border-right: 4px solid #BBBBBB;
-    border-bottom: 4px solid #BBBBBB;
-    border-left: 4px solid #1D1D1D;
-   */
-  bottomRightWhiteBorder: `
-  border-top: 4px solid #1D1D1D;
-  border-right: 4px solid #BBBBBB;
-  border-bottom: 4px solid #BBBBBB;
-  border-left: 4px solid #1D1D1D;
-  `,
   /**
-   * topLeftGreyBorder:
+   * topLeftNormal2:
     border-top: 4px solid #d7d7d7;
     border-right: 4px solid #1D1D1D;
     border-bottom: 4px solid #1D1D1D;
     border-left: 4px solid #d7d7d7;
    */
-  topLeftGreyBorder: `
-  border-top: 4px solid #d7d7d7;
-  border-right: 4px solid #1D1D1D;
-  border-bottom: 4px solid #1D1D1D;
-  border-left: 4px solid #d7d7d7;
+  topLeftNormal2: `
+    border-top: 4px solid #d7d7d7;
+    border-right: 4px solid #1D1D1D;
+    border-bottom: 4px solid #1D1D1D;
+    border-left: 4px solid #d7d7d7;
+    `,
+  /** 
+   * bottomRightThin1:
+    border-top: 2px solid #1D1D1D;
+    border-right: 2px solid #BBBBBB;
+    border-bottom: 2px solid #BBBBBB;
+    border-left: 2px solid #1D1D1D;
+   */
+  bottomRightThin1: `
+  border-top: 2px solid #1D1D1D;
+  border-right: 2px solid #BBBBBB;
+  border-bottom: 2px solid #BBBBBB;
+  border-left: 2px solid #1D1D1D;
+  `,
+  /** 
+   * bottomRightNormal1:
+    border-top: 4px solid #1D1D1D;
+    border-right: 4px solid #BBBBBB;
+    border-bottom: 4px solid #BBBBBB;
+    border-left: 4px solid #1D1D1D;
+   */
+  bottomRightNormal1: `
+  border-top: 4px solid #1D1D1D;
+  border-right: 4px solid #BBBBBB;
+  border-bottom: 4px solid #BBBBBB;
+  border-left: 4px solid #1D1D1D;
   `,
   /**
    * roomCardBorder:
@@ -197,19 +211,6 @@ export const borders = {
     border-bottom: 4px solid #797979;
     border-left: 4px solid #BBBBBB;
     `,
-  /** 
-   * bottomRightThinWhiteBorder:
-    border-top: 2px solid #1D1D1D;
-    border-right: 2px solid #BBBBBB;
-    border-bottom: 2px solid #BBBBBB;
-    border-left: 2px solid #1D1D1D;
-   */
-  bottomRightThinWhiteBorder: `
-  border-top: 2px solid #1D1D1D;
-  border-right: 2px solid #BBBBBB;
-  border-bottom: 2px solid #BBBBBB;
-  border-left: 2px solid #1D1D1D;
-  `,
 };
 
 export const font = {

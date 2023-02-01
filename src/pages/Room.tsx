@@ -150,7 +150,7 @@ const MiddleSectionBox = styled.div`
 `;
 
 const CamListBox = styled.div`
-  border: ${(props) => props.theme.borders.thinGrey};
+  border: ${(props) => props.theme.borders.thin1};
   padding: 13px 21px;
 `;
 

@@ -75,7 +75,7 @@ const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
 const ModalBox = styled.div`
   position: relative;
   background-color: ${(props) => props.theme.colors.darkGrey2};
-  border: ${(props) => props.theme.borders.normalIvory};
+  border: ${(props) => props.theme.borders.normal1};
   height: fit-content;
   z-index: 20;
   margin: 0 auto;

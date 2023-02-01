@@ -88,7 +88,7 @@ const ModalBox = styled.div<{ width?: number; modalName?: string }>`
   position: relative;
   background-color: ${(props) => props.theme.colors.darkGrey2};
   box-shadow: ${(props) => props.theme.boxShadows.boxShadow1};
-  border: ${(props) => props.theme.borders.normalIvory};
+  border: ${(props) => props.theme.borders.normal1};
   width: ${(props) => (props.width ? props.width : 560)}px;
   height: fit-content;
   z-index: 20;

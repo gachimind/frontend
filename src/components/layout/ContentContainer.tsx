@@ -19,7 +19,7 @@ const ContentContainer = ({ title, children }: ContentContainerProps) => {
 
 const ContentContainerLayout = styled.div`
   position: relative;
-  border: ${(props) => props.theme.borders.normalIvory};
+  border: ${(props) => props.theme.borders.normal1};
   box-shadow: ${(props) => props.theme.boxShadows.boxShadow1};
 `;
 

@@ -46,7 +46,7 @@ const KeywordLayout = styled.div`
 `;
 
 const KeywordBox = styled.div`
-  ${(props) => props.theme.borders.bottomRightWhiteBorder}
+  ${(props) => props.theme.borders.bottomRightNormal1}
 
   div {
     font-size: 16px;

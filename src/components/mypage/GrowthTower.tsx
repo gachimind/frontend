@@ -540,7 +540,7 @@ const GrowthTowerLayout = styled.div`
 
 const GrowthTowerBox = styled.div`
   position: relative;
-  ${(props) => props.theme.borders.bottomRightWhiteBorder}
+  ${(props) => props.theme.borders.bottomRightNormal1}
   width: 100%;
   height: 100%;
   display: flex;

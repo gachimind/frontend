@@ -105,7 +105,7 @@ const ResultBox = styled.div`
   position: relative;
   width: 532px;
   height: 400px;
-  ${(props) => props.theme.borders.bottomRightWhiteBorder};
+  ${(props) => props.theme.borders.bottomRightNormal1};
 
   ul {
     position: absolute;

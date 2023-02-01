@@ -110,7 +110,7 @@ const UserInfoLayout = styled.div`
 const ProfileBox = styled.div`
   position: relative;
   margin-bottom: 18px;
-  ${(props) => props.theme.borders.bottomRightWhiteBorder}
+  ${(props) => props.theme.borders.bottomRightNormal1}
   display: flex;
   justify-content: center;
   align-items: center;
@@ -180,12 +180,12 @@ const ScoreBox = styled.div`
   justify-content: center;
   align-items: center;
 
-  ${(props) => props.theme.borders.bottomRightWhiteBorder}
+  ${(props) => props.theme.borders.bottomRightNormal1}
 
   .score-box-icon {
     width: 40px;
     height: 40px;
-    ${(props) => props.theme.borders.bottomRightThinWhiteBorder};
+    ${(props) => props.theme.borders.bottomRightThin1};
     display: flex;
     justify-content: center;
     align-items: center;

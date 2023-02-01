@@ -122,7 +122,7 @@ const LeftSectionBox = styled.div`
 
 const NicknameInputBox = styled.div<{ duplicate: boolean }>`
   height: 56px;
-  ${(props) => props.theme.borders.bottomRightWhiteBorder};
+  ${(props) => props.theme.borders.bottomRightNormal1};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -164,7 +164,7 @@ const NicknameDuplicateAlert = styled.span<{ duplicate: boolean }>`
 const SelectedCharacterBox = styled.div`
   position: relative;
   height: 350px;
-  ${(props) => props.theme.borders.bottomRightWhiteBorder};
+  ${(props) => props.theme.borders.bottomRightNormal1};
   display: flex;
   justify-content: center;
   align-items: center;

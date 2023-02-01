@@ -50,7 +50,7 @@ const SelectBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${(props) => props.theme.borders.bottomRightWhiteBorder}
+  ${(props) => props.theme.borders.bottomRightNormal1}
 
   img {
     position: absolute;
@@ -76,7 +76,7 @@ const SelectOptions = styled.ul<{ show: boolean }>`
   left: -4px;
   display: ${(props) => (props.show ? 'block' : 'none')};
   overflow: hidden;
-  ${(props) => props.theme.borders.bottomRightWhiteBorder}
+  ${(props) => props.theme.borders.bottomRightNormal1}
 `;
 
 const Option = styled.li`

@@ -130,7 +130,7 @@ const RoomTitleBox = styled.div`
     background-color: ${(props) => props.theme.colors.darkGrey2};
     width: 318px;
     height: 56px;
-    ${(props) => props.theme.borders.bottomRightWhiteBorder}
+    ${(props) => props.theme.borders.bottomRightNormal1}
     display: flex;
     justify-content: center;
     align-items: center;
