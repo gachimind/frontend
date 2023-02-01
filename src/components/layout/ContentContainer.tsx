@@ -3,15 +3,14 @@ import styled from 'styled-components';
 import ThreeLightsIcon from '@assets/svg_threeLightsIcon.svg';
 
 interface ContentContainerProps {
-  lights?: boolean;
   title: string;
   children?: React.ReactNode;
 }
 
-const ContentContainer = ({ lights, title, children }: ContentContainerProps) => {
+const ContentContainer = ({ title, children }: ContentContainerProps) => {
   return (
     <ContentContainerLayout>
-      {lights && <HeaderIcon src={ThreeLightsIcon} />}
+      <HeaderIcon src={ThreeLightsIcon} />
       <TitleBox>{title}</TitleBox>
       {children}
     </ContentContainerLayout>
@@ -28,8 +27,9 @@ const TitleBox = styled.div`
   color: ${(props) => props.theme.colors.darkGrey2};
   font-family: ${(props) => props.theme.font.joystick};
   font-size: 20px;
-  background-color: ${(props) => props.theme.colors.ivory1};
-  box-shadow: 2px 0px ${(props) => props.theme.colors.ivory1}, -2px -2px ${(props) => props.theme.colors.ivory1};
+  text-shadow: ${(props) => props.theme.textShadow.textShadow3};
+  background-color: ${(props) => props.theme.colors.lightGrey6};
+  box-shadow: 2px 0px ${(props) => props.theme.colors.lightGrey6}, -2px -2px ${(props) => props.theme.colors.lightGrey6};
   height: 39px;
   display: flex;
   justify-content: center;

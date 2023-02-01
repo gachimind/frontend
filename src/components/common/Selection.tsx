@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 
 import styled from 'styled-components';
 
+import cursorIcon from '@assets/svg_cursorIcon.svg';
 import SelectIcon from '@assets/svg_selectIcon.svg';
 import useClickAway from '@hooks/useClickAway';
 
@@ -32,7 +33,7 @@ const Selection = ({ options, setValue }: SelectionProps) => {
               setValue(value);
             }}
           >
-            {option.label}
+            <span className="option-label">{option.label}</span>
           </Option>
         ))}
       </SelectOptions>
@@ -41,7 +42,7 @@ const Selection = ({ options, setValue }: SelectionProps) => {
 };
 
 const SelectBox = styled.div`
-  cursor: pointer;
+  cursor: url(${cursorIcon}), pointer;
   position: relative;
   background-color: ${(props) => props.theme.colors.darkGrey2};
   height: 56px;
@@ -79,6 +80,7 @@ const SelectOptions = styled.ul<{ show: boolean }>`
 `;
 
 const Option = styled.li`
+  position: relative;
   z-index: 999;
   font-family: inherit;
   font-size: 24px;
@@ -87,9 +89,20 @@ const Option = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.2s ease-in;
 
-  &:hover {
+  .option-label {
+    display: none;
+    position: absolute;
+    color: ${(props) => props.theme.colors.ivory2};
+    width: 97%;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease-in;
+  }
+
+  .option-label:hover {
     background-color: ${(props) => props.theme.colors.black2};
   }
 `;

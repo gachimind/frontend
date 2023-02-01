@@ -1,4 +1,4 @@
-import { authInstance } from '@apis/instance';
+import { authInstance, noAuthInstance } from '@apis/instance';
 
 import { MyKeywordsResponse, MyProfileResponse } from '@customTypes/userType';
 
@@ -9,6 +9,10 @@ const userApi = {
   getUserInfo: () => authInstance.get<never, MyProfileResponse>(USER_API + '/me'),
   // 회원 키워드 조회
   getUserKeyword: () => authInstance.get<never, MyKeywordsResponse>(USER_API + '/me/keyword'),
+  // 닉네임 중복 검사
+  duplicateCheck: (newNickname: string) => noAuthInstance.get(USER_API + `/nickname?nickname=${newNickname}`),
+  // 로그아웃
+  logout: () => authInstance.get(USER_API + '/logout'),
 };
 
 export default userApi;

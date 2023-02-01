@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import styled, { keyframes } from 'styled-components';
 
+import cursorIcon from '@assets/svg_cursorIcon.svg';
 import { CatColor, CatStyles, CatTheme, RocketColor, RocketTheme } from '@constants/characters';
 
 import CatEars from './CatEars';
@@ -520,7 +521,7 @@ const CatGroup = styled.g<CatStyles>`
   fill: ${(props) => props.body};
   stroke: ${(props) => props.body};
   stroke-width: 0.7px;
-  cursor: pointer;
+  cursor: url(${cursorIcon}), pointer;
   .body-center {
     fill: ${(props) => props.middleBody ?? props.body};
     stroke: ${(props) => props.middleBody ?? props.body};

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import cursorIcon from '@assets/svg_cursorIcon.svg';
 import SlideLeftIcon from '@assets/svg_slideLeftIcon.svg';
 import SlideRightIcon from '@assets/svg_slideRightIcon.svg';
 interface SliderNextArrowProps {
@@ -46,7 +47,7 @@ const SliderIconBox = styled.div`
   padding: 8px 12px;
   border-radius: 100%;
   background-color: ${(props) => props.theme.colors.darkGrey1};
-  cursor: pointer;
+  cursor: url(${cursorIcon}), pointer;
   :hover {
     opacity: 0.85;
   }

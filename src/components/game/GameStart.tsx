@@ -41,7 +41,7 @@ const GameStartLayout = styled.div`
 `;
 
 const GameStartButton = styled(GameButton)`
-  cursor: ${(props) => (props.visible ? 'pointer' : 'not-allowed')};
+  ${(props) => !props.visible && `cursor: not-allowed;`}
 `;
 
 export default GameStart;

@@ -1,5 +1,6 @@
 const jsonServer = require('json-server');
 const { validAuthentication } = require('./authenticationHandler');
+const url = require('url');
 
 const server = jsonServer.create();
 const router = jsonServer.router('./db.json');
@@ -11,6 +12,7 @@ server.use(
   jsonServer.rewriter({
     '/api/users/me': '/me',
     '/api/users/me/keyword': '/me/keyword',
+    '/api/users/logout': '/logout',
   }),
 );
 
@@ -24,9 +26,14 @@ server.get('/api/users/login/google', (req, res) => {
   res.redirect('http://localhost:3000/login?token=token2');
 });
 
-// 깃헙 소셜 로그인
-server.get('/api/users/login/github', (req, res) => {
-  res.redirect('http://localhost:3000/login?token=token3');
+// 닉네임 중복검사
+server.get('/api/users/nickname', (req, res) => {
+  const { nickname } = url.parse(req.url, true).query;
+  const isNicknameExists = router.db.__wrapped__.me.some((user) => user.nickname === nickname);
+  if (isNicknameExists) {
+    return res.status(400).send({ result: false, errorMessage: '이미 사용중인 닉네임입니다.' });
+  }
+  return res.status(200).send({ result: true, message: '사용가능한 닉네임입니다.' });
 });
 
 // 내 프로필 조회
@@ -44,8 +51,12 @@ server.get('/me/keyword', (req, res) => {
   const result = {
     data: router.db.__wrapped__.keyword.find((user) => user.userId == authenticatedUserId),
   };
-  console.log(result);
   return res.jsonp(result);
+});
+
+// 로그아웃
+server.get('/logout', (req, res) => {
+  return res.status(200).send({ result: true, message: '로그아웃 되었습니다.' });
 });
 
 server.use(router);

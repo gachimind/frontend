@@ -50,7 +50,7 @@ const GameRuleToolTipLayout = styled.div<{ visible: boolean }>`
 
 const ModalBox = styled.div`
   background-color: white;
-  box-shadow: ${(props) => props.theme.boxShadows.boxShadow2};
+  box-shadow: ${(props) => props.theme.boxShadows.boxShadow1};
   position: absolute;
   width: 409px;
   height: 511px;
@@ -70,7 +70,6 @@ const ModalHeader = styled.div`
 `;
 
 const ModalCloseButton = styled.button`
-  cursor: pointer;
   position: absolute;
   font-size: inherit;
   color: inherit;

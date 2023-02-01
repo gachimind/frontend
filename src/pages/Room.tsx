@@ -119,11 +119,11 @@ const Room = () => {
           successHandler={passwordValidationSuccessHandler}
         />
       )}
-      <ContentContainer title="SCORE" lights={true}>
+      <ContentContainer title="SCORE">
         <ScoreBoard />
       </ContentContainer>
       <MiddleSectionBox>
-        <ContentContainer title="PRESENTER" lights={true}>
+        <ContentContainer title="PRESENTER">
           <Presenter />
         </ContentContainer>
         <CamListBox>
