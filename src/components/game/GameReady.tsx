@@ -6,6 +6,7 @@ import useGameInitiationSocket from '@hooks/socket/useGameInitiationSocket';
 import useDebounce from '@hooks/useDebounce';
 
 import GameButton from '@components/common/GameButton';
+import GameButtonContainer from '@components/layout/GameButtonContainer';
 
 // TODO: 디자인을 반영해야 한다.
 const GameReady = () => {
@@ -23,22 +24,22 @@ const GameReady = () => {
   }, [debouncedReadyState]);
 
   return (
-    <GameReadyLayout>
+    <GameButtonContainer>
+      <DescriptionTextBox>
+        <p>게임을 시작해볼까요?</p> 시작을 원하시면 아래 버튼을 눌러주세요
+      </DescriptionTextBox>
       <GameReadyButton visible={!isReady} onClick={() => setIsReady(!isReady)}>
         READY
       </GameReadyButton>
-    </GameReadyLayout>
+    </GameButtonContainer>
   );
 };
 
-const GameReadyLayout = styled.div`
-  background-color: ${(props) => props.theme.colors.darkGrey2};
-  width: 628px;
-  height: 232px;
-  border: ${(props) => props.theme.borders.normal1};
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const DescriptionTextBox = styled.div`
+  text-align: left;
+  font-size: 24px;
+  line-height: 120%;
+  color: ${(props) => props.theme.colors.ivory1};
 `;
 
 const GameReadyButton = styled(GameButton)``;
