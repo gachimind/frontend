@@ -4,7 +4,6 @@ import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
 import CloseModalIcon from '@assets/svg_closeModalIcon.svg';
-import cursorIcon from '@assets/svg_cursorIcon.svg';
 import useClickAway from '@hooks/useClickAway';
 
 export interface ModalProps {
@@ -116,7 +115,6 @@ const ModalHeader = styled.div`
 `;
 
 const ModalCloseButton = styled.button`
-  cursor: url(${cursorIcon}), pointer;
   position: absolute;
   font-size: inherit;
   color: inherit;

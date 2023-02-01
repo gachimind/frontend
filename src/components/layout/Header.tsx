@@ -52,7 +52,6 @@ const HeaderLayout = styled.div`
   justify-content: space-between;
 
   button {
-    cursor: url(${cursorIcon}), pointer;
     color: ${(props) => props.theme.colors.darkGrey2};
     font-size: 20px;
     background-color: transparent;

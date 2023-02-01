@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
-import cursorIcon from '@assets/svg_cursorIcon.svg';
 import useGameInitiationSocket from '@hooks/socket/useGameInitiationSocket';
 import { useAppSelector } from '@redux/hooks';
 
@@ -42,7 +41,7 @@ const GameStartLayout = styled.div`
 `;
 
 const GameStartButton = styled(GameButton)`
-  cursor: ${(props) => (props.visible ? `url(${cursorIcon}), pointer` : 'not-allowed')};
+  ${(props) => !props.visible && `cursor: not-allowed;`}
 `;
 
 export default GameStart;
