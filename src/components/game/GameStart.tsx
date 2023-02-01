@@ -23,23 +23,32 @@ const GameStart = ({ handleClick }: { handleClick: () => void }) => {
   return (
     <GameButtonContainer>
       <DescriptionTextBox>
-        <p>게임을 시작해볼까요?</p> 시작을 원하시면 아래 버튼을 눌러주세요
+        <p>게임을 시작해볼까요?</p>
+        <p>
+          {isGameReadyToStart
+            ? '시작을 원하시면 아래 버튼을 눌러주세요'
+            : room?.participants.length === 1
+            ? '아직 같이 할 사람이 없어요!'
+            : '다른 참가자들이 준비중입니다..'}
+        </p>
       </DescriptionTextBox>
       <GameStartButton onClick={handleClick} disabled={!isGameReadyToStart} visible={isGameReadyToStart}>
-        START
+        {isGameReadyToStart || room?.participants.length === 1 ? 'START' : 'WAIT'}
       </GameStartButton>
     </GameButtonContainer>
   );
 };
 
 const GameStartButton = styled(GameButton)`
-  ${(props) => !props.visible && `cursor: not-allowed;`}
+  ${(props) => !props.visible && `cursor: default;`};
+  opacity: ${(props) => (props.visible ? 1 : 0.7)};
 `;
 
 const DescriptionTextBox = styled.div`
   text-align: left;
   font-size: 24px;
   line-height: 120%;
+  width: 456px;
   color: ${(props) => props.theme.colors.ivory1};
 `;
 

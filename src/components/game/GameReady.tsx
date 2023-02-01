@@ -24,10 +24,11 @@ const GameReady = ({ handleClick }: { handleClick: () => void }) => {
   return (
     <GameButtonContainer>
       <DescriptionTextBox>
-        <p>게임을 시작해볼까요?</p> 시작을 원하시면 아래 버튼을 눌러주세요
+        <p>게임을 시작해볼까요?</p>
+        <p>{debouncedReadyState ? '다른 참가자들울 잠시 기다려주세요!' : '시작을 원하시면 레디 버튼을 눌러주세요'}</p>
       </DescriptionTextBox>
-      <GameReadyButton visible={!isReady} onClick={() => setIsReady(!isReady)}>
-        READY
+      <GameReadyButton visible={!debouncedReadyState} onClick={() => setIsReady(!isReady)}>
+        {debouncedReadyState ? 'CANCEL' : 'READY'}
       </GameReadyButton>
     </GameButtonContainer>
   );
@@ -37,6 +38,7 @@ const DescriptionTextBox = styled.div`
   text-align: left;
   font-size: 24px;
   line-height: 120%;
+  width: 456px;
   color: ${(props) => props.theme.colors.ivory1};
 `;
 
