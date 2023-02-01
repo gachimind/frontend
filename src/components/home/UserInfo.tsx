@@ -110,7 +110,7 @@ const UserInfoLayout = styled.div`
 const ProfileBox = styled.div`
   position: relative;
   margin-bottom: 18px;
-  ${(props) => props.theme.borders.bottomRightWhiteBorder}
+  ${(props) => props.theme.borders.bottomRightNormal1}
   display: flex;
   justify-content: center;
   align-items: center;
@@ -127,7 +127,7 @@ const RankBox = styled.div`
 
   .rank-box-title {
     font-size: 12px;
-    color: ${(props) => props.theme.colors.ivory2};
+    color: ${(props) => props.theme.colors.white1};
     text-shadow: ${(props) => props.theme.textShadow.textShadow2};
   }
 
@@ -140,7 +140,7 @@ const RankBox = styled.div`
 
   .rank-box-unit {
     font-size: 12px;
-    color: ${(props) => props.theme.colors.ivory2};
+    color: ${(props) => props.theme.colors.white1};
   }
 `;
 
@@ -156,7 +156,7 @@ const UserStatusBox = styled.div`
     border: 1px solid ${(props) => props.theme.colors.lightGrey7};
     height: 100%;
     font-size: 20px;
-    color: ${(props) => props.theme.colors.ivory2};
+    color: ${(props) => props.theme.colors.white1};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -172,7 +172,7 @@ const OnClickHandleButton = styled(Button)`
 `;
 
 const ScoreBox = styled.div`
-  color: ${(props) => props.theme.colors.ivory2};
+  color: ${(props) => props.theme.colors.white1};
   padding: 0px 40px;
   gap: 24px;
   display: grid;
@@ -180,12 +180,12 @@ const ScoreBox = styled.div`
   justify-content: center;
   align-items: center;
 
-  ${(props) => props.theme.borders.bottomRightWhiteBorder}
+  ${(props) => props.theme.borders.bottomRightNormal1}
 
   .score-box-icon {
     width: 40px;
     height: 40px;
-    ${(props) => props.theme.borders.bottomRightThinWhiteBorder};
+    ${(props) => props.theme.borders.bottomRightThin1};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -202,7 +202,7 @@ const ScoreBox = styled.div`
 
     .score-box-title {
       font-size: 12px;
-      color: ${(props) => props.theme.colors.ivory2};
+      color: ${(props) => props.theme.colors.white1};
       text-shadow: ${(props) => props.theme.textShadow.textShadow2};
     }
 
@@ -215,7 +215,7 @@ const ScoreBox = styled.div`
       align-items: center;
       span {
         font-size: 12px;
-        color: ${(props) => props.theme.colors.ivory2};
+        color: ${(props) => props.theme.colors.white1};
         text-shadow: none;
       }
     }

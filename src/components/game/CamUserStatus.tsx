@@ -70,7 +70,7 @@ const CamUserStatusLayout = styled.div<{ customStyles: CamStatusStylesProps }>`
     align-items: center;
   }
   span {
-    color: ${(props) => props.theme.colors.white};
+    color: ${(props) => props.theme.colors.ivory2};
     font-size: ${(props) => props.customStyles.fontSize};
     font-weight: 500;
   }

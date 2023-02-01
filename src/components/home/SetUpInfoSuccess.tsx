@@ -74,7 +74,7 @@ const SetUpInfoSuccessLayout = styled.div`
 const CharacterBox = styled.div`
   position: relative;
   height: 350px;
-  ${(prosp) => prosp.theme.borders.bottomRightWhiteBorder};
+  ${(prosp) => prosp.theme.borders.bottomRightNormal1};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,7 +86,7 @@ const NicknameText = styled.span`
   top: 45px;
   left: 0;
   font-size: 20px;
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.ivory2};
   display: flex;
   justify-content: center;
 `;

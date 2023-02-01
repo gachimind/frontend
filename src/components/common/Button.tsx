@@ -5,10 +5,10 @@ const Button = ({ ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) => 
 };
 
 const ButtonLayout = styled.button`
-  color: ${(props) => props.theme.colors.ivory2};
+  color: ${(props) => props.theme.colors.white1};
   text-shadow: ${(props) => props.theme.textShadow.textShadow1};
   background-color: ${(props) => props.theme.colors.darkGrey2};
-  ${(props) => props.theme.borders.topLeftWhiteBorder}
+  ${(props) => props.theme.borders.topLeftNormal1}
   display: flex;
   justify-content: center;
   align-items: center;

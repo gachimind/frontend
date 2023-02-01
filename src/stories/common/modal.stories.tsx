@@ -23,7 +23,7 @@ const Template: ComponentStory<typeof Modal> = (args: ModalProps) => {
         click to show
       </button>
       <Modal {...args} visible={visible} onClose={() => setVisible(false)}>
-        <div style={{ height: '400px', color: theme.colors.white }}>hello</div>
+        <div style={{ height: '400px', color: theme.colors.ivory2 }}>hello</div>
       </Modal>
     </>
   );

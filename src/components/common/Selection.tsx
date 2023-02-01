@@ -50,7 +50,7 @@ const SelectBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${(props) => props.theme.borders.bottomRightWhiteBorder}
+  ${(props) => props.theme.borders.bottomRightNormal1}
 
   img {
     position: absolute;
@@ -60,7 +60,7 @@ const SelectBox = styled.div`
   label {
     font-family: inherit;
     font-size: 24px;
-    color: ${(props) => props.theme.colors.ivory2};
+    color: ${(props) => props.theme.colors.white1};
     justify-content: center;
   }
 `;
@@ -69,14 +69,14 @@ const SelectOptions = styled.ul<{ show: boolean }>`
   position: absolute;
   z-index: 998;
   font-family: inherit;
-  color: ${(props) => props.theme.colors.ivory2};
+  color: ${(props) => props.theme.colors.white1};
   background-color: ${(props) => props.theme.colors.darkGrey2};
   width: 102%;
   top: -4px;
   left: -4px;
   display: ${(props) => (props.show ? 'block' : 'none')};
   overflow: hidden;
-  ${(props) => props.theme.borders.bottomRightWhiteBorder}
+  ${(props) => props.theme.borders.bottomRightNormal1}
 `;
 
 const Option = styled.li`
@@ -93,7 +93,7 @@ const Option = styled.li`
   .option-label {
     display: none;
     position: absolute;
-    color: ${(props) => props.theme.colors.ivory2};
+    color: ${(props) => props.theme.colors.white1};
     width: 97%;
     height: 45px;
     display: flex;

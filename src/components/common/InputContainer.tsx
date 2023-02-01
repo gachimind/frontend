@@ -24,7 +24,7 @@ const LabelText = styled.span`
   font-family: inherit;
   font-size: 24px;
   margin-bottom: 8px;
-  color: ${(props) => props.theme.colors.ivory2};
+  color: ${(props) => props.theme.colors.white1};
 `;
 
 export default InputContainer;

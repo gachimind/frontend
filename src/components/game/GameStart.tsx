@@ -34,7 +34,7 @@ const GameStartLayout = styled.div`
   background-color: ${(props) => props.theme.colors.darkGrey2};
   width: 628px;
   height: 232px;
-  border: ${(props) => props.theme.borders.normalIvory};
+  border: ${(props) => props.theme.borders.normal1};
   display: flex;
   justify-content: center;
   align-items: center;

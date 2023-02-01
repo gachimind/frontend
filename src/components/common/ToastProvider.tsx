@@ -11,7 +11,7 @@ const ToastProvider = () => {
       <ToastContainer
         toastStyle={{
           backgroundColor: theme.colors.darkGrey1,
-          color: theme.colors.white,
+          color: theme.colors.ivory2,
           width: '380px',
           fontWeight: 600,
         }}

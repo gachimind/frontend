@@ -49,12 +49,12 @@ const ReportBugButton = styled(Button)`
 const ReportTextarea = styled.textarea`
   font-family: inherit;
   font-size: 24px;
-  color: ${(props) => props.theme.colors.ivory2};
+  color: ${(props) => props.theme.colors.white1};
   background-color: ${(props) => props.theme.colors.darkGrey2};
   height: 299px;
   padding: 20px;
   resize: none;
-  ${(props) => props.theme.borders.bottomRightWhiteBorder}
+  ${(props) => props.theme.borders.bottomRightNormal1}
 
   :focus {
     outline: none;

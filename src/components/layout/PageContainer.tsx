@@ -28,7 +28,7 @@ export const ContainerLayout = styled.div`
 const ContainerInnerBox = styled.div`
   width: 1760px;
   height: 928px;
-  border: ${(props) => props.theme.borders.thickIvory};
+  border: ${(props) => props.theme.borders.thick1};
   box-shadow: ${(props) => props.theme.boxShadows.boxShadow1};
   display: flex;
   flex-direction: column;

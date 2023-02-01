@@ -96,7 +96,7 @@ const GameResultModalLayout = styled.div`
   & > span {
     font-family: ${(props) => props.theme.font.joystick};
     font-size: 32px;
-    color: ${(props) => props.theme.colors.ivory2};
+    color: ${(props) => props.theme.colors.white1};
     text-shadow: 0px 4px 0px #797979;
   }
 `;
@@ -105,7 +105,7 @@ const ResultBox = styled.div`
   position: relative;
   width: 532px;
   height: 400px;
-  ${(props) => props.theme.borders.bottomRightWhiteBorder};
+  ${(props) => props.theme.borders.bottomRightNormal1};
 
   ul {
     position: absolute;
