@@ -8,19 +8,19 @@ import CatOnGame from '@components/character/CatOnGame';
 
 import { Participant } from '@customTypes/gameRoomType';
 
-const PlayerCat = ({ participant }: { participant: Participant }) => {
+const PlayerCat = ({ participant, playerScore }: { participant: Participant; playerScore: number }) => {
   const { cat, rocket } = getCatInfoByQuery(participant.profileImg);
   const [score, setScore] = useState<{ score: number }>({ score: 0 });
 
   useEffect(() => {
-    if (!participant.score || score.score === participant.score) {
+    if (!playerScore || score.score === playerScore) {
       return;
     }
-    setScore({ score: participant.score - score.score });
-  }, [participant]);
+    setScore({ score: playerScore - score.score });
+  }, [playerScore]);
 
   return (
-    <PlayerCatLayout score={participant.score} isReady={participant.isHost ? true : participant.isReady ? true : false}>
+    <PlayerCatLayout score={playerScore} isReady={participant.isHost ? true : participant.isReady ? true : false}>
       <div>
         <CatOnGame
           catTheme={cat}

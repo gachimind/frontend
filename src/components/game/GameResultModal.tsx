@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -17,17 +17,20 @@ export interface GameResultModalProps {
   visible: boolean;
   onClose: () => void;
   participants: Participant[];
+  scoreMap: { [key: number]: number };
   userId: number;
 }
 
-const GameResultModal = ({ visible, onClose, participants, userId }: GameResultModalProps) => {
+const GameResultModal = ({ visible, onClose, participants, scoreMap, userId }: GameResultModalProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const sortedParticipants = [...participants].sort((o1, o2) => o2.score - o1.score);
-  const sortedScore = sortedParticipants.map((participant) => participant.score);
-  const maxScore = sortedScore[0];
+  const [sortedParticipants, setSortedParticipants] = useState<Participant[]>([]);
+  const [sortedScore, setSortedScore] = useState<number[]>([]);
   userId;
   useEffect(() => {
+    const sorted = [...participants].sort((o1, o2) => scoreMap[o2.userId] - scoreMap[o1.userId]);
+    setSortedParticipants(sorted);
+    setSortedScore(sorted.map((participant) => scoreMap[participant.userId]));
     return () => {
       dispatch(clearScore());
     };
@@ -41,37 +44,37 @@ const GameResultModal = ({ visible, onClose, participants, userId }: GameResultM
           <ul>
             <GameResultBarChart
               index={4}
-              maxScore={maxScore}
+              maxScore={sortedScore[0]}
               score={sortedScore[4]}
               participant={sortedParticipants[4]}
             />
             <GameResultBarChart
               index={2}
-              maxScore={maxScore}
+              maxScore={sortedScore[0]}
               score={sortedScore[2]}
               participant={sortedParticipants[2]}
             />
             <GameResultBarChart
               index={0}
-              maxScore={maxScore}
+              maxScore={sortedScore[0]}
               score={sortedScore[0]}
               participant={sortedParticipants[0]}
             />
             <GameResultBarChart
               index={1}
-              maxScore={maxScore}
+              maxScore={sortedScore[0]}
               score={sortedScore[1]}
               participant={sortedParticipants[1]}
             />
             <GameResultBarChart
               index={3}
-              maxScore={maxScore}
+              maxScore={sortedScore[0]}
               score={sortedScore[3]}
               participant={sortedParticipants[3]}
             />
             <GameResultBarChart
               index={5}
-              maxScore={maxScore}
+              maxScore={sortedScore[0]}
               score={sortedScore[5]}
               participant={sortedParticipants[5]}
             />

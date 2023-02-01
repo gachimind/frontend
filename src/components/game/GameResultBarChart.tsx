@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import styled, { keyframes } from 'styled-components';
 
 import { getCatInfoByQuery } from '@utils/character';
@@ -17,6 +19,15 @@ interface GameResultCharBarProps {
 
 const GameResultBarChart = ({ maxScore, score, participant, index }: GameResultCharBarProps) => {
   const height = score === 0 ? 15 : score ?? 10;
+  const [scoreInfo, setScoreInfo] = useState<{ score: number }>({ score: 0 });
+
+  useEffect(() => {
+    if (score === scoreInfo.score) {
+      return;
+    }
+    setScoreInfo({ score: score });
+  }, [score]);
+
   const { cat, rocket } = getCatInfoByQuery(participant?.profileImg);
   return (
     <GameResultBarChartLayout
@@ -30,7 +41,7 @@ const GameResultBarChart = ({ maxScore, score, participant, index }: GameResultC
               rocketTheme={rocket}
               scale={1.34}
               size="large"
-              scoreInfo={{ score: participant.score }}
+              scoreInfo={scoreInfo}
               nickname={participant.nickname}
               hasIdlePopupAnimation={false}
               catType="body"
