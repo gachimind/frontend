@@ -50,6 +50,14 @@ export const colors = {
    */
   lightGrey7: '#3F3F3F',
   /**
+   * light grey8: #CECCDA
+   */
+  lightGrey8: '#CECCDA',
+  /**
+   * light grey9: #BBBBBB
+   */
+  lightGrey9: '#BBBBBB',
+  /**
    * dark grey1: #444444
    */
   darkGrey1: '#444444',
@@ -86,6 +94,10 @@ export const colors = {
    */
   black4: '#212122',
   /**
+   * black5: #1D1D1D
+   */
+  black5: '#1D1D1D',
+  /**
    * purple1: #402f5c
    */
   purple1: '#402f5c',
@@ -93,6 +105,14 @@ export const colors = {
    * purple2: #9400b9
    */
   purple2: '#9400b9',
+  /**
+   * red1: #ff0000
+   */
+  red1: '#ff0000',
+  /**
+   * red2: #f90400
+   */
+  red2: '#f90400',
 };
 
 export const boxShadows = {
@@ -110,13 +130,13 @@ export const layout = {
 
 export const borders = {
   /**
-   * thickIvory: 8px solid #F0F0F0
+   * thickIvory: 8px solid #D9D9D9
    */
-  thickIvory: '8px solid #F0F0F0',
+  thickIvory: '8px solid #D9D9D9',
   /**
-   * normalIvory: 4px solid #F0F0F0
+   * normalIvory: 4px solid #D9D9D9
    */
-  normalIvory: '4px solid #F0F0F0',
+  normalIvory: '4px solid #D9D9D9',
   /**
    * normalWhite: 4px solid #FFFFFF
    */
@@ -127,68 +147,68 @@ export const borders = {
   thinGrey: '2px solid #444444',
   /**
    * topLeftWhiteBorder:
-     border-top: 4px solid #FFFFFF;
+     border-top: 4px solid #BBBBBB;
      border-right: 4px solid #000000;
      border-bottom: 4px solid #000000;
-     border-left: 4px solid #FFFFFF;
+     border-left: 4px solid #BBBBBB;
    */
   topLeftWhiteBorder: `
-    border-top: 4px solid #FFFFFF;
-    border-right: 4px solid #000000;
-    border-bottom: 4px solid #000000;
-    border-left: 4px solid #FFFFFF;
+    border-top: 4px solid #BBBBBB;
+    border-right: 4px solid #1D1D1D;
+    border-bottom: 4px solid #1D1D1D;
+    border-left: 4px solid #BBBBBB;
   `,
   /** 
    * bottomRightWhiteBorder:
-    border-top: 4px solid #000000;
-    border-right: 4px solid #FFFFFF;
-    border-bottom: 4px solid #FFFFFF;
-    border-left: 4px solid #000000;
+    border-top: 4px solid #1D1D1D;
+    border-right: 4px solid #BBBBBB;
+    border-bottom: 4px solid #BBBBBB;
+    border-left: 4px solid #1D1D1D;
    */
   bottomRightWhiteBorder: `
-  border-top: 4px solid #000000;
-  border-right: 4px solid #FFFFFF;
-  border-bottom: 4px solid #FFFFFF;
-  border-left: 4px solid #000000;
+  border-top: 4px solid #1D1D1D;
+  border-right: 4px solid #BBBBBB;
+  border-bottom: 4px solid #BBBBBB;
+  border-left: 4px solid #1D1D1D;
   `,
   /**
    * topLeftGreyBorder:
     border-top: 4px solid #d7d7d7;
-    border-right: 4px solid #000000;
-    border-bottom: 4px solid #000000;
+    border-right: 4px solid #1D1D1D;
+    border-bottom: 4px solid #1D1D1D;
     border-left: 4px solid #d7d7d7;
    */
   topLeftGreyBorder: `
   border-top: 4px solid #d7d7d7;
-  border-right: 4px solid #000000;
-  border-bottom: 4px solid #000000;
+  border-right: 4px solid #1D1D1D;
+  border-bottom: 4px solid #1D1D1D;
   border-left: 4px solid #d7d7d7;
   `,
   /**
    * roomCardBorder:
-    border-top: 4px solid #FFFFFF;
+    border-top: 4px solid #BBBBBB;
     border-right: 4px solid #797979;
     border-bottom: 4px solid #797979;
-    border-left: 4px solid #FFFFFF;
+    border-left: 4px solid #BBBBBB;
    */
   roomCardBorder: `
-    border-top: 4px solid #FFFFFF;
+    border-top: 4px solid #BBBBBB;
     border-right: 4px solid #797979;
     border-bottom: 4px solid #797979;
-    border-left: 4px solid #FFFFFF;
+    border-left: 4px solid #BBBBBB;
     `,
   /** 
    * bottomRightThinWhiteBorder:
-    border-top: 2px solid #000000;
-    border-right: 2px solid #FFFFFF;
-    border-bottom: 2px solid #FFFFFF;
-    border-left: 2px solid #000000;
+    border-top: 2px solid #1D1D1D;
+    border-right: 2px solid #BBBBBB;
+    border-bottom: 2px solid #BBBBBB;
+    border-left: 2px solid #1D1D1D;
    */
   bottomRightThinWhiteBorder: `
-  border-top: 2px solid #000000;
-  border-right: 2px solid #FFFFFF;
-  border-bottom: 2px solid #FFFFFF;
-  border-left: 2px solid #000000;
+  border-top: 2px solid #1D1D1D;
+  border-right: 2px solid #BBBBBB;
+  border-bottom: 2px solid #BBBBBB;
+  border-left: 2px solid #1D1D1D;
   `,
 };
 
