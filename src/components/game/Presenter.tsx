@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import styled, { keyframes } from 'styled-components';
 
+import useGameInitiationSocket from '@hooks/socket/useGameInitiationSocket';
 import { useAppSelector } from '@redux/hooks';
 import { filterKeyword } from '@utils/common';
 
@@ -16,6 +17,7 @@ const Presenter = () => {
   const { room, scoreMap } = useAppSelector((state) => state.gameRoom);
   const { turn, playState } = useAppSelector((state) => state.gamePlay);
   const [resultModalVisible, setResultModalVisible] = useState<boolean>(false);
+  const { emitGameReady, emitGameStart } = useGameInitiationSocket();
   const currentUser = room?.participants.find((participant) => participant.userId === user?.userId);
   const presenterNickname =
     room?.participants.find((participant) => participant.userId === turn?.speechPlayer)?.nickname ?? '';
@@ -47,8 +49,8 @@ const Presenter = () => {
       {room?.isGameOn && turn && <PresenterCam nickname={presenterNickname} isMe={isMe} userId={turn.speechPlayer} />}
       {!room?.isGameOn && (
         <GameReadyBox>
-          {currentUser?.isHost && <GameStart />}
-          {currentUser?.isHost === false && <GameReady />}
+          {currentUser?.isHost && <GameStart handleClick={emitGameStart} />}
+          {currentUser?.isHost === false && <GameReady handleClick={emitGameReady} />}
         </GameReadyBox>
       )}
       {resultModalVisible && room && (

@@ -2,25 +2,23 @@ import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
-import useGameInitiationSocket from '@hooks/socket/useGameInitiationSocket';
 import useDebounce from '@hooks/useDebounce';
 
 import GameButton from '@components/common/GameButton';
 import GameButtonContainer from '@components/layout/GameButtonContainer';
 
 // TODO: 디자인을 반영해야 한다.
-const GameReady = () => {
+const GameReady = ({ handleClick }: { handleClick: () => void }) => {
   const [isReady, setIsReady] = useState<boolean>(false);
   const [isRenderedFirstTime, setIsRenderedFirstTime] = useState<boolean>(true);
   const debouncedReadyState = useDebounce(isReady, 200);
-  const { emitGameReady } = useGameInitiationSocket();
 
   useEffect(() => {
     if (isRenderedFirstTime) {
       setIsRenderedFirstTime(false);
       return;
     }
-    emitGameReady();
+    handleClick();
   }, [debouncedReadyState]);
 
   return (
