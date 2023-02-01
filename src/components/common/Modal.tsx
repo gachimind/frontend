@@ -9,12 +9,13 @@ import useClickAway from '@hooks/useClickAway';
 
 export interface ModalProps {
   visible: boolean;
-  title: string;
+  title?: string;
   width?: number;
   children: React.ReactNode;
   isBackgroundClickEventDisabled?: boolean;
   hasBackgroundShadow?: boolean;
   onClose: () => void;
+  modalName?: string;
 }
 
 const Modal = ({
@@ -25,6 +26,7 @@ const Modal = ({
   onClose,
   isBackgroundClickEventDisabled = false,
   hasBackgroundShadow = true,
+  modalName,
 }: ModalProps) => {
   const ref = useRef(null);
   useClickAway(ref, () => !isBackgroundClickEventDisabled && onClose && onClose());
@@ -39,7 +41,7 @@ const Modal = ({
         createPortal(
           <ModalLayout hasBackgroundShadow={hasBackgroundShadow ?? false}>
             <ModalBackgroundLayout visible={visible}>
-              <ModalBox ref={ref} width={width}>
+              <ModalBox ref={ref} width={width} modalName={modalName}>
                 <ModalHeader>
                   {title}
                   <ModalCloseButton onClick={() => onClose && onClose()}>
@@ -83,7 +85,7 @@ const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
   align-items: center;
 `;
 
-const ModalBox = styled.div<{ width?: number }>`
+const ModalBox = styled.div<{ width?: number; modalName?: string }>`
   position: relative;
   background-color: ${(props) => props.theme.colors.darkGrey2};
   box-shadow: ${(props) => props.theme.boxShadows.boxShadow1};
@@ -91,7 +93,13 @@ const ModalBox = styled.div<{ width?: number }>`
   width: ${(props) => (props.width ? props.width : 560)}px;
   height: fit-content;
   z-index: 20;
-  margin: 0 auto;
+  ${(props) =>
+    props.modalName === 'logout'
+      ? `
+        margin-top: -475px;
+        margin-right: -1150px;
+        `
+      : `margin: 0 auto;`}
 `;
 
 const ModalHeader = styled.div`
