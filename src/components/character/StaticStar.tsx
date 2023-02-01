@@ -29,7 +29,7 @@ const StaticStar = ({ amount = 700, height = BACKGROUND_HEIGHT, width = BACKGROU
       <div>
         {[...Array(floorAmount)].map((_, index) => (
           <span
-            key={floorAmount + 1}
+            key={floorAmount + index}
             style={{
               left: getRandomInt(10, width - 10),
               top: getRandomInt(-90, height - 10),
