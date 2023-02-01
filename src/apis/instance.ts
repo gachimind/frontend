@@ -26,8 +26,21 @@ authInstance.interceptors.request.use((config) => {
   return config;
 });
 
-authInstance.interceptors.response.use((res) => {
-  return res.data.data;
-});
+authInstance.interceptors.response.use(
+  (response) => {
+    return response.data.data;
+  },
+  (error) => {
+    if (error.response?.status === 401) {
+      sessionStorage.clear();
+      window.location.assign('/');
+    }
+    const errorResponse = {
+      ...error.response.data,
+      status: error.response.status,
+    };
+    return Promise.reject(errorResponse);
+  },
+);
 
 export { authInstance, noAuthInstance };
