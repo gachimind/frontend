@@ -9,6 +9,7 @@ import useGamePlaySocket from '@hooks/socket/useGamePlaySocket';
 import useGameSocket from '@hooks/socket/useGameSocket';
 import useGameUpdateSocket from '@hooks/socket/useGameUpdateSocket';
 import useBeforeUnload from '@hooks/useBeforeUnload';
+import useDuplicatedUserInvalidate from '@hooks/useDuplicatedUserInvalidate';
 import useLocalStream from '@hooks/useLocalStream';
 import usePopState from '@hooks/usePopState';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
@@ -37,6 +38,7 @@ const Room = () => {
   const { onAnnounceRoomUpdate, offAnnounceRoomUpdate } = useGameUpdateSocket();
   const { emitUserLeaveRoom, emitJoinRoom, onJoinRoom } = useGameSocket();
   const { onError, offError } = useErrorSocket();
+  const { invalidate } = useDuplicatedUserInvalidate();
   useGamePlaySocket();
   usePopState();
   useBeforeUnload();
@@ -96,6 +98,7 @@ const Room = () => {
             dispatch(addChat({ message: msg as string, nickname: '', type: 'warning', socketId: '', userId: 0 })),
           skipAlert: true,
         },
+        { target: 'status', value: 409, callback: invalidate, skipAlert: true },
       ]);
     }
   }, [id, authorized, isConfirmedUser]);

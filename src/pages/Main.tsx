@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { PUBLISH } from '@constants/socket';
 import useErrorSocket from '@hooks/socket/useErrorSocket';
+import useDuplicatedUserInvalidate from '@hooks/useDuplicatedUserInvalidate';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { logout } from '@redux/modules/userSlice';
 
@@ -15,9 +15,13 @@ const Main = () => {
   const user = useAppSelector((state) => state.user.user);
   const dispatch = useAppDispatch();
   const { onError, offError } = useErrorSocket();
+  const { invalidate } = useDuplicatedUserInvalidate();
 
   useEffect(() => {
-    onError([{ target: 'event', value: PUBLISH.login, callback: () => dispatch(logout()) }]);
+    onError([
+      { target: 'status', value: 401, callback: () => dispatch(logout()) },
+      { target: 'status', value: 409, callback: invalidate, skipAlert: true },
+    ]);
     return () => {
       offError();
     };
