@@ -1,20 +1,25 @@
-import React from 'react';
-
 import styled, { keyframes } from 'styled-components';
 
 import { BACKGROUND_HEIGHT, BACKGROUND_WIDTH } from '@constants/characters';
 import { getRandomInt } from '@utils/common';
 
-const StaticStar = () => {
+export interface StaticStarProps {
+  width?: number;
+  height?: number;
+  amount?: number;
+}
+
+const StaticStar = ({ amount = 700, height = BACKGROUND_HEIGHT, width = BACKGROUND_WIDTH }: StaticStarProps) => {
+  const floorAmount = Math.floor(amount / 2);
   return (
     <StaticStarLayout>
       <div>
-        {[...Array(300)].map((_, index) => (
+        {[...Array(floorAmount)].map((_, index) => (
           <span
             key={index}
             style={{
-              left: getRandomInt(10, BACKGROUND_WIDTH - 10),
-              top: getRandomInt(-90, BACKGROUND_HEIGHT - 10),
+              left: getRandomInt(10, width - 10),
+              top: getRandomInt(-90, height - 10),
               width: index > 40 ? '1px' : '1.5px',
               height: index > 40 ? '1px' : '1.5px',
             }}
@@ -22,12 +27,12 @@ const StaticStar = () => {
         ))}
       </div>
       <div>
-        {[...Array(400)].map((_, index) => (
+        {[...Array(floorAmount)].map((_, index) => (
           <span
-            key={index + 400}
+            key={floorAmount + index}
             style={{
-              left: getRandomInt(10, BACKGROUND_WIDTH - 10),
-              top: getRandomInt(-90, BACKGROUND_HEIGHT - 10),
+              left: getRandomInt(10, width - 10),
+              top: getRandomInt(-90, height - 10),
               width: index > 40 ? '1px' : '1.5px',
               height: index > 40 ? '1px' : '1.5px',
             }}

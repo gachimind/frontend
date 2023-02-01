@@ -10,7 +10,7 @@ const ShootingStars = () => {
       <span className="shooting-star-3" />
       <span className="shooting-star-4" />
       <span className="shooting-star-5" />
-      <span className="shooting-star-5" />
+      <span className="shooting-star-6" />
     </ShootingStarsLayout>
   );
 };
