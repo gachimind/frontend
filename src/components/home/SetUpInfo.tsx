@@ -51,7 +51,12 @@ const SetUpInfo = ({ mypage }: { mypage?: boolean }) => {
       <LeftSectionBox>
         <InputContainer label="닉네임">
           <NicknameInputBox duplicate={duplicateAlert.duplicate}>
-            <input type="text" maxLength={10} value={newNickname} onChange={(e) => setNewNickname(e.target.value)} />
+            <input
+              type="text"
+              maxLength={10}
+              value={newNickname}
+              onChange={(e) => setNewNickname(e.target.value.replace(/\s/g, ''))}
+            />
             <button onClick={handleDuplicateCheckButtonClick}>중복확인</button>
           </NicknameInputBox>
           <NicknameDuplicateAlert duplicate={duplicateAlert.duplicate}>{duplicateAlert.message}</NicknameDuplicateAlert>
