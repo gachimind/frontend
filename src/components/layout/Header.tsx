@@ -11,7 +11,7 @@ import { useAppSelector } from '@redux/hooks';
 import LoginModal from '@components/home/LoginModal';
 import LogoutModal from '@components/home/LogoutModal';
 
-const Header = ({ page }: { page?: string }) => {
+const Header = ({ page }: { page: string }) => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user.user);
   const accessToken = sessionStorage.getItem('accessToken');
@@ -21,21 +21,27 @@ const Header = ({ page }: { page?: string }) => {
   return (
     <HeaderLayout>
       <HeaderContents>
-        <LogoBox id="service-name" onClick={() => page !== 'ROOM' && navigate('/')}>
+        <LogoBox id="service-name" onClick={() => page !== 'room' && navigate('/')}>
           <img src={logoIcon} />
           <span>GACHIMIND</span>
         </LogoBox>
         <ServiceDescription>CODING INTERVIEW GAME *** 2023 ***</ServiceDescription>
       </HeaderContents>
       {loginModalVisible && <LoginModal visible={loginModalVisible} onClose={() => setLoginModalVisible(false)} />}
-      {logoutModalVisible && <LogoutModal visible={logoutModalVisible} onClose={() => setLogoutModalVisible(false)} />}
+      {logoutModalVisible && (
+        <LogoutModal visible={logoutModalVisible} onClose={() => setLogoutModalVisible(false)} page={page} />
+      )}
       {!accessToken ? (
         <button className="login-button" onClick={() => setLoginModalVisible(true)}>
           <img src={worldIcon} />
           LOGIN
         </button>
       ) : (
-        <button className="nickname-button" onClick={() => setLogoutModalVisible(true)}>
+        <button
+          className="nickname-button"
+          onClick={() => setLogoutModalVisible(true)}
+          disabled={page === 'room' ? true : false}
+        >
           {user?.nickname}
         </button>
       )}

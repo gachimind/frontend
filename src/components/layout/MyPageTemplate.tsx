@@ -9,9 +9,9 @@ import PageContainer from './PageContainer';
 const MyPageTemplate = ({ children }: { children?: React.ReactNode }) => {
   return (
     <PageContainer>
-      <Header></Header>
+      <Header page="mypage" />
       <MyPageContentsBox>{children}</MyPageContentsBox>
-      <Footer></Footer>
+      <Footer />
     </PageContainer>
   );
 };
