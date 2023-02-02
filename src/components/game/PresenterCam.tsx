@@ -8,11 +8,12 @@ interface PresenterCamProps {
   nickname: string;
   isMe: boolean;
   userId?: number;
+  profileImg?: string;
 }
 
-const PresenterCam = ({ nickname, isMe, userId }: PresenterCamProps) => {
+const PresenterCam = ({ nickname, isMe, userId, profileImg }: PresenterCamProps) => {
   const { playerStreamMap, playerList } = useAppSelector((state) => state.playerMedia);
-  const { userStream, userMic } = useAppSelector((state) => state.userMedia);
+  const { userStream, userMic, userCam } = useAppSelector((state) => state.userMedia);
   const currentPlayer = playerList.find((player) => player.userId === userId);
 
   return (
@@ -23,16 +24,20 @@ const PresenterCam = ({ nickname, isMe, userId }: PresenterCamProps) => {
           userStream={userStream}
           nickname={nickname}
           isMe={isMe}
+          video={userCam}
           audio={userMic}
           size="main"
+          profileImg={profileImg}
         />
       ) : (
         <Cam
           userId={userId as number}
           userStream={playerStreamMap[currentPlayer?.socketId as string]}
           nickname={nickname}
+          video={currentPlayer?.video}
           audio={currentPlayer?.audio}
           size="main"
+          profileImg={profileImg}
         />
       )}
     </PresenterCamLayout>

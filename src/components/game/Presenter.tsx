@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styled, { keyframes } from 'styled-components';
 
@@ -44,7 +44,14 @@ const Presenter = () => {
           </p>
         </PresenterKeywordBox>
       )}
-      {room?.isGameOn && turn && <PresenterCam nickname={presenterNickname} isMe={isMe} userId={turn.speechPlayer} />}
+      {room?.isGameOn && turn && (
+        <PresenterCam
+          nickname={presenterNickname}
+          isMe={isMe}
+          userId={turn.speechPlayer}
+          profileImg={currentUser?.profileImg}
+        />
+      )}
       {!room?.isGameOn && (
         <GameReadyBox>
           {currentUser?.isHost && <GameStart />}
@@ -110,4 +117,4 @@ const PresenterKeywordBox = styled.div`
   }
 `;
 
-export default Presenter;
+export default React.memo(Presenter);

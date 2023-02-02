@@ -15,7 +15,7 @@ const CamStatusStyles = {
   sub: {
     fontSize: '12px',
     gap: '6px',
-    padding: '8px 8px',
+    padding: '6px 8px',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   main: {
