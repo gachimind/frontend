@@ -18,6 +18,9 @@ const useErrorSocket = () => {
 
   const onError = (conditions?: ErrorConditionType[]) => {
     on('error', ({ error }: { error: ErrorResponse }) => {
+      if (!error) {
+        return;
+      }
       conditions?.forEach((condition) => {
         if (error[condition.target] === condition.value) {
           !condition.skipAlert &&
