@@ -22,7 +22,7 @@ const GrowthTower = () => {
           <div className="light-brown-box" id="seven" />
         </BottomBox>
         <LevelOneTower>
-          {user?.today.todayScore && user?.today.todayScore && user?.today.todayScore <= 600 && (
+          {user?.today.todayScore === 0 && user?.today.todayScore <= 600 && (
             <div className="cat" id="level-one-cat">
               <Cat type="body" catTheme={cat} rocketTheme={rocket} />
             </div>
@@ -618,6 +618,7 @@ const GrowthTowerLayout = styled.div`
 `;
 
 const GrowthTowerBox = styled.div`
+  color: transparent;
   position: relative;
   ${(props) => props.theme.borders.bottomRightNormal1}
   width: 100%;
