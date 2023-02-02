@@ -55,18 +55,22 @@ const RoomCard = ({ room, onJoinClick }: RoomCardProps) => {
       <RoomCardTopBox />
       <RoomCardMainBox>
         <CardContentsBox>
-          <AxisXOverflowedText animationSecond={3} maxLength={6} width={130} innerText={room.roomTitle}>
+          <AxisXOverflowedText animationSecond={3} maxLength={12} width={130} innerText={room.roomTitle}>
             <RoomTitleText>{room.roomTitle}</RoomTitleText>
           </AxisXOverflowedText>
           <Participants>
             참여인원: {room.participants.toString()}/{room.maxCount}
           </Participants>
-          <EnterButton onClick={handleJoinButtonClick} disabled={!joinInfo.isJoinable} isJoinable={joinInfo.isJoinable}>
-            {joinInfo.message}
-            <img src={enterRoomIcon} />
-          </EnterButton>
         </CardContentsBox>
-        {room.isSecretRoom && <img className="secret-room-icon" src={privateRoomIcon} />}
+        {room.isSecretRoom && (
+          <span className="room-card-private-room-icon">
+            <img src={privateRoomIcon} />
+          </span>
+        )}
+        <EnterButton onClick={handleJoinButtonClick} disabled={!joinInfo.isJoinable} isJoinable={joinInfo.isJoinable}>
+          {joinInfo.message}
+          <img src={enterRoomIcon} />
+        </EnterButton>
         {isLoginModalVisible && !isLogined && (
           <LoginModal visible={isLoginModalVisible} onClose={() => setIsLoginModalVisible(false)} />
         )}
@@ -108,11 +112,16 @@ const RoomCardMainBox = styled.div`
   border-collapse: collapse;
   overflow: hidden;
   display: flex;
-  .secret-room-icon {
-    width: 86px;
-    height: 86px;
-    margin-top: 25px;
-    margin-left: -10px;
+  .room-card-private-room-icon {
+    position: absolute;
+    top: 21px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    ${(props) => props.theme.borders.bottomRightThin1};
   }
 `;
 
@@ -125,7 +134,7 @@ const CardContentsBox = styled.div`
 `;
 
 const RoomTitleText = styled.span`
-  background-image: linear-gradient(0deg, rgba(121, 121, 121, 0.5) 50%, ${(props) => props.theme.colors.ivory2} 50%);
+  background-image: linear-gradient(0deg, rgba(121, 121, 121, 0.5) 50%, ${(props) => props.theme.colors.white1} 50%);
   background-clip: text;
   -webkit-text-stroke: 1px ${(props) => props.theme.colors.darkGrey4};
   -webkit-background-clip: text;
@@ -143,14 +152,16 @@ const Participants = styled.span`
 `;
 
 const EnterButton = styled.button<{ isJoinable: boolean }>`
-  cursor: ${(props) => (props.isJoinable ? 'pointer' : 'default')};
+  position: absolute;
+  ${(props) => !props.isJoinable && `cursor: default;`}
   opacity: ${(props) => (props.isJoinable ? 1 : 0.7)};
   font-family: inherit;
   font-size: 14px;
-  color: ${(props) => props.theme.colors.ivory2};
+  color: ${(props) => props.theme.colors.white1};
   text-shadow: ${(props) => props.theme.textShadow.textShadow1};
   background-color: ${(props) => props.theme.colors.darkGrey2};
-  margin-top: 12px;
+  right: 24px;
+  bottom: 16px;
   width: 96px;
   height: 40px;
   gap: 8px;
@@ -158,7 +169,7 @@ const EnterButton = styled.button<{ isJoinable: boolean }>`
   justify-content: center;
   align-items: center;
 
-  ${(props) => props.theme.borders.topLeftGreyBorder}
+  ${(props) => props.theme.borders.topLeftNormal2}
 `;
 
 export default RoomCard;

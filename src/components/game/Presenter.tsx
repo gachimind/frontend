@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import styled, { keyframes } from 'styled-components';
 
+import useGameInitiationSocket from '@hooks/socket/useGameInitiationSocket';
 import { useAppSelector } from '@redux/hooks';
 import { filterKeyword } from '@utils/common';
 
@@ -13,9 +14,10 @@ import PresenterCam from './PresenterCam';
 
 const Presenter = () => {
   const { user } = useAppSelector((state) => state.user);
-  const { room } = useAppSelector((state) => state.gameRoom);
+  const { room, scoreMap } = useAppSelector((state) => state.gameRoom);
   const { turn, playState } = useAppSelector((state) => state.gamePlay);
   const [resultModalVisible, setResultModalVisible] = useState<boolean>(false);
+  const { emitGameReady, emitGameStart } = useGameInitiationSocket();
   const currentUser = room?.participants.find((participant) => participant.userId === user?.userId);
   const presenterNickname =
     room?.participants.find((participant) => participant.userId === turn?.speechPlayer)?.nickname ?? '';
@@ -47,8 +49,8 @@ const Presenter = () => {
       {room?.isGameOn && turn && <PresenterCam nickname={presenterNickname} isMe={isMe} userId={turn.speechPlayer} />}
       {!room?.isGameOn && (
         <GameReadyBox>
-          {currentUser?.isHost && <GameStart />}
-          {currentUser?.isHost === false && <GameReady readyState={currentUser.isReady} />}
+          {currentUser?.isHost && <GameStart handleClick={emitGameStart} />}
+          {currentUser?.isHost === false && <GameReady handleClick={emitGameReady} />}
         </GameReadyBox>
       )}
       {resultModalVisible && room && (
@@ -56,6 +58,7 @@ const Presenter = () => {
           visible={resultModalVisible}
           onClose={() => setResultModalVisible(false)}
           participants={room.participants}
+          scoreMap={scoreMap}
           userId={user?.userId as number}
         />
       )}
@@ -99,7 +102,7 @@ const PresenterKeywordBox = styled.div`
   background-color: rgba(28, 28, 28, 0.7);
   z-index: 3;
   padding: 10px 0;
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.ivory2};
   height: 42px;
   animation: ${KeywordSlide} 0.75s 0s;
   font-size: 14px;

@@ -2,6 +2,7 @@ export interface MyProfileResponse {
   userId: number;
   nickname: string;
   profileImg: string;
+  isFirstLogin: boolean;
   today: {
     todayRank: number;
     todayScore: number;

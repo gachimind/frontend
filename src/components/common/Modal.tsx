@@ -8,12 +8,13 @@ import useClickAway from '@hooks/useClickAway';
 
 export interface ModalProps {
   visible: boolean;
-  title: string;
+  title?: string;
   width?: number;
   children: React.ReactNode;
   isBackgroundClickEventDisabled?: boolean;
   hasBackgroundShadow?: boolean;
   onClose: () => void;
+  modalName?: string;
 }
 
 const Modal = ({
@@ -24,6 +25,7 @@ const Modal = ({
   onClose,
   isBackgroundClickEventDisabled = false,
   hasBackgroundShadow = true,
+  modalName,
 }: ModalProps) => {
   const ref = useRef(null);
   useClickAway(ref, () => !isBackgroundClickEventDisabled && onClose && onClose());
@@ -38,7 +40,7 @@ const Modal = ({
         createPortal(
           <ModalLayout hasBackgroundShadow={hasBackgroundShadow ?? false}>
             <ModalBackgroundLayout visible={visible}>
-              <ModalBox ref={ref} width={width}>
+              <ModalBox ref={ref} width={width} modalName={modalName}>
                 <ModalHeader>
                   {title}
                   <ModalCloseButton onClick={() => onClose && onClose()}>
@@ -62,7 +64,7 @@ const ModalLayout = styled.div<{ hasBackgroundShadow: boolean }>`
   z-index: 998;
   width: 100vw;
   height: 100vh;
-  background: ${(props) => (props.hasBackgroundShadow ? 'rgba(0, 0, 0, 0.6)' : 'inherit')};
+  background: ${(props) => (props.hasBackgroundShadow ? 'rgba(0, 0, 0, 0.58)' : 'inherit')};
 `;
 
 const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
@@ -82,15 +84,21 @@ const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
   align-items: center;
 `;
 
-const ModalBox = styled.div<{ width?: number }>`
+const ModalBox = styled.div<{ width?: number; modalName?: string }>`
   position: relative;
   background-color: ${(props) => props.theme.colors.darkGrey2};
-  box-shadow: ${(props) => props.theme.boxShadows.boxShadow2};
-  border: ${(props) => props.theme.borders.normalIvory};
+  box-shadow: ${(props) => props.theme.boxShadows.boxShadow1};
+  border: ${(props) => props.theme.borders.normal1};
   width: ${(props) => (props.width ? props.width : 560)}px;
   height: fit-content;
   z-index: 20;
-  margin: 0 auto;
+  ${(props) =>
+    props.modalName === 'logout'
+      ? `
+        margin-top: -475px;
+        margin-right: -1150px;
+        `
+      : `margin: 0 auto;`}
 `;
 
 const ModalHeader = styled.div`
@@ -107,12 +115,11 @@ const ModalHeader = styled.div`
 `;
 
 const ModalCloseButton = styled.button`
-  cursor: pointer;
   position: absolute;
   font-size: inherit;
   color: inherit;
   background-color: transparent;
-  right: 27px;
+  right: 24px;
   display: flex;
   justify-content: center;
   align-items: center;

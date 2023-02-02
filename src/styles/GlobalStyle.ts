@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import cursorIcon from '@assets/svg_cursorIcon.svg';
+
 import { colors } from './theme';
 
 export const GlobalStyle = createGlobalStyle`
@@ -28,4 +30,7 @@ export const GlobalStyle = createGlobalStyle`
     overflow: hidden;
   }
 
+button {
+    cursor: url(${cursorIcon}), pointer;
+}
 `;

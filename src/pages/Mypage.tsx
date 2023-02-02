@@ -3,6 +3,7 @@ import { useLayoutEffect } from 'react';
 import UserInfo from '@components/home/UserInfo';
 import ContentContainer from '@components/layout/ContentContainer';
 import MyPageTemplate from '@components/layout/MyPageTemplate';
+import GrowthTower from '@components/mypage/GrowthTower';
 import Keyword from '@components/mypage/Keyword';
 
 const Mypage = () => {
@@ -17,11 +18,13 @@ const Mypage = () => {
 
   return (
     <MyPageTemplate>
-      <ContentContainer title="SCORE" lights={true}>
+      <ContentContainer title="SCORE">
         <UserInfo mypage={true} />
       </ContentContainer>
-      <ContentContainer title="GROWTH TOWER"></ContentContainer>
-      <ContentContainer title="KEYWORD LIST" lights={true}>
+      <ContentContainer title="GROWTH TOWER">
+        <GrowthTower />
+      </ContentContainer>
+      <ContentContainer title="KEYWORD LIST">
         <Keyword />
       </ContentContainer>
     </MyPageTemplate>

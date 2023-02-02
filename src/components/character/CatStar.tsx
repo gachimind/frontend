@@ -150,4 +150,4 @@ const CatStarLayout = styled.g`
   }
 `;
 
-export default CatStar;
+export default React.memo(CatStar);

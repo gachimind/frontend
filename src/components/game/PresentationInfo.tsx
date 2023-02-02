@@ -71,7 +71,7 @@ const PresentationInfoLayout = styled.div`
 const PresentationInfoTextBox = styled.div`
   font-size: 24px;
   text-align: center;
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.ivory2};
 `;
 
 const KeywordText = styled.p`

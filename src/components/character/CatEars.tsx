@@ -54,4 +54,4 @@ const CatEarLayout = styled.g`
   }
 `;
 
-export default CatEars;
+export default React.memo(CatEars);

@@ -1,57 +1,53 @@
 import { useState } from 'react';
 
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
+import cursorIcon from '@assets/svg_cursorIcon.svg';
 import medalIcon from '@assets/svg_medalIcon.svg';
 import trophyIcon from '@assets/svg_trophyIcon.svg';
 import { useAppSelector } from '@redux/hooks';
+import { getCatInfoByQuery } from '@utils/character';
 
+import Cat from '@components/character/Cat';
 import Button from '@components/common/Button';
-import EditProfileModal from '@components/mypage/EditProfileModal';
 
 import CreateGameModal from './CreateGameModal';
 import LoginModal from './LoginModal';
+import SetUpInfoModal from './SetUpInfoModal';
 
 const UserInfo = ({ mypage }: { mypage?: boolean }) => {
   const user = useAppSelector((state) => state.user.user);
-  const nickname = sessionStorage.getItem('nickname');
+  const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
+  const token = sessionStorage.getItem('accessToken');
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [createGameModalVisible, setCreateGameModalVisible] = useState<boolean>(false);
-  const [EditProfileModalVisible, setEditProfileModalVisible] = useState<boolean>(false);
+  const [SetUpInfoModalVisible, setSetUpInfoModalVisible] = useState<boolean>(false);
 
   return (
     <UserInfoLayout>
       <ProfileBox>
-        <UserImageBox></UserImageBox>
+        {user ? (
+          <>
+            <Cat type="rocket" catTheme={cat} rocketTheme={rocket} scale={2} />
+            <RankBox>
+              <span className="rank-box-title">오늘의 랭킹</span>
+              <div>
+                <span className="rank-box-rank">{user?.today.todayRank}</span>
+                <span className="rank-box-unit">위</span>
+              </div>
+            </RankBox>
+          </>
+        ) : (
+          <Cat type="body" catTheme={cat} rocketTheme={rocket} scale={2} />
+        )}
         <UserStatusBox>
-          {!nickname ? (
-            <span className="user-status-box-login">로그인이 필요합니다.</span>
+          {!token ? (
+            <span className="user-status-box-login" onClick={() => setLoginModalVisible(true)}>
+              로그인이 필요합니다
+            </span>
           ) : (
-            <>
-              <span className="user-status-box-nickname">
-                {user?.nickname === nickname ? (
-                  user.nickname.length > 4 ? (
-                    <div>{user.nickname}</div>
-                  ) : (
-                    user.nickname
-                  )
-                ) : nickname.length > 4 ? (
-                  <div>{nickname}</div>
-                ) : (
-                  nickname
-                )}
-              </span>
-              <span className="user-status-box-slash">|</span>
-              {user?.today.todayRank !== undefined && (
-                <span className="user-status-box-rank">
-                  {user?.today.todayRank === 1 && '1ST'}
-                  {user?.today.todayRank === 2 && '2ND'}
-                  {user?.today.todayRank === 3 && '3RD'}
-                  {user?.today.todayRank > 3 && user?.today.todayRank + 'TH'}
-                </span>
-              )}
-            </>
+            <span>{user?.nickname}</span>
           )}
         </UserStatusBox>
       </ProfileBox>
@@ -65,12 +61,15 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
           게임방 만들기
         </OnClickHandleButton>
       )}
-
-      {EditProfileModalVisible && (
-        <EditProfileModal visible={EditProfileModalVisible} onClose={() => setEditProfileModalVisible(false)} />
+      {SetUpInfoModalVisible && (
+        <SetUpInfoModal
+          visible={SetUpInfoModalVisible}
+          onClose={() => setSetUpInfoModalVisible(false)}
+          mypage={mypage}
+        />
       )}
       {mypage && (
-        <OnClickHandleButton onClick={() => setEditProfileModalVisible(true)}>회원정보 수정</OnClickHandleButton>
+        <OnClickHandleButton onClick={() => setSetUpInfoModalVisible(true)}>내 정보 수정하기</OnClickHandleButton>
       )}
       <ScoreBox>
         <div className="score-box-icon">
@@ -111,63 +110,60 @@ const UserInfoLayout = styled.div`
 const ProfileBox = styled.div`
   position: relative;
   margin-bottom: 18px;
-  ${(props) => props.theme.borders.bottomRightWhiteBorder}
+  ${(props) => props.theme.borders.bottomRightNormal1}
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-const UserImageBox = styled.div``;
+const RankBox = styled.div`
+  position: absolute;
+  top: 16px;
+  right: 8px;
 
-const nicknameAnimation = keyframes`
-  from {
-    -moz-transform: translateX(50%);
-    -webkit-transform: translateX(50%);
-    transform: translateX(50%);
+  div {
+    margin-top: 8px;
   }
-  to {
-    -moz-transform: translateX(-50%);
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
+
+  .rank-box-title {
+    font-size: 12px;
+    color: ${(props) => props.theme.colors.white1};
+    text-shadow: ${(props) => props.theme.textShadow.textShadow2};
+  }
+
+  .rank-box-rank {
+    font-size: 24px;
+    color: ${(props) => props.theme.colors.ivory3};
+    text-shadow: ${(props) => props.theme.textShadow.textShadow1};
+    margin-right: 4px;
+  }
+
+  .rank-box-unit {
+    font-size: 12px;
+    color: ${(props) => props.theme.colors.white1};
   }
 `;
 
 const UserStatusBox = styled.div`
   position: absolute;
-  font-size: 20px;
-  color: ${(props) => props.theme.colors.ivory2};
-  background: black;
+  background: rgba(0, 0, 0, 0.7);
   width: 100%;
+  height: 72px;
   bottom: 0;
-  gap: 52px;
-  padding: 25px;
-  display: flex;
-  align-items: center;
+  padding: 8px;
 
-  .user-status-box-login {
-    margin-left: 40px;
-  }
-
-  .user-status-box-nickname {
-    position: fixed;
-    width: 100px;
-    white-space: nowrap;
-    display: block;
-    overflow: hidden;
+  span {
+    border: 1px solid ${(props) => props.theme.colors.lightGrey7};
+    height: 100%;
+    font-size: 20px;
+    color: ${(props) => props.theme.colors.white1};
     display: flex;
     justify-content: center;
-
-    div {
-      -moz-animation: ${nicknameAnimation} 7s linear infinite;
-      -webkit-animation: ${nicknameAnimation} 7s linear infinite;
-      animation: ${nicknameAnimation} 7s linear infinite;
-    }
+    align-items: center;
   }
 
-  .user-status-box-slash {
-    position: fixed;
-    margin-left: 127px;
-  }
-
-  .user-status-box-rank {
-    margin-left: 195px;
+  .user-status-box-login {
+    cursor: url(${cursorIcon}), pointer;
   }
 `;
 
@@ -176,7 +172,7 @@ const OnClickHandleButton = styled(Button)`
 `;
 
 const ScoreBox = styled.div`
-  color: ${(props) => props.theme.colors.ivory2};
+  color: ${(props) => props.theme.colors.white1};
   padding: 0px 40px;
   gap: 24px;
   display: grid;
@@ -184,23 +180,34 @@ const ScoreBox = styled.div`
   justify-content: center;
   align-items: center;
 
-  ${(props) => props.theme.borders.bottomRightWhiteBorder}
+  ${(props) => props.theme.borders.bottomRightNormal1}
 
   .score-box-icon {
-    background-color: ${(props) => props.theme.colors.lightGrey6};
     width: 40px;
     height: 40px;
+    ${(props) => props.theme.borders.bottomRightThin1};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 32px;
+      height: 32px;
+    }
   }
 
   div {
+    gap: 8px;
     display: flex;
     flex-direction: column;
 
     .score-box-title {
       font-size: 12px;
+      color: ${(props) => props.theme.colors.white1};
+      text-shadow: ${(props) => props.theme.textShadow.textShadow2};
     }
 
     .score-box-score {
+      color: ${(props) => props.theme.colors.ivory3};
       text-shadow: ${(props) => props.theme.textShadow.textShadow1};
       font-size: 24px;
       gap: 4px;
@@ -208,6 +215,7 @@ const ScoreBox = styled.div`
       align-items: center;
       span {
         font-size: 12px;
+        color: ${(props) => props.theme.colors.white1};
         text-shadow: none;
       }
     }

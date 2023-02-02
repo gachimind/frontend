@@ -9,9 +9,11 @@ import useGamePlaySocket from '@hooks/socket/useGamePlaySocket';
 import useGameSocket from '@hooks/socket/useGameSocket';
 import useGameUpdateSocket from '@hooks/socket/useGameUpdateSocket';
 import useBeforeUnload from '@hooks/useBeforeUnload';
+import useDuplicatedUserInvalidate from '@hooks/useDuplicatedUserInvalidate';
 import useLocalStream from '@hooks/useLocalStream';
 import usePopState from '@hooks/usePopState';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { clearAllGamePlayState } from '@redux/modules/gamePlaySlice';
 import { addChat, updateRoom } from '@redux/modules/gameRoomSlice';
 import { alertToast } from '@utils/toast';
 
@@ -36,6 +38,7 @@ const Room = () => {
   const { onAnnounceRoomUpdate, offAnnounceRoomUpdate } = useGameUpdateSocket();
   const { emitUserLeaveRoom, emitJoinRoom, onJoinRoom } = useGameSocket();
   const { onError, offError } = useErrorSocket();
+  const { invalidate } = useDuplicatedUserInvalidate();
   useGamePlaySocket();
   usePopState();
   useBeforeUnload();
@@ -55,6 +58,7 @@ const Room = () => {
       offError();
       userStreamRef && destroyLocalStream(userStreamRef);
       dispatch(updateRoom(null));
+      dispatch(clearAllGamePlayState());
       console.log('[destroy] local stream');
     };
   }, []);
@@ -94,6 +98,7 @@ const Room = () => {
             dispatch(addChat({ message: msg as string, nickname: '', type: 'warning', socketId: '', userId: 0 })),
           skipAlert: true,
         },
+        { target: 'status', value: 409, callback: invalidate, skipAlert: true },
       ]);
     }
   }, [id, authorized, isConfirmedUser]);
@@ -119,11 +124,11 @@ const Room = () => {
           successHandler={passwordValidationSuccessHandler}
         />
       )}
-      <ContentContainer title="SCORE" lights={true}>
+      <ContentContainer title="SCORE">
         <ScoreBoard />
       </ContentContainer>
       <MiddleSectionBox>
-        <ContentContainer title="PRESENTER" lights={true}>
+        <ContentContainer title="PRESENTER">
           <Presenter />
         </ContentContainer>
         <CamListBox>
@@ -150,7 +155,7 @@ const MiddleSectionBox = styled.div`
 `;
 
 const CamListBox = styled.div`
-  border: ${(props) => props.theme.borders.thinGrey};
+  border: ${(props) => props.theme.borders.thin1};
   padding: 13px 21px;
 `;
 
