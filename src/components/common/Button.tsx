@@ -17,6 +17,10 @@ const ButtonLayout = styled.button`
     background-color: ${(props) => props.theme.colors.purple1};
     ${(props) => props.theme.borders.bottomRightWhiteBorder}
   }
+
+  :hover {
+    background-color: ${(props) => props.theme.colors.lightGrey10};
+  }
 `;
 
 export default Button;

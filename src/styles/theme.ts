@@ -58,6 +58,10 @@ export const colors = {
    */
   lightGrey9: '#BBBBBB',
   /**
+   * light grey10: #DCDCDC
+   */
+  lightGrey10: '#DCDCDC',
+  /**
    * dark grey1: #444444
    */
   darkGrey1: '#444444',
