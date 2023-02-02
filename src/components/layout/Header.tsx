@@ -21,7 +21,7 @@ const Header = ({ page }: { page: string }) => {
   return (
     <HeaderLayout>
       <HeaderContents>
-        <LogoBox id="service-name" onClick={() => page !== 'ROOM' && navigate('/')}>
+        <LogoBox id="service-name" onClick={() => page !== 'room' && navigate('/')}>
           <img src={logoIcon} />
           <span>GACHIMIND</span>
         </LogoBox>
@@ -35,7 +35,11 @@ const Header = ({ page }: { page: string }) => {
           LOGIN
         </button>
       ) : (
-        <button className="nickname-button" onClick={() => setLogoutModalVisible(true)}>
+        <button
+          className="nickname-button"
+          onClick={() => setLogoutModalVisible(true)}
+          disabled={page === 'room' ? true : false}
+        >
           {user?.nickname}
         </button>
       )}
