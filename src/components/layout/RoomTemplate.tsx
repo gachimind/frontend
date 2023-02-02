@@ -21,7 +21,7 @@ const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <PageContainer>
-      <Header page="ROOM"></Header>
+      <Header page="room" />
       <RoomContentsBox>{children}</RoomContentsBox>
       <Footer>
         <FooterBox>

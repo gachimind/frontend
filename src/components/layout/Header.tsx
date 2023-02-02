@@ -11,7 +11,7 @@ import { useAppSelector } from '@redux/hooks';
 import LoginModal from '@components/home/LoginModal';
 import LogoutModal from '@components/home/LogoutModal';
 
-const Header = ({ page }: { page?: string }) => {
+const Header = ({ page }: { page: string }) => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user.user);
   const accessToken = sessionStorage.getItem('accessToken');
