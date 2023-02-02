@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import lockIcon from '@assets/svg_lockIcon.svg';
 import { COUNT_OPTIONS, PARTICIPANTS_OPTIONS } from '@constants/options';
@@ -23,6 +23,14 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
   const [isSecretRoom, setIsSecretRoom] = useState<boolean>(false);
   const { onShowCreatedRoomId, emitCreateRoom } = useGameSocket();
   const navigate = useNavigate();
+
+  let isCreateRoomButtonDisabled;
+
+  if (!roomTitle || maxCount < 2 || maxCount > 6 || (isSecretRoom && String(roomPassword)?.length !== 4)) {
+    isCreateRoomButtonDisabled = true;
+  } else {
+    isCreateRoomButtonDisabled = false;
+  }
 
   const handleCreateGameButtonClick = () => {
     if (!roomTitle || maxCount < 2 || maxCount > 6 || (isSecretRoom && String(roomPassword)?.length !== 4)) {
@@ -55,7 +63,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
               onChange={(e) => setRoomTitle(e.target.value)}
               maxLength={12}
             />
-            <PasswordButton onClick={() => setIsSecretRoom((prev) => !prev)}>
+            <PasswordButton isSecretRoom={isSecretRoom} onClick={() => setIsSecretRoom((prev) => !prev)}>
               <img src={lockIcon} />
             </PasswordButton>
           </TitleInputBox>
@@ -76,7 +84,9 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
         <InputContainer label="카운트(발표/준비/토론)">
           <Selection options={COUNT_OPTIONS} setValue={setTime} />
         </InputContainer>
-        <CreateRoomButton onClick={handleCreateGameButtonClick}>생성하기</CreateRoomButton>
+        <CreateRoomButton onClick={handleCreateGameButtonClick} disabled={isCreateRoomButtonDisabled}>
+          생성하기
+        </CreateRoomButton>
       </CreateGameModalLayout>
     </Modal>
   );
@@ -94,17 +104,34 @@ const TitleInputBox = styled.div`
   justify-content: space-between;
 `;
 
-const PasswordButton = styled(Button)`
+const PasswordButton = styled(Button)<{ isSecretRoom: boolean }>`
   width: 56px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  ${(props) => props.isSecretRoom && props.theme.borders.bottomRightWhiteBorder}
+`;
+
+const blink = keyframes`
+  0% {
+    background-color: #402f5c;
+  }
+  100%{
+    background-color: #2C2C2C;
+  }
 `;
 
 const CreateRoomButton = styled(Button)`
   font-size: 24px;
   height: 72px;
   margin-top: 20px;
+
+  :not(:disabled) {
+    -moz-animation: ${blink} 0.5s linear infinite;
+    -webkit-animation: ${blink} 0.5s linear infinite;
+    animation: ${blink} 0.5s linear infinite;
+  }
 `;
 
 export default CreateGameModal;
