@@ -28,7 +28,9 @@ const Header = ({ page }: { page: string }) => {
         <ServiceDescription>CODING INTERVIEW GAME *** 2023 ***</ServiceDescription>
       </HeaderContents>
       {loginModalVisible && <LoginModal visible={loginModalVisible} onClose={() => setLoginModalVisible(false)} />}
-      {logoutModalVisible && <LogoutModal visible={logoutModalVisible} onClose={() => setLogoutModalVisible(false)} />}
+      {logoutModalVisible && (
+        <LogoutModal visible={logoutModalVisible} onClose={() => setLogoutModalVisible(false)} page={page} />
+      )}
       {!accessToken ? (
         <button className="login-button" onClick={() => setLoginModalVisible(true)}>
           <img src={worldIcon} />
