@@ -13,6 +13,7 @@ export interface UserMediaStateType {
   localDevice: ConstraintsType;
   isMediaLoading: boolean;
   isMediaSuccess: boolean;
+  isSoundOn: boolean;
 }
 
 const initialState: UserMediaStateType = {
@@ -25,6 +26,7 @@ const initialState: UserMediaStateType = {
   },
   isMediaLoading: false,
   isMediaSuccess: false,
+  isSoundOn: true,
 };
 
 const userMediaSlice = createSlice({
@@ -60,6 +62,9 @@ const userMediaSlice = createSlice({
       state.isMediaLoading = false;
       state.isMediaSuccess = false;
     },
+    setSoundOnState: (state) => {
+      state.isSoundOn = !state.isSoundOn;
+    },
   },
 });
 
@@ -73,6 +78,7 @@ export const {
   setMediaLoading,
   setMediaDone,
   initMediaStatus,
+  setSoundOnState,
 } = userMediaSlice.actions;
 
 export default userMediaSlice;
