@@ -16,7 +16,7 @@ const StarlightBackground = () => {
     <div>
       <StarlightBackgroundLayout width={width} height={height}>
         {[...Array(10)].map((_, i) => (
-          <Star key={i} left={getRandomInt(30, width - 30)} size={getRandomInt(4, 8)} />
+          <Star key={i} left={getRandomInt(30, width - 30)} size={getRandomInt(4, 7)} />
         ))}
         <StaticStar />
         <ShootingStars />
