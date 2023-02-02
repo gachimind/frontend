@@ -32,14 +32,5 @@ export const GlobalStyle = createGlobalStyle`
 
   button {
     cursor: url(${cursorIcon}), pointer;
-
-    :focus {
-      background-color: ${(props) => props.theme.colors.purple1};
-      ${(props) => props.theme.borders.bottomRightNormal1}
-    }
-
-    :hover {
-      background-color: ${(props) => props.theme.colors.lightGrey10};
-    }
   }
 `;
