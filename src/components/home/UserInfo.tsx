@@ -18,7 +18,7 @@ import SetUpInfoModal from './SetUpInfoModal';
 const UserInfo = ({ mypage }: { mypage?: boolean }) => {
   const user = useAppSelector((state) => state.user.user);
   const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
-  const nickname = sessionStorage.getItem('nickname');
+  const token = sessionStorage.getItem('accessToken');
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [createGameModalVisible, setCreateGameModalVisible] = useState<boolean>(false);
@@ -42,12 +42,12 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
           <Cat type="body" catTheme={cat} rocketTheme={rocket} scale={2} />
         )}
         <UserStatusBox>
-          {!nickname ? (
+          {!token ? (
             <span className="user-status-box-login" onClick={() => setLoginModalVisible(true)}>
               로그인이 필요합니다
             </span>
           ) : (
-            <span>{user?.nickname === nickname ? user.nickname : nickname}</span>
+            <span>{user?.nickname}</span>
           )}
         </UserStatusBox>
       </ProfileBox>

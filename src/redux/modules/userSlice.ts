@@ -33,6 +33,18 @@ export const __getUserKeyword = createAsyncThunk('getUserKeyword', async (_, thu
   }
 });
 
+export const __updateUserInfo = createAsyncThunk(
+  'updateUserInfo',
+  async ({ newNickname, newProfileImg }: { newNickname: string; newProfileImg: string }, thunkAPI) => {
+    try {
+      await userApi.updateUserInfo({ newNickname, newProfileImg });
+      return thunkAPI.fulfillWithValue({ newNickname, newProfileImg });
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  },
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -47,13 +59,19 @@ const userSlice = createSlice({
     builder.addCase(__getUserInfo.fulfilled, (state, action) => {
       state.isLogined = true;
       state.user = action.payload;
-      sessionStorage.setItem('nickname', action.payload.nickname);
     });
     builder.addCase(__getUserInfo.rejected, (state) => {
       state.isLogined = false;
     });
     builder.addCase(__getUserKeyword.fulfilled, (state, action) => {
       state.keywords = action.payload;
+    });
+    builder.addCase(__updateUserInfo.fulfilled, (state, action) => {
+      if (state.user) {
+        state.user.profileImg = action.payload.newProfileImg;
+        state.user.nickname = action.payload.newNickname;
+        return;
+      }
     });
   },
 });

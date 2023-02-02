@@ -15,7 +15,7 @@ const SetUpInfoModal = ({ visible, onClose, mypage }: { visible: boolean; onClos
       width={!isSetUpInfoSuccess ? 1020 : undefined}
     >
       {!isSetUpInfoSuccess ? (
-        <SetUpInfo />
+        <SetUpInfo isSetUpInfoSuccess={setIsSetUpInfoSuccess} onClose={onClose} mypage={mypage} />
       ) : (
         <SetUpInfoSuccess isSetUpInfoSuccess={setIsSetUpInfoSuccess} onClose={onClose} />
       )}
