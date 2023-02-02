@@ -30,7 +30,16 @@ export const GlobalStyle = createGlobalStyle`
     overflow: hidden;
   }
 
-button {
+  button {
     cursor: url(${cursorIcon}), pointer;
-}
+
+    :focus {
+      background-color: ${(props) => props.theme.colors.purple1};
+      ${(props) => props.theme.borders.bottomRightWhiteBorder}
+    }
+
+    :hover {
+      background-color: ${(props) => props.theme.colors.lightGrey10};
+    }
+  }
 `;

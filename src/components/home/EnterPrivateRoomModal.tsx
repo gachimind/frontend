@@ -143,6 +143,12 @@ const PasswordIconBox = styled(Button)`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  :focus,
+  :hover {
+    background-color: ${(props) => props.theme.colors.darkGrey2};
+    ${(props) => props.theme.borders.topLeftWhiteBorder}
+  }
 `;
 
 const EnterRoomButton = styled(Button)<{ isDisabled: boolean }>`
@@ -151,6 +157,16 @@ const EnterRoomButton = styled(Button)<{ isDisabled: boolean }>`
   opacity: ${(props) => (props.isDisabled ? 0.5 : 1)};
   height: 72px;
   margin-top: 20px;
+
+  ${(props) =>
+    props.isDisabled &&
+    `
+    :focus,
+    :hover {
+      background-color: ${props.theme.colors.darkGrey2};
+      ${props.theme.borders.topLeftWhiteBorder}
+    }
+  `}
 `;
 
 export default EnterPrivateRoomModal;
