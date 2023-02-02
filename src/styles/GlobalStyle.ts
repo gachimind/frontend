@@ -35,7 +35,7 @@ export const GlobalStyle = createGlobalStyle`
 
     :focus {
       background-color: ${(props) => props.theme.colors.purple1};
-      ${(props) => props.theme.borders.bottomRightWhiteBorder}
+      ${(props) => props.theme.borders.bottomRightNormal1}
     }
 
     :hover {

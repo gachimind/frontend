@@ -157,7 +157,7 @@ const SetUpInfoLayout = styled.div<{ cat: CatTheme; rocket: RocketTheme }>`
 
   .cat-button-${(props) => props.cat}, .rocket-button-${(props) => props.rocket} {
     background-color: ${(props) => props.theme.colors.purple1};
-    ${(props) => props.theme.borders.bottomRightWhiteBorder}
+    ${(props) => props.theme.borders.bottomRightNormal1}
   }
 `;
 

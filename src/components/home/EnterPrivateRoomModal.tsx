@@ -147,7 +147,7 @@ const PasswordIconBox = styled(Button)`
   :focus,
   :hover {
     background-color: ${(props) => props.theme.colors.darkGrey2};
-    ${(props) => props.theme.borders.topLeftWhiteBorder}
+    ${(props) => props.theme.borders.topLeftNormal1}
   }
 `;
 
@@ -164,7 +164,7 @@ const EnterRoomButton = styled(Button)<{ isDisabled: boolean }>`
     :focus,
     :hover {
       background-color: ${props.theme.colors.darkGrey2};
-      ${props.theme.borders.topLeftWhiteBorder}
+      ${props.theme.borders.topLeftNormal1}
     }
   `}
 `;

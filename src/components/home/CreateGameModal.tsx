@@ -110,7 +110,7 @@ const PasswordButton = styled(Button)<{ isSecretRoom: boolean }>`
   justify-content: center;
   align-items: center;
 
-  ${(props) => props.isSecretRoom && props.theme.borders.bottomRightWhiteBorder}
+  ${(props) => props.isSecretRoom && props.theme.borders.bottomRightNormal1}
 `;
 
 const blink = keyframes`
