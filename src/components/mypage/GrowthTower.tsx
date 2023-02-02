@@ -1,6 +1,14 @@
 import styled, { keyframes } from 'styled-components';
 
+import { useAppSelector } from '@redux/hooks';
+import { getCatInfoByQuery } from '@utils/character';
+
+import Cat from '@components/character/Cat';
+
 const GrowthTower = () => {
+  const user = useAppSelector((state) => state.user.user);
+  const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
+
   return (
     <GrowthTowerLayout>
       <GrowthTowerBox>
@@ -14,6 +22,11 @@ const GrowthTower = () => {
           <div className="light-brown-box" id="seven" />
         </BottomBox>
         <LevelOneTower>
+          {user?.today.todayScore && user?.today.todayScore && user?.today.todayScore <= 600 && (
+            <div className="cat" id="level-one-cat">
+              <Cat type="body" catTheme={cat} rocketTheme={rocket} />
+            </div>
+          )}
           <div>
             <div className="stand">
               <div className="beige-box" id="thirteen" />
@@ -31,101 +44,120 @@ const GrowthTower = () => {
             <div className="dark-brown-box" id="eight" />
           </div>
         </LevelOneTower>
-        <LevelTwoTower>
-          <div>
-            <div className="stand">
-              <div className="beige-box" id="twentyseven" />
-              <div className="beige-box" id="twentyeight" />
-              <div className="beige-box" id="twentynine" />
-              <div className="light-brown-box" id="thirty" />
+        {user?.today.todayScore && user?.today.todayScore > 600 && (
+          <LevelTwoTower>
+            {user?.today.todayScore && user?.today.todayScore <= 1200 && (
+              <div className="cat" id="level-two-cat">
+                <Cat type="body" catTheme={cat} rocketTheme={rocket} />
+              </div>
+            )}
+            <div>
+              <div className="stand">
+                <div className="beige-box" id="twentyseven" />
+                <div className="beige-box" id="twentyeight" />
+                <div className="beige-box" id="twentynine" />
+                <div className="light-brown-box" id="thirty" />
+              </div>
+              <div className="stand">
+                <div className="light-brown-box" id="twentythree" />
+                <div className="light-brown-box" id="twentyfour" />
+                <div className="light-brown-box" id="twentyfive" />
+                <div className="light-brown-box" id="twentysix" />
+              </div>
             </div>
-            <div className="stand">
-              <div className="light-brown-box" id="twentythree" />
-              <div className="light-brown-box" id="twentyfour" />
-              <div className="light-brown-box" id="twentyfive" />
-              <div className="light-brown-box" id="twentysix" />
+            <div className="level-two-tower-bar">
+              <div className="dark-brown-box" id="twentytwo" />
+              <div className="dark-brown-box" id="twentyone" />
+              <div className="beige-box" id="twenty" />
+              <div className="beige-box" id="nineteen" />
+              <div className="beige-box" id="eighteen" />
+              <div className="beige-box" id="seventeen" />
+              <div className="dark-brown-box" id="sixteen" />
             </div>
-          </div>
-          <div className="level-two-tower-bar">
-            <div className="dark-brown-box" id="twentytwo" />
-            <div className="dark-brown-box" id="twentyone" />
-            <div className="beige-box" id="twenty" />
-            <div className="beige-box" id="nineteen" />
-            <div className="beige-box" id="eighteen" />
-            <div className="beige-box" id="seventeen" />
-            <div className="dark-brown-box" id="sixteen" />
-          </div>
-        </LevelTwoTower>
-        <LevelThreeTower>
-          <div className="level-three-stand">
-            <div className="light-brown-box" id="fiftythree" />
-            <div className="stand">
-              <div className="beige-box" id="fortyeight" />
-              <div className="beige-box" id="fortynine" />
-              <div className="beige-box" id="fifty" />
-              <div className="beige-box" id="fiftyone" />
-              <div className="light-brown-box" id="fiftytwo" />
+          </LevelTwoTower>
+        )}
+        {user?.today.todayScore && user?.today.todayScore > 1200 && (
+          <LevelThreeTower>
+            {user?.today.todayScore && user?.today.todayScore <= 1800 && (
+              <div className="cat" id="level-three-cat">
+                <Cat type="body" catTheme={cat} rocketTheme={rocket} />
+              </div>
+            )}
+            <div className="level-three-stand">
+              <div className="light-brown-box" id="fiftythree" />
+              <div className="stand">
+                <div className="beige-box" id="fortyeight" />
+                <div className="beige-box" id="fortynine" />
+                <div className="beige-box" id="fifty" />
+                <div className="beige-box" id="fiftyone" />
+                <div className="light-brown-box" id="fiftytwo" />
+              </div>
+              <div className="stand">
+                <div className="light-brown-box" id="fortythree" />
+                <div className="light-brown-box" id="fortyfour" />
+                <div className="light-brown-box" id="fortyfive" />
+                <div className="light-brown-box" id="fortysix" />
+                <div className="light-brown-box" id="fortyseven" />
+              </div>
             </div>
-            <div className="stand">
-              <div className="light-brown-box" id="fortythree" />
-              <div className="light-brown-box" id="fortyfour" />
-              <div className="light-brown-box" id="fortyfive" />
-              <div className="light-brown-box" id="fortysix" />
-              <div className="light-brown-box" id="fortyseven" />
+            <div className="level-three-tower-bar">
+              <div className="dark-brown-box" id="fortytwo" />
+              <div className="dark-brown-box" id="fortyone" />
+              <div className="dark-brown-box" id="forty" />
+              <div className="dark-brown-box" id="thirtynine" />
+              <div className="beige-box" id="thirtyeight" />
+              <div className="beige-box" id="thirtyseven" />
+              <div className="beige-box" id="thirtysix" />
+              <div className="beige-box" id="thirtyfive" />
+              <div className="beige-box" id="thirtyfour" />
+              <div className="beige-box" id="thirtythree" />
+              <div className="dark-brown-box" id="thirtytwo" />
+              <div className="dark-brown-box" id="thirtyone" />
             </div>
-          </div>
-          <div className="level-three-tower-bar">
-            <div className="dark-brown-box" id="fortytwo" />
-            <div className="dark-brown-box" id="fortyone" />
-            <div className="dark-brown-box" id="forty" />
-            <div className="dark-brown-box" id="thirtynine" />
-            <div className="beige-box" id="thirtyeight" />
-            <div className="beige-box" id="thirtyseven" />
-            <div className="beige-box" id="thirtysix" />
-            <div className="beige-box" id="thirtyfive" />
-            <div className="beige-box" id="thirtyfour" />
-            <div className="beige-box" id="thirtythree" />
-            <div className="dark-brown-box" id="thirtytwo" />
-            <div className="dark-brown-box" id="thirtyone" />
-          </div>
-        </LevelThreeTower>
-        <LevelFourTower>
-          <div className="level-four-stand">
-            <div className="stand">
-              <div className="beige-box" id="seventythree" />
-              <div className="beige-box" id="seventyfour" />
-              <div className="beige-box" id="seventyfive" />
-              <div className="light-brown-box" id="seventysix" />
+          </LevelThreeTower>
+        )}
+        {user?.today.todayScore && user?.today.todayScore > 1800 && (
+          <LevelFourTower>
+            <div className="cat" id="level-four-cat">
+              <Cat type="body" catTheme={cat} rocketTheme={rocket} />
             </div>
-            <div className="stand">
-              <div className="beige-box" id="sixtynine" />
-              <div className="beige-box" id="seventy" />
-              <div className="beige-box" id="seventyone" />
-              <div className="light-brown-box" id="seventytwo" />
+            <div className="level-four-stand">
+              <div className="stand">
+                <div className="beige-box" id="seventythree" />
+                <div className="beige-box" id="seventyfour" />
+                <div className="beige-box" id="seventyfive" />
+                <div className="light-brown-box" id="seventysix" />
+              </div>
+              <div className="stand">
+                <div className="beige-box" id="sixtynine" />
+                <div className="beige-box" id="seventy" />
+                <div className="beige-box" id="seventyone" />
+                <div className="light-brown-box" id="seventytwo" />
+              </div>
+              <div className="stand">
+                <div className="beige-box" id="sixtysix" />
+                <div className="beige-box" id="sixtyseven" />
+                <div className="light-brown-box" id="sixtyeight" />
+              </div>
+              <div className="stand">
+                <div className="light-brown-box" id="sixtythree" />
+                <div className="light-brown-box" id="sixtyfour" />
+                <div className="light-brown-box" id="sixtyfive" />
+              </div>
             </div>
-            <div className="stand">
-              <div className="beige-box" id="sixtysix" />
-              <div className="beige-box" id="sixtyseven" />
-              <div className="light-brown-box" id="sixtyeight" />
+            <div className="level-two-tower-bar">
+              <div className="dark-brown-box" id="sixtytwo" />
+              <div className="dark-brown-box" id="sixtyone" />
+              <div className="dark-brown-box" id="sixty" />
+              <div className="dark-brown-box" id="fiftynine" />
+              <div className="dark-brown-box" id="fiftyeight" />
+              <div className="dark-brown-box" id="fiftyseven" />
+              <div className="dark-brown-box" id="fiftysix" />
+              <div className="dark-brown-box" id="fiftyfive" />
+              <div className="dark-brown-box" id="fiftyfour" />
             </div>
-            <div className="stand">
-              <div className="light-brown-box" id="sixtythree" />
-              <div className="light-brown-box" id="sixtyfour" />
-              <div className="light-brown-box" id="sixtyfive" />
-            </div>
-          </div>
-          <div className="level-two-tower-bar">
-            <div className="dark-brown-box" id="sixtytwo" />
-            <div className="dark-brown-box" id="sixtyone" />
-            <div className="dark-brown-box" id="sixty" />
-            <div className="dark-brown-box" id="fiftynine" />
-            <div className="dark-brown-box" id="fiftyeight" />
-            <div className="dark-brown-box" id="fiftyseven" />
-            <div className="dark-brown-box" id="fiftysix" />
-            <div className="dark-brown-box" id="fiftyfive" />
-            <div className="dark-brown-box" id="fiftyfour" />
-          </div>
-        </LevelFourTower>
+          </LevelFourTower>
+        )}
       </GrowthTowerBox>
     </GrowthTowerLayout>
   );
@@ -147,9 +179,55 @@ const TowerBox = keyframes`
     }
 `;
 
+const CatAnimation = keyframes`
+  0% {
+    scale:1;
+    opacity:0;
+  }
+  25% {
+    scale:1;
+    opacity: 1;
+  }
+  50% {
+    scale:1;
+    transform: translateY(-10%);
+  }
+  100% {
+    scale:1;
+    transform: translateY(0%);
+  }
+`;
+
 const GrowthTowerLayout = styled.div`
   height: 94.3%;
   padding: 32px 30px;
+
+  .cat {
+    margin-bottom: -14px;
+  }
+
+  #level-one-cat {
+    animation: ${CatAnimation} 0.5s ease-in-out;
+    animation-delay: 3.2s;
+  }
+
+  #level-two-cat {
+    animation: ${CatAnimation} 0.5s ease-in-out;
+    animation-delay: 6.2s;
+  }
+
+  #level-three-cat {
+    margin-right: 50px;
+    margin-bottom: -35px;
+    animation: ${CatAnimation} 0.5s ease-in-out;
+    animation-delay: 10.8s;
+  }
+
+  #level-four-cat {
+    margin-left: 50px;
+    animation: ${CatAnimation} 0.5s ease-in-out;
+    animation-delay: 15.4s;
+  }
 
   div:is(
       #one,
@@ -227,7 +305,8 @@ const GrowthTowerLayout = styled.div`
       #seventythree,
       #seventyfour,
       #seventyfive,
-      #seventysix
+      #seventysix,
+      .cat
     ) {
     scale: 0;
     animation-fill-mode: forwards;
