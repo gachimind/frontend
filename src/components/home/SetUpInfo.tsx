@@ -47,7 +47,7 @@ const SetUpInfo = ({ mypage }: { mypage?: boolean }) => {
   };
 
   return (
-    <SetUpInfoLayout>
+    <SetUpInfoLayout cat={newCat} rocket={newRocket}>
       <LeftSectionBox>
         <InputContainer label="닉네임">
           <NicknameInputBox duplicate={duplicateAlert.duplicate}>
@@ -66,35 +66,35 @@ const SetUpInfo = ({ mypage }: { mypage?: boolean }) => {
       <RightSectionBox>
         <InputContainer label="캐릭터 선택">
           <CatButtonBox>
-            <Button onClick={() => setNewCat('white')}>
+            <Button className="cat-button-white" onClick={() => setNewCat('white')}>
               <img src={whiteCatFaceImage} />
             </Button>
-            <Button onClick={() => setNewCat('brown')}>
+            <Button className="cat-button-brown" onClick={() => setNewCat('brown')}>
               <img src={brownCatFaceImage} />
             </Button>
-            <Button onClick={() => setNewCat('black')}>
+            <Button className="cat-button-black" onClick={() => setNewCat('black')}>
               <img src={blackCatFaceImage} />
             </Button>
-            <Button onClick={() => setNewCat('mix')}>
+            <Button className="cat-button-mix" onClick={() => setNewCat('mix')}>
               <img src={mixCatFaceImage} />
             </Button>
-            <Button onClick={() => setNewCat('orange')}>
+            <Button className="cat-button-orange" onClick={() => setNewCat('orange')}>
               <img src={orangeCatFaceImage} />
             </Button>
-            <Button onClick={() => setNewCat('gray')}>
+            <Button className="cat-button-gray" onClick={() => setNewCat('gray')}>
               <img src={grayCatFaceImage} />
             </Button>
           </CatButtonBox>
         </InputContainer>
         <InputContainer label="로케트 선택">
           <RocketButtonBox>
-            <Button onClick={() => setNewRocket('red')}>
+            <Button className="rocket-button-red" onClick={() => setNewRocket('red')}>
               <img src={redRocketImage} />
             </Button>
-            <Button onClick={() => setNewRocket('blue')}>
+            <Button className="rocket-button-blue" onClick={() => setNewRocket('blue')}>
               <img src={blueRocketImage} />
             </Button>
-            <Button onClick={() => setNewRocket('yellow')}>
+            <Button className="rocket-button-yellow" onClick={() => setNewRocket('yellow')}>
               <img src={yellowRocketImage} />
             </Button>
           </RocketButtonBox>
@@ -105,12 +105,17 @@ const SetUpInfo = ({ mypage }: { mypage?: boolean }) => {
   );
 };
 
-const SetUpInfoLayout = styled.div`
+const SetUpInfoLayout = styled.div<{ cat: CatTheme; rocket: RocketTheme }>`
   padding: 72px 80px;
   gap: 80px;
   display: flex;
   flex-direction: row;
   justify-content: center;
+
+  .cat-button-${(props) => props.cat}, .rocket-button-${(props) => props.rocket} {
+    background-color: ${(props) => props.theme.colors.purple1};
+    ${(props) => props.theme.borders.bottomRightWhiteBorder}
+  }
 `;
 
 const LeftSectionBox = styled.div`
