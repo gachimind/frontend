@@ -13,14 +13,24 @@ import redRocketImage from '@assets/png_redRocketImage.png';
 import whiteCatFaceImage from '@assets/png_whiteCatFaceImage.png';
 import yellowRocketImage from '@assets/png_yellowRocketImage.png';
 import { CatTheme, RocketTheme } from '@constants/characters';
-import { useAppSelector } from '@redux/hooks';
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { __updateUserInfo } from '@redux/modules/userSlice';
 import { getCatInfoByQuery } from '@utils/character';
 
 import Cat from '@components/character/Cat';
 import Button from '@components/common/Button';
 import InputContainer from '@components/common/InputContainer';
 
-const SetUpInfo = ({ mypage }: { mypage?: boolean }) => {
+const SetUpInfo = ({
+  isSetUpInfoSuccess,
+  mypage,
+  onClose,
+}: {
+  isSetUpInfoSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+  mypage?: boolean;
+  onClose: () => void;
+}) => {
+  const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.user);
   const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
   const [newNickname, setNewNickname] = useState<string>(user?.nickname ?? '');
@@ -41,8 +51,36 @@ const SetUpInfo = ({ mypage }: { mypage?: boolean }) => {
         .then(
           (res) => res.status === 200 && setDuplicateAlert({ duplicate: false, message: '*사용가능한 닉네임입니다' }),
         )
-        .catch((e) => e.status === 400 && setDuplicateAlert({ duplicate: true, message: '*중복되는 닉네임입니다' }));
+        .catch((e) => e.status === 412 && setDuplicateAlert({ duplicate: true, message: '*중복되는 닉네임입니다' }));
       return;
+    }
+  };
+
+  const handleUpdateInfoButtonClick = async () => {
+    const newProfileImg = newCat + '-' + newRocket;
+    if (!newNickname) {
+      setDuplicateAlert({ duplicate: true, message: '*닉네임을 입력해주세요' });
+      return;
+    }
+    if (user?.nickname === newNickname && user?.profileImg === newProfileImg) {
+      !mypage && isSetUpInfoSuccess((prev) => !prev);
+      return null;
+    }
+    if (duplicateAlert.duplicate) {
+      return;
+    }
+    if (user?.nickname === newNickname && user?.profileImg !== newProfileImg) {
+      dispatch(__updateUserInfo({ newNickname, newProfileImg }));
+      mypage ? onClose() : isSetUpInfoSuccess((prev) => !prev);
+    }
+    if (newNickname !== user?.nickname) {
+      await userApi
+        .duplicateCheck(newNickname)
+        .then(() => {
+          dispatch(__updateUserInfo({ newNickname, newProfileImg }));
+          mypage ? onClose() : isSetUpInfoSuccess((prev) => !prev);
+        })
+        .catch((e) => e.status === 412 && setDuplicateAlert({ duplicate: true, message: '*중복되는 닉네임입니다' }));
     }
   };
 
@@ -104,7 +142,7 @@ const SetUpInfo = ({ mypage }: { mypage?: boolean }) => {
             </Button>
           </RocketButtonBox>
         </InputContainer>
-        <SetUpInfoButton>{mypage ? '수정하기' : '생성하기'}</SetUpInfoButton>
+        <SetUpInfoButton onClick={handleUpdateInfoButtonClick}>{mypage ? '수정하기' : '생성하기'}</SetUpInfoButton>
       </RightSectionBox>
     </SetUpInfoLayout>
   );
