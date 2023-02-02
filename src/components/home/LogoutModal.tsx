@@ -19,7 +19,7 @@ const LogoutModal = ({ visible, onClose, page }: { visible: boolean; onClose: ()
   };
 
   return (
-    <Modal visible={visible} onClose={onClose} modalName="logout" page={page}>
+    <Modal visible={visible} onClose={onClose} modalName="logout" page={page} isBackgroundClickEventDisabled={false}>
       <LogoutModalModalBox page={page}>
         {page === 'main' && <Button onClick={() => navigate('/mypage')}>마이페이지</Button>}
         <div>
