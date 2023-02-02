@@ -28,13 +28,11 @@ const FooterLayout = styled.div`
   .instagram {
     position: absolute;
     background-color: transparent;
-    right: 60px;
-    margin-top: 13px;
+    right: 65px;
+    margin-top: 8px;
     img {
-      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-      border-radius: 20px;
-      width: 56px;
-      height: 56px;
+      width: 65px;
+      height: 65px;
     }
   }
 `;
