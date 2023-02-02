@@ -59,7 +59,6 @@ const userSlice = createSlice({
     builder.addCase(__getUserInfo.fulfilled, (state, action) => {
       state.isLogined = true;
       state.user = action.payload;
-      sessionStorage.setItem('nickname', action.payload.nickname);
     });
     builder.addCase(__getUserInfo.rejected, (state) => {
       state.isLogined = false;
