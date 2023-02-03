@@ -30,7 +30,7 @@ const useGameTimeCountDown = () => {
     }
     const timeoutId = setTimeout(() => {
       setCounter(counter - 1000);
-    }, 980);
+    }, 990);
 
     return () => clearTimeout(timeoutId);
   }, [counter]);
