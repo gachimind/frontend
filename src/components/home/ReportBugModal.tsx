@@ -17,11 +17,17 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
 
   const handleClickReportBugButton = async () => {
     if (!reportTitle || !reportContent) {
+      alertToast('내용을 입력해주라옹', 'info', {
+        hideProgressBar: true,
+      });
       return;
     }
     await axios
       .post(process.env.REACT_APP_API_ENDPOINT + `/api/admin/report`, { title: reportTitle, content: reportContent })
       .then(() => {
+        alertToast('소중한 제보 감사하다옹~!', 'info', {
+          hideProgressBar: true,
+        });
         onClose();
       })
       .catch(() =>
