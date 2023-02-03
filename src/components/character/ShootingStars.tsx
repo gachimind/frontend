@@ -84,7 +84,7 @@ const ShootingStarsLayout = styled.div`
     box-shadow: none;
     top: 0;
     left: 30%;
-    animation-delay: 1s;
+    animation-delay: -1s;
     animation-duration: 44s;
   }
 `;
