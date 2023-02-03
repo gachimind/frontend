@@ -81,6 +81,7 @@ const CamList = () => {
                   video={userCam}
                   isMe={true}
                   isHost={index === 0}
+                  profileImg={user.profileImg}
                   size="sub"
                 />
               ) : (
@@ -92,6 +93,7 @@ const CamList = () => {
                   audio={player.audio}
                   video={player.video}
                   isHost={index === 0}
+                  profileImg={player.profileImg}
                   size="sub"
                 />
               )}
@@ -105,6 +107,7 @@ const CamList = () => {
 const CamListLayout = styled(Slider)`
   width: 500px;
   margin-top: -6px;
+  margin-left: 12px;
 `;
 
 export default CamList;
