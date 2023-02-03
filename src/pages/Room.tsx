@@ -60,7 +60,6 @@ const Room = () => {
       dispatch(updateRoom(null));
       dispatch(clearAllGamePlayState());
       dispatch(clearScore());
-      console.log('[destroy] local stream');
     };
   }, []);
 

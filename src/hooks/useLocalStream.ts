@@ -23,7 +23,6 @@ const useLocalStream = () => {
   const initLocalStream = async () => {
     await getLocalStream();
     dispatch(setMediaDone());
-    console.log('[ready] local stream');
   };
 
   const destroyLocalStream = (streamRef: React.MutableRefObject<MediaStream | undefined>) => {
