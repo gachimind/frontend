@@ -47,7 +47,7 @@ const Modal = ({
               <ModalBox ref={ref} width={width} modalName={modalName} page={page}>
                 <ModalHeader>
                   {title}
-                  {!isModalCloseButtonShown && (
+                  {isModalCloseButtonShown && (
                     <ModalCloseButton onClick={() => onClose && onClose()}>
                       <img src={CloseModalIcon} />
                     </ModalCloseButton>
