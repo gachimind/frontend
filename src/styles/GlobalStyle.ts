@@ -30,7 +30,7 @@ export const GlobalStyle = createGlobalStyle`
     overflow: hidden;
   }
 
-button {
+  button {
     cursor: url(${cursorIcon}), pointer;
-}
+  }
 `;

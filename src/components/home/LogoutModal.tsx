@@ -8,7 +8,7 @@ import cursorIcon from '@assets/svg_cursorIcon.svg';
 import Button from '@components/common/Button';
 import Modal from '@components/common/Modal';
 
-const LogoutModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
+const LogoutModal = ({ visible, onClose, page }: { visible: boolean; onClose: () => void; page: string }) => {
   const navigate = useNavigate();
 
   const handleLogoutClick = async () => {
@@ -19,9 +19,9 @@ const LogoutModal = ({ visible, onClose }: { visible: boolean; onClose: () => vo
   };
 
   return (
-    <Modal visible={visible} onClose={onClose} modalName="logout">
-      <LogoutModalModalBox>
-        <Button onClick={() => navigate('/mypage')}>마이페이지</Button>
+    <Modal visible={visible} onClose={onClose} modalName="logout" page={page} isBackgroundClickEventDisabled={false}>
+      <LogoutModalModalBox page={page}>
+        {page === 'main' && <Button onClick={() => navigate('/mypage')}>마이페이지</Button>}
         <div>
           <span onClick={handleLogoutClick}>계정 로그아웃하기</span>
         </div>
@@ -30,9 +30,9 @@ const LogoutModal = ({ visible, onClose }: { visible: boolean; onClose: () => vo
   );
 };
 
-const LogoutModalModalBox = styled.div`
+const LogoutModalModalBox = styled.div<{ page: string }>`
   position: relative;
-  padding: 56px 80px 144px 80px;
+  padding: ${(props) => (props.page === 'main' ? '56px 80px 144px 80px' : '56px 0px')};
   display: flex;
 
   Button {
@@ -42,7 +42,7 @@ const LogoutModalModalBox = styled.div`
   }
 
   div {
-    position: absolute;
+    position: ${(props) => (props.page === 'main' ? 'absolute' : 'relative')};
     background-color: ${(props) => props.theme.colors.black5};
     left: 0;
     bottom: 0;

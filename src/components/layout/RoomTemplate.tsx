@@ -21,9 +21,9 @@ const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <PageContainer>
-      <Header page="ROOM"></Header>
+      <Header page="room" />
       <RoomContentsBox>{children}</RoomContentsBox>
-      <Footer>
+      <Footer page="room">
         <FooterBox>
           {GameRuleModalVisible && (
             <GameRuleToolTip visible={GameRuleModalVisible} onClose={() => setGameRuleModalVisible(false)} />

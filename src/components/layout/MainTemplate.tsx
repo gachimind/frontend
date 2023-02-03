@@ -15,7 +15,7 @@ const MainTemplate = ({ children }: { children: React.ReactNode }) => {
   const [reportBugModalVisible, setReportBugModalVisible] = useState<boolean>(false);
   return (
     <PageContainer>
-      <Header />
+      <Header page="main" />
       <MainContentsBox>{children}</MainContentsBox>
       <Footer>
         <FooterBox>

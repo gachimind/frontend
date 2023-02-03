@@ -85,7 +85,7 @@ const EnterPrivateRoomModal = ({ visible, onClose, roomId, roomTitle, successHan
   };
 
   return (
-    <Modal visible={visible} onClose={onClose} title="ENTER THE ROOM" isBackgroundClickEventDisabled={true}>
+    <Modal visible={visible} onClose={onClose} title="ENTER THE ROOM">
       <EnterPrivateRoomModalLayout>
         <InputContainer label="방제">
           <RoomTitleBox>
@@ -143,6 +143,12 @@ const PasswordIconBox = styled(Button)`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  :focus,
+  :hover {
+    background-color: ${(props) => props.theme.colors.darkGrey2};
+    ${(props) => props.theme.borders.topLeftNormal1}
+  }
 `;
 
 const EnterRoomButton = styled(Button)<{ isDisabled: boolean }>`
@@ -151,6 +157,16 @@ const EnterRoomButton = styled(Button)<{ isDisabled: boolean }>`
   opacity: ${(props) => (props.isDisabled ? 0.5 : 1)};
   height: 72px;
   margin-top: 20px;
+
+  ${(props) =>
+    props.isDisabled &&
+    `
+    :focus,
+    :hover {
+      background-color: ${props.theme.colors.darkGrey2};
+      ${props.theme.borders.topLeftNormal1}
+    }
+  `}
 `;
 
 export default EnterPrivateRoomModal;

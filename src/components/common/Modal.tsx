@@ -15,6 +15,7 @@ export interface ModalProps {
   hasBackgroundShadow?: boolean;
   onClose: () => void;
   modalName?: string;
+  page?: string;
 }
 
 const Modal = ({
@@ -23,9 +24,10 @@ const Modal = ({
   width,
   children,
   onClose,
-  isBackgroundClickEventDisabled = false,
+  isBackgroundClickEventDisabled = true,
   hasBackgroundShadow = true,
   modalName,
+  page,
 }: ModalProps) => {
   const ref = useRef(null);
   useClickAway(ref, () => !isBackgroundClickEventDisabled && onClose && onClose());
@@ -40,7 +42,7 @@ const Modal = ({
         createPortal(
           <ModalLayout hasBackgroundShadow={hasBackgroundShadow ?? false}>
             <ModalBackgroundLayout visible={visible}>
-              <ModalBox ref={ref} width={width} modalName={modalName}>
+              <ModalBox ref={ref} width={width} modalName={modalName} page={page}>
                 <ModalHeader>
                   {title}
                   <ModalCloseButton onClick={() => onClose && onClose()}>
@@ -84,7 +86,7 @@ const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
   align-items: center;
 `;
 
-const ModalBox = styled.div<{ width?: number; modalName?: string }>`
+const ModalBox = styled.div<{ width?: number; modalName?: string; page?: string }>`
   position: relative;
   background-color: ${(props) => props.theme.colors.darkGrey2};
   box-shadow: ${(props) => props.theme.boxShadows.boxShadow1};
@@ -95,7 +97,7 @@ const ModalBox = styled.div<{ width?: number; modalName?: string }>`
   ${(props) =>
     props.modalName === 'logout'
       ? `
-        margin-top: -475px;
+        margin-top: ${props.page === 'main' ? '-475px' : '-545px'};
         margin-right: -1150px;
         `
       : `margin: 0 auto;`}

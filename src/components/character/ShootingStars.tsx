@@ -53,28 +53,28 @@ const ShootingStarsLayout = styled.div`
     position: absolute;
     top: 400px;
     left: 110%;
-    animation-delay: 2.5s;
+    animation-delay: 5s;
     animation-duration: 10s;
   }
   .shooting-star-3 {
     position: absolute;
     top: 180px;
     left: 120%;
-    animation-delay: 4s;
-    animation-duration: 8s;
+    animation-delay: -10s;
+    animation-duration: 12s;
   }
   .shooting-star-4 {
     position: absolute;
     box-shadow: none;
     top: 140px;
     left: 110%;
-    animation-delay: 3.4s;
+    animation-delay: -13s;
     animation-duration: 16s;
   }
   .shooting-star-5 {
     position: absolute;
     box-shadow: none;
-    top: 20px;
+    top: 0;
     left: 110%;
     animation-delay: 1.5s;
     animation-duration: 26s;
@@ -82,10 +82,10 @@ const ShootingStarsLayout = styled.div`
   .shooting-star-6 {
     position: absolute;
     box-shadow: none;
-    top: 240px;
-    left: 105%;
-    animation-delay: 1s;
-    animation-duration: 6s;
+    top: 0;
+    left: 30%;
+    animation-delay: -1s;
+    animation-duration: 44s;
   }
 `;
 

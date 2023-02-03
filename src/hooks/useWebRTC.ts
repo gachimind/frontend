@@ -8,7 +8,7 @@ import socketInstance from './socket/socketInstance';
 
 const useWebRTC = () => {
   const dispatch = useAppDispatch();
-  const { localDevice, userStreamRef } = useAppSelector((state) => state.userMedia);
+  const { userStreamRef } = useAppSelector((state) => state.userMedia);
   const { playerStreamMap } = useAppSelector((state) => state.playerMedia);
   const pcsRef = useRef<{ [socketId: string]: RTCPeerConnection }>({});
   const { on, emit, off } = socketInstance;
@@ -72,8 +72,8 @@ const useWebRTC = () => {
     pcsRef.current = { ...pcsRef.current, [socketId]: peerConnection };
     try {
       const localSessionDescription = await peerConnection.createOffer({
-        offerToReceiveAudio: localDevice.audio,
-        offerToReceiveVideo: localDevice.video,
+        offerToReceiveAudio: true,
+        offerToReceiveVideo: true,
       });
       peerConnection.setLocalDescription(new RTCSessionDescription(localSessionDescription));
       emit(PUBLISH.webRTCOffer, {
@@ -102,7 +102,10 @@ const useWebRTC = () => {
         pcsRef.current = { ...pcsRef.current, [offerSendSocketId]: peerconnection };
         try {
           peerconnection.setRemoteDescription(new RTCSessionDescription(sessionDescription));
-          const localSessionDescription = await peerconnection.createAnswer();
+          const localSessionDescription = await peerconnection.createAnswer({
+            offerToReceiveAudio: true,
+            offerToReceiveVideo: true,
+          });
           peerconnection.setLocalDescription(new RTCSessionDescription(localSessionDescription));
           emit(PUBLISH.webRTCAnswer, {
             data: {
