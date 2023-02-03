@@ -48,7 +48,7 @@ const Cam = ({ userId, userStream, nickname, profileImg, video, audio, isMe, isH
     <CamLayout size={size}>
       <VideoBox>
         <CamStatus userId={userId} isHost={isHost} />
-        {userStream && video ? (
+        {userStream ? (
           <Video ref={videoRef} autoPlay playsInline muted={isMe} size={size} />
         ) : (
           <EmptyVideo size={size}>

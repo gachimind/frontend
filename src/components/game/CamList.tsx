@@ -6,15 +6,14 @@ import Slider from 'react-slick';
 import styled from 'styled-components';
 
 import useStreamUpdateSocket from '@hooks/socket/useStreamUpdateSocket';
-import { useAppDispatch, useAppSelector } from '@redux/hooks';
-import { setUserCam, setUserMic } from '@redux/modules/userMediaSlice';
+import { useAppSelector } from '@redux/hooks';
 
 import Cam from './Cam';
 import CamListSliderArrow from './CamListSliderArrow';
 
 // TODO: 사용자들의 캠 대신 이름으로 참여 여부를 먼저 나타냈다. 수정되어야 한다.
 const CamList = () => {
-  const { userStream, userMic, userCam, userStreamRef } = useAppSelector((state) => state.userMedia);
+  const { userStream, userMic, userCam } = useAppSelector((state) => state.userMedia);
   const { playerList, playerStreamMap } = useAppSelector((state) => state.playerMedia);
   const [hasSlider, setHasSlider] = useState<{ hasPrev: boolean; hasNext: boolean }>({
     hasPrev: false,
@@ -22,18 +21,7 @@ const CamList = () => {
   });
   const { user } = useAppSelector((state) => state.user);
   const { turn } = useAppSelector((state) => state.gamePlay);
-  const dispatch = useAppDispatch();
   const { onUpdateUserStream, offUpdateUserStream } = useStreamUpdateSocket();
-
-  useEffect(() => {
-    // XXX: 우선은 끈 상태로 시작하게 했지만..???
-    if (userStreamRef?.current) {
-      dispatch(setUserCam(false));
-      dispatch(setUserMic(false));
-      userStreamRef.current.getAudioTracks().forEach((track) => (track.enabled = !track.enabled));
-      userStreamRef.current.getVideoTracks().forEach((track) => (track.enabled = !track.enabled));
-    }
-  }, []);
 
   useEffect(() => {
     onUpdateUserStream();

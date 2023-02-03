@@ -15,6 +15,8 @@ import usePopState from '@hooks/usePopState';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { clearAllGamePlayState } from '@redux/modules/gamePlaySlice';
 import { addChat, clearScore, updateRoom } from '@redux/modules/gameRoomSlice';
+import { clearPlayerStream } from '@redux/modules/playerMediaSlice';
+import { clearMedia } from '@redux/modules/userMediaSlice';
 import { alertToast } from '@utils/toast';
 
 import CamList from '@components/game/CamList';
@@ -58,8 +60,10 @@ const Room = () => {
       offError();
       userStreamRef && destroyLocalStream(userStreamRef);
       dispatch(updateRoom(null));
+      dispatch(clearPlayerStream());
       dispatch(clearAllGamePlayState());
       dispatch(clearScore());
+      dispatch(clearMedia());
     };
   }, []);
 
