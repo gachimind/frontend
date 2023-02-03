@@ -16,6 +16,7 @@ export interface ModalProps {
   onClose: () => void;
   modalName?: string;
   page?: string;
+  isModalCloseButtonShown?: boolean;
 }
 
 const Modal = ({
@@ -28,6 +29,7 @@ const Modal = ({
   hasBackgroundShadow = true,
   modalName,
   page,
+  isModalCloseButtonShown = true,
 }: ModalProps) => {
   const ref = useRef(null);
   useClickAway(ref, () => !isBackgroundClickEventDisabled && onClose && onClose());
@@ -45,9 +47,11 @@ const Modal = ({
               <ModalBox ref={ref} width={width} modalName={modalName} page={page}>
                 <ModalHeader>
                   {title}
-                  <ModalCloseButton onClick={() => onClose && onClose()}>
-                    <img src={CloseModalIcon} />
-                  </ModalCloseButton>
+                  {!isModalCloseButtonShown && (
+                    <ModalCloseButton onClick={() => onClose && onClose()}>
+                      <img src={CloseModalIcon} />
+                    </ModalCloseButton>
+                  )}
                 </ModalHeader>
                 {children}
               </ModalBox>
