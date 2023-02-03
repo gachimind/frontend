@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 import useGameInitiationSocket from '@hooks/socket/useGameInitiationSocket';
 import { useAppSelector } from '@redux/hooks';
-import { filterKeyword } from '@utils/common';
 
 import GameReady from './GameReady';
 import GameResultModal from './GameResultModal';
 import GameStart from './GameStart';
 import PresentationInfo from './PresentationInfo';
 import PresenterCam from './PresenterCam';
+import PresenterKeywordBox from './PresenterKeywordBox';
 
 const Presenter = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -40,11 +40,7 @@ const Presenter = () => {
         />
       )}
       {playState?.event === 'speechTimer' && turn && (
-        <PresenterKeywordBox>
-          <p>
-            제시어:&nbsp;<span>{isMe ? turn.keyword : filterKeyword(turn.keyword)}</span>
-          </p>
-        </PresenterKeywordBox>
+        <PresenterKeywordBox isMe={isMe} keyword={turn.keyword} answered={turn.answered} />
       )}
       {room?.isGameOn && turn && (
         <PresenterCam
@@ -84,39 +80,6 @@ const GameReadyBox = styled.div`
   position: absolute;
   top: 110px;
   right: -40px;
-`;
-
-const KeywordSlide = keyframes`
-0% {
-  height: 220px;
-  background-color: inherit;
-  font-size: 40px;
-  color: red;
-}
-  100% {
-    height: 42px;
-    background-color: rgba(28, 28, 28, 0.7);
-  }
-`;
-
-const PresenterKeywordBox = styled.div`
-  position: absolute;
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: flex-end;
-  top: 38px;
-  background-color: rgba(28, 28, 28, 0.7);
-  z-index: 3;
-  padding: 10px 0;
-  color: ${(props) => props.theme.colors.ivory2};
-  height: 42px;
-  animation: ${KeywordSlide} 0.75s 0s;
-  font-size: 14px;
-  & > p > span {
-    font-size: 20px;
-    font-weight: 500;
-  }
 `;
 
 export default React.memo(Presenter);

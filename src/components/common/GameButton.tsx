@@ -21,6 +21,9 @@ const GameButtonLayout = styled(Button)<{ visible: boolean }>`
   font-family: ${(props) => props.theme.font.joystick};
   font-size: 28px;
   text-shadow: none;
+  :focus {
+    ${(props) => props.theme.borders.topLeftNormal1}
+  }
   background-image: linear-gradient(
     0deg,
     ${(props) => (props.visible ? props.theme.colors.purple2 : '#A1A1A1')} 50%,

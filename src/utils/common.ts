@@ -9,7 +9,7 @@ export const convertLeaveCounterFormat = (counter: number, hasMinute?: boolean) 
 };
 
 export const filterKeyword = (keyword: string) => {
-  return keyword.replace(/[가-힣a-zA-Z]/gi, '🐟');
+  return keyword.replace(/[가-힣a-zA-Z0-9]/gi, '🐟');
 };
 
 export const findKoreanLength = (text: string) => {

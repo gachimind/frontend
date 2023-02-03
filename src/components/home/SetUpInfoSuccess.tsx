@@ -34,7 +34,7 @@ const SetUpInfoSuccess = ({
         >
           다시하기
         </Button>
-        <Button onClick={() => onClose()}>완료하기</Button>
+        <Button onClick={() => window.location.reload()}>완료하기</Button>
       </ButtonBox>
     </SetUpInfoSuccessLayout>
   );

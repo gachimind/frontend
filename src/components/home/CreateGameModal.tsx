@@ -18,7 +18,7 @@ import { CreateRoomRequest } from '@customTypes/socketType';
 const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
   const [roomTitle, setRoomTitle] = useState<string>('가치마인드 한 판 해요');
   const [maxCount, setMaxCount] = useState<number>(2);
-  const [time, setTime] = useState<string>('30:30:60');
+  const [time, setTime] = useState<string>('15:60:30');
   const [roomPassword, setRoomPassword] = useState<string>('');
   const [isSecretRoom, setIsSecretRoom] = useState<boolean>(false);
   const { onShowCreatedRoomId, emitCreateRoom } = useGameSocket();
@@ -37,6 +37,9 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
       return;
     }
     const password = isSecretRoom ? Number(roomPassword) : undefined;
+    if (time !== COUNT_OPTIONS[0].value && time !== COUNT_OPTIONS[1].value) {
+      return;
+    }
     const createRoom: CreateRoomRequest = {
       roomTitle,
       maxCount,
@@ -81,7 +84,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
         <InputContainer label="인원">
           <Selection options={PARTICIPANTS_OPTIONS} setValue={setMaxCount} />
         </InputContainer>
-        <InputContainer label="카운트(발표/준비/토론)">
+        <InputContainer label="카운트(준비/발표/토론)">
           <Selection options={COUNT_OPTIONS} setValue={setTime} />
         </InputContainer>
         <CreateRoomButton onClick={handleCreateGameButtonClick} disabled={isCreateRoomButtonDisabled}>
