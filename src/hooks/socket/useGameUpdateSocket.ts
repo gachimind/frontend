@@ -37,7 +37,6 @@ const useGameUpdateSocket = () => {
           event: 'enter' | 'leave' | 'leave-force' | 'ready' | 'start' | 'game-end';
         };
       }) => {
-        console.log('[on] update-room');
         if (data.event === 'game-end') {
           dispatch(updateRoom(data.room));
           if (data.room.participants.length === 1) {

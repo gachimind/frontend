@@ -8,7 +8,6 @@ import Button from '@components/common/Button';
 
 const SetUpInfoSuccess = ({
   isSetUpInfoSuccess,
-  onClose,
 }: {
   isSetUpInfoSuccess: React.Dispatch<React.SetStateAction<boolean>>;
   onClose: () => void;
