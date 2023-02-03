@@ -1,20 +1,14 @@
 import styled from 'styled-components';
 
-import googleLoginButtonImage from '@assets/png_googleLoginButtonImage.png';
 import kakaoIcon from '@assets/png_kakaoIcon.png';
 
 import Modal from '@components/common/Modal';
 
 const LoginModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
   const KAKAO_AUTH_URL = process.env.REACT_APP_API_ENDPOINT + '/api/users/login/kakao';
-  const GOOGLE_AUTH_URL = process.env.REACT_APP_API_ENDPOINT + '/api/users/login/google';
 
   const handleLoginKakaoButtonClick = () => {
     KAKAO_AUTH_URL && (window.location.href = KAKAO_AUTH_URL);
-  };
-
-  const handleLoginGoogleButtonClick = () => {
-    GOOGLE_AUTH_URL && (window.location.href = GOOGLE_AUTH_URL);
   };
 
   return (
@@ -24,7 +18,6 @@ const LoginModal = ({ visible, onClose }: { visible: boolean; onClose: () => voi
           <img src={kakaoIcon} />
           카카오 로그인
         </button>
-        <button className="google" onClick={() => handleLoginGoogleButtonClick()} />
       </LoginModalLayout>
     </Modal>
   );
@@ -38,13 +31,13 @@ const LoginModalLayout = styled.div`
   justify-content: center;
 
   button {
-    height: 90px;
+    height: 85px;
     border-radius: 12px;
   }
 
   .kakao {
     color: #000000 85%;
-    font-size: 30px;
+    font-size: 26px;
     font-family: initial;
     background-color: #fee500;
     display: flex;
@@ -52,14 +45,8 @@ const LoginModalLayout = styled.div`
     align-items: center;
 
     img {
-      margin-right: 7px;
+      margin-right: 10px;
     }
-  }
-
-  .google {
-    background-image: url(${googleLoginButtonImage});
-    background-size: 105%;
-    background-position: center;
   }
 `;
 
