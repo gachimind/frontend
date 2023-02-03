@@ -20,12 +20,15 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
       return;
     }
     await axios
-      .post(process.env.REACT_APP_ENDPOINT + `/api/admin/report`, { title: reportTitle, content: reportContent })
-      .then((res) => {
-        console.log(res);
+      .post(process.env.REACT_APP_API_ENDPOINT + `/api/admin/report`, { title: reportTitle, content: reportContent })
+      .then(() => {
         onClose();
       })
-      .catch((e) => console.log(e));
+      .catch(() =>
+        alertToast('서버 연결이 불안정하다옹ㅠ', 'info', {
+          hideProgressBar: true,
+        }),
+      );
   };
 
   return (
@@ -47,16 +50,7 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
             onChange={(e) => setReportContent(e.target.value.replace(/\s/g, ''))}
           ></ReportTextarea>
         </InputContainer>
-        <ReportBugButton
-          // onClick={() => {
-          //   alertToast('준비중이다냥!', 'info', {
-          //     hideProgressBar: true,
-          //   });
-          // }}
-          onClick={handleClickReportBugButton}
-        >
-          제보하기
-        </ReportBugButton>
+        <ReportBugButton onClick={handleClickReportBugButton}>제보하기</ReportBugButton>
       </ReportBugModalLayout>
     </Modal>
   );
