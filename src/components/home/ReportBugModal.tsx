@@ -16,7 +16,7 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
   const [reportContent, setReportContent] = useState<string>('');
 
   const handleClickReportBugButton = async () => {
-    if (!reportTitle || !reportContent) {
+    if (!reportTitle.replace(/\s/g, '').length || !reportContent.replace(/\s/g, '').length) {
       alertToast('내용을 입력해주라옹', 'info', {
         hideProgressBar: true,
       });
@@ -44,7 +44,7 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
           <Input
             type="text"
             value={reportTitle}
-            onChange={(e) => setReportTitle(e.target.value.replace(/\s/g, ''))}
+            onChange={(e) => setReportTitle(e.target.value)}
             maxLength={18}
             style={{ textAlign: 'initial', paddingLeft: '20px' }}
           />
@@ -53,7 +53,7 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
           <ReportTextarea
             spellCheck={false}
             value={reportContent}
-            onChange={(e) => setReportContent(e.target.value.replace(/\s/g, ''))}
+            onChange={(e) => setReportContent(e.target.value)}
           ></ReportTextarea>
         </InputContainer>
         <ReportBugButton onClick={handleClickReportBugButton}>제보하기</ReportBugButton>
