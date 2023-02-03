@@ -39,7 +39,9 @@ const Presenter = () => {
           event={playState.event}
         />
       )}
-      {playState?.event === 'speechTimer' && turn && <PresenterKeywordBox isMe={isMe} keyword={turn.keyword} />}
+      {playState?.event === 'speechTimer' && turn && (
+        <PresenterKeywordBox isMe={isMe} keyword={turn.keyword} answered={turn.answered} />
+      )}
       {room?.isGameOn && turn && (
         <PresenterCam
           nickname={presenterNickname}

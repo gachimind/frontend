@@ -5,13 +5,17 @@ import { filterKeyword } from '@utils/common';
 export interface PresenterKeywordBoxProps {
   isMe: boolean;
   keyword: string;
+  answered?: boolean;
 }
 
-const PresenterKeywordBox = ({ isMe, keyword }: PresenterKeywordBoxProps) => {
+const PresenterKeywordBox = ({ isMe, keyword, answered }: PresenterKeywordBoxProps) => {
   return (
     <PresenterKeywordLayout>
       <p>
-        제시어:&nbsp;<KeywordText isMe={isMe}>{isMe ? keyword : filterKeyword(keyword)}</KeywordText>
+        제시어:&nbsp;
+        <KeywordText isMe={isMe} answered={answered ?? false}>
+          {isMe || answered ? keyword : filterKeyword(keyword)}
+        </KeywordText>
       </p>
     </PresenterKeywordLayout>
   );
@@ -50,8 +54,9 @@ const PresenterKeywordLayout = styled.div`
   }
 `;
 
-const KeywordText = styled.span<{ isMe: boolean }>`
-  letter-spacing: ${(props) => (props.isMe ? '1px' : '-4px')};
+const KeywordText = styled.span<{ isMe: boolean; answered: boolean }>`
+  letter-spacing: ${(props) => (props.isMe || props.answered ? '1px' : '-4px')};
+  color: ${(props) => (props.answered ? 'green' : props.theme.colors.ivory2)};
 `;
 
 export default PresenterKeywordBox;
