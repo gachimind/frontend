@@ -1,6 +1,7 @@
 import { SUBSCRIBE } from '@constants/socket';
 import useWebRTC from '@hooks/useWebRTC';
 import { useAppDispatch } from '@redux/hooks';
+import { clearAllGamePlayState, setPlayState } from '@redux/modules/gamePlaySlice';
 import { addChat, updateRoom } from '@redux/modules/gameRoomSlice';
 import { setPlayerList } from '@redux/modules/playerMediaSlice';
 
@@ -39,6 +40,17 @@ const useGameUpdateSocket = () => {
         console.log('[on] update-room');
         if (data.event === 'game-end') {
           dispatch(updateRoom(data.room));
+          if (data.room.participants.length === 1) {
+            dispatch(
+              setPlayState({
+                event: 'gameEnd',
+                timer: 1000,
+              }),
+            );
+            setTimeout(() => {
+              dispatch(clearAllGamePlayState());
+            }, 1500);
+          }
           return;
         }
         const { nickname, socketId, userId } = data.eventUserInfo;
