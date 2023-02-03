@@ -6,6 +6,7 @@ export interface WebRTCUser {
   nickname: string;
   audio?: boolean;
   video?: boolean;
+  profileImg?: string;
 }
 
 export interface playerMediaStateType {

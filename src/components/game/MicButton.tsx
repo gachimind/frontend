@@ -35,6 +35,12 @@ const MicButtonLayout = styled(Button)`
   display: flex;
   justify-content: center;
   align-items: center;
+  :focus {
+    ${(props) => props.theme.borders.topLeftNormal1}
+  }
+  :hover {
+    background-color: ${(props) => props.theme.colors.darkGrey2};
+  }
 `;
 
 export default MicButton;

@@ -27,10 +27,15 @@ const gamePlaySlice = createSlice({
     setEvaluated: (state, action: PayloadAction<boolean>) => {
       state.isTurnEvaluated = action.payload;
     },
+    setAnswered: (state) => {
+      if (state.turn) {
+        state.turn = { ...state.turn, answered: true };
+      }
+    },
   },
   extraReducers: {},
 });
 
-export const { setPlayState, setTurn, clearAllGamePlayState, setEvaluated } = gamePlaySlice.actions;
+export const { setPlayState, setTurn, clearAllGamePlayState, setEvaluated, setAnswered } = gamePlaySlice.actions;
 
 export default gamePlaySlice;
