@@ -42,7 +42,7 @@ const CatOnGame = ({
       return;
     }
     setPrevScore(scoreInfo);
-    setPrevCatMoved({ millSecond: scoreInfo.score * 0.8 * 10 });
+    setPrevCatMoved({ millSecond: scoreInfo.score * 10 + 1000 });
   }, [scoreInfo]);
 
   return (
