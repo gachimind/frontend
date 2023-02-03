@@ -24,7 +24,6 @@ const useGameSocket = (): UseGameSocketType => {
 
   const onShowCreatedRoomId = (navigate: NavigateFunction, path: string, password?: number) => {
     on(SUBSCRIBE.showCreatedRoomIdForOwner, async ({ data }: { data: { roomId: string } }) => {
-      console.log('[on] create-room');
       dispatch(
         setLastEnteredRoom({
           roomId: data.roomId,
@@ -42,10 +41,8 @@ const useGameSocket = (): UseGameSocketType => {
   };
 
   const onJoinRoom = () => {
-    on(PUBLISH.joinGame, (data) => {
-      console.log('[on] join-room');
-      console.log(data);
-    });
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    on(PUBLISH.joinGame, () => {});
   };
 
   const emitUserLeaveRoom = () => {
@@ -53,7 +50,6 @@ const useGameSocket = (): UseGameSocketType => {
   };
 
   const emitJoinRoom = ({ roomId, roomPassword }: EnterRoomRequest) => {
-    console.log('[emit] enter-room');
     emit(PUBLISH.joinGame, { data: { roomId, roomPassword } });
   };
 
