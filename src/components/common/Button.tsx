@@ -1,7 +1,22 @@
 import styled from 'styled-components';
 
+import buttonSound from '@assets/sounds/button.wav';
+import useSound from '@hooks/useSound';
+
 const Button = ({ ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
-  return <ButtonLayout {...props}></ButtonLayout>;
+  const { playSound } = useSound();
+
+  return (
+    <ButtonLayout
+      {...props}
+      onClick={(e) => {
+        if (props.onClick) {
+          playSound(buttonSound, 0.5);
+          props?.onClick?.(e);
+        }
+      }}
+    ></ButtonLayout>
+  );
 };
 
 const ButtonLayout = styled.button`
