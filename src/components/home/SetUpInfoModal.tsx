@@ -13,6 +13,7 @@ const SetUpInfoModal = ({ visible, onClose, mypage }: { visible: boolean; onClos
       onClose={onClose}
       title={mypage ? 'EDIT PROFILE' : 'SET UP'}
       width={!isSetUpInfoSuccess ? 1020 : undefined}
+      isModalCloseButtonShown={mypage ? true : false}
     >
       {!isSetUpInfoSuccess ? (
         <SetUpInfo isSetUpInfoSuccess={setIsSetUpInfoSuccess} onClose={onClose} mypage={mypage} />

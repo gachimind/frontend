@@ -59,7 +59,7 @@ const ModalBox = styled.div`
   width: 409px;
   height: 550px;
   left: 148px;
-  bottom: 88px;
+  bottom: 510px;
 `;
 
 const ModalHeader = styled.div`
