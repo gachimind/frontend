@@ -24,7 +24,7 @@ const Modal = ({
   width,
   children,
   onClose,
-  isBackgroundClickEventDisabled = false,
+  isBackgroundClickEventDisabled = true,
   hasBackgroundShadow = true,
   modalName,
   page,
