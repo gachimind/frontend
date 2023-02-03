@@ -12,6 +12,15 @@ const ButtonLayout = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  :focus {
+    background-color: ${(props) => props.theme.colors.purple1};
+    ${(props) => props.theme.borders.bottomRightNormal1}
+  }
+
+  :hover {
+    background-color: ${(props) => props.theme.colors.lightGrey10};
+  }
 `;
 
 export default Button;
