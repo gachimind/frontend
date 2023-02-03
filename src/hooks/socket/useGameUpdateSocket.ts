@@ -54,7 +54,7 @@ const useGameUpdateSocket = () => {
         }
         const { nickname, socketId, userId } = data.eventUserInfo;
         dispatch(updateRoom(data.room));
-        if (data.event === 'enter' || data.event === 'leave') {
+        if (isInOutEvent(data.event)) {
           dispatch(
             setPlayerList(
               data.room.participants.map((participant) => {
