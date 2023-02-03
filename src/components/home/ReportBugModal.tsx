@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import styled from 'styled-components';
 
+import { alertToast } from '@utils/toast';
+
 import Button from '@components/common/Button';
 import Input from '@components/common/Input';
 import InputContainer from '@components/common/InputContainer';
@@ -24,7 +26,15 @@ const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () =>
             onChange={(e) => setReportContent(e.target.value)}
           ></ReportTextarea>
         </InputContainer>
-        <ReportBugButton>제보하기</ReportBugButton>
+        <ReportBugButton
+          onClick={() => {
+            alertToast('준비중이다냥!', 'info', {
+              hideProgressBar: true,
+            });
+          }}
+        >
+          제보하기
+        </ReportBugButton>
       </ReportBugModalLayout>
     </Modal>
   );

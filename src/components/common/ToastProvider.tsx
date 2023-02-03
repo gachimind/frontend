@@ -32,7 +32,7 @@ const ToastProvider = () => {
 
 const ToastProviderLayout = styled.div`
   position: absolute;
-  z-index: 2;
+  z-index: 9999;
   transform: scale(${(props) => props.theme.layout.scale});
   padding-top: 76px;
   & > * {
