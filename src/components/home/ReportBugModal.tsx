@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import axios from 'axios';
 import styled from 'styled-components';
 
 import { alertToast } from '@utils/toast';
@@ -11,30 +12,51 @@ import Modal from '@components/common/Modal';
 
 const ReportBugModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [reportTitle, setReportTitle] = useState<string>('');
   const [reportContent, setReportContent] = useState<string>('');
+
+  const handleClickReportBugButton = async () => {
+    if (!reportTitle || !reportContent) {
+      alertToast('내용을 입력해주라옹', 'info', {
+        hideProgressBar: true,
+      });
+      return;
+    }
+    await axios
+      .post(process.env.REACT_APP_API_ENDPOINT + `/api/admin/report`, { title: reportTitle, content: reportContent })
+      .then(() => {
+        alertToast('소중한 제보 감사하다옹~!', 'info', {
+          hideProgressBar: true,
+        });
+        onClose();
+      })
+      .catch(() =>
+        alertToast('서버 연결이 불안정하다옹ㅠ', 'info', {
+          hideProgressBar: true,
+        }),
+      );
+  };
 
   return (
     <Modal visible={visible} onClose={onClose} title="REPORT A BUG" width={700}>
       <ReportBugModalLayout>
         <InputContainer label="제목">
-          <Input type="text" maxLength={18} style={{ textAlign: 'initial', paddingLeft: '20px' }} />
+          <Input
+            type="text"
+            value={reportTitle}
+            onChange={(e) => setReportTitle(e.target.value.replace(/\s/g, ''))}
+            maxLength={18}
+            style={{ textAlign: 'initial', paddingLeft: '20px' }}
+          />
         </InputContainer>
         <InputContainer label="내용">
           <ReportTextarea
             spellCheck={false}
             value={reportContent}
-            onChange={(e) => setReportContent(e.target.value)}
+            onChange={(e) => setReportContent(e.target.value.replace(/\s/g, ''))}
           ></ReportTextarea>
         </InputContainer>
-        <ReportBugButton
-          onClick={() => {
-            alertToast('준비중이다냥!', 'info', {
-              hideProgressBar: true,
-            });
-          }}
-        >
-          제보하기
-        </ReportBugButton>
+        <ReportBugButton onClick={handleClickReportBugButton}>제보하기</ReportBugButton>
       </ReportBugModalLayout>
     </Modal>
   );
