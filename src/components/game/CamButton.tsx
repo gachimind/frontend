@@ -34,12 +34,6 @@ const CamButtonLayout = styled(Button)`
   display: flex;
   justify-content: center;
   align-items: center;
-  :hover {
-    background-color: ${(props) => props.theme.colors.darkGrey2};
-  }
-  :focus {
-    ${(props) => props.theme.borders.topLeftNormal1}
-  }
 `;
 
 export default CamButton;
