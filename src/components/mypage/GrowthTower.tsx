@@ -22,7 +22,7 @@ const GrowthTower = () => {
           <div className="light-brown-box" id="seven" />
         </BottomBox>
         <LevelOneTower>
-          {(!user?.today.todayScore || user?.today.todayScore <= 600) && (
+          {(!user?.today.todayScore || user?.today.todayScore <= 300) && (
             <div className="cat" id="level-one-cat">
               <Cat type="body" catTheme={cat} rocketTheme={rocket} />
             </div>
@@ -44,9 +44,9 @@ const GrowthTower = () => {
             <div className="dark-brown-box" id="eight" />
           </div>
         </LevelOneTower>
-        {user?.today.todayScore && user?.today.todayScore > 600 && (
+        {user?.today.todayScore && user?.today.todayScore > 300 && (
           <LevelTwoTower>
-            {user?.today.todayScore && user?.today.todayScore <= 1200 && (
+            {user?.today.todayScore && user?.today.todayScore <= 600 && (
               <div className="cat" id="level-two-cat">
                 <Cat type="body" catTheme={cat} rocketTheme={rocket} />
               </div>
@@ -76,9 +76,9 @@ const GrowthTower = () => {
             </div>
           </LevelTwoTower>
         )}
-        {user?.today.todayScore && user?.today.todayScore > 1200 && (
+        {user?.today.todayScore && user?.today.todayScore > 600 && (
           <LevelThreeTower>
-            {user?.today.todayScore && user?.today.todayScore <= 1800 && (
+            {user?.today.todayScore && user?.today.todayScore <= 900 && (
               <div className="cat" id="level-three-cat">
                 <Cat type="body" catTheme={cat} rocketTheme={rocket} />
               </div>
@@ -116,7 +116,7 @@ const GrowthTower = () => {
             </div>
           </LevelThreeTower>
         )}
-        {user?.today.todayScore && user?.today.todayScore > 1800 && (
+        {user?.today.todayScore && user?.today.todayScore > 900 && (
           <LevelFourTower>
             <div className="cat" id="level-four-cat">
               <Cat type="body" catTheme={cat} rocketTheme={rocket} />
