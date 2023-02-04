@@ -69,7 +69,7 @@ const EnterPrivateRoomModal = ({ visible, onClose, roomId, roomTitle, successHan
       dispatch(
         setLastEnteredRoom({
           roomId,
-          password: parseInt(password, 10),
+          password: password,
         }),
       );
       successHandler();
@@ -80,8 +80,7 @@ const EnterPrivateRoomModal = ({ visible, onClose, roomId, roomTitle, successHan
     if (!roomId || submitDisabled || isPasswordSubmitted) {
       return;
     }
-    const roomPassword = parseInt(password, 10);
-    emitValidRoomPassword(roomId, roomPassword);
+    emitValidRoomPassword(roomId, password);
   };
 
   return (

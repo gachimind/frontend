@@ -15,7 +15,7 @@ interface UseGameSocketType {
   emitUserLeaveRoom: () => void;
   emitJoinRoom: ({ roomId, roomPassword }: EnterRoomRequest) => void;
   emitCreateRoom: (createRoom: CreateRoomRequest) => void;
-  emitValidRoomPassword: (roomId: number, roomPassword: number) => void;
+  emitValidRoomPassword: (roomId: number, roomPassword: string) => void;
 }
 
 const useGameSocket = (): UseGameSocketType => {
@@ -57,7 +57,7 @@ const useGameSocket = (): UseGameSocketType => {
     emit(PUBLISH.createGame, { data: createRoom });
   };
 
-  const emitValidRoomPassword = (roomId: number, password: number) => {
+  const emitValidRoomPassword = (roomId: number, password: string) => {
     emit(PUBLISH.validRoomPassword, { data: { roomId, password } });
   };
 
