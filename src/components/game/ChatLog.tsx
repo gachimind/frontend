@@ -118,6 +118,12 @@ const ChatBox = styled.div`
   flex-direction: column-reverse;
   word-wrap: break-word;
   word-break: break-all;
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: ${(props) => props.theme.colors.lightGrey1};
+  }
 `;
 
 const ChatInput = styled.input`
