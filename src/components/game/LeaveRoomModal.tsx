@@ -1,15 +1,19 @@
+import { useNavigate } from 'react-router';
+
 import styled from 'styled-components';
 
 import Button from '@components/common/Button';
 import Modal from '@components/common/Modal';
 
 const LeaveRoomModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
+  const navigate = useNavigate();
+
   return (
     <Modal visible={visible} onClose={onClose}>
       <LeaveRoomModalBox>
         정말 나갈거냐옹?
         <ButtonBox>
-          <LeaveButton onClick={() => window.location.replace('/')}>나가기</LeaveButton>
+          <LeaveButton onClick={() => navigate('/')}>나가기</LeaveButton>
           <StayButton onClick={onClose}>계속하기</StayButton>
         </ButtonBox>
       </LeaveRoomModalBox>

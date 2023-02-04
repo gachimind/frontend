@@ -31,6 +31,9 @@ const GameButtonLayout = styled(Button)<{ visible: boolean }>`
   );
   background-size: 100%;
   background-clip: text;
+  text-decoration-color: transparent;
+  -moz-background-clip: text;
+  text-decoration-line: 1px ${(props) => props.theme.colors.black1};
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   -webkit-text-stroke: 1px ${(props) => props.theme.colors.black1};

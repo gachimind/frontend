@@ -72,7 +72,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
           </TitleInputBox>
         </InputContainer>
         {isSecretRoom && (
-          <InputContainer label="비밀번호">
+          <InputContainer label="비밀번호(숫자 4자리)">
             <Input
               type="text"
               value={roomPassword}
