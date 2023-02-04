@@ -24,7 +24,7 @@ const CamList = () => {
 
   useEffect(() => {
     emitUpdateUserStream({ audio: userMic, video: userCam });
-  }, [playerStreamMap.length]);
+  }, [playerStreamMap]);
 
   useEffect(() => {
     onUpdateUserStream();
