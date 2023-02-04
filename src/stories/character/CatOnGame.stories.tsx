@@ -1,3 +1,7 @@
+import { useState } from 'react';
+
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { setScore } from '@redux/modules/gameRoomSlice';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import CatOnGame, { CatOnGameProps } from '@components/character/CatOnGame';
@@ -8,7 +12,40 @@ export default {
 } as ComponentMeta<typeof CatOnGame>;
 
 const Template: ComponentStory<typeof CatOnGame> = (args: CatOnGameProps) => {
-  return <CatOnGame {...args} />;
+  const dispatch = useAppDispatch();
+  return (
+    <div>
+      <button
+        style={{ fontSize: '20px', marginRight: '30px' }}
+        onClick={() =>
+          dispatch(
+            setScore({
+              userId: 999,
+              score: 100,
+            }),
+          )
+        }
+      >
+        +100
+      </button>
+      <button
+        style={{ fontSize: '20px' }}
+        onClick={() =>
+          dispatch(
+            setScore({
+              userId: 999,
+              score: 200,
+            }),
+          )
+        }
+      >
+        +200
+      </button>
+      <div style={{ marginTop: '50px' }}>
+        <CatOnGame {...args} />
+      </div>
+    </div>
+  );
 };
 
 export const Default = Template.bind({});
@@ -18,4 +55,5 @@ Default.args = {
     score: 0,
   },
   nickname: 'hello',
+  userId: 999,
 };

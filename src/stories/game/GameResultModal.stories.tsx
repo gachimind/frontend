@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { useAppDispatch } from '@redux/hooks';
+import { setScore } from '@redux/modules/gameRoomSlice';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import GameResultModal, { GameResultModalProps } from '@components/game/GameResultModal';
@@ -9,13 +11,52 @@ export default {
   component: GameResultModal,
   parameters: {
     controls: {
-      exclude: ['visible', 'onClose'],
+      exclude: ['visible', 'onClose', 'scoreMap'],
     },
   },
 } as ComponentMeta<typeof GameResultModal>;
 
 const Template: ComponentStory<typeof GameResultModal> = (args: GameResultModalProps) => {
+  const dispatch = useAppDispatch();
   const [visible, setVisible] = useState<boolean>(false);
+  useEffect(() => {
+    dispatch(
+      setScore({
+        userId: 1,
+        score: 240,
+      }),
+    );
+    dispatch(
+      setScore({
+        userId: 2,
+        score: 150,
+      }),
+    );
+    dispatch(
+      setScore({
+        userId: 3,
+        score: 450,
+      }),
+    );
+    dispatch(
+      setScore({
+        userId: 4,
+        score: 60,
+      }),
+    );
+    dispatch(
+      setScore({
+        userId: 5,
+        score: 90,
+      }),
+    );
+    dispatch(
+      setScore({
+        userId: 6,
+        score: 100,
+      }),
+    );
+  }, []);
   return (
     <>
       <button onClick={() => setVisible(true)}>click to show</button>
