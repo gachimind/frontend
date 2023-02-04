@@ -22,7 +22,7 @@ const CatScore = ({ score, size = 'small' }: CatScoreProps) => {
       setCorrectScore(0);
       return;
     }
-    if (score < totalScore || score % 10 !== 0) {
+    if (score < totalScore) {
       return;
     }
     setRestScore(score - totalScore);
@@ -30,13 +30,13 @@ const CatScore = ({ score, size = 'small' }: CatScoreProps) => {
   }, [score]);
 
   useEffect(() => {
-    if (!restScore) {
+    if (!restScore || restScore <= 0) {
       totalScore !== 0 && setTotalScore(correctScore);
       return;
     }
     const timeoutId = setTimeout(() => {
-      setTotalScore((prev) => prev + 10);
-      setRestScore((prev) => prev - 10);
+      setTotalScore((prev) => prev + 20);
+      setRestScore((prev) => prev - 20);
     }, 10);
     return () => {
       clearTimeout(timeoutId);
