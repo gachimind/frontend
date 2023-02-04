@@ -6,14 +6,16 @@ import Slider from 'react-slick';
 import styled from 'styled-components';
 
 import useStreamUpdateSocket from '@hooks/socket/useStreamUpdateSocket';
-import { useAppSelector } from '@redux/hooks';
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { setUserCam, setUserMic } from '@redux/modules/userMediaSlice';
 
 import Cam from './Cam';
 import CamListSliderArrow from './CamListSliderArrow';
 
 const CamList = () => {
-  const { userStream, userMic, userCam } = useAppSelector((state) => state.userMedia);
+  const { userStream, userMic, userCam, userStreamRef } = useAppSelector((state) => state.userMedia);
   const { playerList, playerStreamMap } = useAppSelector((state) => state.playerMedia);
+  const dispatch = useAppDispatch();
   const [hasSlider, setHasSlider] = useState<{ hasPrev: boolean; hasNext: boolean }>({
     hasPrev: false,
     hasNext: true,
@@ -21,6 +23,15 @@ const CamList = () => {
   const { user } = useAppSelector((state) => state.user);
   const { turn } = useAppSelector((state) => state.gamePlay);
   const { onUpdateUserStream, offUpdateUserStream, emitUpdateUserStream } = useStreamUpdateSocket();
+
+  useEffect(() => {
+    if (userStreamRef?.current) {
+      dispatch(setUserCam(false));
+      dispatch(setUserMic(false));
+      userStreamRef.current.getAudioTracks().forEach((track) => (track.enabled = !track.enabled));
+      userStreamRef.current.getVideoTracks().forEach((track) => (track.enabled = !track.enabled));
+    }
+  }, []);
 
   useEffect(() => {
     emitUpdateUserStream({ audio: userMic, video: userCam });
