@@ -6,6 +6,7 @@ import useChatSocket from '@hooks/socket/useChatSocket';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { setEvaluated } from '@redux/modules/gamePlaySlice';
 import { addChat, clearChatList } from '@redux/modules/gameRoomSlice';
+import { alertToast } from '@utils/toast';
 
 // TODO: 색상 변경할 것
 interface ChatColorType {
@@ -45,6 +46,10 @@ const ChatLog = () => {
           userId: 0,
         }),
       );
+      alertToast(`정답은 "${turn?.keyword}" 입니다.`, 'success', {
+        hideProgressBar: true,
+        autoClose: 5000,
+      });
     }
   }, [playState]);
 
