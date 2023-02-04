@@ -22,11 +22,11 @@ server.get('/api/users/login/kakao', (req, res) => {
 });
 
 // 닉네임 중복검사
-server.get('/api/users/nickname', (req, res) => {
-  const { nickname } = url.parse(req.url, true).query;
+server.get(`/api/users/:nickname`, (req, res) => {
+  const { nickname } = req.params;
   const isNicknameExists = router.db.__wrapped__.me.some((user) => user.nickname === nickname);
   if (isNicknameExists) {
-    return res.status(400).send({ result: false, errorMessage: '이미 사용중인 닉네임입니다.' });
+    return res.status(412).send({ result: false, errorMessage: '이미 사용중인 닉네임입니다.' });
   }
   return res.status(200).send({ result: true, message: '사용가능한 닉네임입니다.' });
 });
