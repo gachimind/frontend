@@ -28,8 +28,8 @@ const Main = () => {
     };
   }, []);
 
-  const [SetUpInfoModalVisible, setSetUpInfoModalVisible] = useState<boolean>(false);
-  const [AnnouncementModalVisible, setAnnouncementModalVisible] = useState<boolean>(false);
+  const [setUpInfoModalVisible, setSetUpInfoModalVisible] = useState<boolean>(false);
+  const [announcementModalVisible, setAnnouncementModalVisible] = useState<boolean>(false);
 
   useEffect(() => {
     if (user?.isFirstLogin) {
@@ -56,11 +56,11 @@ const Main = () => {
     <MainTemplate>
       <ContentContainer title="PROFILE">
         <UserInfo />
-        {SetUpInfoModalVisible && (
-          <SetUpInfoModal visible={SetUpInfoModalVisible} onClose={() => setSetUpInfoModalVisible(false)} />
+        {setUpInfoModalVisible && (
+          <SetUpInfoModal visible={setUpInfoModalVisible} onClose={() => setSetUpInfoModalVisible(false)} />
         )}
-        {AnnouncementModalVisible && (
-          <AnnouncementModal visible={AnnouncementModalVisible} onClose={() => setAnnouncementModalVisible(false)} />
+        {announcementModalVisible && (
+          <AnnouncementModal visible={announcementModalVisible} onClose={() => setAnnouncementModalVisible(false)} />
         )}
       </ContentContainer>
       <ContentContainer title="ROOM SELECTION">
