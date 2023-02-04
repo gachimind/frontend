@@ -16,6 +16,12 @@ const CatScore = ({ score, size = 'small' }: CatScoreProps) => {
   const [correctScore, setCorrectScore] = useState<number>(0);
 
   useEffect(() => {
+    if (score === 0) {
+      setRestScore(0);
+      setTotalScore(0);
+      setCorrectScore(0);
+      return;
+    }
     if (score < totalScore || score % 10 !== 0) {
       return;
     }
