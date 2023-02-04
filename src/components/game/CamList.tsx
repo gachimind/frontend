@@ -11,7 +11,6 @@ import { useAppSelector } from '@redux/hooks';
 import Cam from './Cam';
 import CamListSliderArrow from './CamListSliderArrow';
 
-// TODO: 사용자들의 캠 대신 이름으로 참여 여부를 먼저 나타냈다. 수정되어야 한다.
 const CamList = () => {
   const { userStream, userMic, userCam } = useAppSelector((state) => state.userMedia);
   const { playerList, playerStreamMap } = useAppSelector((state) => state.playerMedia);
@@ -21,7 +20,11 @@ const CamList = () => {
   });
   const { user } = useAppSelector((state) => state.user);
   const { turn } = useAppSelector((state) => state.gamePlay);
-  const { onUpdateUserStream, offUpdateUserStream } = useStreamUpdateSocket();
+  const { onUpdateUserStream, offUpdateUserStream, emitUpdateUserStream } = useStreamUpdateSocket();
+
+  useEffect(() => {
+    emitUpdateUserStream({ audio: userMic, video: userCam });
+  }, [playerStreamMap.length]);
 
   useEffect(() => {
     onUpdateUserStream();
