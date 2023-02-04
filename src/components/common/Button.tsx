@@ -13,7 +13,7 @@ const ButtonLayout = styled.button`
   justify-content: center;
   align-items: center;
 
-  :focus {
+  :active:hover {
     background-color: ${(props) => props.theme.colors.purple1};
     ${(props) => props.theme.borders.bottomRightNormal1}
   }
