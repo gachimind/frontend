@@ -20,7 +20,7 @@ export interface GameRoomBroadcastResponse extends GameRoomBaseInfo {
  * emit [create-room]
  */
 export interface CreateRoomRequest extends GameRoomBaseInfo, GameRoomPlayDetailInfo {
-  roomPassword?: number;
+  roomPassword?: string;
 }
 
 /**
@@ -35,7 +35,7 @@ export interface CreateRoomResponse {
  */
 export interface EnterRoomRequest {
   roomId: number;
-  roomPassword?: number;
+  roomPassword?: string;
 }
 
 /**

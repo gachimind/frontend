@@ -9,7 +9,7 @@ import { CreateRoomRequest, EnterRoomRequest } from '@customTypes/socketType';
 import socketInstance from './socketInstance';
 
 interface UseGameSocketType {
-  onShowCreatedRoomId: (navigate: NavigateFunction, path: string, password?: number) => void;
+  onShowCreatedRoomId: (navigate: NavigateFunction, path: string, password?: string) => void;
   onJoinRoom: () => void;
   onValidRoomPassword: (callback: () => void) => void;
   emitUserLeaveRoom: () => void;
@@ -22,7 +22,7 @@ const useGameSocket = (): UseGameSocketType => {
   const { on, emit } = socketInstance;
   const dispatch = useAppDispatch();
 
-  const onShowCreatedRoomId = (navigate: NavigateFunction, path: string, password?: number) => {
+  const onShowCreatedRoomId = (navigate: NavigateFunction, path: string, password?: string) => {
     on(SUBSCRIBE.showCreatedRoomIdForOwner, async ({ data }: { data: { roomId: string } }) => {
       dispatch(
         setLastEnteredRoom({
