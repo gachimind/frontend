@@ -1,6 +1,7 @@
+const express = require('express');
 const jsonServer = require('json-server');
 const { validAuthentication } = require('./authenticationHandler');
-const url = require('url');
+const fs = require('fs');
 
 const server = jsonServer.create();
 const router = jsonServer.router('./db.json');
@@ -48,6 +49,27 @@ server.get('/me/keyword', (req, res) => {
     data: router.db.__wrapped__.keyword.find((user) => user.userId == authenticatedUserId),
   };
   return res.jsonp(result);
+});
+
+server.use(express.json());
+// 회원정보 수정
+server.patch('/me', (req, res) => {
+  const authenticatedUserId = validAuthentication(req, res);
+  const isUserExists = router.db.__wrapped__.me.some((user) => user.userId == authenticatedUserId);
+  if (!isUserExists) {
+    return res.status(401).send({ result: false, errorMessage: '해당 유저를 찾을 수 없습니다.' });
+  }
+  const result = router.db.__wrapped__;
+  result.me.map((user) => {
+    if (user.userId == authenticatedUserId) {
+      user.nickname = req.body.nickname;
+      user.profileImg = req.body.profileImg;
+    }
+  });
+
+  fs.writeFileSync('./db.json', JSON.stringify(result));
+
+  return res.status(200).send({ result: true, message: '사용자 정보 변경에 성공하였습니다.' });
 });
 
 // 로그아웃
