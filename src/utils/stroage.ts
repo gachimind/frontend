@@ -7,9 +7,9 @@ const storage = {
     if (!currentRoom) {
       return undefined;
     }
-    const [roomId, password] = currentRoom.split('#').map((splited) => parseInt(splited, 10));
+    const [roomId, password] = currentRoom.split('#').map((splited) => splited);
     if (roomId && password) {
-      return { roomId, password };
+      return { roomId: parseInt(roomId, 10), password };
     }
     return undefined;
   },

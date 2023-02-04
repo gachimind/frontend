@@ -5,9 +5,8 @@ import kakaoIcon from '@assets/png_kakaoIcon.png';
 import Modal from '@components/common/Modal';
 
 const LoginModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
-  const KAKAO_AUTH_URL = process.env.REACT_APP_API_ENDPOINT + '/api/users/login/kakao';
-
   const handleLoginKakaoButtonClick = () => {
+    const KAKAO_AUTH_URL = process.env.REACT_APP_API_ENDPOINT + '/api/users/login/kakao';
     KAKAO_AUTH_URL && (window.location.href = KAKAO_AUTH_URL);
   };
 

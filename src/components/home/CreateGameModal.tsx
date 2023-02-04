@@ -36,7 +36,7 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
     if (!roomTitle || maxCount < 2 || maxCount > 6 || (isSecretRoom && String(roomPassword)?.length !== 4)) {
       return;
     }
-    const password = isSecretRoom ? Number(roomPassword) : undefined;
+    const password = isSecretRoom ? roomPassword : undefined;
     if (time !== COUNT_OPTIONS[0].value && time !== COUNT_OPTIONS[1].value) {
       return;
     }
