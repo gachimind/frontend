@@ -39,8 +39,7 @@ const useWebRTC = () => {
                   candidateReceiveSocketId: peerSocketId,
                 },
               });
-            }, 500);
-            }, 100);
+            }, 400);
           }
         };
         if (!userStreamRef?.current) {
