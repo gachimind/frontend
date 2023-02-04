@@ -49,7 +49,20 @@ const Cam = ({ userId, userStream, nickname, profileImg, video, audio, isMe, isH
       <VideoBox>
         <CamStatus userId={userId} isHost={isHost} />
         {userStream ? (
-          <Video ref={videoRef} autoPlay playsInline muted={isMe} size={size} />
+          <>
+            <Video ref={videoRef} autoPlay playsInline muted={isMe} size={size} />
+            {!video && (
+              <EmptyVideo size={size}>
+                <Cat
+                  catTheme={cat}
+                  rocketTheme={rocket}
+                  type="face"
+                  hasIdlePopupAnimation={false}
+                  scale={size === 'sub' ? 0.8 : 2}
+                />
+              </EmptyVideo>
+            )}
+          </>
         ) : (
           <EmptyVideo size={size}>
             <Cat
