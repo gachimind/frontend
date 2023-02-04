@@ -11,7 +11,7 @@ interface InitialGameRoomStateType {
   chatList: Chat[];
   lastEnteredRoom?: {
     roomId: number;
-    password?: number;
+    password?: string;
   };
   scoreMap: { [key: number]: number };
 }
