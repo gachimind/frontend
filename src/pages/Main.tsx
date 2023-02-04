@@ -5,6 +5,7 @@ import useDuplicatedUserInvalidate from '@hooks/useDuplicatedUserInvalidate';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { logout } from '@redux/modules/userSlice';
 
+import AnnouncementModal from '@components/home/AnnouncementModal';
 import RoomList from '@components/home/RoomList';
 import SetUpInfoModal from '@components/home/SetUpInfoModal';
 import UserInfo from '@components/home/UserInfo';
@@ -28,10 +29,26 @@ const Main = () => {
   }, []);
 
   const [SetUpInfoModalVisible, setSetUpInfoModalVisible] = useState<boolean>(false);
+  const [AnnouncementModalVisible, setAnnouncementModalVisible] = useState<boolean>(false);
 
   useEffect(() => {
     if (user?.isFirstLogin) {
       setSetUpInfoModalVisible(true);
+      return;
+    }
+
+    const date = new Date();
+
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    const currentDate = `${year}${month}${day}`;
+
+    const AnnouncementModalShownDate = localStorage.getItem('AnnouncementModalShownDate');
+
+    if (user && AnnouncementModalShownDate !== currentDate) {
+      setAnnouncementModalVisible(true);
     }
   }, [user]);
 
@@ -41,6 +58,9 @@ const Main = () => {
         <UserInfo />
         {SetUpInfoModalVisible && (
           <SetUpInfoModal visible={SetUpInfoModalVisible} onClose={() => setSetUpInfoModalVisible(false)} />
+        )}
+        {AnnouncementModalVisible && (
+          <AnnouncementModal visible={AnnouncementModalVisible} onClose={() => setAnnouncementModalVisible(false)} />
         )}
       </ContentContainer>
       <ContentContainer title="ROOM SELECTION">
