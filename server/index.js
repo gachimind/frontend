@@ -21,11 +21,6 @@ server.get('/api/users/login/kakao', (req, res) => {
   res.redirect('http://localhost:3000/login?token=token1');
 });
 
-// 구글 소셜 로그인
-server.get('/api/users/login/google', (req, res) => {
-  res.redirect('http://localhost:3000/login?token=token2');
-});
-
 // 닉네임 중복검사
 server.get('/api/users/nickname', (req, res) => {
   const { nickname } = url.parse(req.url, true).query;
