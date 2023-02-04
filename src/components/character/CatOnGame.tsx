@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { CatTheme, RocketTheme } from '@constants/characters';
+import { useAppSelector } from '@redux/hooks';
 
 import AxisXOverflowedText from '@components/common/AxisXOverflowedText';
 
@@ -13,6 +14,7 @@ export interface CatOnGameProps {
   scoreInfo: {
     score: number;
   };
+  userId: number;
   catType: 'rocket' | 'body';
   catTheme: CatTheme;
   rocketTheme: RocketTheme;
@@ -30,18 +32,15 @@ const CatOnGame = ({
   rocketTheme,
   scale = 1,
   size = 'small',
+  userId,
   nickname,
   hasIdlePopupAnimation = true,
   catMarginTop = -17,
 }: CatOnGameProps) => {
-  const [prevScore, setPrevScore] = useState<{ score: number }>({ score: 0 });
   const [prevCatMoved, setPrevCatMoved] = useState<{ millSecond: number }>({ millSecond: 0 });
+  const { scoreMap } = useAppSelector((state) => state.gameRoom);
 
   useEffect(() => {
-    if (!scoreInfo.score || scoreInfo === prevScore) {
-      return;
-    }
-    setPrevScore(scoreInfo);
     setPrevCatMoved({ millSecond: scoreInfo.score * 10 + 1000 });
   }, [scoreInfo]);
 
@@ -56,7 +55,7 @@ const CatOnGame = ({
       >
         <NicknameText size={size}>{nickname}</NicknameText>
       </AxisXOverflowedText>
-      <CatScore size={size} scoreInfo={prevScore} />
+      <CatScore size={size} score={scoreMap[userId] ?? 0} />
       <CatContainerBox catMarginTop={catMarginTop}>
         <Cat
           catTheme={catTheme}

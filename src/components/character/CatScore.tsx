@@ -4,46 +4,38 @@ import styled from 'styled-components';
 
 import ScoreLarge from '@assets/img_scoreLarge.png';
 import ScoreSmall from '@assets/img_scoreSmall.png';
-import { useAppSelector } from '@redux/hooks';
 
 export interface CatScoreProps {
-  scoreInfo?: {
-    score: number;
-  };
+  score: number;
   size: 'large' | 'small';
 }
 
-const CatScore = ({ scoreInfo, size = 'small' }: CatScoreProps) => {
-  const [totalScore, setTotalScore] = useState<number>(0);
+const CatScore = ({ score, size = 'small' }: CatScoreProps) => {
   const [restScore, setRestScore] = useState<number>(0);
-  const { scoreMap } = useAppSelector((state) => state.gameRoom);
+  const [totalScore, setTotalScore] = useState<number>(0);
+  const [correctScore, setCorrectScore] = useState<number>(0);
 
   useEffect(() => {
-    if (!scoreInfo?.score) {
+    if (score < totalScore) {
       return;
     }
-    setRestScore(scoreInfo.score);
-  }, [scoreInfo]);
+    setRestScore(score - totalScore);
+    setCorrectScore(score);
+  }, [score]);
 
   useEffect(() => {
-    if (restScore === 0 || !scoreInfo?.score) {
+    if (!restScore) {
+      totalScore !== 0 && setTotalScore(correctScore);
       return;
     }
     const timeoutId = setTimeout(() => {
-      setTotalScore((prev) => prev + scoreInfo.score / 10);
-      setRestScore((prev) => prev - scoreInfo.score / 10);
-    }, scoreInfo.score / 10);
+      setTotalScore((prev) => prev + 1);
+      setRestScore((prev) => prev - 1);
+    }, 2);
     return () => {
       clearTimeout(timeoutId);
     };
   }, [restScore]);
-
-  useEffect(() => {
-    if (Object.keys(scoreMap).length === 0) {
-      setTotalScore(0);
-      setRestScore(0);
-    }
-  }, [scoreMap]);
 
   return (
     <CatScoreLayout size={size}>
