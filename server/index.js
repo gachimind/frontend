@@ -36,10 +36,25 @@ server.get(`/api/users/:nickname`, (req, res) => {
 // 내 프로필 조회
 server.get('/me', (req, res) => {
   const authenticatedUserId = validAuthentication(req, res);
+  const userData = router.db.__wrapped__.me.find((user) => user.userId == authenticatedUserId);
   const result = {
-    data: router.db.__wrapped__.me.find((user) => user.userId == authenticatedUserId),
+    data: userData,
   };
-  return res.jsonp(result);
+
+  res.jsonp(result);
+
+  if (result.data.isFirstLogin) {
+    const newData = router.db.__wrapped__;
+    newData.me.map((user) => {
+      if (user.userId == authenticatedUserId) {
+        user.isFirstLogin = false;
+      }
+    });
+
+    fs.writeFileSync('./db.json', JSON.stringify(newData));
+  }
+
+  return;
 });
 
 // 회원 키워드 조회
