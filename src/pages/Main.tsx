@@ -47,7 +47,7 @@ const Main = () => {
 
     const AnnouncementModalShownDate = localStorage.getItem('AnnouncementModalShownDate');
 
-    if (AnnouncementModalShownDate !== currentDate) {
+    if (user && AnnouncementModalShownDate !== currentDate) {
       setAnnouncementModalVisible(true);
     }
   }, [user]);
