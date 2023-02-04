@@ -16,8 +16,8 @@ import Header from './Header';
 import PageContainer from './PageContainer';
 
 const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
-  const [GameRuleModalVisible, setGameRuleModalVisible] = useState<boolean>(false);
-  const [LeaveRoomModalVisible, setLeaveRoomModalVisible] = useState<boolean>(false);
+  const [gameRuleModalVisible, setGameRuleModalVisible] = useState<boolean>(false);
+  const [leaveRoomModalVisible, setLeaveRoomModalVisible] = useState<boolean>(false);
 
   return (
     <PageContainer>
@@ -25,8 +25,8 @@ const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
       <RoomContentsBox>{children}</RoomContentsBox>
       <Footer page="room">
         <FooterBox>
-          {GameRuleModalVisible && (
-            <GameRuleToolTip visible={GameRuleModalVisible} onClose={() => setGameRuleModalVisible(false)} />
+          {gameRuleModalVisible && (
+            <GameRuleToolTip visible={gameRuleModalVisible} onClose={() => setGameRuleModalVisible(false)} />
           )}
           <RuleButton onClick={() => setGameRuleModalVisible(true)}>
             <img src={GameRuleIcon} />
@@ -35,8 +35,8 @@ const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
             <CamButton />
             <MicButton />
           </MediaControlBox>
-          {LeaveRoomModalVisible && (
-            <LeaveRoomModal visible={LeaveRoomModalVisible} onClose={() => setLeaveRoomModalVisible(false)} />
+          {leaveRoomModalVisible && (
+            <LeaveRoomModal visible={leaveRoomModalVisible} onClose={() => setLeaveRoomModalVisible(false)} />
           )}
           <LeaveButton onClick={() => setLeaveRoomModalVisible(true)}>
             게임방 나가기

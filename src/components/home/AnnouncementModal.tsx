@@ -6,15 +6,15 @@ import gameRuleIcon from '@assets/svg_gameRuleIcon.svg';
 import Modal from '@components/common/Modal';
 
 const AnnouncementModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
-  const date = new Date();
-
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-
-  const currentDate = `${year}${month}${day}`;
-
   const handleClickShowOnlyTodaySpan = () => {
+    const date = new Date();
+
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    const currentDate = `${year}${month}${day}`;
+
     localStorage.setItem('AnnouncementModalShownDate', currentDate);
     onClose();
   };

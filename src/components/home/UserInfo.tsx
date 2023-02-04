@@ -22,7 +22,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [createGameModalVisible, setCreateGameModalVisible] = useState<boolean>(false);
-  const [SetUpInfoModalVisible, setSetUpInfoModalVisible] = useState<boolean>(false);
+  const [setUpInfoModalVisible, setSetUpInfoModalVisible] = useState<boolean>(false);
 
   return (
     <UserInfoLayout>
@@ -61,9 +61,9 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
           게임방 만들기
         </OnClickHandleButton>
       )}
-      {SetUpInfoModalVisible && (
+      {setUpInfoModalVisible && (
         <SetUpInfoModal
-          visible={SetUpInfoModalVisible}
+          visible={setUpInfoModalVisible}
           onClose={() => setSetUpInfoModalVisible(false)}
           mypage={mypage}
         />
