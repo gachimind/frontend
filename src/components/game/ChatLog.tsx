@@ -64,7 +64,7 @@ const ChatLog = () => {
   };
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (!chat || e.key !== 'Enter') {
+    if (!chat || e.key !== 'Enter' || e.nativeEvent.isComposing) {
       return;
     }
     if (checkEvaluatable() && /^[0-5]$/g.test(chat) && !isTurnEvaluated) {
