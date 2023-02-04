@@ -113,6 +113,7 @@ const ChatBox = styled.div`
   color: ${(props) => props.theme.colors.lightGrey4};
   height: 401px;
   padding: 20px;
+  margin-bottom: 2px;
   overflow-y: auto;
   display: flex;
   flex-direction: column-reverse;
