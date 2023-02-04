@@ -164,7 +164,7 @@ const useWebRTC = () => {
 
   useEffect(() => {
     return () => {
-      emit('webrtc- leave');
+      emit(PUBLISH.webRTCLeave);
       Object.entries(playerStreamMap).forEach((map) => {
         const socketId = map[0];
         const stream = map[1];

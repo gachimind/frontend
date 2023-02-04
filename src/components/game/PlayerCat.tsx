@@ -14,6 +14,7 @@ const PlayerCat = ({ participant, playerScore }: { participant: Participant; pla
 
   useEffect(() => {
     if (!playerScore || score.score === playerScore) {
+      setScore({ score: 0 });
       return;
     }
     setScore({ score: playerScore - score.score });
@@ -23,6 +24,7 @@ const PlayerCat = ({ participant, playerScore }: { participant: Participant; pla
     <PlayerCatLayout score={playerScore} isReady={participant.isHost ? true : participant.isReady ? true : false}>
       <div>
         <CatOnGame
+          userId={participant.userId}
           catTheme={cat}
           rocketTheme={rocket}
           nickname={participant.nickname}

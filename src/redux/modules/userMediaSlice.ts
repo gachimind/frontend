@@ -60,6 +60,18 @@ const userMediaSlice = createSlice({
       state.isMediaLoading = false;
       state.isMediaSuccess = false;
     },
+    clearMedia: (state) => {
+      state.userCam = false;
+      state.userMic = false;
+      state.localDevice = {
+        video: false,
+        audio: false,
+      };
+      state.isMediaLoading = false;
+      state.isMediaSuccess = false;
+      state.userStreamRef = undefined;
+      state.userStream = new MediaStream();
+    },
   },
 });
 
@@ -73,6 +85,7 @@ export const {
   setMediaLoading,
   setMediaDone,
   initMediaStatus,
+  clearMedia,
 } = userMediaSlice.actions;
 
 export default userMediaSlice;

@@ -14,7 +14,5 @@ const Template: ComponentStory<typeof CatScore> = (args: CatScoreProps) => {
 export const Default = Template.bind({});
 Default.args = {
   size: 'large',
-  scoreInfo: {
-    score: 0,
-  },
+  score: 0,
 };

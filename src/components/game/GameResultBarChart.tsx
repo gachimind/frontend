@@ -42,6 +42,7 @@ const GameResultBarChart = ({ maxScore, score, participant, index }: GameResultC
               scale={1.34}
               size="large"
               scoreInfo={scoreInfo}
+              userId={participant.userId}
               nickname={participant.nickname}
               hasIdlePopupAnimation={false}
               catType="body"
