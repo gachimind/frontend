@@ -19,7 +19,9 @@ const useWebRTC = () => {
         const peerConnection = new RTCPeerConnection({
           iceServers: [
             {
-              urls: 'stun:stun.l.google.com:19302',
+              urls: 'turn:linkyway.org',
+              username: 'pds',
+              credential: '1234',
             },
             {
               urls: process.env.REACT_APP_API_TURN_SERVER_DOMAIN ?? 'stun:stun.l.google.com:19302',
@@ -38,6 +40,7 @@ const useWebRTC = () => {
                 },
               });
             }, 500);
+            }, 100);
           }
         };
         if (!userStreamRef?.current) {
