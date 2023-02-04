@@ -13,6 +13,7 @@ server.use(
     '/api/users/me': '/me',
     '/api/users/me/keyword': '/me/keyword',
     '/api/users/logout': '/logout',
+    '/api/admin/report': '/report',
   }),
 );
 
