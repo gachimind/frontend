@@ -19,9 +19,7 @@ const useWebRTC = () => {
         const peerConnection = new RTCPeerConnection({
           iceServers: [
             {
-              urls: 'turn:linkyway.org',
-              username: 'pds',
-              credential: '1234',
+              urls: 'stun:stun.l.google.com:19302',
             },
             {
               urls: process.env.REACT_APP_API_TURN_SERVER_DOMAIN ?? 'stun:stun.l.google.com:19302',
