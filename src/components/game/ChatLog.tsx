@@ -108,7 +108,6 @@ const ChatLogLayout = styled.div`
   height: 100%;
 `;
 
-// TODO: 스크롤 스타일링
 const ChatBox = styled.div`
   font-size: 20px;
   color: ${(props) => props.theme.colors.lightGrey4};
@@ -117,6 +116,8 @@ const ChatBox = styled.div`
   overflow-y: auto;
   display: flex;
   flex-direction: column-reverse;
+  word-wrap: break-word;
+  word-break: break-all;
 `;
 
 const ChatInput = styled.input`
