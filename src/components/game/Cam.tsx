@@ -38,7 +38,7 @@ const Cam = ({ userId, userStream, nickname, profileImg, video, audio, isMe, isH
   const videoRef: React.RefObject<HTMLVideoElement> | null = useRef(null);
   const { cat, rocket } = getCatInfoByQuery(profileImg);
   useEffect(() => {
-    if (!videoRef.current || !userStream || !video) {
+    if (!videoRef.current || !userStream) {
       return;
     }
     videoRef.current.srcObject = userStream;

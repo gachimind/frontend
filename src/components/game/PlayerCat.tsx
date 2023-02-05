@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
+import { useAppSelector } from '@redux/hooks';
 import { getCatInfoByQuery } from '@utils/character';
 
 import CatOnGame from '@components/character/CatOnGame';
@@ -11,6 +12,7 @@ import { Participant } from '@customTypes/gameRoomType';
 const PlayerCat = ({ participant, playerScore }: { participant: Participant; playerScore: number }) => {
   const { cat, rocket } = getCatInfoByQuery(participant.profileImg);
   const [score, setScore] = useState<{ score: number }>({ score: 0 });
+  const { playState } = useAppSelector((state) => state.gamePlay);
 
   useEffect(() => {
     if (!playerScore || score.score === playerScore) {
@@ -21,7 +23,10 @@ const PlayerCat = ({ participant, playerScore }: { participant: Participant; pla
   }, [playerScore]);
 
   return (
-    <PlayerCatLayout score={playerScore} isReady={participant.isHost ? true : participant.isReady ? true : false}>
+    <PlayerCatLayout
+      score={!playState ? 0 : playerScore}
+      isReady={participant.isHost ? true : participant.isReady ? true : false}
+    >
       <div>
         <CatOnGame
           userId={participant.userId}
