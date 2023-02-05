@@ -31,14 +31,13 @@ const Presenter = () => {
 
   return (
     <PresenterLayout>
-      {(playState?.event === 'readyTimer' || playState?.event === 'startCount') && (
-        <PresentationInfo
-          isMe={isMe}
-          keyword={turn?.keyword as string}
-          nickname={presenterNickname}
-          event={playState.event}
-        />
-      )}
+      <PresentationInfo
+        isMe={isMe}
+        keyword={turn?.keyword as string}
+        nickname={presenterNickname}
+        event={playState?.event}
+      />
+
       {playState?.event === 'speechTimer' && turn && (
         <PresenterKeywordBox isMe={isMe} keyword={turn.keyword} answered={turn.answered} />
       )}

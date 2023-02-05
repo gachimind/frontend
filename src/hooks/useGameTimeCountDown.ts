@@ -13,11 +13,13 @@ const CounterDescriptions = {
 const useGameTimeCountDown = () => {
   const { playState } = useAppSelector((state) => state.gamePlay);
   const [counter, setCounter] = useState<number>(0);
+  const [currentCount, setCurrentCount] = useState<number>(0);
   const [counterDescription, setCounterDescription] = useState<string>('');
 
   useEffect(() => {
     if (playState) {
       setCounter(playState.timer);
+      setCurrentCount(playState.timer);
       setCounterDescription(CounterDescriptions[playState.event]);
       return;
     }
@@ -25,18 +27,18 @@ const useGameTimeCountDown = () => {
   }, [playState]);
 
   useEffect(() => {
-    if (counter <= 0) {
+    if (currentCount <= 0 || counter <= 0) {
+      setCounter(0);
       return;
     }
-    const timeoutId = setTimeout(() => {
-      setCounter(counter - 1000);
-    }, 980);
-
-    return () => clearTimeout(timeoutId);
+    const intervaelId = setInterval(() => {
+      setCurrentCount((prev) => Math.max(0, prev - 1000));
+    }, 990);
+    return () => clearInterval(intervaelId);
   }, [counter]);
 
   return {
-    count: counter,
+    count: currentCount,
     description: counterDescription,
   };
 };

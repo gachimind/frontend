@@ -7,11 +7,12 @@ interface PresentationInfoProps {
   isMe: boolean;
   keyword: string;
   nickname: string;
-  event: 'readyTimer' | 'startCount';
+  event?: string;
 }
 
 const PresentationInfo = ({ isMe, keyword, nickname, event }: PresentationInfoProps) => {
   const { count } = useGameTimeCountDown();
+
   if (event === 'startCount') {
     return (
       <PresentationInfoLayout>
