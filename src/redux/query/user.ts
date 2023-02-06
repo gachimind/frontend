@@ -1,4 +1,4 @@
-import { MyProfileResponse } from '@customTypes/userType';
+import { MyKeywordsResponse, MyProfileResponse } from '@customTypes/userType';
 
 import { coreApi } from './coreApi';
 
@@ -20,7 +20,17 @@ export const userApi = coreApi.injectEndpoints({
       transformResponse: (response: { data: MyProfileResponse }) => response.data,
       providesTags: ['User'],
     }),
+    getUserKeyword: builder.query<MyKeywordsResponse, void>({
+      query: () => {
+        return {
+          url: USER_API + '/me/keyword',
+          headers,
+        };
+      },
+      transformResponse: (response: { data: MyKeywordsResponse }) => response.data,
+      providesTags: ['User'],
+    }),
   }),
 });
 
-export const { useGetUserInfoQuery } = userApi;
+export const { useGetUserInfoQuery, useGetUserKeywordQuery } = userApi;
