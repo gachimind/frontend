@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import cursorIcon from '@assets/svg_cursorIcon.svg';
 import medalIcon from '@assets/svg_medalIcon.svg';
 import trophyIcon from '@assets/svg_trophyIcon.svg';
-import { useAppSelector } from '@redux/hooks';
 import { useGetUserInfoQuery } from '@redux/query/user';
 import { getCatInfoByQuery } from '@utils/character';
 
@@ -17,11 +16,8 @@ import LoginModal from './LoginModal';
 import SetUpInfoModal from './SetUpInfoModal';
 
 const UserInfo = ({ mypage }: { mypage?: boolean }) => {
-  const user = useAppSelector((state) => state.user.user);
   const { data } = useGetUserInfoQuery();
-  console.log(data?.nickname);
-
-  const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
+  const { cat, rocket } = getCatInfoByQuery(data?.profileImg);
   const token = sessionStorage.getItem('accessToken');
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
@@ -31,13 +27,13 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
   return (
     <UserInfoLayout>
       <ProfileBox>
-        {user ? (
+        {data ? (
           <>
             <Cat type="rocket" catTheme={cat} rocketTheme={rocket} scale={2} />
             <RankBox>
               <span className="rank-box-title">오늘의 랭킹</span>
               <div>
-                <span className="rank-box-rank">{user?.today.todayRank}</span>
+                <span className="rank-box-rank">{data?.today.todayRank}</span>
                 <span className="rank-box-unit">위</span>
               </div>
             </RankBox>
@@ -51,7 +47,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
               로그인이 필요합니다
             </span>
           ) : (
-            <span>{user?.nickname}</span>
+            <span>{data?.nickname}</span>
           )}
         </UserStatusBox>
       </ProfileBox>
@@ -61,7 +57,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
         <CreateGameModal visible={createGameModalVisible} onClose={() => setCreateGameModalVisible(false)} />
       )}
       {!mypage && (
-        <OnClickHandleButton onClick={() => (!user ? setLoginModalVisible(true) : setCreateGameModalVisible(true))}>
+        <OnClickHandleButton onClick={() => (!data ? setLoginModalVisible(true) : setCreateGameModalVisible(true))}>
           게임방 만들기
         </OnClickHandleButton>
       )}
@@ -82,7 +78,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
         <div>
           <span className="score-box-title">오늘 획득한 점수</span>
           <span className="score-box-score">
-            {user ? user.today.todayScore : 0}
+            {data ? data.today.todayScore : 0}
             <span>점</span>
           </span>
         </div>
@@ -94,7 +90,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
         <div>
           <span className="score-box-title">누적 점수</span>
           <span className="score-box-score">
-            {user ? user.total.totalScore : 0}
+            {data ? data.total.totalScore : 0}
             <span>점</span>
           </span>
         </div>
