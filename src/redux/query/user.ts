@@ -30,7 +30,16 @@ export const userApi = coreApi.injectEndpoints({
       transformResponse: (response: { data: MyKeywordsResponse }) => response.data,
       providesTags: ['User'],
     }),
+    updateUserInfo: builder.mutation({
+      query: ({ newNickname, newProfileImg }: { newNickname: string; newProfileImg: string }) => ({
+        url: '/me',
+        method: 'PATCH',
+        headers,
+        body: { nickname: newNickname, profileImg: newProfileImg },
+      }),
+      invalidatesTags: ['User'],
+    }),
   }),
 });
 
-export const { useGetUserInfoQuery, useGetUserKeywordQuery } = userApi;
+export const { useGetUserInfoQuery, useGetUserKeywordQuery, useUpdateUserInfoMutation } = userApi;

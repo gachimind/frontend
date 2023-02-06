@@ -13,9 +13,7 @@ import redRocketImage from '@assets/png_redRocketImage.png';
 import whiteCatFaceImage from '@assets/png_whiteCatFaceImage.png';
 import yellowRocketImage from '@assets/png_yellowRocketImage.png';
 import { CatTheme, RocketTheme } from '@constants/characters';
-import { useAppDispatch } from '@redux/hooks';
-import { __updateUserInfo } from '@redux/modules/userSlice';
-import { useGetUserInfoQuery } from '@redux/query/user';
+import { useGetUserInfoQuery, useUpdateUserInfoMutation } from '@redux/query/user';
 import { getCatInfoByQuery } from '@utils/character';
 
 import Cat from '@components/character/Cat';
@@ -31,7 +29,7 @@ const SetUpInfo = ({
   mypage?: boolean;
   onClose: () => void;
 }) => {
-  const dispatch = useAppDispatch();
+  const [updateUserInfo] = useUpdateUserInfoMutation();
   const { data } = useGetUserInfoQuery();
   const user = data;
   const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
@@ -72,14 +70,14 @@ const SetUpInfo = ({
       return;
     }
     if (user?.nickname === newNickname && user?.profileImg !== newProfileImg) {
-      dispatch(__updateUserInfo({ newNickname, newProfileImg }));
+      updateUserInfo({ newNickname, newProfileImg });
       mypage ? onClose() : isSetUpInfoSuccess((prev) => !prev);
     }
     if (newNickname !== user?.nickname) {
       await userApi
         .duplicateCheck(newNickname)
         .then(() => {
-          dispatch(__updateUserInfo({ newNickname, newProfileImg }));
+          updateUserInfo({ newNickname, newProfileImg });
           mypage ? onClose() : isSetUpInfoSuccess((prev) => !prev);
         })
         .catch((e) => e.status === 412 && setDuplicateAlert({ duplicate: true, message: '*중복되는 닉네임입니다' }));
