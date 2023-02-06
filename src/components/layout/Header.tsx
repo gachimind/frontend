@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -7,7 +7,9 @@ import logoIcon from '@assets/png_logoIcon.png';
 import cursorIcon from '@assets/svg_cursorIcon.svg';
 import worldIcon from '@assets/svg_worldIcon.svg';
 import { useAppSelector } from '@redux/hooks';
+import { getCatInfoByQuery } from '@utils/character';
 
+import CatIcon from '@components/character/CatIcon';
 import LoginModal from '@components/home/LoginModal';
 import LogoutModal from '@components/home/LogoutModal';
 
@@ -15,7 +17,7 @@ const Header = ({ page }: { page: string }) => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user.user);
   const accessToken = sessionStorage.getItem('accessToken');
-
+  const { cat } = getCatInfoByQuery(user?.profileImg);
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [logoutModalVisible, setLogoutModalVisible] = useState<boolean>(false);
   return (
@@ -37,13 +39,14 @@ const Header = ({ page }: { page: string }) => {
           LOGIN
         </button>
       ) : (
-        <button
-          className="nickname-button"
-          onClick={() => setLogoutModalVisible(true)}
-          disabled={page === 'room' ? true : false}
-        >
-          {user?.nickname}
-        </button>
+        <NicknameBox className="nickname-button" onClick={() => page !== 'room' && setLogoutModalVisible(true)}>
+          <CatContainerBox>
+            <div>
+              <CatIcon catTheme={cat} />
+            </div>
+          </CatContainerBox>
+          <p> {user?.nickname}</p>
+        </NicknameBox>
       )}
     </HeaderLayout>
   );
@@ -70,9 +73,39 @@ const HeaderLayout = styled.div`
     font-family: ${(props) => props.theme.font.joystick};
     margin-right: 150px;
   }
+`;
 
-  .nickname-button {
-    margin-right: 112px;
+const NicknameBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 112px;
+  font-size: 20px;
+  grid-column-gap: 8px;
+  cursor: url(${cursorIcon}), pointer;
+`;
+
+const CatContainerBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  border: 2px solid ${(props) => props.theme.colors.ivory2};
+  & > div {
+    width: 30px;
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    & > div {
+      transform: scale(1.35);
+      margin-bottom: 2px;
+    }
   }
 `;
 

@@ -23,6 +23,11 @@ server.get('/api/users/login/kakao', (req, res) => {
   res.redirect('http://localhost:3000/login?token=token1');
 });
 
+// 깃헙 소셜 로그인
+server.get('/api/users/login/github', (req, res) => {
+  res.redirect('http://localhost:3000/login?token=token2');
+});
+
 // 닉네임 중복검사
 server.get(`/api/users/:nickname`, (req, res) => {
   const { nickname } = req.params;
