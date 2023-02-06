@@ -13,8 +13,9 @@ import redRocketImage from '@assets/png_redRocketImage.png';
 import whiteCatFaceImage from '@assets/png_whiteCatFaceImage.png';
 import yellowRocketImage from '@assets/png_yellowRocketImage.png';
 import { CatTheme, RocketTheme } from '@constants/characters';
-import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { useAppDispatch } from '@redux/hooks';
 import { __updateUserInfo } from '@redux/modules/userSlice';
+import { useGetUserInfoQuery } from '@redux/query/user';
 import { getCatInfoByQuery } from '@utils/character';
 
 import Cat from '@components/character/Cat';
@@ -31,9 +32,9 @@ const SetUpInfo = ({
   onClose: () => void;
 }) => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.user.user);
-  const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
-  const [newNickname, setNewNickname] = useState<string>(user?.nickname ?? '');
+  const { data } = useGetUserInfoQuery();
+  const { cat, rocket } = getCatInfoByQuery(data?.profileImg);
+  const [newNickname, setNewNickname] = useState<string>(data?.nickname ?? '');
   const [duplicateAlert, setDuplicateAlert] = useState<{ duplicate: boolean; message: string }>({
     duplicate: false,
     message: '',
@@ -42,7 +43,7 @@ const SetUpInfo = ({
   const [newRocket, setNewRocket] = useState<RocketTheme>(rocket);
 
   const handleDuplicateCheckButtonClick = async () => {
-    if (newNickname === user?.nickname) {
+    if (newNickname === data?.nickname) {
       return;
     }
     if (newNickname) {
@@ -62,18 +63,18 @@ const SetUpInfo = ({
       setDuplicateAlert({ duplicate: true, message: '*닉네임을 입력해주세요' });
       return;
     }
-    if (user?.nickname === newNickname && user?.profileImg === newProfileImg) {
+    if (data?.nickname === newNickname && data?.profileImg === newProfileImg) {
       !mypage && isSetUpInfoSuccess((prev) => !prev);
       return null;
     }
     if (duplicateAlert.duplicate) {
       return;
     }
-    if (user?.nickname === newNickname && user?.profileImg !== newProfileImg) {
+    if (data?.nickname === newNickname && data?.profileImg !== newProfileImg) {
       dispatch(__updateUserInfo({ newNickname, newProfileImg }));
       mypage ? onClose() : isSetUpInfoSuccess((prev) => !prev);
     }
-    if (newNickname !== user?.nickname) {
+    if (newNickname !== data?.nickname) {
       await userApi
         .duplicateCheck(newNickname)
         .then(() => {

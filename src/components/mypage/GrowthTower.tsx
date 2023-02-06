@@ -1,12 +1,13 @@
 import styled, { keyframes } from 'styled-components';
 
-import { useAppSelector } from '@redux/hooks';
+import { useGetUserInfoQuery } from '@redux/query/user';
 import { getCatInfoByQuery } from '@utils/character';
 
 import Cat from '@components/character/Cat';
 
 const GrowthTower = () => {
-  const user = useAppSelector((state) => state.user.user);
+  const { data } = useGetUserInfoQuery();
+  const user = data;
   const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
 
   return (

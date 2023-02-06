@@ -6,14 +6,14 @@ import styled from 'styled-components';
 import logoIcon from '@assets/png_logoIcon.png';
 import cursorIcon from '@assets/svg_cursorIcon.svg';
 import worldIcon from '@assets/svg_worldIcon.svg';
-import { useAppSelector } from '@redux/hooks';
+import { useGetUserInfoQuery } from '@redux/query/user';
 
 import LoginModal from '@components/home/LoginModal';
 import LogoutModal from '@components/home/LogoutModal';
 
 const Header = ({ page }: { page: string }) => {
   const navigate = useNavigate();
-  const user = useAppSelector((state) => state.user.user);
+  const { data } = useGetUserInfoQuery();
   const accessToken = sessionStorage.getItem('accessToken');
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
@@ -42,7 +42,7 @@ const Header = ({ page }: { page: string }) => {
           onClick={() => setLogoutModalVisible(true)}
           disabled={page === 'room' ? true : false}
         >
-          {user?.nickname}
+          {data?.nickname}
         </button>
       )}
     </HeaderLayout>
