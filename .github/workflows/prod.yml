@@ -25,6 +25,7 @@ jobs:
           REACT_APP_API_TURN_SERVER_DOMAIN: ${{ secrets.REACT_APP_API_TURN_SERVER_DOMAIN }}
           REACT_APP_API_TURN_SERVER_USER: ${{ secrets.REACT_APP_API_TURN_SERVER_USER }}
           REACT_APP_API_TURN_SERVER_CREDENTIAL: ${{ secrets.REACT_APP_API_TURN_SERVER_CREDENTIAL }}
+          REACT_APP_LAMBDA_NOTI: ${{ secrets.REACT_APP_LAMBDA_NOTI }}
         run: |
           npm run build
       - name: Deploy to S3
