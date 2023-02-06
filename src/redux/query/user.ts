@@ -22,7 +22,7 @@ export const userApi = coreApi.injectEndpoints({
         };
       },
       transformResponse: (response: { data: MyKeywordsResponse }) => response.data,
-      providesTags: ['User'],
+      providesTags: ['UserKeyword'],
     }),
     updateUserInfo: builder.mutation({
       query: ({ newNickname, newProfileImg }: { newNickname: string; newProfileImg: string }) => ({
