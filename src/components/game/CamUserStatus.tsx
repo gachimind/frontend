@@ -2,12 +2,15 @@ import styled from 'styled-components';
 
 import smallMicOffIcon from '@assets/svg_smallMicOffIcon.svg';
 import smallMicOnIcon from '@assets/svg_smallMicOnIcon.svg';
+import { CatTheme } from '@constants/characters';
 
+import CatIcon from '@components/character/CatIcon';
 import PlayerImageHolder from '@components/game/PlayerImageHolder';
 
 interface CamUserStatusProps {
   nickname: string;
   isMicOn?: boolean;
+  catTheme: CatTheme;
   size?: 'main' | 'sub';
 }
 
@@ -33,11 +36,11 @@ interface CamStatusStylesProps {
   backgroundColor: string;
 }
 
-const CamUserStatus = ({ nickname, isMicOn, size = 'sub' }: CamUserStatusProps) => {
+const CamUserStatus = ({ nickname, isMicOn, size = 'sub', catTheme }: CamUserStatusProps) => {
   return (
     <CamUserStatusLayout customStyles={CamStatusStyles[size]}>
       <div>
-        <PlayerImageHolder size={size}></PlayerImageHolder>
+        <PlayerImageHolder size={size} catTheme={catTheme} />
         {size === 'sub' ? (
           <NicknameEllipsisedText>{nickname}</NicknameEllipsisedText>
         ) : (

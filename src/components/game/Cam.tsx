@@ -74,7 +74,7 @@ const Cam = ({ userId, userStream, nickname, profileImg, video, audio, isMe, isH
             />
           </EmptyVideo>
         )}
-        <CamUserStatus isMicOn={audio} nickname={nickname} size={size} />
+        <CamUserStatus isMicOn={audio} nickname={nickname} size={size} catTheme={cat} />
       </VideoBox>
     </CamLayout>
   );
