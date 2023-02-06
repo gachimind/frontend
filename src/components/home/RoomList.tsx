@@ -22,6 +22,7 @@ const RoomList = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { isSuccess } = useGetUserInfoQuery();
+  const isLogined = isSuccess;
   const { broadcastedRooms } = useAppSelector((state) => state.gameRoom);
   const { isMediaLoading, isMediaSuccess } = useAppSelector((state) => state.userMedia);
   const [selectedRoom, setSelectedRoom] = useState<GameRoomBroadcastResponse>();
@@ -91,7 +92,7 @@ const RoomList = () => {
               key={room.roomId}
               room={room}
               onJoinClick={() => handleJoinRoomClick(room.roomId)}
-              isLogined={isSuccess}
+              isLogined={isLogined}
             />
           ))}
       </RoomListLayout>

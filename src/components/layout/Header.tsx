@@ -14,6 +14,7 @@ import LogoutModal from '@components/home/LogoutModal';
 const Header = ({ page }: { page: string }) => {
   const navigate = useNavigate();
   const { data } = useGetUserInfoQuery();
+  const user = data;
   const accessToken = sessionStorage.getItem('accessToken');
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
@@ -42,7 +43,7 @@ const Header = ({ page }: { page: string }) => {
           onClick={() => setLogoutModalVisible(true)}
           disabled={page === 'room' ? true : false}
         >
-          {data?.nickname}
+          {user?.nickname}
         </button>
       )}
     </HeaderLayout>
