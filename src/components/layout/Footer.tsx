@@ -8,18 +8,26 @@ import footerImage from '@assets/svg_footerImage.svg';
 import homeIcon from '@assets/svg_homeIcon.svg';
 import instagramIcon from '@assets/svg_instagramIcon.svg';
 import myPageIcon from '@assets/svg_myPageIcon.svg';
+import { useAppSelector } from '@redux/hooks';
 
 import Button from '@components/common/Button';
+import LoginModal from '@components/home/LoginModal';
 import ReportBugModal from '@components/home/ReportBugModal';
 
 const Footer = ({ children, page }: { children?: React.ReactNode; page: string }) => {
   const navigate = useNavigate();
+  const user = useAppSelector((state) => state.user.user);
+
   const [reportBugModalVisible, setReportBugModalVisible] = useState<boolean>(false);
+  const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   return (
     <FooterLayout>
       {page !== 'room' && (
         <FooterBox>
-          <PageNavigateButton onClick={() => navigate(page === 'main' ? '/mypage' : '/')}>
+          {loginModalVisible && <LoginModal visible={loginModalVisible} onClose={() => setLoginModalVisible(false)} />}
+          <PageNavigateButton
+            onClick={() => (user ? navigate(page === 'main' ? '/mypage' : '/') : setLoginModalVisible(true))}
+          >
             <img src={page === 'main' ? myPageIcon : homeIcon} />
           </PageNavigateButton>
           {reportBugModalVisible && (
