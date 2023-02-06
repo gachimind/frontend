@@ -33,8 +33,9 @@ const SetUpInfo = ({
 }) => {
   const dispatch = useAppDispatch();
   const { data } = useGetUserInfoQuery();
-  const { cat, rocket } = getCatInfoByQuery(data?.profileImg);
-  const [newNickname, setNewNickname] = useState<string>(data?.nickname ?? '');
+  const user = data;
+  const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
+  const [newNickname, setNewNickname] = useState<string>(user?.nickname ?? '');
   const [duplicateAlert, setDuplicateAlert] = useState<{ duplicate: boolean; message: string }>({
     duplicate: false,
     message: '',
@@ -43,7 +44,7 @@ const SetUpInfo = ({
   const [newRocket, setNewRocket] = useState<RocketTheme>(rocket);
 
   const handleDuplicateCheckButtonClick = async () => {
-    if (newNickname === data?.nickname) {
+    if (newNickname === user?.nickname) {
       return;
     }
     if (newNickname) {
@@ -63,18 +64,18 @@ const SetUpInfo = ({
       setDuplicateAlert({ duplicate: true, message: '*닉네임을 입력해주세요' });
       return;
     }
-    if (data?.nickname === newNickname && data?.profileImg === newProfileImg) {
+    if (user?.nickname === newNickname && data?.profileImg === newProfileImg) {
       !mypage && isSetUpInfoSuccess((prev) => !prev);
       return null;
     }
     if (duplicateAlert.duplicate) {
       return;
     }
-    if (data?.nickname === newNickname && data?.profileImg !== newProfileImg) {
+    if (user?.nickname === newNickname && user?.profileImg !== newProfileImg) {
       dispatch(__updateUserInfo({ newNickname, newProfileImg }));
       mypage ? onClose() : isSetUpInfoSuccess((prev) => !prev);
     }
-    if (newNickname !== data?.nickname) {
+    if (newNickname !== user?.nickname) {
       await userApi
         .duplicateCheck(newNickname)
         .then(() => {
