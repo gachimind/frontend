@@ -57,17 +57,11 @@ const OAuthButton = styled.button`
 const KakaoButton = styled(OAuthButton)`
   color: #000000 85%;
   background-color: #fee500;
-  :hover {
-    opacity: 0.9;
-  }
 `;
 
 const GithubButton = styled(OAuthButton)`
   color: white;
   background-color: black;
-  :hover {
-    opacity: 0.8;
-  }
 `;
 
 export default LoginModal;
