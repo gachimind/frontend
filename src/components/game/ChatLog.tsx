@@ -6,6 +6,7 @@ import useChatSocket from '@hooks/socket/useChatSocket';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { setEvaluated } from '@redux/modules/gamePlaySlice';
 import { addChat, clearChatList } from '@redux/modules/gameRoomSlice';
+import { useGetUserInfoQuery } from '@redux/query/user';
 import { alertToast } from '@utils/toast';
 
 // TODO: 색상 변경할 것
@@ -26,7 +27,8 @@ const ChatColor: ChatColorType = {
 const ChatLog = () => {
   const { chatList } = useAppSelector((state) => state.gameRoom);
   const { playState, turn, isTurnEvaluated } = useAppSelector((state) => state.gamePlay);
-  const { user } = useAppSelector((state) => state.user);
+  const { data } = useGetUserInfoQuery();
+  const user = data;
   const [chat, setChat] = useState<string>('');
   const dispatch = useAppDispatch();
   const { emitSendChat, emitTurnEvaluation } = useChatSocket();

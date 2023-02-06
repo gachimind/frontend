@@ -8,6 +8,7 @@ import roomListRightIcon from '@assets/svg_roomListRightIcon.svg';
 import { useAuthSocket } from '@hooks/socket/useAuthSocket';
 import useLocalStream from '@hooks/useLocalStream';
 import { useAppSelector } from '@redux/hooks';
+import { useGetUserInfoQuery } from '@redux/query/user';
 import { getParam } from '@utils/common';
 
 import GlobalLoading from '@components/common/GlobalLoading';
@@ -20,6 +21,7 @@ import RoomCard from './RoomCard';
 const RoomList = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { isSuccess } = useGetUserInfoQuery();
   const { broadcastedRooms } = useAppSelector((state) => state.gameRoom);
   const { isMediaLoading, isMediaSuccess } = useAppSelector((state) => state.userMedia);
   const [selectedRoom, setSelectedRoom] = useState<GameRoomBroadcastResponse>();
@@ -85,7 +87,12 @@ const RoomList = () => {
           .filter((room) => room.participants !== 0)
           .slice(offset, offset + 9)
           .map((room) => (
-            <RoomCard key={room.roomId} room={room} onJoinClick={() => handleJoinRoomClick(room.roomId)} />
+            <RoomCard
+              key={room.roomId}
+              room={room}
+              onJoinClick={() => handleJoinRoomClick(room.roomId)}
+              isLogined={isSuccess}
+            />
           ))}
       </RoomListLayout>
     </>
