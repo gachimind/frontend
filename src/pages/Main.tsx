@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 
 import useErrorSocket from '@hooks/socket/useErrorSocket';
 import useDuplicatedUserInvalidate from '@hooks/useDuplicatedUserInvalidate';
+import useSpecialNotification from '@hooks/useSpecialNotification';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { logout } from '@redux/modules/userSlice';
 
 import AnnouncementModal from '@components/home/AnnouncementModal';
 import RoomList from '@components/home/RoomList';
 import SetUpInfoModal from '@components/home/SetUpInfoModal';
+import SpecialNotificationModal from '@components/home/SpecialNotificationModal';
 import UserInfo from '@components/home/UserInfo';
 import ContentContainer from '@components/layout/ContentContainer';
 import MainTemplate from '@components/layout/MainTemplate';
@@ -17,7 +19,7 @@ const Main = () => {
   const dispatch = useAppDispatch();
   const { onError, offError } = useErrorSocket();
   const { invalidate } = useDuplicatedUserInvalidate();
-
+  const { contents, hasNotification, closeNotification, key } = useSpecialNotification();
   useEffect(() => {
     onError([
       { target: 'status', value: 401, callback: () => dispatch(logout()) },
@@ -56,6 +58,14 @@ const Main = () => {
     <MainTemplate>
       <ContentContainer title="PROFILE">
         <UserInfo />
+        {hasNotification && (
+          <SpecialNotificationModal
+            visible={hasNotification}
+            onClose={closeNotification}
+            contents={contents}
+            notificaionKey={key}
+          />
+        )}
         {setUpInfoModalVisible && (
           <SetUpInfoModal visible={setUpInfoModalVisible} onClose={() => setSetUpInfoModalVisible(false)} />
         )}
