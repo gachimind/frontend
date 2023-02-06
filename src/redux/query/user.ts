@@ -2,10 +2,6 @@ import { MyKeywordsResponse, MyProfileResponse } from '@customTypes/userType';
 
 import { coreApi } from './coreApi';
 
-const headers = {
-  authorization: 'Bearer ' + sessionStorage.getItem('accessToken'),
-};
-
 const USER_API = '/api/users';
 
 export const userApi = coreApi.injectEndpoints({
@@ -14,7 +10,6 @@ export const userApi = coreApi.injectEndpoints({
       query: () => {
         return {
           url: USER_API + '/me',
-          headers,
         };
       },
       transformResponse: (response: { data: MyProfileResponse }) => response.data,
@@ -24,7 +19,6 @@ export const userApi = coreApi.injectEndpoints({
       query: () => {
         return {
           url: USER_API + '/me/keyword',
-          headers,
         };
       },
       transformResponse: (response: { data: MyKeywordsResponse }) => response.data,
@@ -34,7 +28,6 @@ export const userApi = coreApi.injectEndpoints({
       query: ({ newNickname, newProfileImg }: { newNickname: string; newProfileImg: string }) => ({
         url: '/me',
         method: 'PATCH',
-        headers,
         body: { nickname: newNickname, profileImg: newProfileImg },
       }),
       invalidatesTags: ['User'],
