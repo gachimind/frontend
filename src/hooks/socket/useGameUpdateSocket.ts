@@ -1,8 +1,9 @@
 import { SUBSCRIBE } from '@constants/socket';
 import useWebRTC from '@hooks/useWebRTC';
 import { useAppDispatch } from '@redux/hooks';
+import { clearAllGamePlayState, setPlayState } from '@redux/modules/gamePlaySlice';
 import { addChat, updateRoom } from '@redux/modules/gameRoomSlice';
-import { setPlayerList } from '@redux/modules/playerMediaSlice';
+import { removePlayerStreamById, setPlayerList } from '@redux/modules/playerMediaSlice';
 
 import { GameRoomDetail } from '@customTypes/gameRoomType';
 import { EventUserInfo } from '@customTypes/socketType';
@@ -21,7 +22,7 @@ const useGameUpdateSocket = () => {
   const { on, off } = socketInstance;
 
   function isInOutEvent(event: string) {
-    return event === 'enter' || event === 'leave' || event === 'leave-force';
+    return event === 'enter' || event === 'leave';
   }
 
   const onAnnounceRoomUpdate = () => {
@@ -33,14 +34,38 @@ const useGameUpdateSocket = () => {
         data: {
           room: GameRoomDetail;
           eventUserInfo: EventUserInfo;
-          event: 'enter' | 'leave' | 'leave-force' | 'ready' | 'start';
+          event: 'enter' | 'leave' | 'ready' | 'start' | 'game-end';
         };
       }) => {
-        console.log('[on] update-room');
-        console.log(data);
+        if (data.event === 'game-end') {
+          dispatch(updateRoom(data.room));
+          if (data.room.participants.length === 1) {
+            dispatch(
+              setPlayState({
+                event: 'gameEnd',
+                timer: 1000,
+              }),
+            );
+            setTimeout(() => {
+              dispatch(clearAllGamePlayState());
+            }, 1500);
+          }
+          return;
+        }
         const { nickname, socketId, userId } = data.eventUserInfo;
         dispatch(updateRoom(data.room));
-        dispatch(setPlayerList(data.room.participants));
+        if (isInOutEvent(data.event)) {
+          dispatch(
+            setPlayerList(
+              data.room.participants.map((participant) => {
+                return { ...participant, audio: participant.audio ?? true, video: participant.video ?? true };
+              }),
+            ),
+          );
+        }
+        if (data.event === 'leave') {
+          dispatch(removePlayerStreamById(socketId));
+        }
         if (isInOutEvent(data.event)) {
           const InOutEventMessageType: InOutEventMessageType = {
             enter: `'${nickname}'님이 입장하셨습니다.`,
@@ -52,7 +77,7 @@ const useGameUpdateSocket = () => {
               nickname: '알림',
               userId,
               socketId,
-              message: InOutEventMessageType[data.event as 'enter' | 'leave' | 'leave-force'],
+              message: InOutEventMessageType[data.event as 'enter' | 'leave'],
               type: 'notification',
             }),
           );

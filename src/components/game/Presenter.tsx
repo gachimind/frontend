@@ -1,21 +1,23 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
+import useGameInitiationSocket from '@hooks/socket/useGameInitiationSocket';
 import { useAppSelector } from '@redux/hooks';
-import { filterKeyword } from '@utils/common';
 
 import GameReady from './GameReady';
 import GameResultModal from './GameResultModal';
 import GameStart from './GameStart';
 import PresentationInfo from './PresentationInfo';
 import PresenterCam from './PresenterCam';
+import PresenterKeywordBox from './PresenterKeywordBox';
 
 const Presenter = () => {
   const { user } = useAppSelector((state) => state.user);
-  const { room } = useAppSelector((state) => state.gameRoom);
+  const { room, scoreMap } = useAppSelector((state) => state.gameRoom);
   const { turn, playState } = useAppSelector((state) => state.gamePlay);
   const [resultModalVisible, setResultModalVisible] = useState<boolean>(false);
+  const { emitGameReady, emitGameStart } = useGameInitiationSocket();
   const currentUser = room?.participants.find((participant) => participant.userId === user?.userId);
   const presenterNickname =
     room?.participants.find((participant) => participant.userId === turn?.speechPlayer)?.nickname ?? '';
@@ -29,26 +31,28 @@ const Presenter = () => {
 
   return (
     <PresenterLayout>
-      {(playState?.event === 'readyTimer' || playState?.event === 'startCount') && (
-        <PresentationInfo
-          isMe={isMe}
-          keyword={turn?.keyword as string}
+      <PresentationInfo
+        isMe={isMe}
+        keyword={turn?.keyword as string}
+        nickname={presenterNickname}
+        event={playState?.event}
+      />
+
+      {playState?.event === 'speechTimer' && turn && (
+        <PresenterKeywordBox isMe={isMe} keyword={turn.keyword} answered={turn.answered} />
+      )}
+      {room?.isGameOn && turn && (
+        <PresenterCam
           nickname={presenterNickname}
-          event={playState.event}
+          isMe={isMe}
+          userId={turn.speechPlayer}
+          profileImg={currentUser?.profileImg}
         />
       )}
-      {playState?.event === 'speechTimer' && turn && (
-        <PresenterKeywordBox>
-          <p>
-            제시어:&nbsp;<span>{isMe ? turn.keyword : filterKeyword(turn.keyword)}</span>
-          </p>
-        </PresenterKeywordBox>
-      )}
-      {room?.isGameOn && turn && <PresenterCam nickname={presenterNickname} isMe={isMe} userId={turn.speechPlayer} />}
       {!room?.isGameOn && (
         <GameReadyBox>
-          {currentUser?.isHost && <GameStart />}
-          {currentUser?.isHost === false && <GameReady />}
+          {currentUser?.isHost && <GameStart handleClick={emitGameStart} />}
+          {currentUser?.isHost === false && <GameReady handleClick={emitGameReady} />}
         </GameReadyBox>
       )}
       {resultModalVisible && room && (
@@ -56,6 +60,7 @@ const Presenter = () => {
           visible={resultModalVisible}
           onClose={() => setResultModalVisible(false)}
           participants={room.participants}
+          scoreMap={scoreMap}
           userId={user?.userId as number}
         />
       )}
@@ -76,37 +81,4 @@ const GameReadyBox = styled.div`
   right: -40px;
 `;
 
-const KeywordSlide = keyframes`
-0% {
-  height: 220px;
-  background-color: inherit;
-  font-size: 40px;
-  color: red;
-}
-  100% {
-    height: 42px;
-    background-color: rgba(28, 28, 28, 0.7);
-  }
-`;
-
-const PresenterKeywordBox = styled.div`
-  position: absolute;
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: flex-end;
-  top: 38px;
-  background-color: rgba(28, 28, 28, 0.7);
-  z-index: 3;
-  padding: 10px 0;
-  color: ${(props) => props.theme.colors.white};
-  height: 42px;
-  animation: ${KeywordSlide} 0.75s 0s;
-  font-size: 14px;
-  & > p > span {
-    font-size: 20px;
-    font-weight: 500;
-  }
-`;
-
-export default Presenter;
+export default React.memo(Presenter);

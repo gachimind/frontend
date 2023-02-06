@@ -4,7 +4,9 @@ import styled from 'styled-components';
 
 import useChatSocket from '@hooks/socket/useChatSocket';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
-import { clearChatList } from '@redux/modules/gameRoomSlice';
+import { setEvaluated } from '@redux/modules/gamePlaySlice';
+import { addChat, clearChatList } from '@redux/modules/gameRoomSlice';
+import { alertToast } from '@utils/toast';
 
 // TODO: 색상 변경할 것
 interface ChatColorType {
@@ -23,9 +25,33 @@ const ChatColor: ChatColorType = {
 
 const ChatLog = () => {
   const { chatList } = useAppSelector((state) => state.gameRoom);
+  const { playState, turn, isTurnEvaluated } = useAppSelector((state) => state.gamePlay);
+  const { user } = useAppSelector((state) => state.user);
   const [chat, setChat] = useState<string>('');
   const dispatch = useAppDispatch();
-  const { emitSendChat } = useChatSocket();
+  const { emitSendChat, emitTurnEvaluation } = useChatSocket();
+
+  useEffect(() => {
+    dispatch(setEvaluated(false));
+  }, [turn]);
+
+  useEffect(() => {
+    if (checkEvaluatable()) {
+      dispatch(
+        addChat({
+          nickname: '',
+          message: '[0~5] 사이의 평점을 입력해 발표자를 평가 해주세요!',
+          type: 'notification',
+          socketId: '',
+          userId: 0,
+        }),
+      );
+      alertToast(`정답은 "${turn?.keyword}" 입니다.`, 'success', {
+        hideProgressBar: true,
+        autoClose: 5000,
+      });
+    }
+  }, [playState]);
 
   useEffect(() => {
     return () => {
@@ -33,14 +59,30 @@ const ChatLog = () => {
     };
   }, []);
 
+  const checkEvaluatable = () => {
+    return playState?.event === 'discussionTimer' && user?.userId !== turn?.speechPlayer;
+  };
+
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (!chat) {
+    if (!chat || e.key !== 'Enter') {
       return;
     }
-    if (e.key === 'Enter') {
-      emitSendChat(chat);
-      setChat('');
+    if (checkEvaluatable() && /^[0-5]$/g.test(chat) && !isTurnEvaluated) {
+      emitTurnEvaluation(Number(chat), turn?.currentTurn ?? 0);
+      dispatch(setEvaluated(true));
+      dispatch(
+        addChat({
+          nickname: '',
+          message: '평가가 반영되었습니다!',
+          type: 'notification',
+          socketId: '',
+          userId: 0,
+        }),
+      );
+    } else {
+      !e.nativeEvent.isComposing && emitSendChat(chat);
     }
+    setChat('');
   };
 
   return (
@@ -66,15 +108,23 @@ const ChatLogLayout = styled.div`
   height: 100%;
 `;
 
-// TODO: 스크롤 스타일링
 const ChatBox = styled.div`
   font-size: 20px;
   color: ${(props) => props.theme.colors.lightGrey4};
   height: 401px;
   padding: 20px;
+  margin-bottom: 2px;
   overflow-y: auto;
   display: flex;
   flex-direction: column-reverse;
+  word-wrap: break-word;
+  word-break: break-all;
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: ${(props) => props.theme.colors.lightGrey1};
+  }
 `;
 
 const ChatInput = styled.input`

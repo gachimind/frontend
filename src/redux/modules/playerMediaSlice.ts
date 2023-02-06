@@ -6,6 +6,7 @@ export interface WebRTCUser {
   nickname: string;
   audio?: boolean;
   video?: boolean;
+  profileImg?: string;
 }
 
 export interface playerMediaStateType {
@@ -45,9 +46,19 @@ const playerMediaSlice = createSlice({
     setPlayerList: (state, action: PayloadAction<WebRTCUser[]>) => {
       state.playerList = action.payload;
     },
+    removePlayerStreamById: (state, action: PayloadAction<string>) => {
+      delete state.playerPeerMap[action.payload];
+      delete state.playerStreamMap[action.payload];
+    },
+    clearPlayerStream: (state) => {
+      state.playerPeerMap = {};
+      state.playerStreamMap = {};
+      state.playerList = [];
+    },
   },
 });
 
-export const { addPlayerStream, addPlayerPeer, setPlayerList } = playerMediaSlice.actions;
+export const { addPlayerStream, addPlayerPeer, setPlayerList, removePlayerStreamById, clearPlayerStream } =
+  playerMediaSlice.actions;
 
 export default playerMediaSlice;

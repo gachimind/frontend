@@ -8,7 +8,7 @@ import socketInstance from './socket/socketInstance';
 
 const useWebRTC = () => {
   const dispatch = useAppDispatch();
-  const { localDevice, userStreamRef } = useAppSelector((state) => state.userMedia);
+  const { userStreamRef } = useAppSelector((state) => state.userMedia);
   const { playerStreamMap } = useAppSelector((state) => state.playerMedia);
   const pcsRef = useRef<{ [socketId: string]: RTCPeerConnection }>({});
   const { on, emit, off } = socketInstance;
@@ -21,6 +21,11 @@ const useWebRTC = () => {
             {
               urls: 'stun:stun.l.google.com:19302',
             },
+            {
+              urls: process.env.REACT_APP_API_TURN_SERVER_DOMAIN ?? 'stun:stun.l.google.com:19302',
+              username: process.env.REACT_APP_API_TURN_SERVER_USER ?? '',
+              credential: process.env.REACT_APP_API_TURN_SERVER_CREDENTIAL ?? '',
+            },
           ],
         });
         peerConnection.onicecandidate = (e) => {
@@ -32,7 +37,7 @@ const useWebRTC = () => {
                   candidateReceiveSocketId: peerSocketId,
                 },
               });
-            }, 500);
+            }, 400);
           }
         };
         if (!userStreamRef?.current) {
@@ -67,8 +72,8 @@ const useWebRTC = () => {
     pcsRef.current = { ...pcsRef.current, [socketId]: peerConnection };
     try {
       const localSessionDescription = await peerConnection.createOffer({
-        offerToReceiveAudio: localDevice.audio,
-        offerToReceiveVideo: localDevice.video,
+        offerToReceiveAudio: true,
+        offerToReceiveVideo: true,
       });
       peerConnection.setLocalDescription(new RTCSessionDescription(localSessionDescription));
       emit(PUBLISH.webRTCOffer, {
@@ -97,7 +102,10 @@ const useWebRTC = () => {
         pcsRef.current = { ...pcsRef.current, [offerSendSocketId]: peerconnection };
         try {
           peerconnection.setRemoteDescription(new RTCSessionDescription(sessionDescription));
-          const localSessionDescription = await peerconnection.createAnswer();
+          const localSessionDescription = await peerconnection.createAnswer({
+            offerToReceiveAudio: true,
+            offerToReceiveVideo: true,
+          });
           peerconnection.setLocalDescription(new RTCSessionDescription(localSessionDescription));
           emit(PUBLISH.webRTCAnswer, {
             data: {
@@ -156,7 +164,7 @@ const useWebRTC = () => {
 
   useEffect(() => {
     return () => {
-      emit('webrtc- leave');
+      emit(PUBLISH.webRTCLeave);
       Object.entries(playerStreamMap).forEach((map) => {
         const socketId = map[0];
         const stream = map[1];

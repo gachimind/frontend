@@ -12,21 +12,19 @@ import { setUserCam, setUserMic } from '@redux/modules/userMediaSlice';
 import Cam from './Cam';
 import CamListSliderArrow from './CamListSliderArrow';
 
-// TODO: 사용자들의 캠 대신 이름으로 참여 여부를 먼저 나타냈다. 수정되어야 한다.
 const CamList = () => {
-  const { userStream, userMic, userStreamRef } = useAppSelector((state) => state.userMedia);
+  const { userStream, userMic, userCam, userStreamRef } = useAppSelector((state) => state.userMedia);
   const { playerList, playerStreamMap } = useAppSelector((state) => state.playerMedia);
+  const dispatch = useAppDispatch();
   const [hasSlider, setHasSlider] = useState<{ hasPrev: boolean; hasNext: boolean }>({
     hasPrev: false,
     hasNext: true,
   });
   const { user } = useAppSelector((state) => state.user);
   const { turn } = useAppSelector((state) => state.gamePlay);
-  const dispatch = useAppDispatch();
-  const { onUpdateUserStream, offUpdateUserStream } = useStreamUpdateSocket();
+  const { onUpdateUserStream, offUpdateUserStream, emitUpdateUserStream } = useStreamUpdateSocket();
 
   useEffect(() => {
-    // XXX: 우선은 끈 상태로 시작하게 했지만..???
     if (userStreamRef?.current) {
       dispatch(setUserCam(false));
       dispatch(setUserMic(false));
@@ -34,6 +32,10 @@ const CamList = () => {
       userStreamRef.current.getVideoTracks().forEach((track) => (track.enabled = !track.enabled));
     }
   }, []);
+
+  useEffect(() => {
+    emitUpdateUserStream({ audio: userMic, video: userCam });
+  }, [playerStreamMap]);
 
   useEffect(() => {
     onUpdateUserStream();
@@ -78,8 +80,10 @@ const CamList = () => {
                   userStream={userStream}
                   nickname={user.nickname}
                   audio={userMic}
+                  video={userCam}
                   isMe={true}
                   isHost={index === 0}
+                  profileImg={user.profileImg}
                   size="sub"
                 />
               ) : (
@@ -89,7 +93,9 @@ const CamList = () => {
                   userStream={playerStreamMap[player.socketId]}
                   nickname={player.nickname}
                   audio={player.audio}
+                  video={player.video}
                   isHost={index === 0}
+                  profileImg={player.profileImg}
                   size="sub"
                 />
               )}
@@ -103,6 +109,7 @@ const CamList = () => {
 const CamListLayout = styled(Slider)`
   width: 500px;
   margin-top: -6px;
+  margin-left: 12px;
 `;
 
 export default CamList;

@@ -7,8 +7,6 @@ export const PARTICIPANTS_OPTIONS = [
 ];
 
 export const COUNT_OPTIONS = [
-  { value: '30:30:60', label: '30:30:60' },
-  { value: '30:60:120', label: '30:60:120' },
+  { value: '15:60:30', label: '15:60:30' },
+  { value: '30:60:60', label: '30:60:60' },
 ];
-
-export const BUG_OPTIONS = [{ value: '내용 미정', label: '내용 미정' }];

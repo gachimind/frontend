@@ -1,31 +1,32 @@
 import styled from 'styled-components';
 
-import Button from '@components/common/Button';
+import kakaoIcon from '@assets/png_kakaoIcon.png';
+import githubIcon from '@assets/svg_githubicon.svg';
+
 import Modal from '@components/common/Modal';
 
 const LoginModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
-  const KAKAO_AUTH_URL = process.env.REACT_APP_API_ENDPOINT + '/api/users/login/kakao';
-  const GOOGLE_AUTH_URL = process.env.REACT_APP_API_ENDPOINT + '/api/users/login/google';
-  const GITHUB_AUTH_URL = process.env.REACT_APP_API_ENDPOINT + '/api/users/login/github';
-
   const handleLoginKakaoButtonClick = () => {
+    const KAKAO_AUTH_URL = process.env.REACT_APP_API_ENDPOINT + '/api/users/login/kakao';
     KAKAO_AUTH_URL && (window.location.href = KAKAO_AUTH_URL);
   };
 
-  const handleLoginGoogleButtonClick = () => {
-    GOOGLE_AUTH_URL && (window.location.href = GOOGLE_AUTH_URL);
-  };
-
-  const handleLoginGithubButtonClick = () => {
+  const handleLoginGihubButtonClick = () => {
+    const GITHUB_AUTH_URL = process.env.REACT_APP_API_ENDPOINT + '/api/users/login/github';
     GITHUB_AUTH_URL && (window.location.href = GITHUB_AUTH_URL);
   };
 
   return (
     <Modal visible={visible} onClose={onClose} title="LOGIN">
       <LoginModalLayout>
-        <LoginButton onClick={() => handleLoginKakaoButtonClick()}>카카오 로그인</LoginButton>
-        <LoginButton onClick={() => handleLoginGoogleButtonClick()}>구글 로그인</LoginButton>
-        <LoginButton onClick={() => handleLoginGithubButtonClick()}>깃허브</LoginButton>
+        <KakaoButton className="kakao" onClick={() => handleLoginKakaoButtonClick()}>
+          <img src={kakaoIcon} />
+          카카오로 시작하기
+        </KakaoButton>
+        <GithubButton className="kakao" onClick={() => handleLoginGihubButtonClick()}>
+          <img src={githubIcon} />
+          Github로 시작하기
+        </GithubButton>
       </LoginModalLayout>
     </Modal>
   );
@@ -39,9 +40,28 @@ const LoginModalLayout = styled.div`
   justify-content: center;
 `;
 
-const LoginButton = styled(Button)`
+const OAuthButton = styled.button`
+  height: 76px;
+  border-radius: 6px;
   font-size: 24px;
-  height: 72px;
+  font-weight: 600;
+  font-family: initial;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & > img {
+    margin-right: 10px;
+  }
+`;
+
+const KakaoButton = styled(OAuthButton)`
+  color: #000000 85%;
+  background-color: #fee500;
+`;
+
+const GithubButton = styled(OAuthButton)`
+  color: white;
+  background-color: black;
 `;
 
 export default LoginModal;

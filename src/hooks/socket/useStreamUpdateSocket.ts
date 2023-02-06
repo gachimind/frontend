@@ -22,7 +22,6 @@ const useStreamUpdateSocket = () => {
   const { playerList } = useAppSelector((state) => state.playerMedia);
 
   const emitUpdateUserStream = (values: EmitUpdateUserStreamProps) => {
-    console.log('[emit] update-userstream');
     emit(PUBLISH.updateUserStream, {
       data: {
         video: values?.video ?? userCam,
@@ -33,7 +32,6 @@ const useStreamUpdateSocket = () => {
 
   const onUpdateUserStream = () => {
     on(SUBSCRIBE.updateUserStream, ({ data }: { data: OnUpdateUserStreamProps }) => {
-      console.log('[on] update-userstream');
       const updatedPlayerList = [...playerList].map((player) =>
         data.socketId === player.socketId ? { ...player, audio: data.audio, video: data.video } : player,
       );

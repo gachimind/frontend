@@ -7,6 +7,7 @@ export const PUBLISH = Object.freeze({
   startGame: 'start',
   readyGame: 'ready',
   validRoomPassword: 'valid-room-password',
+  sendTurnEvaluation: 'turn-evaluate',
 
   // webRTC
   webRTCIce: 'webrtc-ice',

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import lockIcon from '@assets/svg_lockIcon.svg';
 import { COUNT_OPTIONS, PARTICIPANTS_OPTIONS } from '@constants/options';
@@ -18,17 +18,28 @@ import { CreateRoomRequest } from '@customTypes/socketType';
 const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
   const [roomTitle, setRoomTitle] = useState<string>('가치마인드 한 판 해요');
   const [maxCount, setMaxCount] = useState<number>(2);
-  const [time, setTime] = useState<string>('30:30:60');
+  const [time, setTime] = useState<string>('15:60:30');
   const [roomPassword, setRoomPassword] = useState<string>('');
   const [isSecretRoom, setIsSecretRoom] = useState<boolean>(false);
   const { onShowCreatedRoomId, emitCreateRoom } = useGameSocket();
   const navigate = useNavigate();
 
+  let isCreateRoomButtonDisabled;
+
+  if (!roomTitle || maxCount < 2 || maxCount > 6 || (isSecretRoom && String(roomPassword)?.length !== 4)) {
+    isCreateRoomButtonDisabled = true;
+  } else {
+    isCreateRoomButtonDisabled = false;
+  }
+
   const handleCreateGameButtonClick = () => {
     if (!roomTitle || maxCount < 2 || maxCount > 6 || (isSecretRoom && String(roomPassword)?.length !== 4)) {
       return;
     }
-    const password = isSecretRoom ? Number(roomPassword) : undefined;
+    const password = isSecretRoom ? roomPassword : undefined;
+    if (time !== COUNT_OPTIONS[0].value && time !== COUNT_OPTIONS[1].value) {
+      return;
+    }
     const createRoom: CreateRoomRequest = {
       roomTitle,
       maxCount,
@@ -55,13 +66,13 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
               onChange={(e) => setRoomTitle(e.target.value)}
               maxLength={12}
             />
-            <PasswordButton onClick={() => setIsSecretRoom((prev) => !prev)}>
+            <PasswordButton isSecretRoom={isSecretRoom} onClick={() => setIsSecretRoom((prev) => !prev)}>
               <img src={lockIcon} />
             </PasswordButton>
           </TitleInputBox>
         </InputContainer>
         {isSecretRoom && (
-          <InputContainer label="비밀번호">
+          <InputContainer label="비밀번호(숫자 4자리)">
             <Input
               type="text"
               value={roomPassword}
@@ -73,10 +84,12 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
         <InputContainer label="인원">
           <Selection options={PARTICIPANTS_OPTIONS} setValue={setMaxCount} />
         </InputContainer>
-        <InputContainer label="카운트(발표/준비/토론)">
+        <InputContainer label="카운트(준비/발표/토론)">
           <Selection options={COUNT_OPTIONS} setValue={setTime} />
         </InputContainer>
-        <CreateRoomButton onClick={handleCreateGameButtonClick}>생성하기</CreateRoomButton>
+        <CreateRoomButton onClick={handleCreateGameButtonClick} disabled={isCreateRoomButtonDisabled}>
+          생성하기
+        </CreateRoomButton>
       </CreateGameModalLayout>
     </Modal>
   );
@@ -94,17 +107,34 @@ const TitleInputBox = styled.div`
   justify-content: space-between;
 `;
 
-const PasswordButton = styled(Button)`
+const PasswordButton = styled(Button)<{ isSecretRoom: boolean }>`
   width: 56px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  ${(props) => props.isSecretRoom && props.theme.borders.bottomRightNormal1}
+`;
+
+const blink = keyframes`
+  0% {
+    background-color: #402f5c;
+  }
+  100%{
+    background-color: #2C2C2C;
+  }
 `;
 
 const CreateRoomButton = styled(Button)`
   font-size: 24px;
   height: 72px;
   margin-top: 20px;
+
+  :not(:disabled) {
+    -moz-animation: ${blink} 0.5s linear infinite;
+    -webkit-animation: ${blink} 0.5s linear infinite;
+    animation: ${blink} 0.5s linear infinite;
+  }
 `;
 
 export default CreateGameModal;

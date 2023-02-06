@@ -69,7 +69,7 @@ const EnterPrivateRoomModal = ({ visible, onClose, roomId, roomTitle, successHan
       dispatch(
         setLastEnteredRoom({
           roomId,
-          password: parseInt(password, 10),
+          password: password,
         }),
       );
       successHandler();
@@ -80,8 +80,7 @@ const EnterPrivateRoomModal = ({ visible, onClose, roomId, roomTitle, successHan
     if (!roomId || submitDisabled || isPasswordSubmitted) {
       return;
     }
-    const roomPassword = parseInt(password, 10);
-    emitValidRoomPassword(roomId, roomPassword);
+    emitValidRoomPassword(roomId, password);
   };
 
   return (
@@ -126,11 +125,11 @@ const RoomTitleBox = styled.div`
   div {
     font-family: inherit;
     font-size: 24px;
-    color: ${(props) => props.theme.colors.ivory2};
+    color: ${(props) => props.theme.colors.white1};
     background-color: ${(props) => props.theme.colors.darkGrey2};
     width: 318px;
     height: 56px;
-    ${(props) => props.theme.borders.bottomRightWhiteBorder}
+    ${(props) => props.theme.borders.bottomRightNormal1}
     display: flex;
     justify-content: center;
     align-items: center;
@@ -143,6 +142,12 @@ const PasswordIconBox = styled(Button)`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  :focus,
+  :hover {
+    background-color: ${(props) => props.theme.colors.darkGrey2};
+    ${(props) => props.theme.borders.topLeftNormal1}
+  }
 `;
 
 const EnterRoomButton = styled(Button)<{ isDisabled: boolean }>`
@@ -151,6 +156,16 @@ const EnterRoomButton = styled(Button)<{ isDisabled: boolean }>`
   opacity: ${(props) => (props.isDisabled ? 0.5 : 1)};
   height: 72px;
   margin-top: 20px;
+
+  ${(props) =>
+    props.isDisabled &&
+    `
+    :focus,
+    :hover {
+      background-color: ${props.theme.colors.darkGrey2};
+      ${props.theme.borders.topLeftNormal1}
+    }
+  `}
 `;
 
 export default EnterPrivateRoomModal;

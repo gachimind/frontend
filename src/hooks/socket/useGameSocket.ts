@@ -9,22 +9,21 @@ import { CreateRoomRequest, EnterRoomRequest } from '@customTypes/socketType';
 import socketInstance from './socketInstance';
 
 interface UseGameSocketType {
-  onShowCreatedRoomId: (navigate: NavigateFunction, path: string, password?: number) => void;
+  onShowCreatedRoomId: (navigate: NavigateFunction, path: string, password?: string) => void;
   onJoinRoom: () => void;
   onValidRoomPassword: (callback: () => void) => void;
   emitUserLeaveRoom: () => void;
   emitJoinRoom: ({ roomId, roomPassword }: EnterRoomRequest) => void;
   emitCreateRoom: (createRoom: CreateRoomRequest) => void;
-  emitValidRoomPassword: (roomId: number, roomPassword: number) => void;
+  emitValidRoomPassword: (roomId: number, roomPassword: string) => void;
 }
 
 const useGameSocket = (): UseGameSocketType => {
   const { on, emit } = socketInstance;
   const dispatch = useAppDispatch();
 
-  const onShowCreatedRoomId = (navigate: NavigateFunction, path: string, password?: number) => {
+  const onShowCreatedRoomId = (navigate: NavigateFunction, path: string, password?: string) => {
     on(SUBSCRIBE.showCreatedRoomIdForOwner, async ({ data }: { data: { roomId: string } }) => {
-      console.log('[on] create-room');
       dispatch(
         setLastEnteredRoom({
           roomId: data.roomId,
@@ -42,10 +41,8 @@ const useGameSocket = (): UseGameSocketType => {
   };
 
   const onJoinRoom = () => {
-    on(PUBLISH.joinGame, (data) => {
-      console.log('[on] join-room');
-      console.log(data);
-    });
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    on(PUBLISH.joinGame, () => {});
   };
 
   const emitUserLeaveRoom = () => {
@@ -53,7 +50,6 @@ const useGameSocket = (): UseGameSocketType => {
   };
 
   const emitJoinRoom = ({ roomId, roomPassword }: EnterRoomRequest) => {
-    console.log('[emit] enter-room');
     emit(PUBLISH.joinGame, { data: { roomId, roomPassword } });
   };
 
@@ -61,7 +57,7 @@ const useGameSocket = (): UseGameSocketType => {
     emit(PUBLISH.createGame, { data: createRoom });
   };
 
-  const emitValidRoomPassword = (roomId: number, password: number) => {
+  const emitValidRoomPassword = (roomId: number, password: string) => {
     emit(PUBLISH.validRoomPassword, { data: { roomId, password } });
   };
 

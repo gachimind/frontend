@@ -2,12 +2,14 @@ import styled from 'styled-components';
 
 import smallMicOffIcon from '@assets/svg_smallMicOffIcon.svg';
 import smallMicOnIcon from '@assets/svg_smallMicOnIcon.svg';
+import { CatTheme } from '@constants/characters';
 
 import PlayerImageHolder from '@components/game/PlayerImageHolder';
 
 interface CamUserStatusProps {
   nickname: string;
   isMicOn?: boolean;
+  catTheme: CatTheme;
   size?: 'main' | 'sub';
 }
 
@@ -15,7 +17,7 @@ const CamStatusStyles = {
   sub: {
     fontSize: '12px',
     gap: '6px',
-    padding: '8px 8px',
+    padding: '6px 8px',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   main: {
@@ -33,12 +35,16 @@ interface CamStatusStylesProps {
   backgroundColor: string;
 }
 
-const CamUserStatus = ({ nickname, isMicOn, size = 'sub' }: CamUserStatusProps) => {
+const CamUserStatus = ({ nickname, isMicOn, size = 'sub', catTheme }: CamUserStatusProps) => {
   return (
     <CamUserStatusLayout customStyles={CamStatusStyles[size]}>
       <div>
-        <PlayerImageHolder size={size}></PlayerImageHolder>
-        <NicknameText>{nickname}</NicknameText>
+        <PlayerImageHolder size={size} catTheme={catTheme} />
+        {size === 'sub' ? (
+          <NicknameEllipsisedText>{nickname}</NicknameEllipsisedText>
+        ) : (
+          <NicknameText>{nickname}</NicknameText>
+        )}
       </div>
       <div>
         <img
@@ -66,7 +72,7 @@ const CamUserStatusLayout = styled.div<{ customStyles: CamStatusStylesProps }>`
     align-items: center;
   }
   span {
-    color: ${(props) => props.theme.colors.white};
+    color: ${(props) => props.theme.colors.ivory2};
     font-size: ${(props) => props.customStyles.fontSize};
     font-weight: 500;
   }
@@ -75,8 +81,11 @@ const CamUserStatusLayout = styled.div<{ customStyles: CamStatusStylesProps }>`
 const NicknameText = styled.span`
   font-size: 12px;
   color: ${(props) => props.theme.colors.lightGrey3};
-  width: 80px;
   display: inline-block;
+`;
+
+const NicknameEllipsisedText = styled(NicknameText)`
+  width: 80px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

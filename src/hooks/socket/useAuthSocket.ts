@@ -32,7 +32,6 @@ const useAuthSocketImpl = () => {
 
   useEffect(() => {
     on(SUBSCRIBE.showRoomListForFirstUser, ({ data }: { data: GameRoomBroadcastResponse[] }) => {
-      console.log('[on] room-list');
       dispatch(updateAllRooms(data));
     });
   }, []);

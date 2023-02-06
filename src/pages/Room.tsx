@@ -8,9 +8,15 @@ import useErrorSocket from '@hooks/socket/useErrorSocket';
 import useGamePlaySocket from '@hooks/socket/useGamePlaySocket';
 import useGameSocket from '@hooks/socket/useGameSocket';
 import useGameUpdateSocket from '@hooks/socket/useGameUpdateSocket';
+import useBeforeUnload from '@hooks/useBeforeUnload';
+import useDuplicatedUserInvalidate from '@hooks/useDuplicatedUserInvalidate';
 import useLocalStream from '@hooks/useLocalStream';
+import usePopState from '@hooks/usePopState';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
-import { addChat } from '@redux/modules/gameRoomSlice';
+import { clearAllGamePlayState } from '@redux/modules/gamePlaySlice';
+import { addChat, clearScore, updateRoom } from '@redux/modules/gameRoomSlice';
+import { clearPlayerStream } from '@redux/modules/playerMediaSlice';
+import { clearMedia } from '@redux/modules/userMediaSlice';
 import { alertToast } from '@utils/toast';
 
 import CamList from '@components/game/CamList';
@@ -22,6 +28,7 @@ import EnterPrivateRoomModal from '@components/home/EnterPrivateRoomModal';
 import ContentContainer from '@components/layout/ContentContainer';
 import RoomTemplate from '@components/layout/RoomTemplate';
 
+// TODO: 컴포넌트 복잡도를 개선한다.
 const Room = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -33,7 +40,10 @@ const Room = () => {
   const { onAnnounceRoomUpdate, offAnnounceRoomUpdate } = useGameUpdateSocket();
   const { emitUserLeaveRoom, emitJoinRoom, onJoinRoom } = useGameSocket();
   const { onError, offError } = useErrorSocket();
+  const { invalidate } = useDuplicatedUserInvalidate();
   useGamePlaySocket();
+  usePopState();
+  useBeforeUnload();
 
   const [isConfirmedUser, setIsConfirmedUser] = useState<boolean>(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState<boolean>(false);
@@ -49,7 +59,11 @@ const Room = () => {
       emitUserLeaveRoom();
       offError();
       userStreamRef && destroyLocalStream(userStreamRef);
-      console.log('[destroy] local stream');
+      dispatch(updateRoom(null));
+      dispatch(clearPlayerStream());
+      dispatch(clearAllGamePlayState());
+      dispatch(clearScore());
+      dispatch(clearMedia());
     };
   }, []);
 
@@ -88,14 +102,13 @@ const Room = () => {
             dispatch(addChat({ message: msg as string, nickname: '', type: 'warning', socketId: '', userId: 0 })),
           skipAlert: true,
         },
+        { target: 'status', value: 409, callback: invalidate, skipAlert: true },
       ]);
     }
   }, [id, authorized, isConfirmedUser]);
 
   const handlePasswordModalClose = () => {
     setPasswordModalVisible(false);
-    // TODO: beforeunload 이벤트 활용 또는 확인창 컴포넌트 구현해 적용
-    // TODO: 바깥을 클릭해도 안닫히게, 모달 주위를 어둡게
     navigate('/');
   };
 
@@ -115,11 +128,11 @@ const Room = () => {
           successHandler={passwordValidationSuccessHandler}
         />
       )}
-      <ContentContainer title="SCORE" lights={true}>
+      <ContentContainer title="SCORE">
         <ScoreBoard />
       </ContentContainer>
       <MiddleSectionBox>
-        <ContentContainer title="PRESENTER" lights={true}>
+        <ContentContainer title="PRESENTER">
           <Presenter />
         </ContentContainer>
         <CamListBox>
@@ -146,7 +159,7 @@ const MiddleSectionBox = styled.div`
 `;
 
 const CamListBox = styled.div`
-  border: ${(props) => props.theme.borders.thinGrey};
+  border: ${(props) => props.theme.borders.thin1};
   padding: 13px 21px;
 `;
 
