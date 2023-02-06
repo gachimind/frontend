@@ -17,7 +17,9 @@ import SetUpInfoModal from './SetUpInfoModal';
 
 const UserInfo = ({ mypage }: { mypage?: boolean }) => {
   const { data } = useGetUserInfoQuery();
-  const { cat, rocket } = getCatInfoByQuery(data?.profileImg);
+  const user = data;
+
+  const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
   const token = sessionStorage.getItem('accessToken');
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
@@ -33,7 +35,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
             <RankBox>
               <span className="rank-box-title">오늘의 랭킹</span>
               <div>
-                <span className="rank-box-rank">{data?.today.todayRank}</span>
+                <span className="rank-box-rank">{user?.today.todayRank}</span>
                 <span className="rank-box-unit">위</span>
               </div>
             </RankBox>
@@ -57,7 +59,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
         <CreateGameModal visible={createGameModalVisible} onClose={() => setCreateGameModalVisible(false)} />
       )}
       {!mypage && (
-        <OnClickHandleButton onClick={() => (!data ? setLoginModalVisible(true) : setCreateGameModalVisible(true))}>
+        <OnClickHandleButton onClick={() => (!user ? setLoginModalVisible(true) : setCreateGameModalVisible(true))}>
           게임방 만들기
         </OnClickHandleButton>
       )}
@@ -78,7 +80,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
         <div>
           <span className="score-box-title">오늘 획득한 점수</span>
           <span className="score-box-score">
-            {data ? data.today.todayScore : 0}
+            {user ? user.today.todayScore : 0}
             <span>점</span>
           </span>
         </div>
@@ -90,7 +92,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
         <div>
           <span className="score-box-title">누적 점수</span>
           <span className="score-box-score">
-            {data ? data.total.totalScore : 0}
+            {user ? user.total.totalScore : 0}
             <span>점</span>
           </span>
         </div>
