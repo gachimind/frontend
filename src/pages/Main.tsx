@@ -19,7 +19,7 @@ const Main = () => {
   const dispatch = useAppDispatch();
   const { onError, offError } = useErrorSocket();
   const { invalidate } = useDuplicatedUserInvalidate();
-  const { contents, hasNotification, closeNotification } = useSpecialNotification();
+  const { contents, hasNotification, closeNotification, key } = useSpecialNotification();
   useEffect(() => {
     onError([
       { target: 'status', value: 401, callback: () => dispatch(logout()) },
@@ -59,7 +59,12 @@ const Main = () => {
       <ContentContainer title="PROFILE">
         <UserInfo />
         {hasNotification && (
-          <SpecialNotificationModal visible={hasNotification} onClose={closeNotification} contents={contents} />
+          <SpecialNotificationModal
+            visible={hasNotification}
+            onClose={closeNotification}
+            contents={contents}
+            notificaionKey={key}
+          />
         )}
         {setUpInfoModalVisible && (
           <SetUpInfoModal visible={setUpInfoModalVisible} onClose={() => setSetUpInfoModalVisible(false)} />

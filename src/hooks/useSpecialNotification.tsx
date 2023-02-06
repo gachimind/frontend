@@ -5,15 +5,15 @@ import axios from 'axios';
 interface NotificationType {
   hasAlert: string;
   contents: string;
+  key: string;
 }
 
 const useSpecialNotification = () => {
   const lambdaNotificationURL = process.env.REACT_APP_LAMBDA_NOTI;
   const [hasNotification, setHasNotification] = useState<boolean>(false);
   const [contents, setContents] = useState<string>('');
-
+  const [key, setKey] = useState<string>('');
   useEffect(() => {
-    console.log(lambdaNotificationURL);
     if (!lambdaNotificationURL) {
       return;
     }
@@ -23,6 +23,7 @@ const useSpecialNotification = () => {
       if (data.hasAlert === 'true') {
         setHasNotification(true);
         setContents(data.contents);
+        setKey(data.key);
       }
     })();
   }, []);
@@ -31,7 +32,7 @@ const useSpecialNotification = () => {
     setHasNotification(false);
   }
 
-  return { hasNotification, contents, closeNotification };
+  return { hasNotification, contents, closeNotification, key };
 };
 
 export default useSpecialNotification;
