@@ -144,6 +144,12 @@ const CatIcon = ({ catTheme = 'white' }: CatIconProps) => {
         {/* 눈망울 */}
         <rect x="36" y="24" width="8" height="4" fill="#381616" stroke="#381616" className="cat eye" />
         <rect x="60" y="24" width="8" height="4" fill="#381616" stroke="#381616" className="cat eye" />
+        <rect x="32" y="40" width="40" height="4" className="cat shadow" strokeWidth={0.3} />
+        <rect x="28" y="40" width="4" height="4" fill="black" stroke="black" strokeWidth={0.3} />
+        <rect x="72" y="40" width="4" height="4" fill="black" stroke="black" strokeWidth={0.3} />
+        <rect x="32" y="44" width="40" height="4" fill="black" stroke="black" strokeWidth={0.3} />
+        <rect x="28" y="36" width="4" height="4" fill="black" stroke="black" strokeWidth={0.2} />
+        <rect x="72" y="36" width="4" height="4" fill="black" stroke="black" strokeWidth={0.2} />
       </svg>
     </CatIconLayout>
   );

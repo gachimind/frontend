@@ -4,7 +4,6 @@ import smallMicOffIcon from '@assets/svg_smallMicOffIcon.svg';
 import smallMicOnIcon from '@assets/svg_smallMicOnIcon.svg';
 import { CatTheme } from '@constants/characters';
 
-import CatIcon from '@components/character/CatIcon';
 import PlayerImageHolder from '@components/game/PlayerImageHolder';
 
 interface CamUserStatusProps {

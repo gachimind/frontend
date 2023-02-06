@@ -53,9 +53,9 @@ const ImageHolderLayout = styled.div<{ customStyle: PlayerImageHolderStylesType 
 `;
 
 const CatIconBox = styled.div<{ size: 'sub' | 'main' }>`
-  margin-left: ${(props) => (props.size === 'sub' ? '0px' : '11px')};
-  margin-top: ${(props) => (props.size === 'sub' ? '6px' : '11px')};
-  transform: ${(props) => (props.size === 'sub' ? 'scale(0.885)' : 'scale(1.64)')};
+  margin-left: ${(props) => (props.size === 'sub' ? '-1px' : '10px')};
+  margin-top: ${(props) => (props.size === 'sub' ? '6px' : '12px')};
+  transform: ${(props) => (props.size === 'sub' ? 'scale(0.87)' : 'scale(1.51)')};
 `;
 
 export default PlayerImageHolder;
