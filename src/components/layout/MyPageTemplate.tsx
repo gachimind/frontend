@@ -11,7 +11,7 @@ const MyPageTemplate = ({ children }: { children?: React.ReactNode }) => {
     <PageContainer>
       <Header page="mypage" />
       <MyPageContentsBox>{children}</MyPageContentsBox>
-      <Footer />
+      <Footer page="mypage" />
     </PageContainer>
   );
 };
