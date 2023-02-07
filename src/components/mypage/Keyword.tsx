@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import styled from 'styled-components';
 
+import cursorIcon from '@assets/svg_cursorIcon.svg';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { __getUserKeyword } from '@redux/modules/userSlice';
 
@@ -19,7 +20,9 @@ const Keyword = () => {
         <div>SOLVED KEYWORDS</div>
         <ul>
           {keywords?.totalQuizKeyword.map((keyword, idx) => (
-            <li key={idx}>{keyword}</li>
+            <li key={idx}>
+              <span onClick={() => window.open(keyword.link)}>{keyword.keyword}</span>
+            </li>
           ))}
         </ul>
       </KeywordBox>
@@ -27,7 +30,9 @@ const Keyword = () => {
         <div>PUBLISHED KEYWORDS</div>
         <ul>
           {keywords?.totalSpeechKeyword.map((keyword, idx) => (
-            <li key={idx}>{keyword}</li>
+            <li key={idx}>
+              <span onClick={() => window.open(keyword.link)}>{keyword.keyword}</span>
+            </li>
           ))}
         </ul>
       </KeywordBox>
@@ -73,9 +78,14 @@ const KeywordBox = styled.div`
   }
 
   li {
+    cursor: url(${cursorIcon}), pointer;
     color: ${(props) => props.theme.colors.white1};
-    font-size: 16px;
+    font-size: 20px;
     list-style: none;
     margin-bottom: 4px;
+
+    :hover {
+      color: yellow;
+    }
   }
 `;
