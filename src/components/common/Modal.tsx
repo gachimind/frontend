@@ -45,7 +45,7 @@ const Modal = ({
           <ModalLayout hasBackgroundShadow={hasBackgroundShadow ?? false}>
             <ModalBackgroundLayout visible={visible}>
               <ModalBox ref={ref} width={width} modalName={modalName} page={page}>
-                <ModalHeader>
+                <ModalHeader modalName={modalName}>
                   {title}
                   {isModalCloseButtonShown && (
                     <ModalCloseButton onClick={() => onClose && onClose()}>
@@ -94,27 +94,37 @@ const ModalBox = styled.div<{ width?: number; modalName?: string; page?: string 
   position: relative;
   background-color: ${(props) => props.theme.colors.darkGrey2};
   box-shadow: ${(props) => props.theme.boxShadows.boxShadow1};
-  border: ${(props) => props.theme.borders.normal1};
+  border: ${(props) => (props.modalName === 'GameRuleToolTip' ? 'none' : props.theme.borders.normal1)};
   width: ${(props) => (props.width ? props.width : 560)}px;
-  height: fit-content;
+  height: fit-conten;
   z-index: 20;
-  ${(props) =>
-    props.modalName === 'logout'
-      ? `
-        margin-top: ${props.page === 'main' ? '-475px' : '-545px'};
-        margin-right: -1150px;
-        `
-      : `margin: 0 auto;`}
+  ${(props) => {
+    if (props.modalName === 'logout') {
+      return `margin-top: ${props.page === 'main' ? '-475px' : '-545px'};
+     margin-right: -1150px; 
+  `;
+    }
+    if (props.modalName === 'GameRuleToolTip') {
+      return `margin-bottom: -205px;
+     margin-left: -1050px;
+  `;
+    }
+    return 'margin: 0 auto;';
+  }}
 `;
 
-const ModalHeader = styled.div`
+const ModalHeader = styled.div<{ modalName?: string }>`
   position: relative;
   font-family: ${(props) => props.theme.font.joystick};
   font-size: 24px;
-  color: ${(props) => props.theme.colors.black1};
+  color: ${(props) => (props.modalName === 'GameRuleToolTip' ? props.theme.colors.ivory1 : props.theme.colors.black1)};
   height: 48px;
-  background-color: ${(props) => props.theme.colors.ivory1};
-  box-shadow: 2px 0px ${(props) => props.theme.colors.ivory1}, -2px -2px ${(props) => props.theme.colors.ivory1};
+  background-color: ${(props) =>
+    props.modalName === 'GameRuleToolTip' ? props.theme.colors.darkGrey1 : props.theme.colors.ivory1};
+  box-shadow: ${(props) =>
+    props.modalName === 'GameRuleToolTip'
+      ? 'none'
+      : `2px 0px ${props.theme.colors.ivory1}, -2px -2px ${props.theme.colors.ivory1}`};
   display: flex;
   justify-content: center;
   align-items: center;

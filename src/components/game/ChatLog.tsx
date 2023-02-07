@@ -66,10 +66,7 @@ const ChatLog = () => {
   };
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (!chat || e.key !== 'Enter') {
-      return;
-    }
-    if (checkEvaluatable() && /^[0-5]$/g.test(chat) && !isTurnEvaluated) {
+    if (e.key === 'Enter' && checkEvaluatable() && /^[0-5]$/g.test(chat) && !isTurnEvaluated) {
       emitTurnEvaluation(Number(chat), turn?.currentTurn ?? 0);
       dispatch(setEvaluated(true));
       dispatch(
@@ -81,9 +78,13 @@ const ChatLog = () => {
           userId: 0,
         }),
       );
-    } else {
-      !e.nativeEvent.isComposing && emitSendChat(chat);
+      setChat('');
+      return;
     }
+    if (!chat || e.key !== 'Enter' || e.nativeEvent.isComposing) {
+      return;
+    }
+    emitSendChat(chat);
     setChat('');
   };
 
