@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
+import axios, { AxiosResponse } from 'axios';
 import styled from 'styled-components';
 
-import userApi from '@apis/userApi';
 import blackCatFaceImage from '@assets/png_blackCatFaceImage.png';
 import blueRocketImage from '@assets/png_blueRocketImage.png';
 import brownCatFaceImage from '@assets/png_brownCatFaceImage.png';
@@ -34,6 +34,7 @@ const SetUpInfo = ({
   const user = data;
   const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
   const [newNickname, setNewNickname] = useState<string>(user?.nickname ?? '');
+  const [prevCheckedNickname, setPrevCheckedNickname] = useState<string>('');
   const [duplicateAlert, setDuplicateAlert] = useState<{ duplicate: boolean; message: string }>({
     duplicate: false,
     message: '',
@@ -45,13 +46,20 @@ const SetUpInfo = ({
     if (newNickname === user?.nickname) {
       return;
     }
+    if (newNickname === prevCheckedNickname) {
+      return;
+    }
     if (newNickname) {
-      await userApi
-        .duplicateCheck(newNickname)
-        .then(
-          (res) => res.status === 200 && setDuplicateAlert({ duplicate: false, message: '*사용가능한 닉네임입니다' }),
-        )
-        .catch((e) => e.status === 412 && setDuplicateAlert({ duplicate: true, message: '*중복되는 닉네임입니다' }));
+      await axios
+        .get(process.env.REACT_APP_API_ENDPOINT + `/api/users/${newNickname}`)
+        .then((res: AxiosResponse) => {
+          res.status === 200 && setDuplicateAlert({ duplicate: false, message: '*사용가능한 닉네임입니다' });
+          setPrevCheckedNickname(newNickname);
+        })
+        .catch((e: { response: AxiosResponse }) => {
+          e.response.status === 412 && setDuplicateAlert({ duplicate: true, message: '*중복되는 닉네임입니다' });
+          setPrevCheckedNickname(newNickname);
+        });
       return;
     }
   };
@@ -74,13 +82,16 @@ const SetUpInfo = ({
       mypage ? onClose() : isSetUpInfoSuccess((prev) => !prev);
     }
     if (newNickname !== user?.nickname) {
-      await userApi
-        .duplicateCheck(newNickname)
+      await axios
+        .get(process.env.REACT_APP_API_ENDPOINT + `/api/users/${newNickname}`)
         .then(() => {
           updateUserInfo({ newNickname, newProfileImg });
           mypage ? onClose() : isSetUpInfoSuccess((prev) => !prev);
         })
-        .catch((e) => e.status === 412 && setDuplicateAlert({ duplicate: true, message: '*중복되는 닉네임입니다' }));
+        .catch(
+          (e: { response: AxiosResponse }) =>
+            e.response.status === 412 && setDuplicateAlert({ duplicate: true, message: '*중복되는 닉네임입니다' }),
+        );
     }
   };
 
