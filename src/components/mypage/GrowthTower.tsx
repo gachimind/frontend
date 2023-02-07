@@ -1,5 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 
+import leftSpeechBubble from '@assets/svg_leftSpeechBubble.svg';
+import rightSpeechBubble from '@assets/svg_rightSpeechBubble.svg';
 import { useAppSelector } from '@redux/hooks';
 import { getCatInfoByQuery } from '@utils/character';
 
@@ -24,7 +26,8 @@ const GrowthTower = () => {
         <LevelOneTower>
           {(!user?.today.todayScore || user?.today.todayScore <= 300) && (
             <div className="cat" id="level-one-cat">
-              <Cat type="body" catTheme={cat} rocketTheme={rocket} />
+              <img src={leftSpeechBubble} />
+              <Cat type="body" catTheme={cat} rocketTheme={rocket} scale={1.2} />
             </div>
           )}
           <div>
@@ -48,7 +51,8 @@ const GrowthTower = () => {
           <LevelTwoTower>
             {!!user?.today.todayScore && user?.today.todayScore <= 600 && (
               <div className="cat" id="level-two-cat">
-                <Cat type="body" catTheme={cat} rocketTheme={rocket} />
+                <img src={leftSpeechBubble} />
+                <Cat type="body" catTheme={cat} rocketTheme={rocket} scale={1.2} />
               </div>
             )}
             <div>
@@ -80,7 +84,8 @@ const GrowthTower = () => {
           <LevelThreeTower>
             {!!user?.today.todayScore && user?.today.todayScore <= 900 && (
               <div className="cat" id="level-three-cat">
-                <Cat type="body" catTheme={cat} rocketTheme={rocket} />
+                <img src={rightSpeechBubble} />
+                <Cat type="body" catTheme={cat} rocketTheme={rocket} scale={1.2} />
               </div>
             )}
             <div className="level-three-stand">
@@ -119,7 +124,8 @@ const GrowthTower = () => {
         {!!user?.today.todayScore && user?.today.todayScore > 900 && (
           <LevelFourTower>
             <div className="cat" id="level-four-cat">
-              <Cat type="body" catTheme={cat} rocketTheme={rocket} />
+              <img src={rightSpeechBubble} />
+              <Cat type="body" catTheme={cat} rocketTheme={rocket} scale={1.2} />
             </div>
             <div className="level-four-stand">
               <div className="stand">
@@ -203,30 +209,59 @@ const GrowthTowerLayout = styled.div`
   padding: 32px 30px;
 
   .cat {
-    margin-bottom: -14px;
+    position: relative;
+    margin-bottom: -5px;
+    display: flex;
+    img {
+      width: 180px;
+      height: 68px;
+    }
   }
 
   #level-one-cat {
+    position: absolute;
+    bottom: 80px;
+    left: 0px;
     animation: ${CatAnimation} 0.5s ease-in-out;
     animation-delay: 3.2s;
+    flex-direction: column;
+    img {
+      margin-bottom: -20px;
+      margin-left: 3px;
+    }
   }
 
   #level-two-cat {
+    margin-left: 80px;
     animation: ${CatAnimation} 0.5s ease-in-out;
     animation-delay: 6.2s;
+    flex-direction: column;
+    img {
+      margin-bottom: -20px;
+      margin-left: 3px;
+    }
   }
 
   #level-three-cat {
-    margin-right: 50px;
-    margin-bottom: -35px;
+    margin-right: 60px;
+    margin-bottom: -25px;
     animation: ${CatAnimation} 0.5s ease-in-out;
     animation-delay: 10.8s;
+    flex-direction: column;
+    img {
+      margin-bottom: -20px;
+      margin-left: -82px;
+    }
   }
 
   #level-four-cat {
-    margin-left: 50px;
+    margin-left: -50px;
     animation: ${CatAnimation} 0.5s ease-in-out;
     animation-delay: 15.4s;
+    img {
+      margin-top: 0px;
+      margin-right: -20px;
+    }
   }
 
   div:is(
