@@ -10,7 +10,6 @@ export interface ModalProps {
   visible: boolean;
   title?: string;
   width?: number;
-  height?: number;
   children: React.ReactNode;
   isBackgroundClickEventDisabled?: boolean;
   hasBackgroundShadow?: boolean;
@@ -24,7 +23,6 @@ const Modal = ({
   visible,
   title,
   width,
-  height,
   children,
   onClose,
   isBackgroundClickEventDisabled = true,
@@ -46,7 +44,7 @@ const Modal = ({
         createPortal(
           <ModalLayout hasBackgroundShadow={hasBackgroundShadow ?? false}>
             <ModalBackgroundLayout visible={visible}>
-              <ModalBox ref={ref} width={width} modalName={modalName} page={page} height={height}>
+              <ModalBox ref={ref} width={width} modalName={modalName} page={page}>
                 <ModalHeader modalName={modalName}>
                   {title}
                   {isModalCloseButtonShown && (
@@ -92,13 +90,13 @@ const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
   align-items: center;
 `;
 
-const ModalBox = styled.div<{ width?: number; modalName?: string; page?: string; height?: number }>`
+const ModalBox = styled.div<{ width?: number; modalName?: string; page?: string }>`
   position: relative;
   background-color: ${(props) => props.theme.colors.darkGrey2};
   box-shadow: ${(props) => props.theme.boxShadows.boxShadow1};
   border: ${(props) => (props.modalName === 'GameRuleToolTip' ? 'none' : props.theme.borders.normal1)};
   width: ${(props) => (props.width ? props.width : 560)}px;
-  height: ${(props) => (props.modalName === 'GameRuleToolTip' ? props.height + 'px' : 'fit-content')};
+  height: fit-conten;
   z-index: 20;
   ${(props) => {
     if (props.modalName === 'logout') {
