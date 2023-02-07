@@ -8,11 +8,9 @@ import gamePlaySlice from './modules/gamePlaySlice';
 import gameRoomSlice from './modules/gameRoomSlice';
 import playerMediaSlice from './modules/playerMediaSlice';
 import userMediaSlice from './modules/userMediaSlice';
-import userSlice from './modules/userSlice';
 import { coreApi } from './query/coreApi';
 
 const rootReducer = combineReducers({
-  user: userSlice.reducer,
   gameRoom: gameRoomSlice.reducer,
   userMedia: userMediaSlice.reducer,
   playerMedia: playerMediaSlice.reducer,
