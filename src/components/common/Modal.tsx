@@ -10,6 +10,7 @@ export interface ModalProps {
   visible: boolean;
   title?: string;
   width?: number;
+  height?: number;
   children: React.ReactNode;
   isBackgroundClickEventDisabled?: boolean;
   hasBackgroundShadow?: boolean;
@@ -23,6 +24,7 @@ const Modal = ({
   visible,
   title,
   width,
+  height,
   children,
   onClose,
   isBackgroundClickEventDisabled = true,
@@ -44,8 +46,8 @@ const Modal = ({
         createPortal(
           <ModalLayout hasBackgroundShadow={hasBackgroundShadow ?? false}>
             <ModalBackgroundLayout visible={visible}>
-              <ModalBox ref={ref} width={width} modalName={modalName} page={page}>
-                <ModalHeader>
+              <ModalBox ref={ref} width={width} modalName={modalName} page={page} height={height}>
+                <ModalHeader modalName={modalName}>
                   {title}
                   {isModalCloseButtonShown && (
                     <ModalCloseButton onClick={() => onClose && onClose()}>
@@ -90,31 +92,39 @@ const ModalBackgroundLayout = styled.div<{ visible: boolean }>`
   align-items: center;
 `;
 
-const ModalBox = styled.div<{ width?: number; modalName?: string; page?: string }>`
+const ModalBox = styled.div<{ width?: number; modalName?: string; page?: string; height?: number }>`
   position: relative;
   background-color: ${(props) => props.theme.colors.darkGrey2};
   box-shadow: ${(props) => props.theme.boxShadows.boxShadow1};
-  border: ${(props) => props.theme.borders.normal1};
+  border: ${(props) => (props.modalName === 'GameRuleToolTip' ? 'none' : props.theme.borders.normal1)};
   width: ${(props) => (props.width ? props.width : 560)}px;
-  height: fit-content;
+  height: ${(props) => (props.modalName === 'GameRuleToolTip' ? props.height + 'px' : 'fit-content')};
   z-index: 20;
+  margin: 0 auto;
   ${(props) =>
-    props.modalName === 'logout'
-      ? `
-        margin-top: ${props.page === 'main' ? '-475px' : '-545px'};
-        margin-right: -1150px;
-        `
-      : `margin: 0 auto;`}
+    props.modalName === 'logout' &&
+    `margin-top: ${props.page === 'main' ? '-475px' : '-545px'};
+     margin-right: -320px;
+  `}
+  ${(props) =>
+    props.modalName === 'GameRuleToolTip' &&
+    `margin-bottom: -205px;
+     margin-left: -195px;
+  `}
 `;
 
-const ModalHeader = styled.div`
+const ModalHeader = styled.div<{ modalName?: string }>`
   position: relative;
   font-family: ${(props) => props.theme.font.joystick};
   font-size: 24px;
-  color: ${(props) => props.theme.colors.black1};
+  color: ${(props) => (props.modalName === 'GameRuleToolTip' ? props.theme.colors.ivory1 : props.theme.colors.black1)};
   height: 48px;
-  background-color: ${(props) => props.theme.colors.ivory1};
-  box-shadow: 2px 0px ${(props) => props.theme.colors.ivory1}, -2px -2px ${(props) => props.theme.colors.ivory1};
+  background-color: ${(props) =>
+    props.modalName === 'GameRuleToolTip' ? props.theme.colors.darkGrey1 : props.theme.colors.ivory1};
+  box-shadow: ${(props) =>
+    props.modalName === 'GameRuleToolTip'
+      ? 'none'
+      : `2px 0px ${props.theme.colors.ivory1}, -2px -2px ${props.theme.colors.ivory1}`};
   display: flex;
   justify-content: center;
   align-items: center;
