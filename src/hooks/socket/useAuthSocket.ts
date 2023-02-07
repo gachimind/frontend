@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import { singletonHook } from 'react-singleton-hook';
 
 import { PUBLISH, SUBSCRIBE } from '@constants/socket';
-import { useAppSelector } from '@redux/hooks';
 import { updateAllRooms } from '@redux/modules/gameRoomSlice';
+import { useGetUserInfoQuery } from '@redux/query/user';
 
 import { GameRoomBroadcastResponse } from '@customTypes/socketType';
 
@@ -17,7 +17,8 @@ const initValue = {
 
 const useAuthSocketImpl = () => {
   const [authorized, setAuthorized] = useState<boolean>(false);
-  const { isLogined } = useAppSelector((state) => state.user);
+  const { isSuccess } = useGetUserInfoQuery();
+  const isLogined = isSuccess;
   const dispatch = useDispatch();
   const { emit, on } = socketInstance;
 

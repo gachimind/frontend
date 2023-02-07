@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import useGameInitiationSocket from '@hooks/socket/useGameInitiationSocket';
 import { useAppSelector } from '@redux/hooks';
+import { useGetUserInfoQuery } from '@redux/query/user';
 
 import GameReady from './GameReady';
 import GameResultModal from './GameResultModal';
@@ -13,7 +14,8 @@ import PresenterCam from './PresenterCam';
 import PresenterKeywordBox from './PresenterKeywordBox';
 
 const Presenter = () => {
-  const { user } = useAppSelector((state) => state.user);
+  const { data } = useGetUserInfoQuery();
+  const user = data;
   const { room, scoreMap } = useAppSelector((state) => state.gameRoom);
   const { turn, playState } = useAppSelector((state) => state.gamePlay);
   const [resultModalVisible, setResultModalVisible] = useState<boolean>(false);

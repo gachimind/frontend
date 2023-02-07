@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import cursorIcon from '@assets/svg_cursorIcon.svg';
 import medalIcon from '@assets/svg_medalIcon.svg';
 import trophyIcon from '@assets/svg_trophyIcon.svg';
-import { useAppSelector } from '@redux/hooks';
+import { useGetUserInfoQuery } from '@redux/query/user';
 import { getCatInfoByQuery } from '@utils/character';
 
 import Cat from '@components/character/Cat';
@@ -16,9 +16,10 @@ import LoginModal from './LoginModal';
 import SetUpInfoModal from './SetUpInfoModal';
 
 const UserInfo = ({ mypage }: { mypage?: boolean }) => {
-  const user = useAppSelector((state) => state.user.user);
+  const { data } = useGetUserInfoQuery();
+  const user = data;
+
   const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
-  const token = sessionStorage.getItem('accessToken');
 
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [createGameModalVisible, setCreateGameModalVisible] = useState<boolean>(false);
@@ -42,7 +43,7 @@ const UserInfo = ({ mypage }: { mypage?: boolean }) => {
           <Cat type="body" catTheme={cat} rocketTheme={rocket} scale={2} />
         )}
         <UserStatusBox>
-          {!token ? (
+          {!user ? (
             <span className="user-status-box-login" onClick={() => setLoginModalVisible(true)}>
               로그인이 필요합니다
             </span>

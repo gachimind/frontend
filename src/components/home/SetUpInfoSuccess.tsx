@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { useAppSelector } from '@redux/hooks';
+import { useGetUserInfoQuery } from '@redux/query/user';
 import { getCatInfoByQuery } from '@utils/character';
 
 import Cat from '@components/character/Cat';
@@ -13,7 +13,8 @@ const SetUpInfoSuccess = ({
   onClose: () => void;
 }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const user = useAppSelector((state) => state.user.user);
+  const { data } = useGetUserInfoQuery();
+  const user = data;
   const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
 
   return (

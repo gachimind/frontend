@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import logoIcon from '@assets/png_logoIcon.png';
 import cursorIcon from '@assets/svg_cursorIcon.svg';
 import worldIcon from '@assets/svg_worldIcon.svg';
-import { useAppSelector } from '@redux/hooks';
+import { useGetUserInfoQuery } from '@redux/query/user';
 import { getCatInfoByQuery } from '@utils/character';
 
 import CatIcon from '@components/character/CatIcon';
@@ -15,8 +15,9 @@ import LogoutModal from '@components/home/LogoutModal';
 
 const Header = ({ page }: { page: string }) => {
   const navigate = useNavigate();
-  const user = useAppSelector((state) => state.user.user);
-  const accessToken = sessionStorage.getItem('accessToken');
+  const { data } = useGetUserInfoQuery();
+  const user = data;
+
   const { cat } = getCatInfoByQuery(user?.profileImg);
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
   const [logoutModalVisible, setLogoutModalVisible] = useState<boolean>(false);
@@ -33,7 +34,7 @@ const Header = ({ page }: { page: string }) => {
       {logoutModalVisible && (
         <LogoutModal visible={logoutModalVisible} onClose={() => setLogoutModalVisible(false)} page={page} />
       )}
-      {!accessToken ? (
+      {!user ? (
         <button className="login-button" onClick={() => setLoginModalVisible(true)}>
           <img src={worldIcon} />
           LOGIN
