@@ -100,17 +100,19 @@ const ModalBox = styled.div<{ width?: number; modalName?: string; page?: string;
   width: ${(props) => (props.width ? props.width : 560)}px;
   height: ${(props) => (props.modalName === 'GameRuleToolTip' ? props.height + 'px' : 'fit-content')};
   z-index: 20;
-  margin: 0 auto;
-  ${(props) =>
-    props.modalName === 'logout' &&
-    `margin-top: ${props.page === 'main' ? '-475px' : '-545px'};
-     margin-right: -320px;
-  `}
-  ${(props) =>
-    props.modalName === 'GameRuleToolTip' &&
-    `margin-bottom: -205px;
-     margin-left: -195px;
-  `}
+  ${(props) => {
+    if (props.modalName === 'logout') {
+      return `margin-top: ${props.page === 'main' ? '-475px' : '-545px'};
+     margin-right: -1150px; 
+  `;
+    }
+    if (props.modalName === 'GameRuleToolTip') {
+      return `margin-bottom: -205px;
+     margin-left: -1050px;
+  `;
+    }
+    return 'margin: 0 auto;';
+  }}
 `;
 
 const ModalHeader = styled.div<{ modalName?: string }>`
