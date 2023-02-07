@@ -2,20 +2,19 @@ import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import userApi from '@apis/userApi';
 import cursorIcon from '@assets/svg_cursorIcon.svg';
+import { useLazyGetLogoutQuery } from '@redux/query/user';
 
 import Button from '@components/common/Button';
 import Modal from '@components/common/Modal';
 
 const LogoutModal = ({ visible, onClose, page }: { visible: boolean; onClose: () => void; page: string }) => {
   const navigate = useNavigate();
-
+  const [logout] = useLazyGetLogoutQuery();
   const handleLogoutClick = async () => {
-    await userApi.logout().then(() => {
-      sessionStorage.clear();
-      window.location.reload();
-    });
+    await logout();
+    onClose();
+    navigate('/', { replace: true });
   };
 
   return (

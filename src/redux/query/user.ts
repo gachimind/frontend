@@ -22,17 +22,30 @@ export const userApi = coreApi.injectEndpoints({
         };
       },
       transformResponse: (response: { data: MyKeywordsResponse }) => response.data,
-      providesTags: ['User'],
+      providesTags: ['UserKeyword'],
     }),
     updateUserInfo: builder.mutation({
       query: ({ newNickname, newProfileImg }: { newNickname: string; newProfileImg: string }) => ({
-        url: '/me',
+        url: USER_API + '/me',
         method: 'PATCH',
         body: { nickname: newNickname, profileImg: newProfileImg },
       }),
       invalidatesTags: ['User'],
     }),
+    getLogout: builder.query<void, void>({
+      query: () => {
+        return {
+          url: USER_API + '/logout',
+        };
+      },
+      async onQueryStarted(_, { queryFulfilled, dispatch }) {
+        await queryFulfilled;
+        sessionStorage.clear();
+        dispatch(userApi.util.resetApiState());
+      },
+    }),
   }),
 });
 
-export const { useGetUserInfoQuery, useGetUserKeywordQuery, useUpdateUserInfoMutation } = userApi;
+export const { useGetUserInfoQuery, useGetUserKeywordQuery, useUpdateUserInfoMutation, useLazyGetLogoutQuery } =
+  userApi;
