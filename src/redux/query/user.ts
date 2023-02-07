@@ -47,10 +47,5 @@ export const userApi = coreApi.injectEndpoints({
   }),
 });
 
-export const {
-  useGetUserInfoQuery,
-  useLazyGetUserInfoQuery,
-  useGetUserKeywordQuery,
-  useUpdateUserInfoMutation,
-  useLazyGetLogoutQuery,
-} = userApi;
+export const { useGetUserInfoQuery, useGetUserKeywordQuery, useUpdateUserInfoMutation, useLazyGetLogoutQuery } =
+  userApi;

@@ -1,4 +1,6 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { abort } from 'process';
+
+import { combineReducers, configureStore, isPending } from '@reduxjs/toolkit';
 import { isRejectedWithValue } from '@reduxjs/toolkit';
 import type { Middleware } from '@reduxjs/toolkit';
 
@@ -18,9 +20,16 @@ const rootReducer = combineReducers({
   [coreApi.reducerPath]: coreApi.reducer,
 });
 
-const rtkQueryErrorLogger: Middleware = () => (next) => (action) => {
+const rtkQueryPromiseInterceptor: Middleware = () => (next) => (action) => {
+  const token = sessionStorage.getItem('accessToken');
+  if (isPending(action)) {
+    if (!token) {
+      abort();
+    }
+  }
+
   if (isRejectedWithValue(action)) {
-    if (sessionStorage.getItem('accessToken') && action.payload.status === 401) {
+    if ((token && action.payload.status === 401) || action.payload.status === 500) {
       sessionStorage.clear();
       window.location.assign('/');
     }
@@ -32,7 +41,7 @@ const rtkQueryErrorLogger: Middleware = () => (next) => (action) => {
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }).concat(coreApi.middleware).concat(rtkQueryErrorLogger),
+    getDefaultMiddleware({ serializableCheck: false }).concat(coreApi.middleware).concat(rtkQueryPromiseInterceptor),
   devTools: process.env.NODE_ENV !== 'production',
 });
 
