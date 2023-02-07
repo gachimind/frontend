@@ -94,6 +94,9 @@ const Video = styled.video<{ size: SizeType }>`
   position: absolute;
   width: ${(props) => SizeTypes[props.size].width + 'px'};
   height: ${(props) => SizeTypes[props.size].height + 12 + 'px'};
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
 `;
 
 const EmptyVideo = styled.div<{ size: SizeType }>`
