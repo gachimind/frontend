@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import logoIcon from '@assets/png_logoIcon.png';
 import cursorIcon from '@assets/svg_cursorIcon.svg';
 import worldIcon from '@assets/svg_worldIcon.svg';
-import { useLazyGetUserInfoQuery } from '@redux/query/user';
+import { useGetUserInfoQuery } from '@redux/query/user';
 import { getCatInfoByQuery } from '@utils/character';
 
 import CatIcon from '@components/character/CatIcon';
@@ -15,15 +15,8 @@ import LogoutModal from '@components/home/LogoutModal';
 
 const Header = ({ page }: { page: string }) => {
   const navigate = useNavigate();
-  const [trigger, result] = useLazyGetUserInfoQuery();
-  const user = result.data;
-
-  useEffect(() => {
-    const token = sessionStorage.getItem('accessToken');
-    if (token) {
-      trigger();
-    }
-  }, []);
+  const { data } = useGetUserInfoQuery();
+  const user = data;
 
   const { cat } = getCatInfoByQuery(user?.profileImg);
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);

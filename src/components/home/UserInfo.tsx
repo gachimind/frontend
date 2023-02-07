@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import styled from 'styled-components';
 
 import cursorIcon from '@assets/svg_cursorIcon.svg';
 import medalIcon from '@assets/svg_medalIcon.svg';
 import trophyIcon from '@assets/svg_trophyIcon.svg';
-import { useLazyGetUserInfoQuery } from '@redux/query/user';
+import { useGetUserInfoQuery } from '@redux/query/user';
 import { getCatInfoByQuery } from '@utils/character';
 
 import Cat from '@components/character/Cat';
@@ -16,15 +16,8 @@ import LoginModal from './LoginModal';
 import SetUpInfoModal from './SetUpInfoModal';
 
 const UserInfo = ({ mypage }: { mypage?: boolean }) => {
-  const [trigger, result] = useLazyGetUserInfoQuery();
-  const user = result.data;
-
-  useEffect(() => {
-    const token = sessionStorage.getItem('accessToken');
-    if (token) {
-      trigger();
-    }
-  }, []);
+  const { data } = useGetUserInfoQuery();
+  const user = data;
 
   const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
 
