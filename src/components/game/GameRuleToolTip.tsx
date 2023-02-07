@@ -9,7 +9,6 @@ const GameRuleToolTip = ({ visible, onClose }: { visible: boolean; onClose: () =
       onClose={onClose}
       title="GAME RULE"
       width={409}
-      height={550}
       modalName="GameRuleToolTip"
       hasBackgroundShadow={false}
       isBackgroundClickEventDisabled={false}
