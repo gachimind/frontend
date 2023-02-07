@@ -8,7 +8,6 @@ import roomListRightIcon from '@assets/svg_roomListRightIcon.svg';
 import { useAuthSocket } from '@hooks/socket/useAuthSocket';
 import useLocalStream from '@hooks/useLocalStream';
 import { useAppSelector } from '@redux/hooks';
-import { useGetUserInfoQuery } from '@redux/query/user';
 import { getParam } from '@utils/common';
 
 import GlobalLoading from '@components/common/GlobalLoading';
@@ -21,8 +20,7 @@ import RoomCard from './RoomCard';
 const RoomList = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { isSuccess } = useGetUserInfoQuery();
-  const isLogined = isSuccess;
+  const isLogined = !!sessionStorage.getItem('accessToken');
   const { broadcastedRooms } = useAppSelector((state) => state.gameRoom);
   const { isMediaLoading, isMediaSuccess } = useAppSelector((state) => state.userMedia);
   const [selectedRoom, setSelectedRoom] = useState<GameRoomBroadcastResponse>();

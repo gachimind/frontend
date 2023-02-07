@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import useErrorSocket from '@hooks/socket/useErrorSocket';
 import useDuplicatedUserInvalidate from '@hooks/useDuplicatedUserInvalidate';
 import useSpecialNotification from '@hooks/useSpecialNotification';
-import { useGetUserInfoQuery, useLazyGetLogoutQuery } from '@redux/query/user';
+import { useLazyGetLogoutQuery, useLazyGetUserInfoQuery } from '@redux/query/user';
 
 import AnnouncementModal from '@components/home/AnnouncementModal';
 import RoomList from '@components/home/RoomList';
@@ -14,9 +14,16 @@ import ContentContainer from '@components/layout/ContentContainer';
 import MainTemplate from '@components/layout/MainTemplate';
 
 const Main = () => {
-  const { data } = useGetUserInfoQuery();
+  const [trigger, result] = useLazyGetUserInfoQuery();
+  const user = result.data;
 
-  const user = data;
+  useEffect(() => {
+    const token = sessionStorage.getItem('accessToken');
+    if (token) {
+      trigger();
+    }
+  }, []);
+
   const { onError, offError } = useErrorSocket();
   const { invalidate } = useDuplicatedUserInvalidate();
   const [doLogout] = useLazyGetLogoutQuery();
