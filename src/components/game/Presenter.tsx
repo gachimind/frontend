@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import useChatSocket from '@hooks/socket/useChatSocket';
+import useEvaluateSocket from '@hooks/socket/useEvaluateSocket';
 import useGameInitiationSocket from '@hooks/socket/useGameInitiationSocket';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { setEvaluated } from '@redux/modules/gamePlaySlice';
@@ -24,7 +25,7 @@ const Presenter = () => {
   const { turn, playState, isTurnEvaluated } = useAppSelector((state) => state.gamePlay);
   const [resultModalVisible, setResultModalVisible] = useState<boolean>(false);
   const { emitGameReady, emitGameStart } = useGameInitiationSocket();
-  const { emitTurnEvaluation } = useChatSocket();
+  const { emitTurnEvaluation } = useEvaluateSocket();
   const currentUser = room?.participants.find((participant) => participant.userId === user?.userId);
   const presenter = room?.participants.find((participant) => participant.userId === turn?.speechPlayer);
   const isMe = user?.userId === turn?.speechPlayer;
