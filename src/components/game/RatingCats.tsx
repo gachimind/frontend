@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import styled, { keyframes } from 'styled-components';
 
@@ -70,4 +70,4 @@ const RatingCatBox = styled.div<{ selected: boolean }>`
   }
 `;
 
-export default RatingCats;
+export default React.memo(RatingCats);

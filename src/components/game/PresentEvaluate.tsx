@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import Draggable from 'react-draggable';
 import styled from 'styled-components';
@@ -34,9 +34,9 @@ const PresentEvaluate = ({ currentTurn, emitEvaluate }: PresentEvaluateProps) =>
     };
   }, []);
 
-  const handleSetScoreChange = (value: number) => {
+  const handleSetScoreChange = useCallback((value: number) => {
     setInputScore(value);
-  };
+  }, []);
 
   const handleEvaluateButtonClick = () => {
     emitEvaluate(inputScore, currentTurn);
@@ -60,7 +60,6 @@ const PresentEvaluate = ({ currentTurn, emitEvaluate }: PresentEvaluateProps) =>
               <DescriptionText>발표를 평가해주세요!!</DescriptionText>
               <SubDescriptionText>미제출 시 최고점으로 자동 평가됩니다!</SubDescriptionText>
             </DescriptionContainer>
-
             <RatingCats setInputScore={handleSetScoreChange} />
             <ButtonContainer>
               <SubmitButton onClick={handleEvaluateButtonClick}>평가하기</SubmitButton>

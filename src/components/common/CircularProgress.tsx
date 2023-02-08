@@ -1,3 +1,5 @@
+import React from 'react';
+
 import styled, { keyframes } from 'styled-components';
 
 const CircularProgress = ({ second }: { second: number }) => {
@@ -83,4 +85,4 @@ const OverlayBox = styled.div`
   background-color: #07070c;
 `;
 
-export default CircularProgress;
+export default React.memo(CircularProgress);
