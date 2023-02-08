@@ -18,6 +18,8 @@ export interface PresentEvaluateProps {
   emitEvaluate: (score: number, turn: number) => void;
 }
 
+const SCORING_TIME = 15;
+
 const PresentEvaluate = ({ currentTurn, emitEvaluate }: PresentEvaluateProps) => {
   const [inputScore, setInputScore] = useState<number>(1);
   const dispatch = useAppDispatch();
@@ -26,7 +28,7 @@ const PresentEvaluate = ({ currentTurn, emitEvaluate }: PresentEvaluateProps) =>
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       dispatch(setEvaluated(true));
-    }, 7000);
+    }, SCORING_TIME * 1000);
     return () => {
       clearTimeout(timeoutId);
     };
@@ -42,13 +44,18 @@ const PresentEvaluate = ({ currentTurn, emitEvaluate }: PresentEvaluateProps) =>
   };
 
   return (
-    <Draggable onDrag={(e, data) => trackPosition(data)} onStart={handleDragStart} onStop={handleDragEnd}>
+    <Draggable
+      onDrag={(_, data) => trackPosition(data)}
+      onStart={handleDragStart}
+      onStop={handleDragEnd}
+      cancel=".not-draggable"
+    >
       <DraggableBox isDragging={isDragging}>
         <GameButtonContainer>
           <CircularProgressBox>
-            <CircularProgress second={7} />
+            <CircularProgress second={SCORING_TIME} />
           </CircularProgressBox>
-          <PresentEvaluateBox>
+          <PresentEvaluateBox className="not-draggable">
             <DescriptionContainer>
               <DescriptionText>발표를 평가해주세요!!</DescriptionText>
               <SubDescriptionText>미제출 시 최고점으로 자동 평가됩니다!</SubDescriptionText>
@@ -72,6 +79,7 @@ const DraggableBox = styled.div<{ isDragging: boolean }>`
 `;
 
 const PresentEvaluateBox = styled.div`
+  cursor: default;
   position: relative;
   display: flex;
   justify-content: center;
