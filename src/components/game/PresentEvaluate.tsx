@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 
+import Draggable from 'react-draggable';
 import styled from 'styled-components';
 
+import useDraggable from '@hooks/useDraggable';
 import { useAppDispatch } from '@redux/hooks';
 import { setEvaluated } from '@redux/modules/gamePlaySlice';
 
@@ -19,6 +21,7 @@ export interface PresentEvaluateProps {
 const PresentEvaluate = ({ currentTurn, emitEvaluate }: PresentEvaluateProps) => {
   const [inputScore, setInputScore] = useState<number>(1);
   const dispatch = useAppDispatch();
+  const { isDragging, trackPosition, handleDragStart, handleDragEnd } = useDraggable();
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -39,26 +42,36 @@ const PresentEvaluate = ({ currentTurn, emitEvaluate }: PresentEvaluateProps) =>
   };
 
   return (
-    <GameButtonContainer>
-      <CircularProgressBox>
-        <CircularProgress second={7} />
-      </CircularProgressBox>
-      <PresentEvaluateLayout>
-        <DescriptionContainer>
-          <DescriptionText>발표를 평가해주세요!!</DescriptionText>
-          <SubDescriptionText>미제출 시 최고점으로 자동 평가됩니다!</SubDescriptionText>
-        </DescriptionContainer>
-        <RatingCats setInputScore={handleSetScoreChange} />
-        <ButtonContainer>
-          <SubmitButton onClick={handleEvaluateButtonClick}>평가하기</SubmitButton>
-          <LeaveButton onClick={() => dispatch(setEvaluated(true))}>취소하기</LeaveButton>
-        </ButtonContainer>
-      </PresentEvaluateLayout>
-    </GameButtonContainer>
+    <Draggable onDrag={(e, data) => trackPosition(data)} onStart={handleDragStart} onStop={handleDragEnd}>
+      <DraggableBox isDragging={isDragging}>
+        <GameButtonContainer>
+          <CircularProgressBox>
+            <CircularProgress second={7} />
+          </CircularProgressBox>
+          <PresentEvaluateBox>
+            <DescriptionContainer>
+              <DescriptionText>발표를 평가해주세요!!</DescriptionText>
+              <SubDescriptionText>미제출 시 최고점으로 자동 평가됩니다!</SubDescriptionText>
+            </DescriptionContainer>
+
+            <RatingCats setInputScore={handleSetScoreChange} />
+            <ButtonContainer>
+              <SubmitButton onClick={handleEvaluateButtonClick}>평가하기</SubmitButton>
+              <LeaveButton onClick={() => dispatch(setEvaluated(true))}>취소하기</LeaveButton>
+            </ButtonContainer>
+          </PresentEvaluateBox>
+        </GameButtonContainer>
+      </DraggableBox>
+    </Draggable>
   );
 };
 
-const PresentEvaluateLayout = styled.div`
+const DraggableBox = styled.div<{ isDragging: boolean }>`
+  opacity: ${(props) => (props.isDragging ? 0.7 : 1)};
+  cursor: move;
+`;
+
+const PresentEvaluateBox = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
