@@ -26,8 +26,7 @@ const Presenter = () => {
   const { emitGameReady, emitGameStart } = useGameInitiationSocket();
   const { emitTurnEvaluation } = useChatSocket();
   const currentUser = room?.participants.find((participant) => participant.userId === user?.userId);
-  const presenterNickname =
-    room?.participants.find((participant) => participant.userId === turn?.speechPlayer)?.nickname ?? '';
+  const presenter = room?.participants.find((participant) => participant.userId === turn?.speechPlayer);
   const isMe = user?.userId === turn?.speechPlayer;
 
   const isEvaluatable = () => {
@@ -55,7 +54,7 @@ const Presenter = () => {
       <PresentationInfo
         isMe={isMe}
         keyword={turn?.keyword as string}
-        nickname={presenterNickname}
+        nickname={presenter?.nickname ?? ''}
         event={playState?.event}
       />
       {playState?.event === 'speechTimer' && turn && (
@@ -63,10 +62,10 @@ const Presenter = () => {
       )}
       {room?.isGameOn && turn && (
         <PresenterCam
-          nickname={presenterNickname}
+          nickname={presenter?.nickname ?? ''}
           isMe={isMe}
           userId={turn.speechPlayer}
-          profileImg={currentUser?.profileImg}
+          profileImg={presenter?.profileImg}
         />
       )}
       {!room?.isGameOn && (
