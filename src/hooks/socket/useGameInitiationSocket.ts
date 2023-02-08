@@ -1,5 +1,4 @@
 import { PUBLISH } from '@constants/socket';
-import { alertToast } from '@utils/toast';
 
 import socketInstance from './socketInstance';
 
@@ -11,9 +10,6 @@ const useGameInitiationSocket = () => {
   };
 
   const emitGameStart = () => {
-    alertToast('게임시작!', 'info', {
-      hideProgressBar: true,
-    });
     emit(PUBLISH.startGame);
   };
 
