@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
-import useChatSocket from '@hooks/socket/useChatSocket';
 import useGameInitiationSocket from '@hooks/socket/useGameInitiationSocket';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { setEvaluated } from '@redux/modules/gamePlaySlice';
