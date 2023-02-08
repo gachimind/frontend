@@ -11,8 +11,9 @@ export interface PresenterKeywordBoxProps {
 const PresenterKeywordBox = ({ isMe, keyword, answered }: PresenterKeywordBoxProps) => {
   return (
     <PresenterKeywordLayout>
+      {keyword.length > 12 && <p>제시어</p>}
       <p>
-        제시어:&nbsp;
+        {keyword.length <= 12 && <span>제시어:&nbsp;</span>}
         <KeywordText isMe={isMe} answered={answered ?? false}>
           {isMe || answered ? keyword : filterKeyword(keyword)}
         </KeywordText>
@@ -39,7 +40,8 @@ const PresenterKeywordLayout = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
+  flex-direction: column;
   top: 38px;
   background-color: rgba(28, 28, 28, 0.7);
   z-index: 3;

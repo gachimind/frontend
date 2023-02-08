@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
+import cursorIcon from '@assets/svg_cursorIcon.svg';
+import hintIcon from '@assets/svg_gameRuleIcon.svg';
 import useEvaluateSocket from '@hooks/socket/useEvaluateSocket';
 import useGameInitiationSocket from '@hooks/socket/useGameInitiationSocket';
+import useDebounce from '@hooks/useDebounce';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { setEvaluated } from '@redux/modules/gamePlaySlice';
 import { useGetUserInfoQuery } from '@redux/query/user';
 import { alertToast } from '@utils/toast';
+
+import BubbleContents from '@components/common/BubbleContents';
 
 import GameReady from './GameReady';
 import GameResultModal from './GameResultModal';
@@ -28,6 +33,8 @@ const Presenter = () => {
   const currentUser = room?.participants.find((participant) => participant.userId === user?.userId);
   const presenter = room?.participants.find((participant) => participant.userId === turn?.speechPlayer);
   const isMe = user?.userId === turn?.speechPlayer;
+  const [isHintVisible, setIsHintVisible] = useState<boolean>(false);
+  const debouncedHintVisible = useDebounce(isHintVisible, 300);
 
   const isEvaluatable = () => {
     return playState?.event === 'discussionTimer' && user?.userId !== turn?.speechPlayer && !isTurnEvaluated;
@@ -64,6 +71,23 @@ const Presenter = () => {
       />
       {playState?.event === 'speechTimer' && turn && (
         <PresenterKeywordBox isMe={isMe} keyword={turn.keyword} answered={turn.answered} />
+      )}
+      {playState?.event === 'discussionTimer' && turn && (
+        <PresenterKeywordBox isMe={false} keyword={turn.keyword} answered={true} />
+      )}
+      {((playState?.event === 'readyTimer' && isMe) || playState?.event === 'discussionTimer') && (
+        <HintBox>
+          {turn?.hint && (
+            <div>
+              <img
+                src={hintIcon}
+                onMouseOver={() => setIsHintVisible(true)}
+                onMouseLeave={() => setIsHintVisible(false)}
+              />
+              {debouncedHintVisible && <BubbleContents onMouseLeave={() => setIsHintVisible(false)} text={turn.hint} />}
+            </div>
+          )}
+        </HintBox>
       )}
       {room?.isGameOn && turn && (
         <PresenterCam
@@ -115,6 +139,21 @@ const ScoreEvaluateBox = styled.div`
   top: 110px;
   right: -40px;
   z-index: 3;
+`;
+
+const HintBox = styled.div`
+  position: absolute;
+  top: 40px;
+  z-index: 3;
+  cursor: url(${cursorIcon}), pointer;
+  right: 14px;
+  transform: scale(0.7);
+  img:hover {
+    opacity: 0.7;
+  }
+  & > div {
+    position: relative;
+  }
 `;
 
 export default React.memo(Presenter);
