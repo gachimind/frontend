@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
+import axios, { AxiosResponse } from 'axios';
 import styled from 'styled-components';
 
-import userApi from '@apis/userApi';
 import blackCatFaceImage from '@assets/png_blackCatFaceImage.png';
 import blueRocketImage from '@assets/png_blueRocketImage.png';
 import brownCatFaceImage from '@assets/png_brownCatFaceImage.png';
@@ -13,8 +13,7 @@ import redRocketImage from '@assets/png_redRocketImage.png';
 import whiteCatFaceImage from '@assets/png_whiteCatFaceImage.png';
 import yellowRocketImage from '@assets/png_yellowRocketImage.png';
 import { CatTheme, RocketTheme } from '@constants/characters';
-import { useAppDispatch, useAppSelector } from '@redux/hooks';
-import { __updateUserInfo } from '@redux/modules/userSlice';
+import { useGetUserInfoQuery, useUpdateUserInfoMutation } from '@redux/query/user';
 import { getCatInfoByQuery } from '@utils/character';
 
 import Cat from '@components/character/Cat';
@@ -30,10 +29,12 @@ const SetUpInfo = ({
   mypage?: boolean;
   onClose: () => void;
 }) => {
-  const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.user.user);
+  const [updateUserInfo] = useUpdateUserInfoMutation();
+  const { data } = useGetUserInfoQuery();
+  const user = data;
   const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
   const [newNickname, setNewNickname] = useState<string>(user?.nickname ?? '');
+  const [prevCheckedNickname, setPrevCheckedNickname] = useState<string>('');
   const [duplicateAlert, setDuplicateAlert] = useState<{ duplicate: boolean; message: string }>({
     duplicate: false,
     message: '',
@@ -45,13 +46,20 @@ const SetUpInfo = ({
     if (newNickname === user?.nickname) {
       return;
     }
+    if (newNickname === prevCheckedNickname) {
+      return;
+    }
     if (newNickname) {
-      await userApi
-        .duplicateCheck(newNickname)
-        .then(
-          (res) => res.status === 200 && setDuplicateAlert({ duplicate: false, message: '*사용가능한 닉네임입니다' }),
-        )
-        .catch((e) => e.status === 412 && setDuplicateAlert({ duplicate: true, message: '*중복되는 닉네임입니다' }));
+      await axios
+        .get(process.env.REACT_APP_API_ENDPOINT + `/api/users/${newNickname}`)
+        .then((res: AxiosResponse) => {
+          res.status === 200 && setDuplicateAlert({ duplicate: false, message: '*사용가능한 닉네임입니다' });
+          setPrevCheckedNickname(newNickname);
+        })
+        .catch((e: { response: AxiosResponse }) => {
+          e.response.status === 412 && setDuplicateAlert({ duplicate: true, message: '*중복되는 닉네임입니다' });
+          setPrevCheckedNickname(newNickname);
+        });
       return;
     }
   };
@@ -62,7 +70,7 @@ const SetUpInfo = ({
       setDuplicateAlert({ duplicate: true, message: '*닉네임을 입력해주세요' });
       return;
     }
-    if (user?.nickname === newNickname && user?.profileImg === newProfileImg) {
+    if (user?.nickname === newNickname && data?.profileImg === newProfileImg) {
       !mypage && isSetUpInfoSuccess((prev) => !prev);
       return null;
     }
@@ -70,17 +78,20 @@ const SetUpInfo = ({
       return;
     }
     if (user?.nickname === newNickname && user?.profileImg !== newProfileImg) {
-      dispatch(__updateUserInfo({ newNickname, newProfileImg }));
+      updateUserInfo({ newNickname, newProfileImg });
       mypage ? onClose() : isSetUpInfoSuccess((prev) => !prev);
     }
     if (newNickname !== user?.nickname) {
-      await userApi
-        .duplicateCheck(newNickname)
+      await axios
+        .get(process.env.REACT_APP_API_ENDPOINT + `/api/users/${newNickname}`)
         .then(() => {
-          dispatch(__updateUserInfo({ newNickname, newProfileImg }));
+          updateUserInfo({ newNickname, newProfileImg });
           mypage ? onClose() : isSetUpInfoSuccess((prev) => !prev);
         })
-        .catch((e) => e.status === 412 && setDuplicateAlert({ duplicate: true, message: '*중복되는 닉네임입니다' }));
+        .catch(
+          (e: { response: AxiosResponse }) =>
+            e.response.status === 412 && setDuplicateAlert({ duplicate: true, message: '*중복되는 닉네임입니다' }),
+        );
     }
   };
 

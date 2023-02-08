@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react';
 import useErrorSocket from '@hooks/socket/useErrorSocket';
 import useDuplicatedUserInvalidate from '@hooks/useDuplicatedUserInvalidate';
 import useSpecialNotification from '@hooks/useSpecialNotification';
-import { useAppDispatch, useAppSelector } from '@redux/hooks';
-import { logout } from '@redux/modules/userSlice';
+import { useGetUserInfoQuery, useLazyGetLogoutQuery } from '@redux/query/user';
 
 import AnnouncementModal from '@components/home/AnnouncementModal';
 import RoomList from '@components/home/RoomList';
@@ -15,14 +14,21 @@ import ContentContainer from '@components/layout/ContentContainer';
 import MainTemplate from '@components/layout/MainTemplate';
 
 const Main = () => {
-  const user = useAppSelector((state) => state.user.user);
-  const dispatch = useAppDispatch();
+  const { data } = useGetUserInfoQuery();
+  const user = data;
+
   const { onError, offError } = useErrorSocket();
   const { invalidate } = useDuplicatedUserInvalidate();
+  const [doLogout] = useLazyGetLogoutQuery();
   const { contents, hasNotification, closeNotification, key } = useSpecialNotification();
+
+  const logout = () => {
+    doLogout();
+  };
+
   useEffect(() => {
     onError([
-      { target: 'status', value: 401, callback: () => dispatch(logout()) },
+      { target: 'status', value: 401, callback: logout },
       { target: 'status', value: 409, callback: invalidate, skipAlert: true },
     ]);
     return () => {

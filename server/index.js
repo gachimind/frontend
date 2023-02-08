@@ -42,6 +42,9 @@ server.get(`/api/users/:nickname`, (req, res) => {
 server.get('/me', (req, res) => {
   const authenticatedUserId = validAuthentication(req, res);
   const userData = router.db.__wrapped__.me.find((user) => user.userId == authenticatedUserId);
+  if (!userData) {
+    return res.status(401).send({ result: false, errorMessage: '토큰 에러' });
+  }
   const result = {
     data: userData,
   };
@@ -68,6 +71,9 @@ server.get('/me/keyword', (req, res) => {
   const result = {
     data: router.db.__wrapped__.keyword.find((user) => user.userId == authenticatedUserId),
   };
+  if (!result.data) {
+    return res.status(401).send({ result: false, errorMessage: '토큰 에러' });
+  }
   return res.jsonp(result);
 });
 

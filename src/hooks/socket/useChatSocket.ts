@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 
 import { PUBLISH, SUBSCRIBE } from '@constants/socket';
-import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { useAppDispatch } from '@redux/hooks';
 import { setAnswered } from '@redux/modules/gamePlaySlice';
 import { addChat } from '@redux/modules/gameRoomSlice';
+import { useGetUserInfoQuery } from '@redux/query/user';
 
 import { EventUserInfo } from '@customTypes/socketType';
 
@@ -12,7 +13,9 @@ import socketInstance from './socketInstance';
 const useChatSocket = () => {
   const { on, emit, off } = socketInstance;
   const dispatch = useAppDispatch();
-  const { user, isLogined } = useAppSelector((state) => state.user);
+  const { data, isSuccess } = useGetUserInfoQuery();
+  const user = data;
+  const isLogined = isSuccess;
   useEffect(() => {
     on(
       SUBSCRIBE.receiveChat,

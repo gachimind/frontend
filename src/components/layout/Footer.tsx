@@ -8,7 +8,7 @@ import footerImage from '@assets/svg_footerImage.svg';
 import homeIcon from '@assets/svg_homeIcon.svg';
 import instagramIcon from '@assets/svg_instagramIcon.svg';
 import myPageIcon from '@assets/svg_myPageIcon.svg';
-import { useAppSelector } from '@redux/hooks';
+import { useGetUserInfoQuery } from '@redux/query/user';
 
 import Button from '@components/common/Button';
 import LoginModal from '@components/home/LoginModal';
@@ -16,7 +16,8 @@ import ReportBugModal from '@components/home/ReportBugModal';
 
 const Footer = ({ children, page }: { children?: React.ReactNode; page: string }) => {
   const navigate = useNavigate();
-  const user = useAppSelector((state) => state.user.user);
+  const { data } = useGetUserInfoQuery();
+  const user = data;
 
   const [reportBugModalVisible, setReportBugModalVisible] = useState<boolean>(false);
   const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);

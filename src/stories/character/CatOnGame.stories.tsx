@@ -1,6 +1,4 @@
-import { useState } from 'react';
-
-import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { useAppDispatch } from '@redux/hooks';
 import { setScore } from '@redux/modules/gameRoomSlice';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 

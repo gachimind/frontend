@@ -1,18 +1,11 @@
-import { useEffect } from 'react';
-
 import styled from 'styled-components';
 
 import cursorIcon from '@assets/svg_cursorIcon.svg';
-import { useAppDispatch, useAppSelector } from '@redux/hooks';
-import { __getUserKeyword } from '@redux/modules/userSlice';
+import { useGetUserKeywordQuery } from '@redux/query/user';
 
 const Keyword = () => {
-  const dispatch = useAppDispatch();
-  const keywords = useAppSelector((state) => state.user.keywords);
-
-  useEffect(() => {
-    dispatch(__getUserKeyword());
-  }, []);
+  const { data } = useGetUserKeywordQuery();
+  const keywords = data;
 
   return (
     <KeywordLayout>

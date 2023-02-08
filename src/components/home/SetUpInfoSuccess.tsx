@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { useAppSelector } from '@redux/hooks';
+import { useGetUserInfoQuery } from '@redux/query/user';
 import { getCatInfoByQuery } from '@utils/character';
 
 import Cat from '@components/character/Cat';
@@ -13,7 +13,8 @@ const SetUpInfoSuccess = ({
   onClose: () => void;
 }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const user = useAppSelector((state) => state.user.user);
+  const { data } = useGetUserInfoQuery();
+  const user = data;
   const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
 
   return (
@@ -23,7 +24,14 @@ const SetUpInfoSuccess = ({
         <NicknameText>{user?.nickname}</NicknameText>
         <Cat type="rocket" catTheme={cat} rocketTheme={rocket} scale={2} />
       </CharacterBox>
-      <span className="welcome-quote">환영합니다 {user?.nickname}님!</span>
+      {!!user?.nickname && user?.nickname.length > 8 ? (
+        <span className="welcome-quote">
+          <p>환영합니다</p>
+          <p>{user?.nickname}님!</p>
+        </span>
+      ) : (
+        <span className="welcome-quote">환영합니다 {user?.nickname}님!</span>
+      )}
       <ButtonBox>
         <Button
           className="go-back-button"
@@ -66,6 +74,8 @@ const SetUpInfoSuccessLayout = styled.div`
     font-size: 24px;
     color: ${(props) => props.theme.colors.darkGrey4};
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
   }
 `;

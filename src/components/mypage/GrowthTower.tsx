@@ -2,13 +2,14 @@ import styled, { keyframes } from 'styled-components';
 
 import leftSpeechBubble from '@assets/svg_leftSpeechBubble.svg';
 import rightSpeechBubble from '@assets/svg_rightSpeechBubble.svg';
-import { useAppSelector } from '@redux/hooks';
+import { useGetUserInfoQuery } from '@redux/query/user';
 import { getCatInfoByQuery } from '@utils/character';
 
 import Cat from '@components/character/Cat';
 
 const GrowthTower = () => {
-  const user = useAppSelector((state) => state.user.user);
+  const { data } = useGetUserInfoQuery();
+  const user = data;
   const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
 
   return (

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import enterRoomIcon from '@assets/svg_enterRoomIcon.svg';
 import privateRoomIcon from '@assets/svg_privateRoomIcon.svg';
-import { useAppSelector } from '@redux/hooks';
 
 import AxisXOverflowedText from '@components/common/AxisXOverflowedText';
 
@@ -15,6 +14,7 @@ import LoginModal from './LoginModal';
 export interface RoomCardProps {
   room: GameRoomBroadcastResponse;
   onJoinClick: () => void;
+  isLogined: boolean;
 }
 
 interface RoomJoinableInfoType {
@@ -22,8 +22,7 @@ interface RoomJoinableInfoType {
   isJoinable: boolean;
 }
 
-const RoomCard = ({ room, onJoinClick }: RoomCardProps) => {
-  const { isLogined } = useAppSelector((state) => state.user);
+const RoomCard = ({ room, onJoinClick, isLogined }: RoomCardProps) => {
   const [isLoginModalVisible, setIsLoginModalVisible] = useState<boolean>(false);
   const [joinInfo, setJoinInfo] = useState<RoomJoinableInfoType>({ message: '참가하기', isJoinable: true });
 

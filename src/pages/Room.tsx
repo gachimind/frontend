@@ -17,6 +17,7 @@ import { clearAllGamePlayState } from '@redux/modules/gamePlaySlice';
 import { addChat, clearScore, updateRoom } from '@redux/modules/gameRoomSlice';
 import { clearPlayerStream } from '@redux/modules/playerMediaSlice';
 import { clearMedia } from '@redux/modules/userMediaSlice';
+import { userApi } from '@redux/query/user';
 import { alertToast } from '@utils/toast';
 
 import CamList from '@components/game/CamList';
@@ -64,6 +65,7 @@ const Room = () => {
       dispatch(clearAllGamePlayState());
       dispatch(clearScore());
       dispatch(clearMedia());
+      dispatch(userApi.util.invalidateTags(['User', 'UserKeyword']));
     };
   }, []);
 

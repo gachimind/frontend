@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import useStreamUpdateSocket from '@hooks/socket/useStreamUpdateSocket';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { setUserCam, setUserMic } from '@redux/modules/userMediaSlice';
+import { useGetUserInfoQuery } from '@redux/query/user';
 
 import Cam from './Cam';
 import CamListSliderArrow from './CamListSliderArrow';
@@ -20,7 +21,8 @@ const CamList = () => {
     hasPrev: false,
     hasNext: true,
   });
-  const { user } = useAppSelector((state) => state.user);
+  const { data } = useGetUserInfoQuery();
+  const user = data;
   const { turn } = useAppSelector((state) => state.gamePlay);
   const { onUpdateUserStream, offUpdateUserStream, emitUpdateUserStream } = useStreamUpdateSocket();
 
