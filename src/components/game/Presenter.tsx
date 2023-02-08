@@ -37,6 +37,11 @@ const Presenter = () => {
     if (playState?.event === 'gameEnd') {
       setResultModalVisible(true);
     }
+    if (playState?.event === 'startCount') {
+      alertToast('게임시작!', 'info', {
+        hideProgressBar: true,
+      });
+    }
     if (isEvaluatable()) {
       alertToast(`정답은 "${turn?.keyword}" 입니다.`, 'success', {
         hideProgressBar: true,
