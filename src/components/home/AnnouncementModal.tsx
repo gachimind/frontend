@@ -1,11 +1,21 @@
+import { useEffect } from 'react';
+
 import styled from 'styled-components';
 
 import cursorIcon from '@assets/svg_cursorIcon.svg';
 import gameRuleIcon from '@assets/svg_gameRuleIcon.svg';
+import { useAppDispatch } from '@redux/hooks';
+import { setMainNotificationShown } from '@redux/modules/notificationSlice';
 
 import Modal from '@components/common/Modal';
 
 const AnnouncementModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setMainNotificationShown());
+  }, []);
+
   const handleClickShowOnlyTodaySpan = () => {
     const date = new Date();
 

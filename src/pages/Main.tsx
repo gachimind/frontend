@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import useErrorSocket from '@hooks/socket/useErrorSocket';
 import useDuplicatedUserInvalidate from '@hooks/useDuplicatedUserInvalidate';
 import useSpecialNotification from '@hooks/useSpecialNotification';
+import { useAppSelector } from '@redux/hooks';
 import { useGetUserInfoQuery, useLazyGetLogoutQuery } from '@redux/query/user';
 
 import AnnouncementModal from '@components/home/AnnouncementModal';
@@ -16,7 +17,7 @@ import MainTemplate from '@components/layout/MainTemplate';
 const Main = () => {
   const { data } = useGetUserInfoQuery();
   const user = data;
-
+  const { isMainNotificationShown } = useAppSelector((state) => state.notification);
   const { onError, offError } = useErrorSocket();
   const { invalidate } = useDuplicatedUserInvalidate();
   const [doLogout] = useLazyGetLogoutQuery();
@@ -56,7 +57,7 @@ const Main = () => {
     const AnnouncementModalShownDate = localStorage.getItem('AnnouncementModalShownDate');
 
     if (user && AnnouncementModalShownDate !== currentDate) {
-      setAnnouncementModalVisible(true);
+      setAnnouncementModalVisible(true && !isMainNotificationShown);
     }
   }, [user]);
 
