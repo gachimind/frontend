@@ -2,7 +2,10 @@ import React from 'react';
 
 import styled from 'styled-components';
 
+import { useBackgroundSound } from '@hooks/useBackgroundSound';
+
 const PageContainer = ({ children }: { children: React.ReactNode }) => {
+  useBackgroundSound();
   return (
     <ContainerLayout>
       <ContainerInnerBox>{children}</ContainerInnerBox>

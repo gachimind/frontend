@@ -1,6 +1,11 @@
+import { useEffect } from 'react';
+
 import styled, { css, keyframes } from 'styled-components';
 
+import rocketSound from '@assets/sounds/rocket.mp3';
 import { RocketStyles } from '@constants/characters';
+import useSound from '@hooks/useSound';
+import { useAppSelector } from '@redux/hooks';
 
 export interface RocketProps {
   rocketStyle: RocketStyles;
@@ -8,6 +13,14 @@ export interface RocketProps {
 }
 
 const Rocket = ({ rocketStyle, startMove }: RocketProps) => {
+  const { playSound } = useSound();
+  const { playState } = useAppSelector((state) => state.gamePlay);
+  useEffect(() => {
+    if (startMove && playState?.event) {
+      playSound(rocketSound, 0.05);
+    }
+  }, [startMove, playState]);
+
   return (
     <RocketLayout {...rocketStyle}>
       {/* 로케트면 빨강 아니면 검정 */}
