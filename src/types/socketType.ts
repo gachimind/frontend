@@ -89,4 +89,5 @@ export interface GameTurnInfoResponse {
   speechPlayer: number;
   keyword: string;
   answered?: boolean;
+  hint: string;
 }
