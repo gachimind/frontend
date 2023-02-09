@@ -26,10 +26,9 @@ const SoundEffectButton = () => {
       <img
         ref={ref}
         src={isEffectSoundOn ? soundUnMuted : soundMuted}
-        onClick={(e) => {
+        onClick={() => {
           dispatch(setEffectSoundState());
           dispatch(setBackgroundSoundState());
-          e.stopPropagation();
         }}
       />
     </SoundEffectButtonLayout>
