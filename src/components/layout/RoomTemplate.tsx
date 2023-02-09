@@ -6,6 +6,7 @@ import GameRuleIcon from '@assets/svg_gameRuleIcon.svg';
 import leaveRoomIcon from '@assets/svg_leaveRoomIcon.svg';
 
 import Button from '@components/common/Button';
+import SoundEffectButton from '@components/common/SoundEffectButton';
 import CamButton from '@components/game/CamButton';
 import GameRuleToolTip from '@components/game/GameRuleToolTip';
 import LeaveRoomModal from '@components/game/LeaveRoomModal';
@@ -38,10 +39,13 @@ const RoomTemplate = ({ children }: { children: React.ReactNode }) => {
           {leaveRoomModalVisible && (
             <LeaveRoomModal visible={leaveRoomModalVisible} onClose={() => setLeaveRoomModalVisible(false)} />
           )}
-          <LeaveButton onClick={() => setLeaveRoomModalVisible(true)}>
-            게임방 나가기
-            <img src={leaveRoomIcon} />
-          </LeaveButton>
+          <RightSideBox>
+            <SoundEffectButton />
+            <LeaveButton onClick={() => setLeaveRoomModalVisible(true)}>
+              게임방 나가기
+              <img src={leaveRoomIcon} />
+            </LeaveButton>
+          </RightSideBox>
         </FooterBox>
       </Footer>
     </PageContainer>
@@ -59,14 +63,14 @@ const RoomContentsBox = styled.div`
 const FooterBox = styled.div`
   height: inherit;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  padding: 0px 136px;
 `;
 
 const RuleButton = styled(Button)`
   width: 56px;
   height: 56px;
-  margin-right: 613px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,17 +79,25 @@ const RuleButton = styled(Button)`
 const MediaControlBox = styled.div`
   gap: 55px;
   display: flex;
+  justify-content: center;
+  margin-left: 188px;
 `;
 
 const LeaveButton = styled(Button)`
   font-size: 16px;
   width: 176px;
   height: 56px;
-  margin-left: 454px;
   gap: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const RightSideBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column-gap: 24px;
 `;
 
 export default RoomTemplate;
