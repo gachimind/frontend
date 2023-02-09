@@ -43,9 +43,9 @@ const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () =
     const createRoom: CreateRoomRequest = {
       roomTitle,
       maxCount,
-      readyTime: Number(time.split(':')[0]) * 1000,
-      speechTime: Number(time.split(':')[1]) * 1000,
-      discussionTime: Number(time.split(':')[2]) * 1000,
+      readyTime: Number(time.split('/')[0]) * 1000,
+      speechTime: Number(time.split('/')[1]) * 1000,
+      discussionTime: Number(time.split('/')[2]) * 1000,
       round: 1,
       roomPassword: password,
       isSecretRoom,
