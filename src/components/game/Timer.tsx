@@ -1,11 +1,20 @@
+import { useEffect } from 'react';
+
 import styled from 'styled-components';
 
+import timeTick from '@assets/sounds/tick.wav';
 import useGameTimeCountDown from '@hooks/useGameTimeCountDown';
+import useSound from '@hooks/useSound';
 import { convertLeaveCounterFormat } from '@utils/common';
 
 const Timer = () => {
   const { count, description } = useGameTimeCountDown();
-
+  const { playSound } = useSound();
+  useEffect(() => {
+    if (count > 0 && count <= 5000) {
+      playSound(timeTick, 0.1);
+    }
+  }, [count]);
   return (
     <TimerLayout>
       <TimeDescriptionText>{description}</TimeDescriptionText>
