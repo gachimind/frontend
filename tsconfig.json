@@ -17,5 +17,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "styled-components.d.ts"]
+  "include": ["src", "styled-components.d.ts", "audio.d.ts"]
 }
