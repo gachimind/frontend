@@ -19,6 +19,7 @@ const unmute = () => {
 
 const useBackgroundSoundImpl = () => {
   const { isBackgroundSoundOn } = useAppSelector((state) => state.userMedia);
+  const { playState } = useAppSelector((state) => state.gamePlay);
 
   const play = () => {
     audio.src = backgroundSound;
@@ -39,11 +40,13 @@ const useBackgroundSoundImpl = () => {
         play();
         return;
       }
-      unmute();
+      if (!playState?.event) {
+        unmute();
+      }
       return;
     }
     mute();
-  }, [isBackgroundSoundOn]);
+  }, [isBackgroundSoundOn, playState]);
 
   return { mute, unmute };
 };
