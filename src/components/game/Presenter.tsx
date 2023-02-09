@@ -52,7 +52,7 @@ const Presenter = () => {
     if (isEvaluatable()) {
       alertToast(`정답은 "${turn?.keyword}" 입니다.`, 'success', {
         hideProgressBar: true,
-        autoClose: 9000,
+        autoClose: 3000,
       });
     }
   }, [playState]);
