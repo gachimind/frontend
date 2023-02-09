@@ -11,6 +11,7 @@ import myPageIcon from '@assets/svg_myPageIcon.svg';
 import { useGetUserInfoQuery } from '@redux/query/user';
 
 import Button from '@components/common/Button';
+import SoundEffectButton from '@components/common/SoundEffectButton';
 import LoginModal from '@components/home/LoginModal';
 import ReportBugModal from '@components/home/ReportBugModal';
 
@@ -26,6 +27,7 @@ const Footer = ({ children, page }: { children?: React.ReactNode; page: string }
       {page !== 'room' && (
         <FooterBox>
           {loginModalVisible && <LoginModal visible={loginModalVisible} onClose={() => setLoginModalVisible(false)} />}
+          <SoundEffectButton />
           <PageNavigateButton
             onClick={() => (user ? navigate(page === 'main' ? '/mypage' : '/') : setLoginModalVisible(true))}
           >
