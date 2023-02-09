@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useRef } from 'react';
 
 import styled from 'styled-components';
 
@@ -13,15 +13,25 @@ import Button from './Button';
 const SoundEffectButton = () => {
   const dispatch = useAppDispatch();
   const { isEffectSoundOn } = useAppSelector((state) => state.userMedia);
+  const ref = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    if (ref.current && isEffectSoundOn === undefined) {
+      ref.current.click();
+    }
+  }, []);
 
   return (
-    <SoundEffectButtonLayout
-      onClick={() => {
-        dispatch(setEffectSoundState());
-        dispatch(setBackgroundSoundState());
-      }}
-    >
-      <img src={isEffectSoundOn ? soundUnMuted : soundMuted} />
+    <SoundEffectButtonLayout>
+      <img
+        ref={ref}
+        src={isEffectSoundOn ? soundUnMuted : soundMuted}
+        onClick={(e) => {
+          dispatch(setEffectSoundState());
+          dispatch(setBackgroundSoundState());
+          e.stopPropagation();
+        }}
+      />
     </SoundEffectButtonLayout>
   );
 };
