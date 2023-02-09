@@ -33,7 +33,7 @@ const SpecialNotificationModal = ({ visible, onClose, contents, notificaionKey }
   return (
     <>
       {!notVisibleToday() && (
-        <Modal visible={visible} onClose={onClose}>
+        <Modal visible={visible} onClose={onClose} isBackgroundClickEventDisabled={false}>
           <SpecialNotificationModalLayout>
             <h1>특 별 공 지</h1>
             <p>{contents}</p>

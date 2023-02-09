@@ -30,7 +30,7 @@ const AnnouncementModal = ({ visible, onClose }: { visible: boolean; onClose: ()
   };
 
   return (
-    <Modal visible={visible} onClose={onClose} title="ANNOUNCEMENT">
+    <Modal visible={visible} onClose={onClose} title="ANNOUNCEMENT" isBackgroundClickEventDisabled={false}>
       <AnnouncementModalLayout>
         <ul>
           <li>
@@ -55,10 +55,8 @@ const AnnouncementModal = ({ visible, onClose }: { visible: boolean; onClose: ()
           <li className="important">가능한 중도에 나가기 버튼은 지양해주세요!</li>
           <br />
           <br />
-          <li>
-            <span onClick={handleClickShowOnlyTodaySpan} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              오늘 하루 보지 않기
-            </span>
+          <li style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <span onClick={handleClickShowOnlyTodaySpan}>오늘 하루 보지 않기</span>
           </li>
         </ul>
       </AnnouncementModalLayout>
