@@ -18,7 +18,7 @@ import { CreateRoomRequest } from '@customTypes/socketType';
 const CreateGameModal = ({ visible, onClose }: { visible: boolean; onClose: () => void }) => {
   const [roomTitle, setRoomTitle] = useState<string>('가치마인드 한 판 해요');
   const [maxCount, setMaxCount] = useState<number>(2);
-  const [time, setTime] = useState<string>('15:60:30');
+  const [time, setTime] = useState<string>('15/60/30');
   const [roomPassword, setRoomPassword] = useState<string>('');
   const [isSecretRoom, setIsSecretRoom] = useState<boolean>(false);
   const { onShowCreatedRoomId, emitCreateRoom } = useGameSocket();
