@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
+import nyang from '@assets/sounds/nyang.wav';
 import cursorIcon from '@assets/svg_cursorIcon.svg';
 import hintIcon from '@assets/svg_gameRuleIcon.svg';
 import useEvaluateSocket from '@hooks/socket/useEvaluateSocket';
 import useGameInitiationSocket from '@hooks/socket/useGameInitiationSocket';
+import { useBackgroundSound } from '@hooks/useBackgroundSound';
 import useDebounce from '@hooks/useDebounce';
+import useSound from '@hooks/useSound';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import { setEvaluated } from '@redux/modules/gamePlaySlice';
 import { useGetUserInfoQuery } from '@redux/query/user';
@@ -30,6 +33,8 @@ const Presenter = () => {
   const [resultModalVisible, setResultModalVisible] = useState<boolean>(false);
   const { emitGameReady, emitGameStart } = useGameInitiationSocket();
   const { emitTurnEvaluation } = useEvaluateSocket();
+  const { playSound } = useSound();
+  const { mute, unmute } = useBackgroundSound();
   const currentUser = room?.participants.find((participant) => participant.userId === user?.userId);
   const presenter = room?.participants.find((participant) => participant.userId === turn?.speechPlayer);
   const isMe = user?.userId === turn?.speechPlayer;
@@ -43,11 +48,15 @@ const Presenter = () => {
   useEffect(() => {
     if (playState?.event === 'gameEnd') {
       setResultModalVisible(true);
+      unmute();
     }
     if (playState?.event === 'startCount') {
       alertToast('게임시작!', 'info', {
         hideProgressBar: true,
       });
+      playSound(nyang, 0.1);
+      // TODO: fade out
+      mute();
     }
     if (isEvaluatable()) {
       alertToast(`정답은 "${turn?.keyword}" 입니다.`, 'success', {
