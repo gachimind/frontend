@@ -22,7 +22,7 @@ const useBackgroundSoundImpl = () => {
 
   const play = () => {
     audio.src = backgroundSound;
-    audio.volume = 0.01;
+    audio.volume = 0.05;
     audio.loop = true;
     audio.play();
   };
