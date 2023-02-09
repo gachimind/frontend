@@ -7,12 +7,12 @@
     <p>
       <a href="https://gachimind.com" target="_blank">플레이하기</a>
     </p>
-    <a href="https://www.notion.so/54cfdfd05cd64f8c8e09ef1b471bc41c" target="_blank">가치마인드 팀 노션</a> &nbsp; &nbsp; |&nbsp; &nbsp; 
-    <a href="" target="_blank">시연영상(준비중)</a> &nbsp; &nbsp; |&nbsp; &nbsp;
+    <a href="https://www.notion.so/54cfdfd05cd64f8c8e09ef1b471bc41c" target="_blank">팀 노션</a> &nbsp; &nbsp; |&nbsp; &nbsp; 
+    <a href="https://www.youtube.com/watch?v=VNoWMh-u5dk" target="_blank">시연영상</a> &nbsp; &nbsp; |&nbsp; &nbsp;
     <a href="https://www.figma.com/file/G3t7s1x1skqg8UPWzfHvHO/%ED%95%AD%ED%95%B499-E%EB%B0%98-2%EC%A1%B0?node-id=0%3A1&t=7JFV1T7g4C9qwIBy-0" target="_blank">Figma 디자인</a> &nbsp; &nbsp; |&nbsp; &nbsp;
     <a href="https://github.com/gachimind/frontend/wiki" target="_blank">Frontend 위키</a> &nbsp; &nbsp; |&nbsp; &nbsp;
     <a href="https://63d2e9d06c097db66f843a4e-seszruxywo.chromatic.com" target="_blank">스토리북</a>  &nbsp; &nbsp; |&nbsp; &nbsp;
-    <a href="https://github.com/gachimind/backend" target="_blank">Backend Repo</a>
+    <a href="https://github.com/gachimind/backend" target="_blank">Backend</a>
     <br /><br />
     <img src="https://github.com/gachimind/frontend/actions/workflows/prod.yml/badge.svg">&nbsp;
     <img src="https://github.com/gachimind/frontend/actions/workflows/pr.yml/badge.svg"><br /><br />
@@ -42,7 +42,7 @@
 
 ## 😸 Frontend 프로젝트 개발 기간
 
-- 2023.01.04 ~ 2023.02.XX
+- 2023.01.04 ~ 2023.02.10
 
 <br>
 
@@ -56,9 +56,9 @@
 |------|------|----
 |<p align="center">게임 플레이</p>|<p align="center">게임 플레이</p>|<p align="center">게임 플레이</p>|
 
-|<p align="center"><img src="https://user-images.githubusercontent.com/76927397/217139726-6550832b-92fa-4659-b8df-96a32c2c685b.JPG" width=100%/></p> |<p align="center"><img src="https://user-images.githubusercontent.com/76927397/217140628-33a13c2c-af47-4e43-9a4e-d47897785250.png" width=90%/></p> |
-|------|------|
-|<p align="center">게임 결과</p>|<p align="center">마이 페이지</p>|
+|<p align="center"><img src="https://user-images.githubusercontent.com/76927397/217945698-6393aabd-88a7-4dd4-8180-ff46d487048a.gif" width=100%/></p> |<p align="center"><img src="https://user-images.githubusercontent.com/76927397/217945052-52770aa3-9439-4f4e-8d30-f5c98e43506f.gif" width=100%/></p> | <p align="center"><img src="https://user-images.githubusercontent.com/76927397/217946075-726a8fcf-dc65-4858-bc25-7e1baf83a493.png" width=90%/></p>|
+|------|------|----
+|<p align="center">발표자 평가</p>|<p align="center">게임 결과</p>|<p align="center">마이 페이지</p>|
 
 
 <br>
@@ -213,6 +213,76 @@ KeybordEvent의 isComposing 속성을 이용해 조합이 끝난 뒤 이벤트�
 		
 </div>
 </details>
+
+<details>
+<summary><h4>🐰 채팅으로 발표자를 평가하는 것의 불편함, 평가할 수 있는 화면이 따로 있다면 좋을 것 같아요</h4></summary>
+<div markdown="1">
+
+<br>
+
+> 게임 스코어 입력하는 부분이 조금 헷갈렸어요! 점수를 채팅창으로 입력하기보다 모달창이 떠서 점수를 입력할 수 있으면 더 직관적일 것 같아요 : ) 전반적으로 좋았습니다 ! 
+
+사실 채팅창에서 발표자 평가를 하는 부분은 알아채기 쉽지 않고 개발하는 입장에서도 마음에 들지 않았었어요
+
+발표자 평가를 강제하지 않고 발표 후 발표자를 중심으로 발표자의 얼굴을 확인하며 토론하는 시간을 가져야 한다고 생각해서 따로 평가창을 띄우지 않았었는데
+
+평가창이 뜨는 것이 평가의 존재여부를 알아채지 못하는 것 보다는 나을 것이라는 판단으로 개선해보았어요
+
+|<p align="center"><img src="https://user-images.githubusercontent.com/76927397/217951407-e31d5d9b-421c-4fc0-9482-ca43214e0938.gif" width=100%/></p> |<p align="center"><img src="https://user-images.githubusercontent.com/76927397/217951942-93681d26-96db-4462-ad77-509fe07b9503.gif" width=60%/></p> |
+|------|------|
+|<p align="center">기존 </p>|<p align="center">수정 후</p>|
+
+평가 시스템에 대해 100% 인지할 수 있게 되었고 직접 점수를 입력하는 것 보다 빠르고 재밌어지지 않아졌나 생각해요
+
+호평이 많았던 고양이를 ~~재탕~~활용하여 평가를 제출할 수 있게 구성했어요
+
+발표자를 가리는 것에 불편함을 느낄 수 있는 부분을 고려해 드래그 할 수 있도록 기능을 추가했어요
+
+기획에 없던 내용이라 먼저 개발하고 슬랙,카카오톡,PR,스토리북 등으로 공유하여 의견, 피드백을 요청드려 확인 받고 빠르게 적용해보았어요
+
+
+**여전히 고민해야 할 문제**
+
+마우스를 가져다대보면 드래그 되는지 알 수 있다 하더라도 눈으로만 보면 사용자 입장에서는 고정된 창 하나가 띄워져있는 것으로 밖에 보이지 않을 수 있을 것 같아요
+
+어떻게 하면 이런 상호작용이 있다는 것을 쉽고 효과적으로 보여줄 수 있을 지 앞으로도 고민해보아야 할 것 같습니다.
+
+
+</div>
+</details>
+
+<br>
+
+## 💡 추가 및 개선해보고 싶은 것들
+
+> 시간과 체력이 더 있다면 해보고 싶은 아쉬웠던 것들이예요!
+
+**키워드 개선**
+
+이용자가 직접 키워드를 선정하는 것이 아니기 때문에 사실 키워드가 결국 핵심인 서비스라고 생각해요.
+
+난이도라던가 키워드 그 자체의 적절함에 대해서는 개발한 우리들 입장에서도 아직 의문부호가 남아있는 것 같아요
+
+CS지식만으로는 양 자체에 한계가 있기 때문에 카테고리화를 해서 사용자가 출제될 문제 분야들을 선택할 수 있게 한다면 좋을 것 같습니다!
+
+
+<br>
+
+**복습**
+
+마이페이지 키워드 히스토리를 세분화해서 보여주어 어떤 상황에 해당 키워드를 접했는지 알 수 있게 하고
+
+각 키워드들에 대한 간단한 메모를 남길 수 있게 하여 보여주는 등 복습에 도움될만한 기능들을 추가하면 좋을 것 같습니다
+
+<
+
+**솔로모드**
+
+사실 유저 피드백에 솔로모드에 대한 수요가 많았어요. 
+
+연습모드 느낌으로 사용자가 빠르게 주어진 키워드를 설명해볼 수 있는 공간을 마련해보면 좋을 것 같다고 생각했습니다.
+
+
 
 <br>
 
