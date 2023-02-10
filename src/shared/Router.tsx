@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 
 import Main from '@pages/Main';
@@ -15,6 +15,7 @@ const Router = () => {
         <Route path="/room/:id" element={<Room />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/login" element={<OAuthRedirectHandler />} />
+        <Route path="/*" element={<Navigate to="/" replace={true} />} />
       </Routes>
     </BrowserRouter>
   );
