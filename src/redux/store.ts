@@ -6,6 +6,7 @@ import type { Middleware } from '@reduxjs/toolkit';
 
 import gamePlaySlice from './modules/gamePlaySlice';
 import gameRoomSlice from './modules/gameRoomSlice';
+import notificationSlice from './modules/notificationSlice';
 import playerMediaSlice from './modules/playerMediaSlice';
 import userMediaSlice from './modules/userMediaSlice';
 import { coreApi } from './query/coreApi';
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   userMedia: userMediaSlice.reducer,
   playerMedia: playerMediaSlice.reducer,
   gamePlay: gamePlaySlice.reducer,
+  notification: notificationSlice.reducer,
   [coreApi.reducerPath]: coreApi.reducer,
 });
 

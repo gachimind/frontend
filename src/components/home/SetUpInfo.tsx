@@ -15,6 +15,7 @@ import yellowRocketImage from '@assets/png_yellowRocketImage.png';
 import { CatTheme, RocketTheme } from '@constants/characters';
 import { useGetUserInfoQuery, useUpdateUserInfoMutation } from '@redux/query/user';
 import { getCatInfoByQuery } from '@utils/character';
+import { alertToast } from '@utils/toast';
 
 import Cat from '@components/character/Cat';
 import Button from '@components/common/Button';
@@ -35,8 +36,7 @@ const SetUpInfo = ({
   const { cat, rocket } = getCatInfoByQuery(user?.profileImg);
   const [newNickname, setNewNickname] = useState<string>(user?.nickname ?? '');
   const [prevCheckedNickname, setPrevCheckedNickname] = useState<string>('');
-  const [duplicateAlert, setDuplicateAlert] = useState<{ duplicate: boolean; message: string }>({
-    duplicate: false,
+  const [duplicateAlert, setDuplicateAlert] = useState<{ duplicate?: boolean; message: string }>({
     message: '',
   });
   const [newCat, setNewCat] = useState<CatTheme>(cat);
@@ -74,7 +74,10 @@ const SetUpInfo = ({
       !mypage && isSetUpInfoSuccess((prev) => !prev);
       return null;
     }
-    if (duplicateAlert.duplicate) {
+    if (user?.nickname !== newNickname && (duplicateAlert.duplicate || duplicateAlert.duplicate === undefined)) {
+      alertToast('닉네임 중복을 확인하세요!', 'warning', {
+        hideProgressBar: true,
+      });
       return;
     }
     if (user?.nickname === newNickname && user?.profileImg !== newProfileImg) {
@@ -95,20 +98,24 @@ const SetUpInfo = ({
     }
   };
 
+  const handleNicknameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputNickname = e.target.value.replace(/\s/g, '');
+    setNewNickname(inputNickname);
+    setDuplicateAlert({ duplicate: undefined, message: user?.nickname === inputNickname ? '현재 닉네임입니다.' : '' });
+    setPrevCheckedNickname('');
+  };
+
   return (
     <SetUpInfoLayout cat={newCat} rocket={newRocket}>
       <LeftSectionBox>
         <InputContainer label="닉네임">
-          <NicknameInputBox duplicate={duplicateAlert.duplicate}>
-            <input
-              type="text"
-              maxLength={10}
-              value={newNickname}
-              onChange={(e) => setNewNickname(e.target.value.replace(/\s/g, ''))}
-            />
+          <NicknameInputBox duplicate={duplicateAlert.duplicate ?? false}>
+            <input type="text" maxLength={10} value={newNickname} onChange={handleNicknameInputChange} />
             <button onClick={handleDuplicateCheckButtonClick}>중복확인</button>
           </NicknameInputBox>
-          <NicknameDuplicateAlert duplicate={duplicateAlert.duplicate}>{duplicateAlert.message}</NicknameDuplicateAlert>
+          <NicknameDuplicateAlert duplicate={duplicateAlert.duplicate ?? false}>
+            {duplicateAlert.message}
+          </NicknameDuplicateAlert>
         </InputContainer>
         <InputContainer label="적용 캐릭터">
           <SelectedCharacterBox>

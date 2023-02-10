@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 
 import axios from 'axios';
 
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { setSpecialNotificationShown } from '@redux/modules/notificationSlice';
+
 interface NotificationType {
   hasAlert: string;
   contents: string;
@@ -9,21 +12,24 @@ interface NotificationType {
 }
 
 const useSpecialNotification = () => {
-  const lambdaNotificationURL = process.env.REACT_APP_LAMBDA_NOTI;
+  const dispatch = useAppDispatch();
+  const { isSpecialNotificationShown } = useAppSelector((state) => state.notification);
   const [hasNotification, setHasNotification] = useState<boolean>(false);
   const [contents, setContents] = useState<string>('');
   const [key, setKey] = useState<string>('');
+  const lambdaNotificationURL = process.env.REACT_APP_LAMBDA_NOTI;
   useEffect(() => {
-    if (!lambdaNotificationURL) {
+    if (!lambdaNotificationURL || isSpecialNotificationShown) {
       return;
     }
     (async () => {
-      const notificationResult = await axios.get('https://au12xtunpb.execute-api.ap-northeast-2.amazonaws.com/prod');
+      const notificationResult = await axios.get(lambdaNotificationURL);
       const data = notificationResult.data.body as NotificationType;
       if (data.hasAlert === 'true') {
         setHasNotification(true);
         setContents(data.contents);
         setKey(data.key);
+        dispatch(setSpecialNotificationShown());
       }
     })();
   }, []);
