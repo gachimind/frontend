@@ -11,7 +11,7 @@
     <a href="https://www.youtube.com/watch?v=VNoWMh-u5dk" target="_blank">시연영상</a> &nbsp; &nbsp; |&nbsp; &nbsp;
     <a href="https://www.figma.com/file/G3t7s1x1skqg8UPWzfHvHO/%ED%95%AD%ED%95%B499-E%EB%B0%98-2%EC%A1%B0?node-id=0%3A1&t=7JFV1T7g4C9qwIBy-0" target="_blank">Figma 디자인</a> &nbsp; &nbsp; |&nbsp; &nbsp;
     <a href="https://github.com/gachimind/frontend/wiki" target="_blank">Frontend 위키</a> &nbsp; &nbsp; |&nbsp; &nbsp;
-    <a href="https://63d2e9d06c097db66f843a4e-seszruxywo.chromatic.com" target="_blank">스토리북</a>  &nbsp; &nbsp; |&nbsp; &nbsp;
+    <a href="https://63d2e9d06c097db66f843a4e-bvcefjnjeh.chromatic.com" target="_blank">스토리북</a>  &nbsp; &nbsp; |&nbsp; &nbsp;
     <a href="https://github.com/gachimind/backend" target="_blank">Backend</a>
     <br /><br />
     <img src="https://github.com/gachimind/frontend/actions/workflows/prod.yml/badge.svg">&nbsp;
