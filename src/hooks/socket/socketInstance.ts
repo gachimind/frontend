@@ -4,6 +4,10 @@ const socketInstance: Socket = io(
   process.env.REACT_APP_API_SOCKET || process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8080',
   {
     closeOnBeforeunload: false,
+    withCredentials: true,
+    extraHeaders: {
+      'my-custom-header': process.env.CUSTOM_HEADER_VALUE || 'abcd',
+    },
   },
 );
 

@@ -5,13 +5,12 @@ export const coreApi = createApi({
     baseUrl: process.env.REACT_APP_API_ENDPOINT,
     prepareHeaders: (headers) => {
       const token = sessionStorage.getItem('accessToken');
-
       if (token) {
         headers.set('authorization', 'Bearer ' + token);
       }
-
       return headers;
     },
+    credentials: 'include',
   }),
   tagTypes: ['User', 'UserKeyword'],
   endpoints: () => ({}),
