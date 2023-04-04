@@ -26,6 +26,9 @@
 </div>
 <br /><br />
 
+> 개발 과정 및 기록은 [위키](https://github.com/gachimind/frontend/wiki)에서 확인할 수 있어요! 
+
+<br />
 
 ## 🐱 프로젝트 간단 소개
 
@@ -67,7 +70,7 @@
 ## 🏗️ 프로젝트 아키텍쳐
 
 
-![arch](https://user-images.githubusercontent.com/76927397/217140856-a15fe2ff-e6c7-44d4-b480-730f2bee1731.jpg)
+![arch](https://user-images.githubusercontent.com/102890891/217815357-0021a947-c0e7-4191-be70-bf587dc1d0db.png)
 
 
 <br>
@@ -125,17 +128,6 @@
 </tr>
 </table>
 
-<br>
-
-## 🛠 학습일지 & 트러블 슈팅
-
-> 지속적으로 업데이트 예정입니다!
-
-- [Github actions, S3, CloudFront로 리액트 배포하기](https://velog.io/@pds0309/Day37-Github-actions-S3-CloudFront-Route53%EC%9C%BC%EB%A1%9C-React-CICD%ED%95%98%EA%B8%B0)
-- [Json-server로 백엔드 api 개발 의존도 줄여보기](https://velog.io/@heayounchoi/230114-%ED%95%AD%ED%95%B499-69%EC%9D%BC%EC%B0%A8-json-server)
-- [RTK 쿼리 사용하기](https://velog.io/@heayounchoi/230116-%ED%95%AD%ED%95%B499-71%EC%9D%BC%EC%B0%A8-RTK-Query)
-- [미디어 스트림 교환 문제 해결하기](https://github.com/gachimind/frontend/wiki/%EB%AF%B8%EB%94%94%EC%96%B4-%EC%8A%A4%ED%8A%B8%EB%A6%BC-%EA%B5%90%ED%99%98-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0)
-- [일부 네트워크 환경에서 peer 연결이 안되는 문제 feat.TURN](https://github.com/gachimind/frontend/wiki/%EC%9D%BC%EB%B6%80-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-peer-%EC%97%B0%EA%B2%B0%EC%9D%B4-%EC%95%88%EB%90%98%EB%8A%94-%EB%AC%B8%EC%A0%9C-feat.TURN)
 
 <br>
 
@@ -207,9 +199,7 @@ KeybordEvent의 isComposing 속성을 이용해 조합이 끝난 뒤 이벤트�
 
 몇 없는 소중한 사용자들 중에서도 관심을 가지고 서비스를 이용하려 들어왔는데 마이크 문제로 게임을 플레이 하지 못했다는 피드백을 보고 정말 속상했습니다 😢 
 
-하나의 컴포넌트의 책임이 너무 많아 결합도가 높아 확장성이 별로인지, 상태의 변화가 하위 컴포넌트들에 어떤 영향을 미칠 지 늘 고려하며 개발해야겠다는 반성했습니다.
-
-프로젝트 기간이 종료되어도 우리팀은 함께 코드리뷰하며 성찰하고 개선해나갈 것이 있는지 고민해보고 공부하는 시간을 가지기로 했어요!
+하나의 컴포넌트의 책임이 너무 많아 결합도가 높아 확장성이 별로인지, 상태의 변화가 하위 컴포넌트들에 어떤 영향을 미칠 지 늘 고려하며 개발해야겠다고 반성했습니다.
 		
 </div>
 </details>
@@ -274,7 +264,7 @@ CS지식만으로는 양 자체에 한계가 있기 때문에 카테고리화를
 
 각 키워드들에 대한 간단한 메모를 남길 수 있게 하여 보여주는 등 복습에 도움될만한 기능들을 추가하면 좋을 것 같습니다
 
-<
+<br>
 
 **솔로모드**
 
